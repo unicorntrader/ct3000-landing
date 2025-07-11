@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0d1117;
-            color: #eaeaea;
+            background: #ffffff;
+            color: #1f2937;
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -30,10 +30,11 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(13, 17, 23, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         nav {
@@ -46,7 +47,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffdb70;
+            color: #3b82f6;
             text-decoration: none;
             letter-spacing: -0.5px;
         }
@@ -58,13 +59,13 @@
         }
 
         .nav-links a {
-            color: #eaeaea;
+            color: #6b7280;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #ffdb70;
+            color: #3b82f6;
         }
 
         /* Hero Section */
@@ -74,6 +75,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
 
         .hero::before {
@@ -83,7 +85,7 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 219, 112, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.05) 100%);
             clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
         }
 
@@ -97,20 +99,20 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1rem;
-            color: #ffffff;
+            color: #1f2937;
             line-height: 1.1;
         }
 
         .hero-subtitle {
             font-size: 1.3rem;
-            color: #ffdb70;
+            color: #3b82f6;
             margin-bottom: 1.5rem;
             font-weight: 600;
         }
 
         .hero-description {
             font-size: 1.1rem;
-            color: #a0a0a0;
+            color: #6b7280;
             margin-bottom: 2rem;
             max-width: 500px;
         }
@@ -118,19 +120,19 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #ffdb70, #ff8c00);
-            color: #0d1117;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 219, 112, 0.3);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             animation: pulse 2s infinite;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 219, 112, 0.5);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
         }
 
         @keyframes pulse {
@@ -152,7 +154,7 @@
         /* Features Section */
         .features {
             padding: 5rem 0;
-            background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+            background: #ffffff;
         }
 
         .features-grid {
@@ -160,45 +162,81 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
+            margin-bottom: 4rem;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff;
             padding: 2.5rem;
             border-radius: 20px;
-            border: 1px solid rgba(255, 219, 112, 0.2);
+            border: 2px solid #e5e7eb;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
+        .feature-card:nth-child(1) {
+            border-color: #3b82f6;
+        }
+
+        .feature-card:nth-child(2) {
+            border-color: #10b981;
+        }
+
+        .feature-card:nth-child(3) {
+            border-color: #8b5cf6;
+        }
+
         .feature-card:hover {
             transform: translateY(-10px);
-            border-color: #ffdb70;
-            box-shadow: 0 20px 50px rgba(255, 219, 112, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:nth-child(1):hover {
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.2);
+        }
+
+        .feature-card:nth-child(2):hover {
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.2);
+        }
+
+        .feature-card:nth-child(3):hover {
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.2);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #ffdb70, #ff8c00);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
         }
 
         .feature-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #1f2937;
             margin-bottom: 1rem;
         }
 
         .feature-description {
-            color: #a0a0a0;
+            color: #6b7280;
             font-size: 1rem;
         }
 
@@ -206,18 +244,19 @@
         .process {
             padding: 5rem 0;
             text-align: center;
+            background: #f8fafc;
         }
 
         .section-title {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #ffffff;
+            color: #1f2937;
             margin-bottom: 1rem;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
-            color: #a0a0a0;
+            color: #6b7280;
             margin-bottom: 3rem;
             max-width: 600px;
             margin-left: auto;
@@ -242,45 +281,45 @@
         .step-number {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #ffdb70, #ff8c00);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             font-weight: 800;
-            color: #0d1117;
+            color: #ffffff;
             margin: 0 auto 1rem;
         }
 
         .step-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #1f2937;
             margin-bottom: 0.5rem;
         }
 
         .step-description {
-            color: #a0a0a0;
+            color: #6b7280;
         }
 
         /* CTA Section */
         .cta-section {
             padding: 5rem 0;
-            background: linear-gradient(135deg, rgba(255, 219, 112, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             text-align: center;
         }
 
         .cta-title {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #ffffff;
+            color: #1f2937;
             margin-bottom: 1rem;
         }
 
         .cta-description {
             font-size: 1.2rem;
-            color: #a0a0a0;
+            color: #6b7280;
             margin-bottom: 2rem;
             max-width: 500px;
             margin-left: auto;
@@ -290,12 +329,13 @@
         /* Footer */
         footer {
             padding: 3rem 0;
-            border-top: 1px solid rgba(255, 219, 112, 0.2);
+            border-top: 1px solid #e5e7eb;
             text-align: center;
+            background: #ffffff;
         }
 
         .footer-content {
-            color: #a0a0a0;
+            color: #6b7280;
         }
 
         /* Responsive */
@@ -345,10 +385,10 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Co-Trader 3000: Your Secret Weapon for Serious Trading</h1>
-                <p class="hero-subtitle">CT3000 isn't just another tool—it's a silent co-pilot built for traders who treat the markets like craft, not chaos.</p>
-                <p class="hero-description">Whether you're a solo operator, a strategy tester, or a pattern-spotting sniper, CT3000 is designed to amplify your edge.</p>
-                <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Get Early Access</a>
+                <h1 class="hero-title">Never Miss a Trade Again</h1>
+                <p class="hero-subtitle">Find your Edge. Track it. Build on it.</p>
+                <p class="hero-description">Human traders are not perfect. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.</p>
+                <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Try it for Free</a>
             </div>
         </div>
     </section>
@@ -359,17 +399,17 @@
                 <div class="feature-card fade-in">
                     <div class="feature-icon">🎯</div>
                     <h3 class="feature-title">Pattern Recognition</h3>
-                    <p class="feature-description">CT3000 quietly tracks your patterns, learning how you think and helping you spot opportunities others miss.</p>
+                    <p class="feature-description">Tracks your trading from planning to execution and discovers insights for better trading.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">🔍</div>
                     <h3 class="feature-title">Blind Spot Detection</h3>
-                    <p class="feature-description">Flags your blind spots and nudges you toward sharper, cleaner trades with real-time intelligence.</p>
+                    <p class="feature-description">Pushes you to do less of what doesn't work and more of what does.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">⚡</div>
                     <h3 class="feature-title">Execution Clarity</h3>
-                    <p class="feature-description">Blends discipline with intuition, giving you structure without sacrificing your trading instincts.</p>
+                    <p class="feature-description">Plan your trade and trade your plan. Execution is where most traders fail. But execution is where the money is made.</p>
                 </div>
             </div>
         </div>
@@ -404,7 +444,7 @@
         <div class="container">
             <h2 class="cta-title fade-in">Ready to Transform Your Trading?</h2>
             <p class="cta-description fade-in">Join the select group of traders who've discovered their edge with CT3000.</p>
-            <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Start Your Journey</a>
+            <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Try it for Free</a>
         </div>
     </section>
 
@@ -453,9 +493,11 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(13, 17, 23, 0.98)';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
             } else {
-                header.style.background = 'rgba(13, 17, 23, 0.95)';
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
             }
         });
     </script>
