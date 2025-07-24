@@ -1,33 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CT3000 - Never Miss a Trade Again</title>
-    
-    <!-- SEO Meta Tags -->
     <meta name="description" content="Find your Edge. Track it. Build on it. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.">
     <meta name="keywords" content="trading, co-pilot, pattern recognition, trading software, execution, blind spots, trading edge">
     <meta name="author" content="CT3000">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="CT3000 - Never Miss a Trade Again">
+    <meta property="og:description" content="Find your Edge. Track it. Build on it. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cotraderapp.com">
-    <meta property="og:title" content="CT3000 - Never Miss a Trade Again">
-    <meta property="og:description" content="Find your Edge. Track it. Build on it. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.">
-    <meta property="og:image" content="https://cotraderapp.com/ct3k-logo.png">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://cotraderapp.com">
-    <meta property="twitter:title" content="CT3000 - Never Miss a Trade Again">
-    <meta property="twitter:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
-    <meta property="twitter:image" content="https://cotraderapp.com/ct3k-logo.png">
-    
-    <!-- FAVICON (Browser Tab Icon) -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CT3000 - Never Miss a Trade Again">
+    <meta name="twitter:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
     <style>
         * {
             margin: 0;
@@ -264,38 +251,6 @@
             font-size: 1rem;
         }
 
-        /* Preview CTA Section */
-        .preview-cta-section {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px solid #3b82f6;
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .preview-cta-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 1rem;
-        }
-
-        .preview-cta-description {
-            color: #6b7280;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .preview-cta-button {
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        .preview-cta-button:hover {
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
-        }
-
         /* Process Section */
         .process {
             padding: 5rem 0;
@@ -433,7 +388,7 @@
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#process">Process</a></li>
-                <li><a href="https://forms.gle/2W2XdojJhZ5mAHid7" target="_blank">Try</a></li>
+                <li><a href="https://forms.gle/2W2XdojJhZ5mAHid7" target="_blank" onclick="plausible('FormClick')">Try</a></li>
             </ul>
         </nav>
     </header>
@@ -444,14 +399,9 @@
                 <h1 class="hero-title">Never Miss a Trade Again</h1>
                 <p class="hero-subtitle">Find your Edge. Track it. Build on it.</p>
                 <p class="hero-description">Human traders are not perfect. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.</p>
-                <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Try it for Free</a>
-            </div>
-            
-            <!-- Preview CTA Section -->
-            <div class="preview-cta-section">
-                <h3 class="preview-cta-title">Curious what CT3000 looks like in action?</h3>
-                <p class="preview-cta-description">Get a sneak peek at the interface that's changing how traders operate.</p>
-                <a href="preview-page.html" class="cta-button preview-cta-button" onclick="LooksLike()" target="_blank">See what it will look like</a>
+                <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank" onclick="plausible('FormClick')">
+  Try it for Free
+</a></a>
             </div>
         </div>
     </section>
@@ -507,7 +457,9 @@
         <div class="container">
             <h2 class="cta-title fade-in">Ready to Transform Your Trading?</h2>
             <p class="cta-description fade-in">Join the select group of traders who've discovered their edge with CT3000.</p>
-            <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Try it for Free</a>
+            <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank" onclick="plausible('FormClick')">
+  Try it for Free
+</a>
         </div>
     </section>
 
@@ -563,16 +515,6 @@
                 header.style.boxShadow = 'none';
             }
         });
-    </script>
-
-    <!-- Plausible Analytics -->
-    <script>
-        function LooksLike() {
-            // Track the LooksLike event in Plausible
-            if (typeof plausible !== 'undefined') {
-                plausible('LooksLike');
-            }
-        }
     </script>
 </body>
 </html>
