@@ -264,6 +264,38 @@
             font-size: 1rem;
         }
 
+        /* Preview CTA Section */
+        .preview-cta-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .preview-cta-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .preview-cta-description {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .preview-cta-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .preview-cta-button:hover {
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+
         /* Process Section */
         .process {
             padding: 5rem 0;
@@ -414,6 +446,13 @@
                 <p class="hero-description">Human traders are not perfect. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.</p>
                 <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Try it for Free</a>
             </div>
+            
+            <!-- Preview CTA Section -->
+            <div class="preview-cta-section">
+                <h3 class="preview-cta-title">Curious what CT3000 looks like in action?</h3>
+                <p class="preview-cta-description">Get a sneak peek at the interface that's changing how traders operate.</p>
+                <a href="preview-page.html" class="cta-button preview-cta-button" onclick="LooksLike()" target="_blank">See what it will look like</a>
+            </div>
         </div>
     </section>
 
@@ -524,6 +563,16 @@
                 header.style.boxShadow = 'none';
             }
         });
+    </script>
+
+    <!-- Plausible Analytics -->
+    <script>
+        function LooksLike() {
+            // Track the LooksLike event in Plausible
+            if (typeof plausible !== 'undefined') {
+                plausible('LooksLike');
+            }
+        }
     </script>
 </body>
 </html>
