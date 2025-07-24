@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CT3000 Preview - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 2rem;
+        }
+
+        .preview-content {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .preview-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .preview-subtitle {
+            font-size: 1.3rem;
+            color: #3b82f6;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .preview-description {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .countdown-container {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            color: white;
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .preview-mockup {
+            background: #f8fafc;
+            border: 2px dashed #3b82f6;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .mockup-placeholder {
+            font-size: 4rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .mockup-text {
+            font-size: 1.2rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            margin: 1rem 0.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            box-shadow: 0 10px 30px rgba(107, 114, 128, 0.3);
+        }
+
+        .back-button:hover {
+            box-shadow: 0 15px 40px rgba(107, 114, 128, 0.4);
+        }
+
+        .features-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-preview {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .feature-preview h4 {
+            color: #3b82f6;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-preview p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .preview-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .preview-title {
+                font-size: 2rem;
+            }
+            
+            .countdown-timer {
+                gap: 1rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .features-preview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">CT3000</div>
+        
+        <div class="preview-content">
+            <h1 class="preview-title">The Interface Is Coming</h1>
+            <p class="preview-subtitle">Get ready to see your trading process like never before</p>
+            <p class="preview-description">We're putting the finishing touches on CT3000's revolutionary interface. Soon, you'll experience pattern recognition, blind spot detection, and execution clarity in a way that will transform how you trade.</p>
+            
+            <div class="countdown-container">
+                <h3 class="countdown-title">Frontend Release Countdown</h3>
+                <div class="countdown-timer" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">30</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview-mockup">
+                <div class="mockup-placeholder">📊</div>
+                <p class="mockup-text">Sleek dashboards, intelligent insights, and crystal-clear execution guidance - all designed to amplify your trading edge.</p>
+            </div>
+            
+            <div class="features-preview">
+                <div class="feature-preview">
+                    <h4>🎯 Visual Pattern Recognition</h4>
+                    <p>See your trading patterns come to life with intuitive visualizations that reveal insights you never knew existed.</p>
+                </div>
+                <div class="feature-preview">
+                    <h4>🔍 Real-time Blind Spot Alerts</h4>
+                    <p>Get instant notifications when you're about to repeat costly mistakes or miss profitable opportunities.</p>
+                </div>
+                <div class="feature-preview">
+                    <h4>⚡ Execution Command Center</h4>
+                    <p>Plan, execute, and review your trades in one seamless interface designed for precision and clarity.</p>
+                </div>
+            </div>
+            
+            <p style="color: #6b7280; margin: 2rem 0; font-style: italic;">Want to be first in line when we launch?</p>
+            
+            <a href="https://forms.gle/2W2XdojJhZ5mAHid7" class="cta-button" target="_blank">Get Early Access</a>
+            <a href="index.html" class="cta-button back-button">← Back to Main Page</a>
+        </div>
+    </div>
+
+    <script>
+        // Set countdown target date (30 days from today)
+        const today = new Date();
+        const targetDate = new Date(today.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><span class="countdown-number">🚀</span><span class="countdown-label">Launched!</span></div>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
