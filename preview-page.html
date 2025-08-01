@@ -264,35 +264,47 @@
         </div>
     </div>
 
-    <script>
-        // Set countdown target date (30 days from today at 10 AM)
-        const startDate = new Date();
-        startDate.setHours(10, 0, 0, 0); // Set to 10 AM today
-        const targetDate = new Date(startDate.getTime() + (30 * 24 * 60 * 60 * 1000)); // Add 30 days
+<script>
+    // Set countdown target date (30 days from Monday August 3rd, 2025 at 10 AM)
+    const targetDate = new Date('2025-09-02T10:00:00'); // 30 days from Aug 3, 2025
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate.getTime() - now;
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
 
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><span class="countdown-number">🚀</span><span class="countdown-label">Launched!</span></div>';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        if (distance < 0) {
+            document.getElementById('countdown').innerHTML = '<div class="countdown-item"><span class="countdown-number">🚀</span><span class="countdown-label">Launched!</span></div>';
+            return;
         }
 
-        // Update countdown immediately and then every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+    }
+
+    // Update countdown immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+</script>
+<script>
+    // Track preview page view (wait for plausible to load)
+    function trackPageView() {
+        if (typeof plausible !== 'undefined') {
+            plausible('PreviewPageView');
+        } else {
+            // Try again in 100ms if plausible isn't loaded yet
+            setTimeout(trackPageView, 100);
+        }
+    }
+    
+    // Start tracking after page loads
+    window.addEventListener('load', trackPageView);
+</script>
 </body>
 </html>
