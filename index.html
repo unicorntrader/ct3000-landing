@@ -11,15 +11,11 @@
   <meta name="keywords" content="trading, co-pilot, trading software, execution, pattern recognition, trading edge">
   <meta name="author" content="CT3000">
 
-  <!-- Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com">
   <meta property="og:title" content="CT3000 — Never Miss a Trade Again">
   <meta property="og:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
   <meta property="og:image" content="https://cotraderapp.com/ct3k-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CT3000 — Never Miss a Trade Again">
-  <meta name="twitter:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
 
   <style>
     :root{
@@ -31,149 +27,34 @@
       --muted:#6b7280;
       --bg:#ffffff;
       --bg-soft:#f8fafc;
-      --card:#ffffff;
       --border:#e5e7eb;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--ink);
-      background:var(--bg);
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-    }
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);margin:0;padding:0;line-height:1.6}
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-    /* Header */
-    header{
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      background:rgba(255,255,255,.95); backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-    }
+    header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
     nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-    .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue-dark))}
-    .logo-text{font-weight:800;letter-spacing:-.3px;color:var(--ink)}
     .nav-links{display:flex;gap:1.5rem;list-style:none}
     .nav-links a{color:var(--muted);text-decoration:none}
     .nav-links a:hover{color:var(--blue)}
-    /* Logo image clamp */
-.logo-img {
-  height: 36px;
-  max-height: 36px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
-.logo {
-  gap: 10px;
-}
-
-    /* Hero */
-    .hero{
-      min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden;
-      background:linear-gradient(135deg,var(--bg-soft) 0%, #e2e8f0 100%);
-      padding-top:88px; /* space under fixed header */
-    }
-    .hero:before{
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(80% 60% at 90% 10%, rgba(59,130,246,.12) 0%, transparent 60%);
-    }
-    .hero-content{position:relative; z-index:2; max-width:640px; animation:fadeUp .8s ease}
-    .hero h1{font-size:clamp(2.4rem,5vw,4rem); line-height:1.08; font-weight:900; margin-bottom:.75rem}
-    .hero .sub{color:var(--blue); font-weight:700; font-size:1.15rem; margin-bottom:1rem}
-    .hero p.desc{color:var(--muted); font-size:1.075rem; margin-bottom:1.25rem}
-
-    /* Form (re-usable) */
-    .custom-form-container{background:var(--card); border:2px solid var(--border); border-radius:14px; padding:1.25rem; max-width:520px}
-    .form-title{font-size:1.15rem; font-weight:800; margin-bottom:.25rem}
-    .form-description{color:var(--muted); margin-bottom:1rem}
+    .logo-img{height:36px;display:block;object-fit:contain}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--bg-soft) 0%,#e2e8f0 100%);padding-top:88px}
+    .hero-content{max-width:640px}
+    .hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:900;margin-bottom:.75rem}
+    .sub{color:var(--blue);font-weight:700;margin-bottom:1rem}
+    .desc{color:var(--muted);font-size:1.1rem;margin-bottom:1.2rem}
+    .custom-form-container{background:#fff;border:2px solid var(--border);border-radius:14px;padding:1.25rem;max-width:520px}
     .form-group{margin-bottom:1rem}
-    .form-group input[type="email"]{
-      width:100%; padding:.9rem 1rem; border:2px solid #d1d5db; border-radius:10px; font-size:1rem; background:#fff;
-      transition:border .2s, box-shadow .2s;
-    }
-    .form-group input[type="email"]:focus{
-      outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,130,246,.12);
-    }
-    .cta-button{
-      display:inline-block; width:100%; padding:1rem 1.25rem;
-      background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:#fff; border:0; border-radius:12px;
-      font-weight:800; text-decoration:none; text-align:center; cursor:pointer;
-      box-shadow:0 10px 30px rgba(59,130,246,.30);
-      transition:transform .15s ease, box-shadow .15s ease, opacity .2s;
-    }
-    .cta-button:hover{transform:translateY(-2px); box-shadow:0 14px 40px rgba(59,130,246,.38)}
-    .cta-button[disabled]{opacity:.7; cursor:not-allowed}
-    .success-message{
-      display:none; margin-top:1rem; padding:1rem; text-align:center; border-radius:10px;
-      background:#d1fae5; border:2px solid var(--green); color:#065f46;
-    }
-
-    /* Sections */
-    .preview-cta{margin-top:1.75rem; background:linear-gradient(135deg,#f8fafc,#e2e8f0); border:2px solid var(--blue); border-radius:16px; padding:1.5rem}
-    .preview-cta h3{font-size:1.2rem;margin-bottom:.4rem}
-    .preview-cta p{color:var(--muted); margin-bottom:.9rem}
-    .preview-cta .ghost{background:linear-gradient(135deg,var(--green),var(--green-dark)); display:inline-block; padding:.9rem 1.25rem; border-radius:12px; color:#fff; text-decoration:none; box-shadow:0 10px 30px rgba(16,185,129,.30)}
-    .features{padding:4.5rem 0; background:#fff}
-    .grid{display:grid; gap:2rem; grid-template-columns:repeat(3,minmax(0,1fr))}
-    .card{border:2px solid var(--border); border-radius:18px; padding:1.75rem; background:#fff; transition:transform .2s, box-shadow .2s}
-    .card:hover{transform:translateY(-6px); box-shadow:0 22px 50px rgba(0,0,0,.08)}
-    .card .icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:1rem;font-size:1.25rem}
-    .card.c1 .icon{background:linear-gradient(135deg,var(--blue),var(--blue-dark))}
-    .card.c2 .icon{background:linear-gradient(135deg,var(--green),var(--green-dark))}
-    .card.c3 .icon{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
-    .card h3{font-size:1.25rem; font-weight:800; margin-bottom:.4rem}
-    .card p{color:var(--muted)}
-    .process{padding:4.5rem 0; background:var(--bg-soft); text-align:center}
-    .process h2{font-size:2.2rem; font-weight:900; margin-bottom:.5rem}
-    .process p.lead{color:var(--muted); max-width:700px; margin:0 auto 2rem}
-    .steps{display:flex; gap:2rem; flex-wrap:wrap; justify-content:center}
-    .step{flex:1 1 260px; max-width:330px}
-    .step .num{width:74px;height:74px;border-radius:50%; display:flex;align-items:center;justify-content:center;margin:0 auto .8rem; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue-dark)); font-size:1.6rem}
-    .cta-block{padding:4.5rem 0; background:linear-gradient(135deg,#f8fafc,#e2e8f0); text-align:center}
-    .cta-block h2{font-size:2.2rem; font-weight:900; margin-bottom:.6rem}
-    .cta-block p{color:var(--muted); margin:0 auto 1.2rem; max-width:560px}
-/* CTA Section */
-.cta-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Center the bottom CTA form */
-.cta-block .custom-form-container {
-  margin: 0 auto;
-  max-width: 520px;
-  width: 100%;
-}
-
-    footer{border-top:1px solid var(--border); padding:2.2rem 0; text-align:center; color:var(--muted); background:#fff}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
-
-    /* Responsive */
-    @media (max-width: 960px){ .grid{grid-template-columns:1fr 1fr} }
-    @media (max-width: 680px){
-      .grid{grid-template-columns:1fr}
-      nav .nav-links{display:none}
-      .hero{padding-top:92px; padding-bottom:26px}
-      .hero-content{max-width:100%}
-    }
+    input[type=email]{width:100%;padding:.9rem 1rem;border:2px solid #d1d5db;border-radius:10px;font-size:1rem}
+    input[type=email]:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+    .cta-button{display:inline-block;width:100%;padding:1rem 1.25rem;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border:0;border-radius:12px;font-weight:800;text-decoration:none;text-align:center;cursor:pointer}
+    .success-message{display:none;margin-top:1rem;padding:1rem;text-align:center;border-radius:10px;background:#d1fae5;border:2px solid var(--green);color:#065f46}
+    footer{border-top:1px solid var(--border);padding:2.2rem 0;text-align:center;color:var(--muted)}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <nav class="container">
-<a href="/" class="logo">
-  <img src="/ct3k-logo.png" alt="CT3000" class="logo-img" />
-</a>
+      <a href="/" class="logo"><img src="/ct3k-logo.png" alt="CT3000" class="logo-img"></a>
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#process">Process</a></li>
@@ -182,7 +63,6 @@
     </nav>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
@@ -190,98 +70,19 @@
         <div class="sub">Find your Edge. Track it. Build on it.</div>
         <p class="desc">Human traders are not perfect. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.</p>
 
-        <!-- Embedded Waitlist Form -->
         <div class="custom-form-container" id="waitlist">
-          <div class="form-title">Join the Waitlist</div>
+          <div class="form-title"><strong>Join the Waitlist</strong></div>
           <div class="form-description">Be first to experience CT3000 when we launch.</div>
 
-          <form id="waitlistForm">
+          <form id="waitlistForm"
+                data-form-id="1FAIpQLSfr7LL60a4_jRsRGTohZ44H5zmUrmkZe-hgmPYKWuTgSjt5LQ"
+                data-entry-id="1556369182">
             <div class="form-group">
-              <label class="sr-only" for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
             </div>
             <button id="submitBtn" type="submit" class="cta-button">Secure My Spot →</button>
           </form>
-
-          <div class="success-message" id="successMessage">
-            🎉 You’re on the list! We’ll notify you as soon as CT3000 launches.
-          </div>
-        </div>
-
-        <!-- Preview CTA -->
-        <div class="preview-cta">
-          <h3>Curious what CT3000 looks like in action?</h3>
-          <p>Get a sneak peek at the interface that’s changing how traders operate.</p>
-          <a class="ghost" href="preview-page.html" onclick="try{plausible('LooksLike')}catch(e){}">See what it will look like</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="grid">
-        <div class="card c1">
-          <div class="icon">🎯</div>
-          <h3>Pattern Recognition</h3>
-          <p>Tracks your trading from planning to execution and discovers insights for better trading.</p>
-        </div>
-        <div class="card c2">
-          <div class="icon">🔍</div>
-          <h3>Blind Spot Detection</h3>
-          <p>Pushes you to do less of what doesn’t work and more of what does.</p>
-        </div>
-        <div class="card c3">
-          <div class="icon">⚡</div>
-          <h3>Execution Clarity</h3>
-          <p>Plan your trade and trade your plan. Execution is where most traders fail—and where money is made.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process -->
-  <section class="process" id="process">
-    <div class="container">
-      <h2>Master Your Process</h2>
-      <p class="lead">For the first time, your process is visible. And once you see it clearly, you can master it.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <h3>Watch & Learn</h3>
-          <p>CT3000 observes your trading patterns and decision-making process silently in the background.</p>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <h3>Analyze & Adapt</h3>
-          <p>Advanced logic identifies strengths and flags areas to improve—grounded in your own data.</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <h3>Execute & Excel</h3>
-          <p>Trade like the version of yourself you know is possible, with clarity and control.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom CTA (optional second form) -->
-  <section class="cta-block">
-    <div class="container">
-      <h2>Ready to Transform Your Trading?</h2>
-      <p>Join the select group of traders discovering their edge with CT3000.</p>
-
-      <div class="custom-form-container">
-        <form id="waitlistForm2">
-          <div class="form-group">
-            <label class="sr-only" for="email2">Email</label>
-            <input type="email" id="email2" name="email" placeholder="your@email.com" autocomplete="email" required>
-          </div>
-          <button id="submitBtn2" type="submit" class="cta-button">Join the Waitlist →</button>
-        </form>
-        <div class="success-message" id="successMessage2">
-          🎉 You’re on the list! We’ll notify you as soon as CT3000 launches.
+          <div class="success-message" id="successMessage">🎉 You’re on the list! We’ll notify you as soon as CT3000 launches.</div>
         </div>
       </div>
     </div>
@@ -291,76 +92,34 @@
     <div class="container">© 2025 CT3000. Built for traders who demand more.</div>
   </footer>
 
-  <!-- Submission wiring -->
   <script>
     (function(){
-      // Google Form config (yours)
- FORM_ID  = "1FAIpQLSfGsrPQHJt_dkWoAF2t67MFlDQi8Rc3aQAAW-TWdIU2w5AvsA"
-ENTRY_ID = "981728278"
+      function wire(formId,emailId,successId,buttonId){
+        const form=document.getElementById(formId);
+        if(!form)return;
+        const emailEl=document.getElementById(emailId);
+        const success=document.getElementById(successId);
+        const btn=document.getElementById(buttonId);
+        const FORM_ID=form.dataset.formId;
+        const ENTRY_ID=form.dataset.entryId;
 
-      function submitEmail(form, emailInputId, successId, buttonId){
-        const emailEl = document.getElementById(emailInputId);
-        const success = document.getElementById(successId);
-        const btn = document.getElementById(buttonId);
-
-        if (!emailEl) return;
-
-        form.addEventListener("submit", function(e){
+        form.addEventListener("submit",e=>{
           e.preventDefault();
-          const email = emailEl.value.trim();
-          if (!email) return;
-
-          // prevent double clicks
-          if (btn) btn.disabled = true;
-
-          const endpoint = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-          const data = new FormData();
-          data.append(`entry.${ENTRY_ID}`, email);
-
-          // fire & forget (CORS won't allow reading response)
-          fetch(endpoint, { method: "POST", mode: "no-cors", body: data })
-            .catch(()=>{}) // ignore network noise
-            .finally(()=>{
-              if (success) success.style.display = "block";
-              form.reset();
-              try { if (typeof plausible === "function") plausible("WaitlistJoin"); } catch (e) {}
-              if (btn) setTimeout(()=>{ btn.disabled = false; }, 800);
-              setTimeout(()=>{ if (success) success.style.display = "none"; }, 5000);
-            });
+          const email=(emailEl?.value||"").trim();
+          if(!email)return;
+          if(btn)btn.disabled=true;
+          const endpoint=`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+          const data=new FormData();
+          data.append(`entry.${ENTRY_ID}`,email);
+          fetch(endpoint,{method:"POST",mode:"no-cors",body:data}).finally(()=>{
+            if(success)success.style.display="block";
+            form.reset();
+            if(btn)setTimeout(()=>btn.disabled=false,800);
+            setTimeout(()=>{if(success)success.style.display="none";},5000);
+          });
         });
       }
-
-      // Wire both forms (hero + bottom)
-      const f1 = document.getElementById("waitlistForm");
-      if (f1) submitEmail(f1, "email", "successMessage", "submitBtn");
-
-      const f2 = document.getElementById("waitlistForm2");
-      if (f2) submitEmail(f2, "email2", "successMessage2", "submitBtn2");
-
-      // Smooth scroll for in-page nav
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener("click", e=>{
-          const id = a.getAttribute("href");
-          if (!id || id === "#") return;
-          const target = document.querySelector(id);
-          if (target){
-            e.preventDefault();
-            target.scrollIntoView({behavior:"smooth", block:"start"});
-          }
-        });
-      });
-
-      // Header subtle shadow after scroll
-      window.addEventListener("scroll", ()=>{
-        const header = document.querySelector("header");
-        if (window.scrollY > 90){
-          header.style.boxShadow = "0 10px 30px rgba(0,0,0,.06)";
-          header.style.background = "rgba(255,255,255,.98)";
-        } else {
-          header.style.boxShadow = "none";
-          header.style.background = "rgba(255,255,255,.95)";
-        }
-      });
+      wire("waitlistForm","email","successMessage","submitBtn");
     })();
   </script>
 </body>
