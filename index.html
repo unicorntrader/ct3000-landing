@@ -6,20 +6,20 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CT3000 — Never Miss a Trade Again</title>
-  <meta name="description" content="Find your Edge. Track it. Build on it. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.">
+  <title>CT3000 — Your Trading Intelligence Engine</title>
+  <meta name="description" content="Plan your trade. Trade your plan. Journal your trades. Review your trades. The complete trading cycle in one intelligence engine.">
   <meta name="keywords" content="trading, co-pilot, trading software, execution, pattern recognition, trading edge">
   <meta name="author" content="CT3000">
 
   <!-- Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com">
-  <meta property="og:title" content="CT3000 — Never Miss a Trade Again">
-  <meta property="og:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
+  <meta property="og:title" content="CT3000 — Your Trading Intelligence Engine">
+  <meta property="og:description" content="Plan. Execute. Journal. Review. The complete trading cycle.">
   <meta property="og:image" content="https://cotraderapp.com/ct3k-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CT3000 — Never Miss a Trade Again">
-  <meta name="twitter:description" content="Find your Edge. Track it. Build on it. Trading Co-Pilot for better decisions.">
+  <meta name="twitter:title" content="CT3000 — Your Trading Intelligence Engine">
+  <meta name="twitter:description" content="Plan. Execute. Journal. Review. The complete trading cycle.">
 
   <style>
     :root{
@@ -39,7 +39,7 @@
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:var(--ink);
-      background:var(--bg);
+      background:var(--bg-soft);
       line-height:1.6;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -55,130 +55,290 @@
     }
     nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-    .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue-dark))}
-    .logo-text{font-weight:800;letter-spacing:-.3px;color:var(--ink)}
+    .logo-img {
+      height: 36px;
+      max-height: 36px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
     .nav-links{display:flex;gap:1.5rem;list-style:none}
-    .nav-links a{color:var(--muted);text-decoration:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500}
     .nav-links a:hover{color:var(--blue)}
-    /* Logo image clamp */
-.logo-img {
-  height: 36px;
-  max-height: 36px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
-.logo {
-  gap: 10px;
-}
+
+    /* CTA Buttons */
+    .cta-button-large{
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      color:#fff;padding:20px 50px;border-radius:12px;text-decoration:none;
+      font-weight:bold;font-size:1.2rem;transition:all .3s ease;
+      display:inline-block;border:none;cursor:pointer;font-family:inherit;
+      box-shadow:0 10px 30px rgba(59,130,246,.30);
+    }
+    .cta-button-large:hover{
+      background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+      transform:translateY(-3px);
+      box-shadow:0 14px 40px rgba(59,130,246,.38);
+    }
+    .cta-button-large[disabled]{opacity:.7;cursor:not-allowed}
 
     /* Hero */
     .hero{
-      min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden;
+      min-height:100vh; display:flex; align-items:center; position:relative;
       background:linear-gradient(135deg,var(--bg-soft) 0%, #e2e8f0 100%);
-      padding-top:88px; /* space under fixed header */
+      padding-top:88px; padding-bottom:60px;
     }
-    .hero:before{
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(80% 60% at 90% 10%, rgba(59,130,246,.12) 0%, transparent 60%);
+    .hero-content{
+      display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
     }
-    .hero-content{position:relative; z-index:2; max-width:640px; animation:fadeUp .8s ease}
-    .hero h1{font-size:clamp(2.4rem,5vw,4rem); line-height:1.08; font-weight:900; margin-bottom:.75rem}
-    .hero .sub{color:var(--blue); font-weight:700; font-size:1.15rem; margin-bottom:1rem}
-    .hero p.desc{color:var(--muted); font-size:1.075rem; margin-bottom:1.25rem}
+    .hero-text{text-align:left}
+    .hero-text h1{
+      font-size:3.5rem; line-height:1.1; font-weight:900; margin-bottom:24px;
+      background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-text p.tagline{
+      font-size:1.2rem; color:#666; margin-bottom:24px; line-height:1.5;
+    }
+    .hero-details{
+      list-style:disc; padding-left:20px; font-size:1.5rem; line-height:1.8;
+      font-weight:600; margin:24px 0; color:var(--ink);
+    }
+    .hero-details li{margin-bottom:12px}
 
-    /* Form (re-usable) */
-    .custom-form-container{background:var(--card); border:2px solid var(--border); border-radius:14px; padding:1.25rem; max-width:520px}
-    .form-title{font-size:1.15rem; font-weight:800; margin-bottom:.25rem}
-    .form-description{color:var(--muted); margin-bottom:1rem}
-    .form-group{margin-bottom:1rem}
-    .form-group input[type="email"]{
-      width:100%; padding:.9rem 1rem; border:2px solid #d1d5db; border-radius:10px; font-size:1rem; background:#fff;
-      transition:border .2s, box-shadow .2s;
+    /* Credibility Badges */
+    .credibility-badges{
+      margin-top:40px; padding-top:32px; border-top:2px solid var(--blue);
     }
-    .form-group input[type="email"]:focus{
-      outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,130,246,.12);
+    .badges-grid{
+      display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
+      font-size:0.95rem; color:var(--ink);
     }
-    .cta-button{
-      display:inline-block; width:100%; padding:1rem 1.25rem;
-      background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:#fff; border:0; border-radius:12px;
-      font-weight:800; text-decoration:none; text-align:center; cursor:pointer;
-      box-shadow:0 10px 30px rgba(59,130,246,.30);
-      transition:transform .15s ease, box-shadow .15s ease, opacity .2s;
+    .badge-item{display:flex; align-items:center; gap:8px}
+    .badge-item span:first-child{font-size:1.75rem}
+
+    /* Video Section */
+    .hero-video{text-align:center}
+    .video-label{
+      margin-bottom:16px; text-align:center;
     }
-    .cta-button:hover{transform:translateY(-2px); box-shadow:0 14px 40px rgba(59,130,246,.38)}
-    .cta-button[disabled]{opacity:.7; cursor:not-allowed}
+    .video-label p{
+      font-size:1.1rem; font-weight:700; color:var(--blue);
+      margin:0; letter-spacing:0.02em;
+    }
+    .video-wrapper{
+      position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+      border-radius:14px; border:2px solid var(--blue);
+      box-shadow:0 6px 18px rgba(59,130,246,.12);
+    }
+    .video-wrapper iframe{
+      position:absolute; top:0; left:0; width:100%; height:100%;
+    }
+
+    /* Section Styling */
+    section{padding:80px 0}
+    .section-eyebrow{
+      text-align:center; font-size:0.9rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--blue);
+      margin-bottom:12px;
+    }
+    .section-title{
+      text-align:center; font-size:4rem; font-weight:900; line-height:1.1;
+      margin-bottom:20px; color:var(--ink);
+    }
+    .section-subtitle{
+      text-align:center; font-size:1.1rem; color:var(--muted);
+      max-width:600px; margin:0 auto 48px;
+    }
+
+    /* The Cycle - 4 Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 22px;
+    }
+    .step{
+      position: relative;
+      background:#fff;
+      border:2px solid var(--blue);
+      border-radius:14px;
+      padding:22px 22px 18px;
+      box-shadow:0 6px 18px rgba(59,130,246,.10);
+      transform: translateY(14px);
+      opacity:0;
+      transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
+      will-change: transform, opacity;
+    }
+    .step.in-view{
+      transform: translateY(0);
+      opacity:1;
+    }
+    .step:hover{
+      transform: translateY(-6px);
+      box-shadow:0 12px 28px rgba(59,130,246,.18);
+    }
+    .part-label {
+      font-size:.8rem;
+      letter-spacing:.02em;
+      color:#7A8A96;
+      margin-bottom:6px;
+    }
+    .step h3 { 
+      font-size: 1.5rem; 
+      color: var(--ink); 
+      margin: 4px 0 10px; 
+      text-align: left; 
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+    .step ul { margin-left:18px; }
+    .step li { margin:6px 0; font-size:.98rem; line-height:1.55; }
+    .step li::marker { color:var(--blue); }
+    .steps-cta { 
+      text-align: center; 
+      margin-top: 60px;
+    }
+
+    /* Results Applied - Before/After */
+    .results-list{
+      max-width:800px; margin:0 auto; background:#fff;
+      border:2px solid var(--blue); border-radius:14px; padding:40px;
+      box-shadow:0 6px 18px rgba(59,130,246,.12);
+    }
+    .results-list ul{list-style:none; padding:0; margin:0}
+    .results-list li{
+      padding:20px 0; border-bottom:1px solid #dbeafe;
+    }
+    .results-list li:last-child{border-bottom:none}
+    .results-list p{margin:0; font-size:0.95rem}
+    .results-list .before{color:#666; margin-bottom:8px}
+    .results-list .before strong{color:var(--ink)}
+    .results-list .after{color:var(--ink); font-weight:600}
+    .results-list .after strong{color:var(--blue)}
+
+    /* Intelligence Engine Examples */
+    .insights-grid{
+      display:grid; grid-template-columns:repeat(2, 1fr); gap:30px;
+      max-width:1100px; margin:0 auto;
+    }
+    .insight-example{
+      background:#fff; border-left:6px solid var(--green);
+      border-radius:16px; padding:30px;
+      box-shadow:0 10px 30px rgba(16,185,129,.15);
+      border:2px solid #d1fae5;
+    }
+    .insight-example.warning{
+      border-left-color:#dc2626;
+      border-color:#fee2e2;
+      box-shadow:0 10px 30px rgba(220,38,38,.15);
+    }
+    .insight-example .icon{font-size:2.5rem; margin-bottom:12px}
+    .insight-example h3{font-size:1.5rem; margin-bottom:12px; color:var(--green)}
+    .insight-example.warning h3{color:#dc2626}
+    .insight-example p{color:var(--muted); margin-bottom:20px; line-height:1.6}
+    .insight-impact{
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top:20px; border-top:2px solid #d1fae5;
+    }
+    .insight-example.warning .insight-impact{border-top-color:#fee2e2}
+    .impact-value{font-size:2rem; font-weight:700; color:var(--green)}
+    .insight-example.warning .impact-value{color:#dc2626}
+    .insight-action{
+      background:#d1fae5; padding:12px 20px; border-radius:8px;
+      font-size:0.95rem; color:#065f46; font-weight:600;
+    }
+    .insight-example.warning .insight-action{
+      background:#fee2e2; color:#991b1b;
+    }
+
+    /* Harsh Truth */
+    .harsh-truth-box{
+      max-width:800px; margin:0 auto; background:var(--bg-soft);
+      border:2px solid var(--blue); border-radius:14px; padding:48px;
+      box-shadow:0 6px 18px rgba(59,130,246,.2);
+    }
+    .harsh-truth-box p{
+      font-size:1.1rem; line-height:1.8; color:var(--ink);
+      margin-bottom:24px;
+    }
+    .harsh-truth-box p:first-of-type{
+      font-size:1.3rem; font-weight:600;
+    }
+    .harsh-truth-box p:last-of-type{margin-bottom:0}
+
+    /* Audience Fit Cards */
+    .audience-cards{
+      display:grid; gap:22px;
+    }
+    @media(min-width:980px){.audience-cards{grid-template-columns:1fr 1fr;}}
+    .audience-card{
+      background:#fff; border:2px solid var(--blue); border-radius:14px;
+      box-shadow:0 6px 18px rgba(59,130,246,.12);
+      padding:22px 22px 18px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .audience-card:hover {
+      transform: translateY(-6px);
+      box-shadow:0 12px 28px rgba(59,130,246,.18);
+    }
+    .audience-eyebrow{
+      font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+      color:#6b7280; margin:0 0 6px; font-weight:700;
+    }
+    .audience-card h3{
+      margin:0 0 10px; font-size:1.12rem; line-height:1.25;
+      color:var(--ink); font-weight:800;
+    }
+    .audience-card p{margin:0 0 8px; color:#374151;}
+    .audience-card ul{margin:8px 0 0 0; padding:0; list-style:none;}
+    .audience-card li{
+      margin:8px 0; padding-left:18px; position:relative;
+      color:var(--ink); line-height:1.45;
+    }
+    .audience-card li::before{
+      content:""; position:absolute; left:0; top:.6em;
+      width:6px; height:6px; border-radius:50%; background:var(--blue);
+    }
+    @media(min-width:980px){.audience-card.span-2{grid-column:1 / -1;}}
+
+    /* Success Message */
     .success-message{
-      display:none; margin-top:1rem; padding:1rem; text-align:center; border-radius:10px;
-      background:#d1fae5; border:2px solid var(--green); color:#065f46;
+      display:none; margin-top:1rem; padding:1rem; text-align:center;
+      border-radius:10px; background:#d1fae5; border:2px solid var(--green);
+      color:#065f46; font-weight:600;
     }
 
-    /* Sections */
-    .preview-cta{margin-top:1.75rem; background:linear-gradient(135deg,#f8fafc,#e2e8f0); border:2px solid var(--blue); border-radius:16px; padding:1.5rem}
-    .preview-cta h3{font-size:1.2rem;margin-bottom:.4rem}
-    .preview-cta p{color:var(--muted); margin-bottom:.9rem}
-    .preview-cta .ghost{background:linear-gradient(135deg,var(--green),var(--green-dark)); display:inline-block; padding:.9rem 1.25rem; border-radius:12px; color:#fff; text-decoration:none; box-shadow:0 10px 30px rgba(16,185,129,.30)}
-    .features{padding:4.5rem 0; background:#fff}
-    .grid{display:grid; gap:2rem; grid-template-columns:repeat(3,minmax(0,1fr))}
-    .card{border:2px solid var(--border); border-radius:18px; padding:1.75rem; background:#fff; transition:transform .2s, box-shadow .2s}
-    .card:hover{transform:translateY(-6px); box-shadow:0 22px 50px rgba(0,0,0,.08)}
-    .card .icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:1rem;font-size:1.25rem}
-    .card.c1 .icon{background:linear-gradient(135deg,var(--blue),var(--blue-dark))}
-    .card.c2 .icon{background:linear-gradient(135deg,var(--green),var(--green-dark))}
-    .card.c3 .icon{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
-    .card h3{font-size:1.25rem; font-weight:800; margin-bottom:.4rem}
-    .card p{color:var(--muted)}
-    .process{padding:4.5rem 0; background:var(--bg-soft); text-align:center}
-    .process h2{font-size:2.2rem; font-weight:900; margin-bottom:.5rem}
-    .process p.lead{color:var(--muted); max-width:700px; margin:0 auto 2rem}
-    .steps{display:flex; gap:2rem; flex-wrap:wrap; justify-content:center}
-    .step{flex:1 1 260px; max-width:330px}
-    .step .num{width:74px;height:74px;border-radius:50%; display:flex;align-items:center;justify-content:center;margin:0 auto .8rem; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue-dark)); font-size:1.6rem}
-    .cta-block{padding:4.5rem 0; background:linear-gradient(135deg,#f8fafc,#e2e8f0); text-align:center}
-    .cta-block h2{font-size:2.2rem; font-weight:900; margin-bottom:.6rem}
-    .cta-block p{color:var(--muted); margin:0 auto 1.2rem; max-width:560px}
-/* CTA Section */
-.cta-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Center the bottom CTA form */
-.cta-block .custom-form-container {
-  margin: 0 auto;
-  max-width: 520px;
-  width: 100%;
-}
-
-    footer{border-top:1px solid var(--border); padding:2.2rem 0; text-align:center; color:var(--muted); background:#fff}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
+    /* Footer */
+    footer{
+      background:var(--ink); padding:40px 0; text-align:center;
+      border-top:2px solid var(--blue);
+    }
+    footer p{color:#fff}
 
     /* Responsive */
-    @media (max-width: 960px){ .grid{grid-template-columns:1fr 1fr} }
-    @media (max-width: 680px){
-      .grid{grid-template-columns:1fr}
-      nav .nav-links{display:none}
-      .hero{padding-top:92px; padding-bottom:26px}
-      .hero-content{max-width:100%}
+    @media (max-width:968px){
+      .hero-content{grid-template-columns:1fr !important; gap:30px !important}
+      .hero-text h1{text-align:center !important; font-size:2rem}
+      .hero-text p.tagline{text-align:center !important}
+      .hero-details{display:inline-block; text-align:left}
+      .hero-text > div[style*="text-align:left"]{text-align:center !important}
+      .section-title{font-size:2.5rem !important}
+      .steps{grid-template-columns:1fr}
+      .insights-grid{grid-template-columns:1fr}
+      .badges-grid{grid-template-columns:1fr}
     }
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <nav class="container">
-<a href="/" class="logo">
-  <img src="/ct3k-logo.png" alt="CT3000" class="logo-img" />
-</a>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#waitlist">Join Waitlist</a></li>
-      </ul>
+      <!-- Header intentionally empty -->
     </nav>
   </header>
 
@@ -186,185 +346,432 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Never Miss a Trade Again</h1>
-        <div class="sub">Find your Edge. Track it. Build on it.</div>
-        <p class="desc">Human traders are not perfect. The Co-Trader 3000 is a trading Co-Pilot helping you make better decisions every step of the way.</p>
+        
+        <!-- Left: Text Content -->
+        <div class="hero-text" style="text-align:left;">
+          <h1>Master Your Trading Process</h1>
+          <p class="tagline">The complete trading cycle. One intelligence engine.</p>
+          
+          <!-- Course Details -->
+          <ul class="hero-details">
+            <li>25% Plan your trade</li>
+            <li>25% Trade your plan</li>
+            <li>25% Journal your trades</li>
+            <li>25% Review your trades</li>
+          </ul>
 
-        <!-- Embedded Waitlist Form -->
-        <div class="custom-form-container" id="waitlist">
-          <div class="form-title">Join the Waitlist</div>
-          <div class="form-description">Be first to experience CT3000 when we launch.</div>
+          <!-- CTA Button -->
+          <div style="margin:24px 0; text-align:left;" id="waitlist">
+            <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('hero')" class="cta-button-large">Join the Waitlist</button>
+          </div>
 
-          <form id="waitlistForm">
-            <div class="form-group">
-              <label class="sr-only" for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+          <!-- Credibility Badges -->
+          <div class="credibility-badges">
+            <div class="badges-grid">
+              <div class="badge-item">
+                <span>🎯</span>
+                <span><strong>Pattern Recognition</strong> that actually works</span>
+              </div>
+              <div class="badge-item">
+                <span>🔍</span>
+                <span><strong>Blind Spot Detection</strong> in real-time</span>
+              </div>
+              <div class="badge-item">
+                <span>📊</span>
+                <span><strong>Plan vs Reality</strong> every trade</span>
+              </div>
+              <div class="badge-item">
+                <span>🧠</span>
+                <span><strong>Intelligence Engine</strong> that learns you</span>
+              </div>
             </div>
-            <button id="submitBtn" type="submit" class="cta-button">Secure My Spot →</button>
-          </form>
-
-          <div class="success-message" id="successMessage">
-            🎉 You’re on the list! We’ll notify you as soon as CT3000 launches.
           </div>
         </div>
 
-
-
-
-        <!-- Preview CTA -->
-        <div class="preview-cta">
-          <h3>Curious what CT3000 looks like in action?</h3>
-          <p>Get a sneak peek at the interface that’s changing how traders operate.</p>
-          <a class="ghost" href="preview-page.html" onclick="try{plausible('LooksLike')}catch(e){}">See what it will look like</a>
+        <!-- Right: Video -->
+        <div class="hero-video">
+          <!-- Video Label with Arrow -->
+          <div class="video-label">
+            <p>See CT3000 in Action</p>
+          </div>
+          
+          <div class="video-wrapper">
+            <!-- Placeholder for actual video - replace with real embed -->
+            <iframe 
+              style="width:100%; height:100%;" 
+              src="ct3000-teaser-slides.html" 
+              title="CT3000 Teaser Video" 
+              frameborder="0" 
+              allow="autoplay; fullscreen"
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="features" id="features">
+  <!-- The Cycle -->
+  <section id="cycle" style="background:#fff">
     <div class="container">
-      <div class="grid">
-        <div class="card c1">
-          <div class="icon">🎯</div>
-          <h3>Pattern Recognition</h3>
-          <p>Tracks your trading from planning to execution and discovers insights for better trading.</p>
-        </div>
-        <div class="card c2">
-          <div class="icon">🔍</div>
-          <h3>Blind Spot Detection</h3>
-          <p>Pushes you to do less of what doesn’t work and more of what does.</p>
-        </div>
-        <div class="card c3">
-          <div class="icon">⚡</div>
-          <h3>Execution Clarity</h3>
-          <p>Plan your trade and trade your plan. Execution is where most traders fail—and where money is made.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <p class="section-eyebrow">The Complete Trading Cycle</p>
+      <h2 class="section-title">On Repeat = 100% Great Trader</h2>
 
-  <!-- Process -->
-  <section class="process" id="process">
-    <div class="container">
-      <h2>Master Your Process</h2>
-      <p class="lead">For the first time, your process is visible. And once you see it clearly, you can master it.</p>
       <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <h3>Watch & Learn</h3>
-          <p>CT3000 observes your trading patterns and decision-making process silently in the background.</p>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <h3>Analyze & Adapt</h3>
-          <p>Advanced logic identifies strengths and flags areas to improve—grounded in your own data.</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <h3>Execute & Excel</h3>
-          <p>Trade like the version of yourself you know is possible, with clarity and control.</p>
-        </div>
+        <!-- STEP 1 -->
+        <article class="step" style="--delay: 0ms;">
+          <p class="part-label">STEP 1 — Plan</p>
+          <h3>📝 Plan Your Trade</h3>
+          <ul>
+            <li>Define entry, stop, target before market open</li>
+            <li>Size positions based on conviction and risk</li>
+            <li>Document thesis and setup criteria</li>
+            <li>Build your edge through preparation</li>
+          </ul>
+        </article>
+
+        <!-- STEP 2 -->
+        <article class="step" style="--delay: 80ms;">
+          <p class="part-label">STEP 2 — Execute</p>
+          <h3>⚡ Trade Your Plan</h3>
+          <ul>
+            <li>Execute with discipline, no emotional deviation</li>
+            <li>Track adherence to your plan in real-time</li>
+            <li>See exactly where you follow through</li>
+            <li>Measure the gap between plan and reality</li>
+          </ul>
+        </article>
+
+        <!-- STEP 3 -->
+        <article class="step" style="--delay: 160ms;">
+          <p class="part-label">STEP 3 — Journal</p>
+          <h3>📊 Journal Your Trades</h3>
+          <ul>
+            <li>Automatic trade logging and matching</li>
+            <li>Capture context, emotions, market conditions</li>
+            <li>Build your complete trading history</li>
+            <li>Never lose track of a single trade</li>
+          </ul>
+        </article>
+
+        <!-- STEP 4 -->
+        <article class="step" style="--delay: 240ms;">
+          <p class="part-label">STEP 4 — Review</p>
+          <h3>🧠 Review Your Trades</h3>
+          <ul>
+            <li>Intelligence Engine finds patterns you miss</li>
+            <li>Discover your actual edge vs. imagined edge</li>
+            <li>Spot revenge trading, FOMO, poor sizing</li>
+            <li>Iterate and improve systematically</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="steps-cta">
+        <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('cycle')" class="cta-button-large">Start Trading Better</button>
       </div>
     </div>
   </section>
 
-  <!-- Bottom CTA (optional second form) -->
-  <section class="cta-block">
+  <!-- Intelligence Engine -->
+  <section id="intelligence" style="background:var(--bg-soft)">
     <div class="container">
-      <h2>Ready to Transform Your Trading?</h2>
-      <p>Join the select group of traders discovering their edge with CT3000.</p>
+      <p class="section-eyebrow">AI That Actually Helps</p>
+      <h2 class="section-title">Intelligence Engine</h2>
+      <p class="section-subtitle">Real insights from your actual trading data. Not generic advice.</p>
 
-      <div class="custom-form-container">
-        <form id="waitlistForm2">
-          <div class="form-group">
-            <label class="sr-only" for="email2">Email</label>
-            <input type="email" id="email2" name="email" placeholder="your@email.com" autocomplete="email" required>
+      <div class="insights-grid">
+        <!-- Warning Insight -->
+        <div class="insight-example warning">
+          <div class="icon">⚠️</div>
+          <h3>Revenge Trading Detected</h3>
+          <p>7 revenge trades (emotional + oversized) show 29% win rate, bleeding -$892 total.</p>
+          <div class="insight-impact">
+            <div class="impact-value">-$892</div>
+            <div class="insight-action">
+              💡 Take 30-min break after any loss
+            </div>
           </div>
-          <button id="submitBtn2" type="submit" class="cta-button">Join the Waitlist →</button>
-        </form>
-        <div class="success-message" id="successMessage2">
-          🎉 You’re on the list! We’ll notify you as soon as CT3000 launches.
+        </div>
+
+        <!-- Success Insight 1 -->
+        <div class="insight-example">
+          <div class="icon">🎯</div>
+          <h3>Pre-Market Planning Edge</h3>
+          <p>Planned trades average $284 vs spontaneous trades $127. Your preparation creates real edge.</p>
+          <div class="insight-impact">
+            <div class="impact-value">+$1,570</div>
+            <div class="insight-action">
+              💡 Plan every trade before open
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Insight 2 -->
+        <div class="insight-example">
+          <div class="icon">🏆</div>
+          <h3>NVDA Mastery</h3>
+          <p>NVDA: 85% win rate across 12 trades, $2,340 total P&L. You've developed genuine edge here.</p>
+          <div class="insight-impact">
+            <div class="impact-value">+$2,340</div>
+            <div class="insight-action">
+              💡 Double down on NVDA setups
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Insight 3 -->
+        <div class="insight-example">
+          <div class="icon">⏰</div>
+          <h3>Morning Session Dominance</h3>
+          <p>Morning trading shows 72% win rate (23 trades) vs midday at 51%. Focus energy when you're sharpest.</p>
+          <div class="insight-impact">
+            <div class="impact-value">+$4,125</div>
+            <div class="insight-action">
+              💡 Focus 70% of trades in morning
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-cta">
+        <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('intelligence')" class="cta-button-large">Discover Your Edge</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Applied -->
+  <section id="results" style="background:#fff">
+    <div class="container">
+      <p class="section-eyebrow">From Chaos to Clarity</p>
+      <h2 class="section-title">Results, Applied</h2>
+      <p class="section-subtitle">Real transformations from traders who went from winging it to mastering it.</p>
+      
+      <div class="results-list">
+        <ul>
+          <li>
+            <p class="before">
+              <strong>Before:</strong> No planning, just reacting to price action and FOMO
+            </p>
+            <p class="after">
+              <strong>After:</strong> Plans every trade pre-market, 92% adherence score
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> Couldn't identify patterns, repeated same mistakes weekly
+            </p>
+            <p class="after">
+              <strong>After:</strong> Intelligence Engine spots revenge trading instantly
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> Inconsistent position sizing, no risk framework
+            </p>
+            <p class="after">
+              <strong>After:</strong> Systematic sizing based on conviction and edge
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> Thought they had edge in tech, actually lost money
+            </p>
+            <p class="after">
+              <strong>After:</strong> Discovered real edge in financial sector morning trades
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> Manual spreadsheets, hours wasted on data entry
+            </p>
+            <p class="after">
+              <strong>After:</strong> Automatic journaling, focus time on actual trading
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> No review process, couldn't measure improvement
+            </p>
+            <p class="after">
+              <strong>After:</strong> Weekly insights show clear progress and evolution
+            </p>
+          </li>
+
+          <li>
+            <p class="before">
+              <strong>Before:</strong> Emotional exits, sold winners too early, held losers too long
+            </p>
+            <p class="after">
+              <strong>After:</strong> Plan vs Reality tracking keeps exits disciplined
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="steps-cta">
+        <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('results')" class="cta-button-large">Start Your Transformation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Harsh Truth -->
+  <section style="background:var(--bg-soft)">
+    <div class="container">
+      <p class="section-eyebrow">This Isn't For Everyone</p>
+      <h2 class="section-title">The Harsh Truth</h2>
+      
+      <div class="harsh-truth-box">
+        <p>Most traders don't have a process. They wing it.</p>
+        
+        <p>They don't plan trades. They don't follow plans. They don't journal consistently. They definitely don't review systematically.</p>
+        
+        <p>CT3000 requires commitment. You have to want to actually improve. You have to be willing to see your blind spots. You have to be ready to do the work.</p>
+        
+        <p>If you're looking for magic indicators or get-rich-quick schemes, this isn't it.</p>
+        
+        <p>But if you're ready to build a real process and become the trader you know you can be—this is it.</p>
+      </div>
+
+      <div class="steps-cta">
+        <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('harsh-truth')" class="cta-button-large">I'm Ready to Commit</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience Fit -->
+  <section style="background:#fff">
+    <div class="container">
+      <p class="section-eyebrow">Who This Is For</p>
+      <h2 class="section-title">Trader Fit</h2>
+      
+      <div style="max-width:1100px; margin:0 auto;">
+        <div class="audience-cards">
+
+          <!-- Card 1: Who Joins -->
+          <article class="audience-card">
+            <p class="audience-eyebrow">Audience Fit</p>
+            <h3>Who Uses CT3000</h3>
+            <p>From beginners to professionals, these are the traders who thrive with CT3000.</p>
+            <ul>
+              <li>Day traders building systematic edge</li>
+              <li>Swing traders managing 5-20 positions</li>
+              <li>Options traders tracking complex strategies</li>
+              <li>Prop traders proving their process</li>
+              <li>Rebuilders regaining confidence after drawdowns</li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Pain Points → Solutions -->
+          <article class="audience-card">
+            <p class="audience-eyebrow">Problems We Solve</p>
+            <h3>Pain Points → Solutions</h3>
+            <p>The most common struggles — and how CT3000 solves them.</p>
+            <ul>
+              <li><strong>No Process</strong> → Complete trading cycle framework</li>
+              <li><strong>Inconsistent Execution</strong> → Plan vs Reality tracking</li>
+              <li><strong>Blind Spots</strong> → Intelligence Engine pattern detection</li>
+              <li><strong>Manual Chaos</strong> → Automatic journaling and matching</li>
+            </ul>
+          </article>
+
+          <!-- Card 3: Motivations & Objectives (full width) -->
+          <article class="audience-card span-2">
+            <p class="audience-eyebrow">Goals & Outcomes</p>
+            <h3>Motivations & Objectives</h3>
+            <p>Why traders join, and what they're aiming for.</p>
+            <ul>
+              <li><strong>Build Real Edge:</strong> Move from guessing to systematic advantage</li>
+              <li><strong>Improve Discipline:</strong> Execute plans consistently without emotional deviation</li>
+              <li><strong>Discover Patterns:</strong> See what's actually working vs. what you think works</li>
+              <li><strong>Accelerate Learning:</strong> Compress years of trial-and-error into months</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <div class="steps-cta">
+          <button onclick="window.location.href='https://forms.gle/2W2XdojJhZ5mAHid7';trackWaitlistClick('audience-fit')" class="cta-button-large">Join the Waitlist</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Corporate Packages -->
+  <section style="background:var(--bg-soft)">
+    <div class="container">
+      <p class="section-eyebrow">For Trading Desks & Prop Firms</p>
+      <h2 class="section-title">Corporate Packages</h2>
+      <p class="section-subtitle">Team licenses for prop firms, trading desks, and advisory services</p>
+      
+      <div style="text-align:center;">
+        <a href="mailto:hello@cotraderapp.com?subject=Corporate%20Package%20Inquiry%20-%20CT3000&body=Hi,%0D%0A%0D%0AI'm%20interested%20in%20learning%20more%20about%20corporate%20packages%20for%20CT3000.%0D%0A%0D%0ACompany/Organization:%0D%0ATeam%20Size:%0D%0ASpecific%20Needs:%0D%0A%0D%0ALooking%20forward%20to%20hearing%20from%20you." class="cta-button-large">Inquire About Team Licenses</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <div class="container">© 2025 CT3000. Built for traders who demand more.</div>
+    <div class="container">
+      <p>&copy; 2025 CT3000. Built for traders who demand more.</p>
+    </div>
   </footer>
 
-  <!-- Submission wiring -->
+  <!-- JS -->
   <script>
-    (function(){
-      // Google Form config (yours)
-const FORM_ID  = "1FAIpQLSfr7LL60a4_jRsRGTohZ44H5zmUrmkZe-hgmPYKWuTgSjt5LQ";
-const ENTRY_ID = "1556369182";
-
-      function submitEmail(form, emailInputId, successId, buttonId){
-        const emailEl = document.getElementById(emailInputId);
-        const success = document.getElementById(successId);
-        const btn = document.getElementById(buttonId);
-
-        if (!emailEl) return;
-
-        form.addEventListener("submit", function(e){
-          e.preventDefault();
-          const email = emailEl.value.trim();
-          if (!email) return;
-
-          // prevent double clicks
-          if (btn) btn.disabled = true;
-
-          const endpoint = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-          const data = new FormData();
-          data.append(`entry.${ENTRY_ID}`, email);
-
-          // fire & forget (CORS won't allow reading response)
-          fetch(endpoint, { method: "POST", mode: "no-cors", body: data })
-            .catch(()=>{}) // ignore network noise
-            .finally(()=>{
-              if (success) success.style.display = "block";
-              form.reset();
-              try { if (typeof plausible === "function") plausible("WaitlistJoin"); } catch (e) {}
-              if (btn) setTimeout(()=>{ btn.disabled = false; }, 800);
-              setTimeout(()=>{ if (success) success.style.display = "none"; }, 5000);
-            });
-        });
+    // Track waitlist clicks
+    window.trackWaitlistClick = function(location) {
+      if (typeof plausible !== 'undefined') {
+        plausible('WaitlistClick', { props: { location: location } });
       }
+    }
 
-      // Wire both forms (hero + bottom)
-      const f1 = document.getElementById("waitlistForm");
-      if (f1) submitEmail(f1, "email", "successMessage", "submitBtn");
+    // Smooth scroll for header links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
 
-      const f2 = document.getElementById("waitlistForm2");
-      if (f2) submitEmail(f2, "email2", "successMessage2", "submitBtn2");
+    // Reveal steps on scroll
+    document.addEventListener('DOMContentLoaded', function () {
+      const steps = document.querySelectorAll('.step');
+      if (!steps.length) return;
 
-      // Smooth scroll for in-page nav
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener("click", e=>{
-          const id = a.getAttribute("href");
-          if (!id || id === "#") return;
-          const target = document.querySelector(id);
-          if (target){
-            e.preventDefault();
-            target.scrollIntoView({behavior:"smooth", block:"start"});
+      if (!('IntersectionObserver' in window)) {
+        steps.forEach(s => s.classList.add('in-view'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
           }
         });
-      });
+      }, { threshold: 0.15 });
+      steps.forEach(step => io.observe(step));
+    });
 
-      // Header subtle shadow after scroll
-      window.addEventListener("scroll", ()=>{
-        const header = document.querySelector("header");
-        if (window.scrollY > 90){
-          header.style.boxShadow = "0 10px 30px rgba(0,0,0,.06)";
-          header.style.background = "rgba(255,255,255,.98)";
-        } else {
-          header.style.boxShadow = "none";
-          header.style.background = "rgba(255,255,255,.95)";
-        }
-      });
-    })();
+    // Header subtle shadow after scroll
+    window.addEventListener("scroll", ()=>{
+      const header = document.querySelector("header");
+      if (window.scrollY > 90){
+        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.06)";
+        header.style.background = "rgba(255,255,255,.98)";
+      } else {
+        header.style.boxShadow = "none";
+        header.style.background = "rgba(255,255,255,.95)";
+      }
+    });
   </script>
 </body>
 </html>
