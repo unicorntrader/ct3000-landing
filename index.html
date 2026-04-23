@@ -243,14 +243,20 @@
     .insight-example p{color:var(--muted); margin-bottom:20px; line-height:1.6}
     .insight-impact{
       display:flex; justify-content:space-between; align-items:center;
+      gap:14px;
       padding-top:20px; border-top:2px solid #d1fae5;
     }
     .insight-example.warning .insight-impact{border-top-color:#fee2e2}
-    .impact-value{font-size:2rem; font-weight:700; color:var(--green)}
+    .impact-value{
+      font-size:2rem; font-weight:700; color:var(--green);
+      flex-shrink:0;
+    }
     .insight-example.warning .impact-value{color:#dc2626}
     .insight-action{
-      background:#d1fae5; padding:12px 20px; border-radius:8px;
-      font-size:0.95rem; color:#065f46; font-weight:600;
+      background:#d1fae5; padding:12px 18px; border-radius:8px;
+      font-size:0.92rem; color:#065f46; font-weight:600;
+      line-height:1.4;
+      flex:1 1 auto; min-width:0;
     }
     .insight-example.warning .insight-action{
       background:#fee2e2; color:#991b1b;
@@ -328,74 +334,77 @@
     }
     footer p{color:#fff}
 
-    /* Showcase Card (TradeSquares + Missed Trades) */
-    .showcase-card, .narrative-card{
+    /* Showcase Cards (TradeSquares, Missed Trades, Playbooks) */
+    .showcase-card, .narrative-card, .playbook-card{
       background:#fff;
-      border-radius:20px;
-      padding:36px 36px 30px;
-      margin-bottom:40px;
+      border-radius:14px;
+      padding:24px 26px;
+      margin:0 auto 20px;
+      max-width:1000px;
     }
     .showcase-card{
-      border:2px solid #d1fae5;
-      border-left:6px solid var(--green);
-      box-shadow:0 10px 30px rgba(16,185,129,.12);
+      border:1px solid #d1fae5;
+      border-left:4px solid var(--green);
+      box-shadow:0 4px 14px rgba(16,185,129,.07);
     }
     .narrative-card{
-      border:2px solid #dbeafe;
-      border-left:6px solid var(--blue);
-      box-shadow:0 10px 30px rgba(59,130,246,.12);
+      border:1px solid #dbeafe;
+      border-left:4px solid var(--blue);
+      box-shadow:0 4px 14px rgba(59,130,246,.07);
     }
     .showcase-header{
       display:flex;
-      gap:20px;
-      margin-bottom:24px;
+      gap:14px;
+      margin-bottom:18px;
       align-items:flex-start;
     }
     .showcase-icon{
-      font-size:2.75rem;
+      font-size:1.6rem;
       flex-shrink:0;
       line-height:1;
+      margin-top:2px;
     }
     .showcase-meta{ flex:1; min-width:0; }
     .showcase-tag{
-      font-size:.72rem;
+      font-size:.68rem;
       font-weight:800;
-      letter-spacing:.12em;
+      letter-spacing:.1em;
       color:var(--green-dark);
       text-transform:uppercase;
-      margin-bottom:6px;
+      margin-bottom:4px;
     }
     .showcase-tag.narrative-tag{ color: var(--blue-dark); }
     .showcase-meta h3{
-      font-size:1.75rem;
-      font-weight:800;
+      font-size:1.3rem;
+      font-weight:700;
       color:var(--ink);
-      line-height:1.2;
-      margin:0 0 10px;
+      line-height:1.3;
+      margin:0 0 6px;
     }
     .showcase-desc{
-      font-size:1.02rem;
+      font-size:.92rem;
       color:var(--muted);
       line-height:1.55;
       margin:0;
-      max-width:720px;
+      max-width:680px;
     }
     .showcase-stats{
       display:grid;
       grid-template-columns:repeat(4, 1fr);
-      gap:16px;
-      margin-top:20px;
-      padding-top:20px;
+      gap:14px;
+      margin-top:16px;
+      padding-top:14px;
       border-top:1px solid #d1fae5;
     }
     .showcase-insight{
-      margin-top:20px;
-      padding:14px 18px;
+      margin-top:16px;
+      padding:11px 14px;
       background:#d1fae5;
-      border-radius:10px;
+      border-radius:8px;
       color:#065f46;
-      font-size:.95rem;
-      font-weight:600;
+      font-size:.88rem;
+      font-weight:500;
+      line-height:1.5;
     }
 
     /* Missed Trades demo */
@@ -450,13 +459,9 @@
 
     /* Playbooks */
     .playbook-card{
-      background:#fff;
-      border:2px solid #fde68a;
-      border-left:6px solid #f59e0b;
-      border-radius:20px;
-      padding:36px 36px 30px;
-      margin-bottom:40px;
-      box-shadow:0 10px 30px rgba(245,158,11,.12);
+      border:1px solid #fde68a;
+      border-left:4px solid #f59e0b;
+      box-shadow:0 4px 14px rgba(245,158,11,.07);
     }
     .showcase-tag.playbook-tag{ color: #92400e; }
 
@@ -594,7 +599,7 @@
       .steps{grid-template-columns:1fr}
       .insights-grid{grid-template-columns:1fr}
       .badges-grid{grid-template-columns:1fr}
-      .showcase-card, .narrative-card{padding:26px 22px 22px}
+      .showcase-card, .narrative-card, .playbook-card{padding:24px 20px}
       .showcase-header{flex-direction:column; gap:12px}
       .showcase-icon{font-size:2.25rem}
     }
@@ -602,7 +607,6 @@
       .showcase-stats{grid-template-columns:repeat(2, 1fr); gap:12px}
       .play-row{grid-template-columns: 24px 1fr; row-gap:6px}
       .play-meta{grid-column: 2; justify-content:flex-start}
-      .playbook-card{padding:26px 22px 22px}
     }
 
     @keyframes fadeUp{from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
@@ -649,19 +653,19 @@
             <div class="badges-grid">
               <div class="badge-item">
                 <span>🔗</span>
-                <span>Auto-syncs with <strong>Interactive Brokers</strong></span>
+                <span><strong>Automatically syncs</strong> with your broker</span>
               </div>
               <div class="badge-item">
                 <span>🎯</span>
-                <span><strong>Adherence score</strong> on every trade, 0–100</span>
+                <span>Tracks <strong>adherence score</strong> on planned trades</span>
               </div>
               <div class="badge-item">
                 <span>🧠</span>
-                <span><strong>12 pattern detectors</strong>, not generic advice</span>
+                <span>Tracks <strong>patterns</strong> in your trading and generates insights</span>
               </div>
               <div class="badge-item">
                 <span>📊</span>
-                <span><strong>Plan vs reality</strong>, side by side</span>
+                <span><strong>Plan Vs Execution</strong></span>
               </div>
             </div>
           </div>
@@ -807,9 +811,9 @@
   <!-- Inside the App: TradeSquares + Missed Trades -->
   <section id="inside" style="background:#fff">
     <div class="container">
-      <p class="section-eyebrow">Inside the App</p>
-      <h2 class="section-title">Where Discipline Becomes Visible</h2>
-      <p class="section-subtitle">Three moves that turn your behaviour into data you can actually use.</p>
+      <p class="section-eyebrow">Features</p>
+      <h2 class="section-title">Three features worth a closer look.</h2>
+      <p class="section-subtitle">TradeSquares, Missed Trades, Playbooks — each one does a specific job, each one stands on its own.</p>
 
       <!-- TradeSquares Showcase -->
       <article class="showcase-card">
@@ -869,10 +873,9 @@
 
         <div class="missed-demo">
           <div class="mini-form">
-            <div class="form-row"><span class="form-key">Ticker</span><span class="form-val">TSLA</span></div>
-            <div class="form-row"><span class="form-key">Setup</span><span class="form-val">Breakout</span></div>
-            <div class="form-row"><span class="form-key">Why skipped</span><span class="form-val">Chasing, no plan</span></div>
-            <div class="form-row"><span class="form-key">Tag</span><span class="form-tag">#FOMO</span></div>
+            <div class="form-row"><span class="form-key">Ticker</span><span class="form-val">NVDA</span></div>
+            <div class="form-row"><span class="form-key">Setup</span><span class="form-val">Bounced off support</span></div>
+            <div class="form-row"><span class="form-key">Why missed</span><span class="form-val">No plan, not ready for that setup</span></div>
           </div>
         </div>
 
@@ -887,45 +890,45 @@
           <div class="showcase-icon">📖</div>
           <div class="showcase-meta">
             <p class="showcase-tag playbook-tag">Playbooks</p>
-            <h3>Codify your own rules.</h3>
-            <p class="showcase-desc">The trap setups you keep falling for. Covering shorts on the 50MA. Buying strong stocks at a pullback. Chasing new highs with no base. Log them as Plays — your anti-patterns, your rules, on file.</p>
+            <h3>Your setups, codified.</h3>
+            <p class="showcase-desc">The plays you've earned through screen time. Covering shorts at a key MA. Buying strong stocks at MA support. Breakouts only after a real base. Each Play is a rule you've proven works — so you stop re-learning it every month.</p>
           </div>
         </div>
 
         <div class="playbook-list">
 
           <div class="play-row">
-            <div class="play-icon">🚫</div>
+            <div class="play-icon">🎯</div>
             <div class="play-body">
               <div class="play-name">MA Short Cover</div>
-              <div class="play-rule">Don't cover shorts just because price taps a moving average.</div>
+              <div class="play-rule">Take profit on shorts when price hits a key moving average — MAs act as dynamic support.</div>
             </div>
             <div class="play-meta">
-              <span class="play-tag">#trap</span>
+              <span class="play-tag">#profit-take</span>
               <span class="play-count">logged 5×</span>
             </div>
           </div>
 
           <div class="play-row">
-            <div class="play-icon">🚫</div>
+            <div class="play-icon">🎯</div>
             <div class="play-body">
               <div class="play-name">MA Bounce Buy</div>
-              <div class="play-rule">Don't buy strong stocks just because they pulled back to an MA.</div>
+              <div class="play-rule">Buy strong stocks when they pull back to a moving average — MA as support on names in uptrend.</div>
             </div>
             <div class="play-meta">
-              <span class="play-tag">#FOMO</span>
+              <span class="play-tag">#support</span>
               <span class="play-count">logged 3×</span>
             </div>
           </div>
 
           <div class="play-row">
-            <div class="play-icon">🚫</div>
+            <div class="play-icon">🎯</div>
             <div class="play-body">
-              <div class="play-name">No-Base Breakout</div>
-              <div class="play-rule">Don't chase new highs without a clear consolidation base.</div>
+              <div class="play-name">Base Breakout</div>
+              <div class="play-rule">Enter breakouts only after a clear consolidation base. No base, no trade — patience over FOMO.</div>
             </div>
             <div class="play-meta">
-              <span class="play-tag">#chase</span>
+              <span class="play-tag">#breakout</span>
               <span class="play-count">logged 7×</span>
             </div>
           </div>
@@ -933,7 +936,7 @@
         </div>
 
         <div class="showcase-insight playbook-insight">
-          💡 The Playbook is where experience gets written down. Next, ideation features cross-reference live setups against your Plays — if you're about to fall for a known trap, you'll know.
+          💡 The Playbook is where recurring patterns get written down. Those Plays then make your trading better and better. That pattern you ignored and didn't learn from. That behaviour you didn't fix. That trap you fell for again. How will you solve the problem if you don't know what the problem is?
         </div>
       </article>
 
