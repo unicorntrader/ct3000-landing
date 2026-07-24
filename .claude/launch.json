@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ct3000-landing",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "0"],
+      "port": 8765,
+      "autoPort": true
+    }
+  ]
+}
