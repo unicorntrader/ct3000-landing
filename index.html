@@ -488,10 +488,11 @@
       border-radius: 8px;
       font-weight: 600; font-size: 14px;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all 0.15s;
+      transition: all 0.2s;
       cursor: pointer;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.15);
     }
-    .sync-cta:hover { background: var(--blue-700); }
+    .sync-cta:hover { background: var(--blue-700); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transform: translateY(-1px); }
     .sync-cta:disabled { background: var(--gray-200); color: var(--gray-500); cursor: default; }
     .sync-cta .spinner {
       width: 14px; height: 14px;
@@ -531,10 +532,11 @@
     .taken-row {
       border-bottom: 1px solid var(--gray-100);
       cursor: pointer;
-      transition: background 0.15s;
+      transition: background 0.15s, box-shadow 0.15s;
     }
     .taken-row:last-child { border-bottom: none; }
-    .taken-row:hover .taken-summary { background: var(--gray-50); }
+    .taken-row:hover { background: var(--blue-50); }
+    .taken-row:hover .taken-summary { background: var(--blue-50); }
     .taken-date { color: var(--gray-700); display: inline-flex; align-items: center; gap: 4px; }
     .taken-date .chev {
       color: var(--gray-400); font-weight: 700; font-size: 14px;
@@ -597,7 +599,7 @@
       transition: all 0.15s;
       cursor: pointer;
     }
-    .journal-tab:hover { color: var(--ink); }
+    .journal-tab:hover { color: var(--ink); background: var(--gray-200); }
     .journal-tab.active {
       background: var(--white); color: var(--ink);
       border: 1px solid var(--gray-200);
@@ -684,9 +686,9 @@
       display: flex; align-items: flex-start; gap: 10px;
       padding: 12px 12px;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: background 0.15s, border-color 0.15s;
     }
-    .callout-header:hover { background: var(--gray-50); }
+    .callout-header:hover { background: var(--blue-50); border-color: var(--blue-200); }
     .callout-icon {
       flex-shrink: 0;
       width: 16px; height: 16px;
@@ -1363,7 +1365,7 @@
         <div class="feature-row">
           <div class="feature-text">
             <span class="section-eyebrow">Callouts</span>
-            <h3>See what's working. See what's not.</h3>
+            <h3>Tap to see what's working. Tap to see what's not.</h3>
             <p>Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
           </div>
           <div class="phone">
