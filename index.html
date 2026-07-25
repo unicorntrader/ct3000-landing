@@ -931,6 +931,44 @@
       .philosophy { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
     }
+
+    /* ─── Interactive Guide Arrows ─── */
+    .guide-arrow {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 40;
+      transition: opacity 0.3s ease;
+    }
+    .guide-arrow.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .guide-arrow svg {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+    }
+    .guide-arrow-label {
+      position: absolute;
+      background: var(--blue-600);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: all;
+      cursor: pointer;
+    }
+    .guide-arrow-label:hover {
+      background: var(--blue-700);
+    }
+    @keyframes arrowPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .guide-arrow.pulse svg {
+      animation: arrowPulse 1.5s ease-in-out infinite;
+    }
   </style>
 </head>
 <body>
@@ -1363,7 +1401,7 @@
         <div class="feature-row">
           <div class="feature-text">
             <span class="section-eyebrow">Callouts</span>
-            <h3>Patterns you couldn't see. Now you can.</h3>
+            <h3>See what's working. See what's not.</h3>
             <p>Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
           </div>
           <div class="phone">
@@ -1663,6 +1701,111 @@
           applyPrivacy(phone);
         });
       });
+    })();
+
+    /* ─── Guide Arrows: Interactive scroll-based pointers ─── */
+    (function initGuideArrows() {
+      const arrowConfigs = [
+        {
+          id: 'arrow-plans',
+          targetSelector: '.features:nth-of-type(1) .phone',
+          position: { top: '20%', right: '5%' },
+          rotation: -45,
+          label: 'Click to explore',
+          visibleRange: [0.05, 0.25]
+        },
+        {
+          id: 'arrow-sync',
+          targetSelector: '.features:nth-of-type(2) .phone',
+          position: { top: '35%', left: '5%' },
+          rotation: 45,
+          label: 'See it sync',
+          visibleRange: [0.18, 0.38]
+        },
+        {
+          id: 'arrow-journal',
+          targetSelector: '.features:nth-of-type(3) .phone',
+          position: { top: '50%', right: '5%' },
+          rotation: -45,
+          label: 'Try tapping a trade',
+          visibleRange: [0.33, 0.53]
+        },
+        {
+          id: 'arrow-review',
+          targetSelector: '.features:nth-of-type(4) .phone',
+          position: { top: '65%', left: '5%' },
+          rotation: 45,
+          label: 'Navigate weeks',
+          visibleRange: [0.48, 0.68]
+        },
+        {
+          id: 'arrow-callouts',
+          targetSelector: '.features:nth-of-type(5) .phone',
+          position: { top: '80%', right: '5%' },
+          rotation: -45,
+          label: 'Tap to learn more',
+          visibleRange: [0.63, 0.83]
+        }
+      ];
+
+      function createArrowSVG() {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 60 80');
+        svg.setAttribute('width', '40');
+        svg.setAttribute('height', '50');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', '#2563eb');
+        svg.setAttribute('stroke-width', '2.5');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        // Arrow shaft
+        svg.innerHTML = '<line x1="30" y1="10" x2="30" y2="55"/>' +
+                       '<polyline points="30,55 20,40 30,50 40,40" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        return svg;
+      }
+
+      arrowConfigs.forEach(config => {
+        const arrow = document.createElement('div');
+        arrow.className = 'guide-arrow pulse';
+        arrow.id = config.id;
+        arrow.style.transform = `rotate(${config.rotation}deg)`;
+        Object.assign(arrow.style, config.position);
+
+        const svgArrow = createArrowSVG();
+        arrow.appendChild(svgArrow);
+
+        const label = document.createElement('div');
+        label.className = 'guide-arrow-label';
+        label.textContent = config.label;
+        if (config.rotation < 0) {
+          label.style.right = '-140px';
+          label.style.top = '15px';
+        } else {
+          label.style.left = '-140px';
+          label.style.top = '15px';
+        }
+        arrow.appendChild(label);
+
+        document.body.appendChild(arrow);
+      });
+
+      function updateArrowVisibility() {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollProgress = window.scrollY / scrollHeight;
+
+        arrowConfigs.forEach(config => {
+          const arrow = document.getElementById(config.id);
+          if (!arrow) return;
+
+          const [minScroll, maxScroll] = config.visibleRange;
+          const isVisible = scrollProgress >= minScroll && scrollProgress <= maxScroll;
+
+          arrow.classList.toggle('visible', isVisible);
+        });
+      }
+
+      window.addEventListener('scroll', updateArrowVisibility, { passive: true });
+      updateArrowVisibility();
     })();
   </script>
 </body>
