@@ -1750,17 +1750,28 @@
 
       function createArrowSVG() {
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', '0 0 60 80');
-        svg.setAttribute('width', '40');
-        svg.setAttribute('height', '50');
+        svg.setAttribute('viewBox', '0 0 80 120');
+        svg.setAttribute('width', '50');
+        svg.setAttribute('height', '70');
         svg.setAttribute('fill', 'none');
-        svg.setAttribute('stroke', '#2563eb');
-        svg.setAttribute('stroke-width', '2.5');
-        svg.setAttribute('stroke-linecap', 'round');
-        svg.setAttribute('stroke-linejoin', 'round');
-        // Arrow shaft
-        svg.innerHTML = '<line x1="30" y1="10" x2="30" y2="55"/>' +
-                       '<polyline points="30,55 20,40 30,50 40,40" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+
+        // Hand-drawn marker-style arrow in red
+        svg.innerHTML = `
+          <!-- Arrow shaft with slight curve for organic feel -->
+          <path d="M 40 15 Q 42 40, 40 70" stroke="#ef4444" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+
+          <!-- Arrow head - marker tip style -->
+          <g transform="translate(40, 70)">
+            <!-- Large arrowhead -->
+            <path d="M 0 0 L -16 -20 L -8 -25 Q 0 -28 8 -25 L 16 -20 Z" fill="#ef4444" opacity="0.95"/>
+            <!-- Inner highlight for marker pen effect -->
+            <path d="M -8 -22 Q 0 -24 8 -22" stroke="#ff6b6b" stroke-width="1.5" fill="none" opacity="0.6"/>
+          </g>
+
+          <!-- Decorative squiggle lines for hand-drawn effect -->
+          <path d="M 50 30 Q 55 32 52 38" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+          <path d="M 28 50 Q 20 52 25 58" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+        `;
         return svg;
       }
 
