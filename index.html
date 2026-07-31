@@ -866,6 +866,95 @@
       text-shadow: 0 0 40px rgba(37,99,235,0.6);
     }
 
+    /* ============ MENTORSHIP ============ */
+    .mentorship {
+      background: var(--white);
+    }
+    .mentorship .wrap { max-width: 980px; }
+    .mentorship-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .mentorship-head h2 {
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .mentorship-head p {
+      font-size: 17px; color: var(--gray-600);
+      max-width: 560px; margin: 0 auto;
+      line-height: 1.6;
+    }
+    .mentorship-tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .mentorship-tier {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .mentorship-tier.pro {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .mentorship-tier .tier-name {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+    .mentorship-tier.pro .tier-name { color: var(--blue-200); }
+    .mentorship-tier .tier-price {
+      font-size: 32px; font-weight: 800;
+      color: var(--ink); letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .mentorship-tier.pro .tier-price { color: white; }
+    .mentorship-tier .tier-price span {
+      font-size: 15px; font-weight: 500;
+      color: var(--gray-500);
+    }
+    .mentorship-tier.pro .tier-price span { color: var(--gray-300); }
+    .mentorship-tier .tier-schedule {
+      font-size: 14px; font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+    .mentorship-tier.pro .tier-schedule { color: var(--gray-200); }
+    .mentorship-tier .tier-desc {
+      font-size: 14px; color: var(--gray-600);
+      line-height: 1.55;
+    }
+    .mentorship-tier.pro .tier-desc { color: var(--gray-400); }
+    .mentorship-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+    .mentorship-pillar h4 {
+      font-size: 15px; font-weight: 700;
+      color: var(--ink); margin-bottom: 10px;
+    }
+    .mentorship-pillar ul {
+      list-style: none;
+    }
+    .mentorship-pillar li {
+      font-size: 14px; color: var(--gray-600);
+      padding: 4px 0;
+    }
+    .mentorship-cta { text-align: center; }
+    .mentorship-disclaimer {
+      font-size: 13px; color: var(--gray-500);
+      max-width: 520px; margin: 18px auto 0;
+      line-height: 1.55;
+    }
+
     /* ============ FINAL CTA ============ */
     .final-cta {
       padding: 120px 0;
@@ -924,6 +1013,7 @@
       .feature-row { grid-template-columns: 1fr; gap: 36px; margin-bottom: 72px; }
       .feature-row.reverse > :first-child { order: 0; }
       .feature-row.reverse > :last-child { order: 0; }
+      .mentorship-pillars { grid-template-columns: repeat(2, 1fr); gap: 32px; }
     }
     @media (max-width: 640px) {
       section { padding: 64px 0; }
@@ -932,6 +1022,8 @@
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .philosophy { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
+      .mentorship-tiers { grid-template-columns: 1fr; }
+      .mentorship-pillars { grid-template-columns: 1fr; gap: 24px; }
     }
   </style>
 </head>
@@ -1435,6 +1527,72 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENTORSHIP ============ -->
+    <section class="mentorship" id="mentorship">
+      <div class="wrap">
+        <div class="mentorship-head">
+          <span class="section-eyebrow">Level up</span>
+          <h2>Professional mentorship.</h2>
+          <p>One-on-one coaching to build your process, master discipline, and turn trading into a professional practice.</p>
+        </div>
+
+        <div class="mentorship-tiers">
+          <div class="mentorship-tier">
+            <div class="tier-name">Mentorship</div>
+            <div class="tier-price">$500<span>/month</span></div>
+            <div class="tier-schedule">Bi-weekly</div>
+            <div class="tier-desc">Bi-weekly 1:1 coaching sessions.</div>
+          </div>
+          <div class="mentorship-tier pro">
+            <div class="tier-name">Mentorship Pro</div>
+            <div class="tier-price">$1,000<span>/month</span></div>
+            <div class="tier-schedule">Weekly + async</div>
+            <div class="tier-desc">Weekly sessions plus daily access between.</div>
+          </div>
+        </div>
+
+        <div class="mentorship-pillars">
+          <div class="mentorship-pillar">
+            <h4>Psychology &amp; Discipline</h4>
+            <ul>
+              <li>Emotional control</li>
+              <li>Decision patterns</li>
+              <li>Consistency</li>
+            </ul>
+          </div>
+          <div class="mentorship-pillar">
+            <h4>Risk &amp; Portfolio</h4>
+            <ul>
+              <li>Position sizing</li>
+              <li>Capital allocation</li>
+              <li>Diversification</li>
+            </ul>
+          </div>
+          <div class="mentorship-pillar">
+            <h4>Strategy &amp; Execution</h4>
+            <ul>
+              <li>Repeatable process</li>
+              <li>Entry &amp; exit rules</li>
+              <li>Playbook</li>
+            </ul>
+          </div>
+          <div class="mentorship-pillar">
+            <h4>Review &amp; Improvement</h4>
+            <ul>
+              <li>Trade journaling</li>
+              <li>Decision review</li>
+              <li>Iteration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mentorship-cta">
+          <a href="https://cotrader3000.com/mentorship-apply" class="cta-primary">Apply for mentorship</a>
+          <p class="mentorship-disclaimer">Mentorship is education and coaching, not financial advice. Your results depend on your process and discipline, not outcomes.</p>
         </div>
       </div>
     </section>
