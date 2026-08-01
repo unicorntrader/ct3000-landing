@@ -110,6 +110,56 @@
     }
     .nav-cta:hover { background: var(--blue-700); transform: translateY(-1px); }
 
+    /* ============ SECTION NAV (header links + side dot rail) ============ */
+    section[id] { scroll-margin-top: 90px; }
+    .site-nav {
+      display: flex; align-items: center; gap: 22px;
+    }
+    .site-nav a {
+      font-size: 13px; font-weight: 600;
+      color: var(--gray-600);
+      transition: color 0.15s ease;
+    }
+    .site-nav a:hover { color: var(--ink); }
+    .site-nav a.is-active { color: var(--blue-600); }
+
+    .dot-rail {
+      position: fixed;
+      right: 22px; top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: flex; flex-direction: column; gap: 16px;
+      align-items: center;
+    }
+    .dot-rail a {
+      position: relative;
+      display: block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .dot-rail a:hover { background: var(--gray-400); }
+    .dot-rail a.is-active { background: var(--blue-600); transform: scale(1.35); }
+    .dot-rail .dot-label {
+      position: absolute;
+      right: 18px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px; font-weight: 600;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 4px 10px; border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+    .dot-rail a:hover .dot-label,
+    .dot-rail a:focus-visible .dot-label { opacity: 1; }
+    @media (max-width: 900px) {
+      .site-nav, .dot-rail { display: none; }
+    }
+
     /* ============ HERO ============ */
     .hero {
       padding: 88px 0 32px;
@@ -1003,8 +1053,25 @@
           <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
         </svg>
       </div>
+      <nav class="site-nav" aria-label="Page sections">
+        <a href="#plans" data-section="plans">Plans</a>
+        <a href="#auto-sync" data-section="auto-sync">Auto-sync</a>
+        <a href="#journal" data-section="journal">Journal</a>
+        <a href="#weekly-review" data-section="weekly-review">Weekly review</a>
+        <a href="#insights" data-section="insights">Insights</a>
+        <a href="#mentorship" data-section="mentorship">Mentorship</a>
+      </nav>
     </div>
   </header>
+
+  <nav class="dot-rail" aria-label="Section quick jump">
+    <a href="#plans" data-section="plans"><span class="dot-label">Plans</span></a>
+    <a href="#auto-sync" data-section="auto-sync"><span class="dot-label">Auto-sync</span></a>
+    <a href="#journal" data-section="journal"><span class="dot-label">Journal</span></a>
+    <a href="#weekly-review" data-section="weekly-review"><span class="dot-label">Weekly review</span></a>
+    <a href="#insights" data-section="insights"><span class="dot-label">Insights</span></a>
+    <a href="#mentorship" data-section="mentorship"><span class="dot-label">Mentorship</span></a>
+  </nav>
 
   <main>
     <!-- ============ HERO ============ -->
@@ -1020,7 +1087,7 @@
     </section>
 
     <!-- ============ ROW 1 · PLANS ============ -->
-    <section class="features">
+    <section class="features" id="plans">
       <div class="wrap">
         <div class="feature-row">
           <div class="feature-text">
@@ -1085,7 +1152,7 @@
     </section>
 
     <!-- ============ ROW 2 · AUTO-SYNC ============ -->
-    <section class="features">
+    <section class="features" id="auto-sync">
       <div class="wrap">
         <div class="feature-row reverse">
           <div class="feature-text">
@@ -1127,7 +1194,7 @@
     </section>
 
     <!-- ============ ROW 3 · JOURNAL ============ -->
-    <section class="features">
+    <section class="features" id="journal">
       <div class="wrap">
         <div class="feature-row">
           <div class="feature-text">
@@ -1369,7 +1436,7 @@
     </section>
 
     <!-- ============ ROW 4 · WEEKLY REVIEW ============ -->
-    <section class="features">
+    <section class="features" id="weekly-review">
       <div class="wrap">
         <div class="feature-row reverse">
           <div class="feature-text">
@@ -1413,7 +1480,7 @@
     </section>
 
     <!-- ============ ROW 5 · INSIGHTS ============ -->
-    <section class="features">
+    <section class="features" id="insights">
       <div class="wrap">
         <div class="feature-row">
           <div class="feature-text">
@@ -1493,7 +1560,7 @@
     </section>
 
     <!-- ============ MENTORSHIP TEASER ============ -->
-    <section class="mentorship-teaser">
+    <section class="mentorship-teaser" id="mentorship">
       <div class="wrap">
         <span class="teaser-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg>
@@ -1521,6 +1588,31 @@
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load', () => window.scrollTo(0, 0));
+
+    // ─── Section nav — scrollspy for header links + side dot rail ─────
+    (function initSectionNav() {
+      const links = document.querySelectorAll('[data-section]');
+      if (!links.length) return;
+      const setActive = (id) => {
+        links.forEach(a => a.classList.toggle('is-active', a.dataset.section === id));
+      };
+      const sections = Array.from(new Set(Array.from(links).map(a => a.dataset.section)))
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+      const observer = new IntersectionObserver((entries) => {
+        // Pick whichever observed section is currently closest to the
+        // vertical center of the viewport, not just "first intersecting"
+        // — with a thin rootMargin band, fast scrolls can skip a section
+        // entirely, or momentarily intersect two at once.
+        const visible = entries.filter(e => e.isIntersecting);
+        if (!visible.length) return;
+        const closest = visible.reduce((a, b) =>
+          Math.abs(a.boundingClientRect.top) < Math.abs(b.boundingClientRect.top) ? a : b
+        );
+        setActive(closest.target.id);
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      sections.forEach(s => observer.observe(s));
+    })();
 
     // ─── ROW 1 · Live Plan card (R:R) ─────────────────────────────────
     (function initPlanLive() {
