@@ -110,54 +110,46 @@
     }
     .nav-cta:hover { background: var(--blue-700); transform: translateY(-1px); }
 
-    /* ============ SECTION NAV (header links + side dot rail) ============ */
+    /* ============ SECTION NAV (side dot rail) ============ */
     section[id] { scroll-margin-top: 90px; }
-    .site-nav {
-      display: flex; align-items: center; gap: 22px;
-    }
-    .site-nav a {
-      font-size: 13px; font-weight: 600;
-      color: var(--gray-600);
-      transition: color 0.15s ease;
-    }
-    .site-nav a:hover { color: var(--ink); }
-    .site-nav a.is-active { color: var(--blue-600); }
 
     .dot-rail {
       position: fixed;
-      right: 22px; top: 50%;
+      right: 28px; top: 50%;
       transform: translateY(-50%);
       z-index: 40;
-      display: flex; flex-direction: column; gap: 16px;
-      align-items: center;
+      display: flex; flex-direction: column; gap: 20px;
+      align-items: flex-end;
     }
     .dot-rail a {
-      position: relative;
-      display: block;
-      width: 8px; height: 8px;
+      display: flex; align-items: center; gap: 12px;
+      padding: 4px 2px;
+    }
+    .dot-rail .dot-label {
+      font-size: 13px; font-weight: 600;
+      color: var(--gray-400);
+      white-space: nowrap;
+      transition: color 0.2s ease, transform 0.2s ease;
+      transform: translateX(4px);
+    }
+    .dot-rail .dot {
+      flex-shrink: 0;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: var(--gray-300);
-      transition: background 0.2s ease, transform 0.2s ease;
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
     }
-    .dot-rail a:hover { background: var(--gray-400); }
-    .dot-rail a.is-active { background: var(--blue-600); transform: scale(1.35); }
-    .dot-rail .dot-label {
-      position: absolute;
-      right: 18px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 11px; font-weight: 600;
-      color: var(--ink);
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      padding: 4px 10px; border-radius: 6px;
-      white-space: nowrap;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.15s ease;
+    .dot-rail a:hover .dot-label { color: var(--gray-700); transform: translateX(0); }
+    .dot-rail a:hover .dot { background: var(--gray-500); }
+    .dot-rail a.is-active .dot-label { color: var(--blue-600); transform: translateX(0); }
+    .dot-rail a.is-active .dot {
+      background: var(--blue-600);
+      width: 12px; height: 12px;
+      border-color: var(--blue-200);
     }
-    .dot-rail a:hover .dot-label,
-    .dot-rail a:focus-visible .dot-label { opacity: 1; }
     @media (max-width: 900px) {
-      .site-nav, .dot-rail { display: none; }
+      .dot-rail { display: none; }
     }
 
     /* ============ HERO ============ */
@@ -1053,24 +1045,16 @@
           <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
         </svg>
       </div>
-      <nav class="site-nav" aria-label="Page sections">
-        <a href="#plans" data-section="plans">Plans</a>
-        <a href="#auto-sync" data-section="auto-sync">Auto-sync</a>
-        <a href="#journal" data-section="journal">Journal</a>
-        <a href="#weekly-review" data-section="weekly-review">Weekly review</a>
-        <a href="#insights" data-section="insights">Insights</a>
-        <a href="#mentorship" data-section="mentorship">Mentorship</a>
-      </nav>
     </div>
   </header>
 
   <nav class="dot-rail" aria-label="Section quick jump">
-    <a href="#plans" data-section="plans"><span class="dot-label">Plans</span></a>
-    <a href="#auto-sync" data-section="auto-sync"><span class="dot-label">Auto-sync</span></a>
-    <a href="#journal" data-section="journal"><span class="dot-label">Journal</span></a>
-    <a href="#weekly-review" data-section="weekly-review"><span class="dot-label">Weekly review</span></a>
-    <a href="#insights" data-section="insights"><span class="dot-label">Insights</span></a>
-    <a href="#mentorship" data-section="mentorship"><span class="dot-label">Mentorship</span></a>
+    <a href="#plans" data-section="plans"><span class="dot-label">Plans</span><span class="dot"></span></a>
+    <a href="#auto-sync" data-section="auto-sync"><span class="dot-label">Auto-sync</span><span class="dot"></span></a>
+    <a href="#journal" data-section="journal"><span class="dot-label">Journal</span><span class="dot"></span></a>
+    <a href="#weekly-review" data-section="weekly-review"><span class="dot-label">Weekly review</span><span class="dot"></span></a>
+    <a href="#insights" data-section="insights"><span class="dot-label">Insights</span><span class="dot"></span></a>
+    <a href="#mentorship" data-section="mentorship"><span class="dot-label">Mentorship</span><span class="dot"></span></a>
   </nav>
 
   <main>
