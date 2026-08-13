@@ -832,11 +832,19 @@
       background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: 18px;
-      box-shadow: 0 24px 60px -10px rgba(17,24,39,0.15);
+      /* Soft blue glow layered under the existing neutral shadow -- the
+         section background (--gray-50) sits too close in tone to white
+         for the card to read as distinct on its own, so the glow does
+         the separating instead. box-shadow paints outside the border
+         box and isn't affected by this element's own overflow:hidden. */
+      box-shadow:
+        0 0 90px -12px rgba(37,99,235,0.28),
+        0 24px 60px -10px rgba(17,24,39,0.15);
       overflow: hidden;
       max-width: 440px;
       margin: 0 auto;
       width: 100%;
+      position: relative;
     }
     .phone-bar {
       padding: 14px 18px;
