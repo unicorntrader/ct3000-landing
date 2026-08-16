@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>Revenge Trading: What It Actually Costs You — CoTrader 3000 Blog</title>
+  <meta name="description" content="Revenge trading is gambling wearing a trading costume. Here's why it never works out over the long run, and how to catch it in your own account.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cotraderapp.com/blog-revenge-trading.html">
+  <meta property="og:title" content="Revenge Trading: What It Actually Costs You — CoTrader 3000 Blog">
+  <meta property="og:description" content="It's gambling wearing a trading costume, and it costs real money. Here's how to catch it in your own account.">
+  <meta property="og:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta property="og:image:width" content="2856">
+  <meta property="og:image:height" content="501">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+
+  <style>
+    :root {
+      --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
+      --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue-600); text-decoration: none; }
+    a:hover { color: var(--blue-700); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; max-width: none; padding: 12px 28px; }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); opacity: 0.85; }
+    .brand svg { height: 19px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a:not(.nav-cta) { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .site-nav a:not(.nav-cta):hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    .article-head { text-align: center; padding: 72px 0 48px; }
+    .article-head .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
+    }
+    .article-head h1 {
+      font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.15; color: var(--ink); max-width: 720px; margin: 0 auto 16px;
+    }
+    .article-head .meta { font-size: 13px; color: var(--gray-500); }
+
+    .article-body { max-width: 680px; margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--gray-700); line-height: 1.75; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body h2 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink);
+      margin: 40px 0 16px;
+    }
+    .article-body ul { margin: 0 0 22px 20px; }
+    .article-body li { margin-bottom: 10px; }
+    .article-body blockquote {
+      border-left: 3px solid var(--blue-600); background: var(--blue-50);
+      padding: 20px 24px; border-radius: 0 10px 10px 0; margin: 32px 0;
+      font-size: 18px; font-style: italic; color: var(--ink);
+    }
+    .article-body blockquote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--gray-500); }
+
+    .article-cta {
+      max-width: 680px; margin: 0 auto; text-align: center;
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .article-cta h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+    .article-cta p { font-size: 14px; color: var(--gray-600); margin-bottom: 20px; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-600); color: white; padding: 14px 28px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+    }
+    .cta-primary:hover { background: var(--blue-700); color: white; }
+    .back-to-blog { display: block; text-align: center; font-size: 13px; font-weight: 600; color: var(--gray-500); margin: 32px 0 0; }
+    .back-to-blog:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html" class="current">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="article-head">
+      <span class="eyebrow">Trading discipline</span>
+      <h1>Revenge trading: what it actually costs you</h1>
+      <div class="meta">4 min read</div>
+    </div>
+
+    <div class="article-body">
+      <p>You take a loss. It stings. And before the feeling has even settled, you're already back in — bigger size, less thought, one goal: get it back, right now. That's revenge trading, and underneath the trading terminology, it's just gambling. Not a metaphor for gambling — the actual mechanics of it. A bet placed to chase a loss, sized by emotion instead of a plan.</p>
+
+      <p>And like all gambling chased on tilt, it doesn't work out. Not sometimes — over any meaningful stretch of time, essentially never. You might get the money back on any single trade. That's not the same as it working, because the process that produced it will cost you again the next time, and the time after that, until the math catches up.</p>
+
+      <h2>Why it feels so reasonable in the moment</h2>
+      <p>Revenge trading doesn't feel reckless while you're doing it. It feels like conviction — "I know this ticker, I just need one good trade to fix this." That's the trap. The decision isn't coming from your edge or your plan. It's coming from the discomfort of an open loss, and your brain will construct a perfectly plausible-sounding reason to act on that discomfort instead of sitting with it.</p>
+
+      <p>The tell is usually speed and size: a trade entered within minutes of a loss closing, sized larger than your normal position, with a thinner rationale than you'd normally require. Any one of those alone might be nothing. All three together, right after a loss, is close to a tell every time.</p>
+
+      <h2>Defeating it is a real milestone, not a footnote</h2>
+      <p>Every trader who's become consistently profitable had to get past this one specifically. It's not a minor bad habit sitting alongside a dozen others — it's usually one of the biggest single leaks in a losing account, because it compounds: the revenge trade is oversized <em>and</em> low-quality, so when it also loses, it's worse than the original loss you were trying to fix.</p>
+
+      <p>Getting past it isn't about willpower in the moment — by the time you're in the trade, the moment has already been lost. It's about seeing the pattern clearly enough, in your own numbers, that you catch it before the next one.</p>
+
+      <h2>How to actually catch it</h2>
+      <p>This is exactly the kind of pattern that's nearly invisible trade-by-trade and completely obvious once you look at a stretch of your own history. CoTrader's Callouts specifically watch for entries clustered within a short window of a loss, and flag them — not as a lecture, but as a fact about your own account: <em>this happened, and here's what it cost.</em></p>
+
+      <p>You don't beat revenge trading by trying harder in the moment. You beat it by seeing it clearly enough, ahead of time, that the moment never gets the chance.</p>
+    </div>
+
+    <div class="article-cta">
+      <h3>Catch the pattern in your own account</h3>
+      <p>CoTrader flags revenge-trading clusters automatically, from your own synced trades.</p>
+      <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
+    </div>
+
+    <a href="blog.html" class="back-to-blog">← Back to all guides</a>
+  </main>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+  </script>
+</body>
+</html>

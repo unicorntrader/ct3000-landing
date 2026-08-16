@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>Blog — CoTrader 3000</title>
+  <meta name="description" content="Honest, practical guides on using CoTrader and trading with more discipline. No fluff, just what actually helps.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cotraderapp.com/blog.html">
+  <meta property="og:title" content="Blog — CoTrader 3000">
+  <meta property="og:description" content="Honest, practical guides on using CoTrader and trading with more discipline.">
+  <meta property="og:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta property="og:image:width" content="2856">
+  <meta property="og:image:height" content="501">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+
+  <style>
+    :root {
+      --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
+      --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue-600); text-decoration: none; }
+    a:hover { color: var(--blue-700); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; max-width: none; padding: 12px 28px; }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); opacity: 0.85; }
+    .brand svg { height: 19px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a:not(.nav-cta) { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .site-nav a:not(.nav-cta):hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    .blog-head { text-align: center; padding: 72px 0 56px; }
+    .blog-head .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
+    }
+    .blog-head h1 {
+      font-size: clamp(32px, 4.5vw, 46px); font-weight: 800; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 14px;
+    }
+    .blog-head p { font-size: 16px; color: var(--gray-600); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding-bottom: 96px;
+    }
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex; flex-direction: column;
+    }
+    .blog-card .cat {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue-600); margin-bottom: 12px;
+    }
+    .blog-card h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); line-height: 1.3; margin-bottom: 10px; }
+    .blog-card p { font-size: 14px; color: var(--gray-600); line-height: 1.55; margin-bottom: 18px; flex: 1; }
+    .blog-card .read-link { font-size: 14px; font-weight: 700; color: var(--blue-600); }
+    .blog-card .read-link:hover { color: var(--blue-700); }
+
+    .blog-card.soon { background: var(--gray-50); border-style: dashed; }
+    .blog-card.soon .cat { color: var(--gray-500); }
+    .blog-card.soon h3 { color: var(--gray-700); }
+    .blog-card.soon p { color: var(--gray-500); }
+
+    @media (max-width: 900px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html" class="current">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="blog-head">
+        <span class="eyebrow">The CoTrader Blog</span>
+        <h1>Trading guides</h1>
+        <p>Honest and practical. No fluff, just what actually helps you trade with more discipline.</p>
+      </div>
+
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="cat">Using CoTrader</div>
+          <h3>What are Callouts?</h3>
+          <p>Twelve deterministic rules that scan your trade history for real patterns — not generic advice.</p>
+          <a href="blog-callouts.html" class="read-link">Read the guide →</a>
+        </div>
+        <div class="blog-card">
+          <div class="cat">Using CoTrader</div>
+          <h3>Reading your Weekly Review</h3>
+          <p>Net P&amp;L, win rate, average trade — what each number is really telling you.</p>
+          <a href="blog-weekly-review.html" class="read-link">Read the guide →</a>
+        </div>
+        <div class="blog-card">
+          <div class="cat">Trading discipline</div>
+          <h3>Why most traders overtrade</h3>
+          <p>It rarely feels like a mistake in the moment. Here's how to catch it in your own data.</p>
+          <a href="blog-overtrading.html" class="read-link">Read the guide →</a>
+        </div>
+        <div class="blog-card">
+          <div class="cat">Trading discipline</div>
+          <h3>Revenge trading: what it actually costs you</h3>
+          <p>It's gambling wearing a trading costume, and it never works out over the long run.</p>
+          <a href="blog-revenge-trading.html" class="read-link">Read the guide →</a>
+        </div>
+        <div class="blog-card soon">
+          <div class="cat">Coming soon</div>
+          <h3>Connecting Interactive Brokers to CoTrader</h3>
+          <p>The 5-minute setup — start to first synced trade.</p>
+        </div>
+        <div class="blog-card soon">
+          <div class="cat">Coming soon</div>
+          <h3>Your first week on CoTrader</h3>
+          <p>What to expect from setup through your first Weekly Review.</p>
+        </div>
+        <div class="blog-card soon">
+          <div class="cat">Coming soon</div>
+          <h3>How to write a trade plan that actually holds up</h3>
+          <p>Entry, stop, target — and why most plans fall apart before the trade even starts.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+  </script>
+</body>
+</html>

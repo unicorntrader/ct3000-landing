@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>Reading Your Weekly Review — CoTrader 3000 Blog</title>
+  <meta name="description" content="Net P&L, win rate, average trade — one screen per week. Here's what each number actually means and why the ritual matters more than any single metric.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cotraderapp.com/blog-weekly-review.html">
+  <meta property="og:title" content="Reading Your Weekly Review — CoTrader 3000 Blog">
+  <meta property="og:description" content="What the weekly numbers actually mean, and why the ritual matters more than any single metric.">
+  <meta property="og:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta property="og:image:width" content="2856">
+  <meta property="og:image:height" content="501">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+
+  <style>
+    :root {
+      --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
+      --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue-600); text-decoration: none; }
+    a:hover { color: var(--blue-700); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; max-width: none; padding: 12px 28px; }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); opacity: 0.85; }
+    .brand svg { height: 19px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a:not(.nav-cta) { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .site-nav a:not(.nav-cta):hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    .article-head { text-align: center; padding: 72px 0 48px; }
+    .article-head .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
+    }
+    .article-head h1 {
+      font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.15; color: var(--ink); max-width: 720px; margin: 0 auto 16px;
+    }
+    .article-head .meta { font-size: 13px; color: var(--gray-500); }
+
+    .article-body { max-width: 680px; margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--gray-700); line-height: 1.75; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body h2 {
+      font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink);
+      margin: 40px 0 16px;
+    }
+    .article-body ul { margin: 0 0 22px 20px; }
+    .article-body li { margin-bottom: 10px; }
+    .article-body blockquote {
+      border-left: 3px solid var(--blue-600); background: var(--blue-50);
+      padding: 20px 24px; border-radius: 0 10px 10px 0; margin: 32px 0;
+      font-size: 18px; font-style: italic; color: var(--ink);
+    }
+    .article-body blockquote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--gray-500); }
+
+    .article-cta {
+      max-width: 680px; margin: 0 auto; text-align: center;
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .article-cta h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+    .article-cta p { font-size: 14px; color: var(--gray-600); margin-bottom: 20px; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-600); color: white; padding: 14px 28px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+    }
+    .cta-primary:hover { background: var(--blue-700); color: white; }
+    .back-to-blog { display: block; text-align: center; font-size: 13px; font-weight: 600; color: var(--gray-500); margin: 32px 0 0; }
+    .back-to-blog:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html" class="current">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="article-head">
+      <span class="eyebrow">Using CoTrader</span>
+      <h1>Reading your Weekly Review</h1>
+      <div class="meta">3 min read</div>
+    </div>
+
+    <div class="article-body">
+      <p>Every Sunday — or whenever you sit down to do it — CoTrader gives you one screen: Net P&amp;L, win rate, average trade, all for the week that just closed. It takes about two minutes to read. That's the point.</p>
+
+      <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. The Weekly Review exists so you look at the same three numbers on the same cadence regardless of how the week went — especially when it went fine, because that's when the drift that causes next month's bad week is actually happening.</p>
+
+      <h2>The three numbers, and what they're really telling you</h2>
+      <p><strong>Net P&amp;L</strong> is the outcome. It matters, but it's the least useful number for changing your behavior — a green week can hide a bad process that got lucky, and a red week can hide a good process that had a rough five days. Don't stop here.</p>
+
+      <p><strong>Win rate</strong> tells you about your hit rate, not your edge. A 40% win rate with a 3:1 reward-to-risk ratio is a great week. A 70% win rate where your losers are three times the size of your winners is a slow leak. Win rate only means something next to average trade.</p>
+
+      <p><strong>Average trade</strong> is expectancy in miniature — what you actually made or lost per trade, on average, across everything you did that week. This is the number that tells you whether your process is working, independent of how any single trade turned out.</p>
+
+      <h2>The ritual matters more than any single week</h2>
+      <p>One week of data won't tell you much. Four weeks in a row will. The value of the Weekly Review isn't in any individual screen — it's in the pattern that shows up when you cycle back through the last month and watch these three numbers drift, or hold steady, or improve. CoTrader lets you flip back through prior weeks for exactly this reason.</p>
+
+      <p>Two minutes, one screen, every week. It's not a lot to ask, and it's usually the difference between a trader who's improving and one who's just trading.</p>
+    </div>
+
+    <div class="article-cta">
+      <h3>See your own Weekly Review</h3>
+      <p>Connect your IBKR account and CoTrader builds your first review automatically.</p>
+      <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
+    </div>
+
+    <a href="blog.html" class="back-to-blog">← Back to all guides</a>
+  </main>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+  </script>
+</body>
+</html>
