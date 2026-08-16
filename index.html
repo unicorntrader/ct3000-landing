@@ -243,24 +243,24 @@
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
-    .feature-tabs-head { text-align: center; margin-bottom: 48px; }
+    .feature-tabs-head { text-align: center; margin-bottom: 64px; }
     .feature-tabs-head h2 {
       font-size: clamp(30px, 4.5vw, 44px);
       font-weight: 800; letter-spacing: -0.02em;
       color: var(--ink);
     }
     .tab-row {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 48px;
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 64px;
     }
     .tab-btn {
       display: flex; flex-direction: column; align-items: center; gap: 0;
       background: var(--white); border: 2px solid var(--gray-200);
       border-radius: 16px;
-      padding: 12px; width: 200px;
+      padding: 16px; width: 230px;
       cursor: pointer; transition: all 0.2s ease;
     }
-    .tab-btn img { width: 100%; height: 110px; object-fit: contain; margin-bottom: 10px; }
+    .tab-btn img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 14px; }
     .tab-btn span { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .tab-btn:hover { border-color: var(--blue-200); }
     .tab-btn.active { border-color: var(--blue-600); }
@@ -270,7 +270,7 @@
     .tab-panel { display: none; }
     .tab-panel.active {
       display: grid; grid-template-columns: 1fr 1.3fr;
-      gap: 56px; align-items: start; text-align: left;
+      gap: 64px; align-items: start; text-align: left;
     }
     .tab-panel h3 {
       font-size: clamp(26px, 3.5vw, 34px); font-weight: 800; color: var(--ink);
@@ -282,16 +282,16 @@
     }
     .tab-panel ul { list-style: none; }
     .tab-panel li {
-      font-size: 15px; font-weight: 700; color: var(--ink);
-      padding: 14px 0; border-top: 1px solid var(--gray-200);
-      display: flex; align-items: center; gap: 12px;
+      font-size: 16px; font-weight: 700; color: var(--ink);
+      padding: 22px 0; border-top: 1px solid var(--gray-200);
+      display: flex; align-items: center; gap: 14px;
     }
     .tab-panel li::before {
       content: '✓'; flex-shrink: 0;
-      width: 22px; height: 22px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
       background: var(--blue-600); color: white;
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
+      font-size: 14px; font-weight: 700;
     }
     @media (max-width: 800px) {
       .tab-panel.active { grid-template-columns: 1fr; gap: 20px; }
