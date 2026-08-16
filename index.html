@@ -135,6 +135,19 @@
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
     .hero + section { padding-top: 48px; }
+    /* Staggered load-in: headline, then subhead, then buttons -- one
+       after another instead of the whole hero appearing at once. */
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1, .hero p.lead, .hero .cta-row {
+      opacity: 0;
+      animation: heroReveal 0.7s ease forwards;
+    }
+    .hero h1        { animation-delay: 0.05s; }
+    .hero p.lead     { animation-delay: 0.25s; }
+    .hero .cta-row   { animation-delay: 0.45s; }
     .hero h1 {
       font-size: clamp(42px, 7vw, 76px);
       line-height: 1.0;
@@ -142,13 +155,6 @@
       letter-spacing: -0.035em;
       color: var(--ink);
       margin-bottom: 18px;
-    }
-    .hero .tagline {
-      font-size: 18px;
-      color: var(--blue-700);
-      font-weight: 600;
-      margin-bottom: 24px;
-      letter-spacing: 0.02em;
     }
     .hero p.lead {
       font-size: 19px;
@@ -2002,10 +2008,20 @@
 
     // ─── ROW 4 · Weekly review nav ────────────────────────────────────
     (function initWeekNav() {
+      // Shared 8-week trend shape (oldest -> newest, left -> right). Every
+      // card shows the same rolling 8-week history; only which bar is
+      // marked "current" changes as you navigate, matching the week
+      // you're actually looking at instead of always the rightmost bar.
+      const trend = [22, 26, 32, 40, 32, 26, 74, 96];
       const weeks = [
-        { label: 'May 4–10',     num: 19, badge: 'THIS WEEK',    pnl: '+$2,690', pnlPos: true,  wr: '100%', wl: '5W · 0L', closed: '5 closed', avg: '+$538', trend: [22, 26, 32, 40, 32, 26, 74, 96] },
-        { label: 'Apr 27–May 3', num: 18, badge: 'LAST WEEK',    pnl: '+$1,200', pnlPos: true,  wr: '67%',  wl: '4W · 2L', closed: '6 closed', avg: '+$200', trend: [22, 26, 32, 40, 32, 26, 74, 65] },
-        { label: 'Apr 20–26',    num: 17, badge: '2 WEEKS AGO',  pnl: '−$450',   pnlPos: false, wr: '40%',  wl: '2W · 3L', closed: '5 closed', avg: '−$90',  trend: [22, 26, 32, 40, 32, 26, 22, 18] },
+        { label: 'May 4–10',     num: 19, badge: 'THIS WEEK',     pnl: '+$2,690', pnlPos: true,  wr: '100%', wl: '5W · 0L', closed: '5 closed', avg: '+$538' },
+        { label: 'Apr 27–May 3', num: 18, badge: 'LAST WEEK',     pnl: '+$1,200', pnlPos: true,  wr: '67%',  wl: '4W · 2L', closed: '6 closed', avg: '+$200' },
+        { label: 'Apr 20–26',    num: 17, badge: '2 WEEKS AGO',   pnl: '−$450',   pnlPos: false, wr: '40%',  wl: '2W · 3L', closed: '5 closed', avg: '−$90'  },
+        { label: 'Apr 13–19',    num: 16, badge: '3 WEEKS AGO',   pnl: '+$890',   pnlPos: true,  wr: '60%',  wl: '3W · 2L', closed: '5 closed', avg: '+$178' },
+        { label: 'Apr 6–12',     num: 15, badge: '4 WEEKS AGO',   pnl: '−$210',   pnlPos: false, wr: '33%',  wl: '1W · 2L', closed: '3 closed', avg: '−$70'  },
+        { label: 'Mar 30–Apr 5', num: 14, badge: '5 WEEKS AGO',   pnl: '+$1,540', pnlPos: true,  wr: '80%',  wl: '4W · 1L', closed: '5 closed', avg: '+$308' },
+        { label: 'Mar 23–29',    num: 13, badge: '6 WEEKS AGO',   pnl: '+$320',   pnlPos: true,  wr: '50%',  wl: '2W · 2L', closed: '4 closed', avg: '+$80'  },
+        { label: 'Mar 16–22',    num: 12, badge: '7 WEEKS AGO',   pnl: '−$680',   pnlPos: false, wr: '25%',  wl: '1W · 3L', closed: '4 closed', avg: '−$170' },
       ];
       let idx = 0;
       const $prev = document.getElementById('week-prev');
@@ -2035,8 +2051,13 @@
         if (window.__ct3000_setMasked) window.__ct3000_setMasked($avg, w.avg);
         else $avg.textContent = w.avg;
         $avg.style.color    = w.avg.startsWith('−') ? 'var(--red-600)' : 'var(--ink)';
-        $chart.innerHTML = w.trend.map((h, i) => {
-          const cls = (i === w.trend.length - 1) ? 'bar pos current'
+        // The "current" bar tracks idx (how many weeks back you've
+        // navigated), not always the rightmost bar -- otherwise Previous
+        // looked like it did nothing, since the highlight never moved.
+        const currentPos = trend.length - 1 - idx;
+        $chart.innerHTML = trend.map((h, i) => {
+          const isCurrent = i === currentPos;
+          const cls = isCurrent ? 'bar ' + (w.pnlPos ? 'pos' : 'neg') + ' current'
                     : (h < 30 ? 'bar neg' : 'bar pos');
           return '<div class="' + cls + '" style="height:' + Math.max(6, h) + '%"></div>';
         }).join('');

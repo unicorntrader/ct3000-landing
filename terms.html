@@ -25,6 +25,7 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --amber-50: #fffbeb; --amber-500: #f59e0b; --amber-800: #92400e;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -141,39 +142,89 @@
   <main>
     <div class="doc-head">
       <h1>Terms of Service</h1>
-      <div class="meta">Effective August 16, 2026</div>
+      <div class="meta">Last updated: 18 May 2026</div>
     </div>
 
     <div class="doc-body">
-      <p>These terms govern your use of CoTrader 3000 ("CoTrader," "we," "us"). By using the app, you agree to them. Questions go to <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a>.</p>
+      <div class="doc-warning">
+        <strong>⚠️ Private beta — please read carefully.</strong>
+        CoTrader 3000 is an early-stage product built largely with AI-assisted coding tools. It connects to your Interactive Brokers account through third-party services (IBKR Flex Query, Stripe, Supabase). It can have bugs, mis-categorise trades, miscompute P&amp;L, lag during sync, or go offline without notice. Do not rely on it as the official record of your trading activity — always cross-check with your broker statements.
+      </div>
 
-      <h2>What CoTrader is</h2>
-      <p>CoTrader is a trade journaling and analytics tool. It connects, read-only, to your Interactive Brokers account and organizes your trade history into a Journal, Weekly Reviews, and Callouts. CoTrader is not a broker, is not a registered investment adviser, and does not provide personalized financial advice.</p>
+      <h2>1. Who we are</h2>
+      <p>CoTrader 3000 (the "Service") is a trading journal and analytics tool. Throughout these Terms, "we", "us", and "our" refer to the operators of CoTrader 3000.</p>
+      <p>By creating an account or using the Service, you agree to these Terms. If you do not agree, do not use the Service.</p>
 
-      <h2>Not financial advice</h2>
-      <p>Callouts, Weekly Review summaries, and any mentorship content are educational and informational only. They describe patterns in your own historical data — they are not a recommendation to buy, sell, or hold any security, and they are not a substitute for advice from a licensed financial professional. You are solely responsible for your own trading decisions.</p>
+      <h2>2. Eligibility</h2>
+      <p>You must be at least 18 years old to use the Service. By signing up, you confirm that you meet this requirement and that you have the legal capacity to enter into these Terms.</p>
 
-      <h2>Read-only access</h2>
-      <p>CoTrader cannot place, modify, or cancel trades in your IBKR account under any circumstance. All trading continues to happen directly in Interactive Brokers, exactly as it does today.</p>
+      <h2>3. What the Service does</h2>
+      <p>CoTrader 3000 is a trading journal and analytics tool. It connects to your Interactive Brokers account via IBKR's Flex Query service, imports your executed trades, and provides features for journaling, planning, reviewing, and analysing your trading activity.</p>
+      <p>The Service does not execute trades on your behalf. We read your trade data from IBKR; we never submit orders.</p>
 
-      <h2>Billing and cancellation</h2>
+      <h2>4. Disclaimers — please read carefully</h2>
+      <p><strong>Not financial advice.</strong> Nothing in the Service constitutes investment advice, financial advice, trading advice, tax advice, or any other regulated form of advice. CoTrader 3000 is a journaling and analytics tool, not a broker, advisor, fund, or regulated financial institution. The insights, callouts, scores, R-multiples, expectancy figures, adherence scores, and any other analytics are informational only and reflect calculations performed on imported data. You are solely responsible for your trading decisions, your capital, and any losses you incur.</p>
+      <p><strong>Prices and market data.</strong> Trade prices, P&amp;L figures, FX conversion rates, R-multiples, currency totals, and any other monetary values shown in the Service are derived from data imported from Interactive Brokers' Flex Query service. We do not provide real-time market data and we do not run our own price feeds. Values may be delayed, rounded, lagging, missing transactions, or denominated in an inconvenient currency. P&amp;L figures shown in the Service are not tax records and do not substitute for official statements from your broker or your tax jurisdiction's reporting requirements.</p>
+      <p><strong>FX conversion.</strong> When trades are denominated in a currency different from your account base currency, we convert using the FX rate IBKR records for the execution. These conversions are for review purposes and may differ materially from the rate your broker, accountant, or tax authority would use.</p>
+      <p><strong>Data accuracy and completeness.</strong> We rely entirely on Interactive Brokers' Flex Query feed for trade data. IBKR's feed may lag, contain errors, omit transactions, or change format without notice. Synced data is not the authoritative record of your trading activity — your IBKR account statements are. Always verify P&amp;L, positions, and tax figures with your broker.</p>
+      <p><strong>Past performance.</strong> Past trading performance does not guarantee future results. Historical statistics displayed in the Service are for reflection only and have no predictive value.</p>
+      <p><strong>Software provided "as is".</strong> The Service is provided on an "as-is" and "as-available" basis. We make no warranties of any kind, express or implied, including fitness for a particular purpose, accuracy, completeness, security, or uninterrupted availability. During private beta, expect bugs, downtime, data lag, occasional data loss, and breaking changes. You use the Service at your own risk.</p>
+
+      <h2>5. AI-assisted development</h2>
+      <p>CoTrader 3000 is built largely with the assistance of AI coding tools. Significant portions of the codebase — including data import, FIFO matching, P&amp;L calculations, plan matching, and UI components — were drafted, reviewed, and iterated on with the help of large language models.</p>
+      <p>We disclose this for transparency. The implications you should be aware of:</p>
       <ul>
-        <li>Subscriptions are billed on a recurring basis until cancelled.</li>
-        <li>You can cancel at any time from your account settings. Cancelling stops future billing.</li>
-        <li>We do not offer refunds for the current billing period once it has started.</li>
+        <li>AI-generated code may contain subtle bugs, edge-case failures, or logic errors that human-only review would catch.</li>
+        <li>Calculations (P&amp;L, R-multiples, expectancy, currency conversions, FIFO matching across partial fills) may differ from what your broker, accountant, or financial software computes.</li>
+        <li>The Service evolves rapidly during beta. Behaviour may change between sessions without prior notice.</li>
+      </ul>
+      <p>Cross-check anything you intend to act on (trading decisions, tax filings, performance reports for others) against your broker's official records.</p>
+
+      <h2>6. Third-party services</h2>
+      <p>The Service depends on several third-party providers that we do not control. By using CoTrader 3000 you also accept these dependencies and their respective terms:</p>
+      <ul>
+        <li><strong>Interactive Brokers (IBKR).</strong> Trade data is imported from your IBKR account using IBKR's Flex Query service. You provide us with a read-only Flex Web Service token and Query ID. We never receive your IBKR username, password, account login, or order-submission credentials. IBKR's availability, rate limits, and data format are outside our control.</li>
+        <li><strong>Stripe.</strong> All payments, subscription billing, trial management, and card processing are handled by Stripe. We do not store your card number, CVV, or full payment credentials. Stripe is subject to its own terms and privacy policy.</li>
+        <li><strong>Supabase.</strong> Authentication, database storage, and API hosting are provided by Supabase. Your data is stored on infrastructure operated by Supabase.</li>
+        <li><strong>Vercel.</strong> Application hosting and serverless functions run on Vercel.</li>
+        <li><strong>Sentry.</strong> Error reports and crash diagnostics may be collected by Sentry for debugging.</li>
+      </ul>
+      <p>If any of these third parties experiences an outage, rate-limits us, loses data, or changes their interface, the Service may be affected — including (but not limited to) failed syncs, missing trades, incorrect P&amp;L, or temporary inability to log in.</p>
+
+      <h2>7. Your account</h2>
+      <p>You are responsible for safeguarding your account credentials and for all activity under your account. Notify us immediately at <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a> if you suspect unauthorised access.</p>
+      <p>You may delete your account at any time from Settings. Deletion is permanent and removes all your data. If you have an active subscription, you must cancel it through the billing portal before deletion.</p>
+
+      <h2>8. Billing</h2>
+      <p>The Service is offered as a paid subscription. New users receive a 7-day free trial. After the trial, your card is charged at the stated monthly rate unless you cancel. Billing is handled by Stripe; we never store your card details.</p>
+      <p>You can cancel your subscription at any time through the billing portal (Settings → Manage subscription). Cancellation takes effect at the end of your current billing period; no refunds for partial months.</p>
+
+      <h2>9. Your data</h2>
+      <p>Your trades, plans, notes, and related data belong to you. We process them only to provide the Service. See our Privacy Policy for details on what we collect and how we handle it.</p>
+
+      <h2>10. Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the Service to violate any law or regulation</li>
+        <li>Reverse engineer, scrape, or attempt to access unauthorised parts of the Service</li>
+        <li>Share your account with third parties</li>
+        <li>Use the Service in a way that disrupts it for other users</li>
+        <li>Upload or submit content that infringes intellectual property rights</li>
       </ul>
 
-      <h2>Mentorship</h2>
-      <p>Mentorship sessions are coaching and education, not financial advice, and come with no guarantee of trading results. Mentors may be CoTrader team members or independent contractors.</p>
+      <h2>11. Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, we will not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, trading losses, or goodwill, arising from your use of the Service.</p>
+      <p>Our total aggregate liability under these Terms, for any claim, will not exceed the amount you paid us in the twelve (12) months preceding the claim.</p>
+      <p>Nothing in these Terms excludes liability that cannot be excluded under applicable law (including your statutory rights as a consumer under EU law).</p>
 
-      <h2>Account termination</h2>
-      <p>We may suspend or terminate accounts that violate these terms, misuse the service, or attempt to abuse the IBKR connection outside its intended read-only purpose.</p>
+      <h2>12. Changes to these Terms</h2>
+      <p>We may update these Terms from time to time. If we make material changes, we will notify you by email or through the Service. Continued use after changes take effect means you accept the updated Terms.</p>
 
-      <h2>No warranty, limitation of liability</h2>
-      <p>CoTrader is provided "as is." We do our best to keep your data accurate and the app running reliably, but we don't guarantee it will be error-free or uninterrupted. We are not liable for trading losses, decisions made using the app, or issues arising from your IBKR connection itself.</p>
+      <h2>13. Governing law</h2>
+      <p>These Terms are governed by the laws of the Republic of Cyprus. Any disputes arising from these Terms or your use of the Service will be subject to the exclusive jurisdiction of the courts of Cyprus, unless otherwise required by mandatory consumer protection law in your jurisdiction.</p>
 
-      <h2>Changes to these terms</h2>
-      <p>If we materially change these terms, we'll update this page and change the effective date above.</p>
+      <h2>14. Contact</h2>
+      <p>Questions about these Terms? Email us at <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a>.</p>
     </div>
 
     <a href="index.html" class="back-link">← Back to home</a>
