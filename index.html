@@ -1207,7 +1207,11 @@
       .footer-brand { grid-column: 1 / -1; }
     }
     @media (max-width: 520px) {
-      .footer-inner { grid-template-columns: 1fr; }
+      /* Keep the 2-column Links/Legal layout even at phone width --
+         Gather's footer stays 2-column all the way down (Guides just
+         wraps to its own row underneath), collapsing to a single
+         stacked column made the footer much longer to scroll through
+         than it needed to be. */
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-bottom-links a:first-child { margin-left: 0; }
     }
