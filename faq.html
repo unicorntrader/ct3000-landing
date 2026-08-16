@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>FAQ — CoTrader 3000</title>
+  <meta name="description" content="Pricing, setup, data, and mentorship questions, answered in plain English.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cotraderapp.com/faq.html">
+  <meta property="og:title" content="FAQ — CoTrader 3000">
+  <meta property="og:description" content="Pricing, setup, data, and mentorship questions, answered in plain English.">
+  <meta property="og:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta property="og:image:width" content="2856">
+  <meta property="og:image:height" content="501">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+
+  <style>
+    :root {
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      --blue-50:  #eff6ff;
+      --blue-200: #bfdbfe;
+      --ink:    #111827;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white:    #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--gray-50);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue-600); text-decoration: none; }
+    a:hover { color: var(--blue-700); }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .site-header .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+    }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); opacity: 0.85; }
+    .brand svg { height: 19px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .site-nav a:hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta {
+      background: var(--blue-600); color: white;
+      padding: 9px 18px; border-radius: 999px;
+      font-size: 13px; font-weight: 600;
+    }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    section { padding: 96px 0; }
+    .cta-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--blue-600);
+      padding: 16px 32px; border-radius: 999px;
+      border: 1.5px solid var(--blue-200);
+      font-size: 15px; font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .cta-outline:hover { background: var(--blue-50); border-color: var(--blue-600); color: var(--blue-700); }
+
+    /* ============ FAQ ============ */
+    .faq .wrap { max-width: 720px; }
+    .faq-head { text-align: center; margin-bottom: 48px; }
+    .faq-head h1 {
+      font-size: clamp(32px, 4.5vw, 44px);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 12px;
+    }
+    .faq-head p { font-size: 15px; color: var(--gray-600); line-height: 1.6; }
+    .faq-category { font-size: 13px; font-weight: 700; color: var(--blue-600); margin: 32px 0 12px; }
+    .faq-category:first-of-type { margin-top: 0; }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 20px;
+      cursor: pointer;
+      font-size: 14px; font-weight: 600; color: var(--ink);
+    }
+    .faq-question .plus {
+      color: var(--blue-600);
+      font-size: 18px; font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.expanded .faq-question .plus { transform: rotate(45deg); }
+    .faq-answer { display: none; padding: 0 20px 18px; font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+    .faq-item.expanded .faq-answer { display: block; }
+    .faq-foot { text-align: center; margin-top: 40px; }
+    .faq-foot p { font-size: 14px; color: var(--gray-600); margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html" class="current">FAQ</a>
+        <a href="blog.html">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="faq">
+      <div class="wrap">
+        <div class="faq-head">
+          <h1>Questions, answered properly</h1>
+          <p>Everything traders ask us, in plain English. Can't find yours? Email <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a> and a real person replies.</p>
+        </div>
+
+        <div class="faq-category">Pricing and trial</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>How much does CoTrader cost?</span><span class="plus">+</span></div>
+          <div class="faq-answer">$30/month for Solo, after a 7-day free trial. Mentorship is a separate add-on on top of Solo, at $500 or $1,000/month depending on cadence.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is there a free trial?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — 7 days free on Solo. Your card isn't charged until the trial ends.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Can I cancel anytime?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes, cancel anytime from your billing portal. Canceling stops future charges, but we don't offer refunds for the current billing period.</div>
+        </div>
+
+        <div class="faq-category">Getting started</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Do I need Interactive Brokers?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — right now CoTrader only supports Interactive Brokers (IBKR). Other brokers aren't supported yet.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>How long does setup take?</span><span class="plus">+</span></div>
+          <div class="faq-answer">A few minutes. Connect your IBKR account and you're live — fills start syncing automatically.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is my trading data safe?</span><span class="plus">+</span></div>
+          <div class="faq-answer">CoTrader can't execute trades on your behalf. It only reads your account activity through IBKR — it can never place, modify, or cancel an order.</div>
+        </div>
+
+        <div class="faq-category">The product</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What exactly does CoTrader track?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Your trades sync automatically from IBKR — entries, exits, size, timing. You plan trades before you take them, journal your reasoning, and review your week.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What are Callouts?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Twelve deterministic rules that scan your trade history for real patterns — a standout symbol, a weak day of the week, revenge trading, and more. They only fire when your own data shows something real, not generic advice.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Does it work on mobile?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — CoTrader is a responsive web app, so it works in your mobile browser. There's no separate native app right now.</div>
+        </div>
+
+        <div class="faq-category">Mentorship</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What's the difference between Solo and Mentorship?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Solo ($30/month) is the core app — plan, sync, journal, review. Mentorship ($500 or $1,000/month) is 1:1 coaching layered on top of Solo, not a replacement for it.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>If I cancel Mentorship, do I lose Solo too?</span><span class="plus">+</span></div>
+          <div class="faq-answer">No. They're separate subscriptions — canceling Mentorship only cancels Mentorship. Your Solo access keeps running.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is mentorship investment advice?</span><span class="plus">+</span></div>
+          <div class="faq-answer">No. Mentorship is educational — coaching on process, discipline, and risk management. It's not investment advice.</div>
+        </div>
+
+        <div class="faq-foot">
+          <p>Still got a question?</p>
+          <a href="mailto:thinker@philoinvestor.com" class="cta-outline">Email us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+
+    document.querySelectorAll('[data-faq-expand]').forEach(item => {
+      const question = item.querySelector('.faq-question');
+      if (!question) return;
+      question.addEventListener('click', () => item.classList.toggle('expanded'));
+    });
+  </script>
+</body>
+</html>

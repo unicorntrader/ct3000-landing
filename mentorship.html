@@ -68,18 +68,25 @@
     }
     .site-header .wrap {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 14px; padding-bottom: 14px;
+      padding: 12px 20px;
     }
     .brand {
       display: inline-flex; align-items: center;
       color: var(--ink);
+      opacity: 0.85;
     }
-    .brand svg { height: 26px; width: auto; display: block; }
-    .back-link {
-      font-size: 14px; font-weight: 600;
-      color: var(--gray-600);
+    .brand svg { height: 19px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a:not(.nav-cta) { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .site-nav a:not(.nav-cta):hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta {
+      background: var(--blue-600); color: white;
+      padding: 9px 18px; border-radius: 999px;
+      font-size: 13px; font-weight: 600;
     }
-    .back-link:hover { color: var(--ink); }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
 
     section { padding: 96px 0; }
     .section-eyebrow {
@@ -219,7 +226,13 @@
           <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
         </svg>
       </a>
-      <a href="index.html" class="back-link">← Back</a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html">Blog</a>
+        <a href="mentorship.html" class="current">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
     </div>
   </header>
 
