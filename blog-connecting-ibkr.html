@@ -118,6 +118,11 @@
       font-size: 18px; font-style: italic; color: var(--ink);
     }
     .article-body blockquote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--gray-500); }
+    .article-body .diagram {
+      display: block; width: 100%; height: auto;
+      margin: 32px 0; padding: 28px;
+      background: var(--blue-50); border-radius: 12px;
+    }
 
     .article-cta {
       max-width: 680px; margin: 0 auto; text-align: center;
@@ -238,6 +243,7 @@
         <li>CoTrader pulls your existing trade history so you're not starting from a blank slate.</li>
         <li>From that point on, new fills sync automatically — you don't re-import or re-connect for each session.</li>
       </ul>
+      <img src="diagram-connecting-ibkr.png" alt="Diagram showing the three-step setup: link, sync, done" class="diagram">
       <p>There's no CSV to export, no manual entry, no reconciling two systems by hand. You trade in IBKR like you always have; CoTrader just watches and organizes.</p>
 
       <h2>After you're connected</h2>
