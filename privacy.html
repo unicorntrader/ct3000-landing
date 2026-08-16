@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>Privacy Policy — CoTrader 3000</title>
+  <meta name="description" content="How CoTrader 3000 collects, uses, and protects your data, including your Interactive Brokers trade history.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cotraderapp.com/privacy.html">
+  <meta property="og:title" content="Privacy Policy — CoTrader 3000">
+  <meta property="og:description" content="How CoTrader 3000 collects, uses, and protects your data.">
+  <meta property="og:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta property="og:image:width" content="2856">
+  <meta property="og:image:height" content="501">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+
+  <style>
+    :root {
+      --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
+      --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue-600); text-decoration: none; }
+    a:hover { color: var(--blue-700); }
+    .wrap { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; max-width: none; padding: 12px 28px; }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); opacity: 0.85; }
+    .brand svg { height: 23px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 26px; }
+    .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
+    .site-nav a:not(.nav-cta):hover { color: var(--ink); }
+    .site-nav a.current { color: var(--blue-600); }
+    .nav-cta { background: var(--blue-600); color: white; padding: 11px 22px; border-radius: 999px; font-size: 15px; font-weight: 700; }
+    .nav-cta:hover { background: var(--blue-700); color: white; }
+    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    .doc-head { text-align: center; padding: 72px 0 40px; }
+    .doc-head h1 {
+      font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 12px;
+    }
+    .doc-head .meta { font-size: 13px; color: var(--gray-500); }
+
+    .doc-body { max-width: 680px; margin: 0 auto; padding: 0 0 96px; font-size: 16px; color: var(--gray-700); line-height: 1.75; }
+    .doc-body p { margin-bottom: 20px; }
+    .doc-body h2 {
+      font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink);
+      margin: 36px 0 14px;
+    }
+    .doc-body ul { margin: 0 0 20px 20px; }
+    .doc-body li { margin-bottom: 8px; }
+    .back-link { display: block; text-align: center; font-size: 13px; font-weight: 600; color: var(--gray-500); margin: 8px 0 0; }
+    .back-link:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="doc-head">
+      <h1>Privacy Policy</h1>
+      <div class="meta">Effective August 16, 2026</div>
+    </div>
+
+    <div class="doc-body">
+      <p>This page explains what CoTrader 3000 ("CoTrader," "we," "us") collects when you use the app, why we collect it, and how you can control it. If anything here is unclear, email us at <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a> and a real person will answer.</p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Account information</strong> — the email and any profile details you give us when you sign up.</li>
+        <li><strong>Trade data from Interactive Brokers</strong> — when you connect your IBKR account, we pull your trade history (fills, symbols, timestamps, P&amp;L) through a read-only connection. We never receive your IBKR login credentials directly, and we cannot place, modify, or cancel trades.</li>
+        <li><strong>Usage data</strong> — basic, privacy-first product analytics via Plausible, which does not use cookies and does not track you across other sites. We use it to understand which parts of the app are actually useful, not to build an advertising profile.</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <p>Your trade data powers the features you're actually using CoTrader for: the Journal, Weekly Review, and Callouts. It is used to generate insights about your own trading — nothing more. We do not sell your data, and we do not share your trade history with advertisers or data brokers.</p>
+
+      <h2>Who else sees it</h2>
+      <ul>
+        <li><strong>Interactive Brokers</strong> — governs the connection itself under its own agreement with you; we only receive the data IBKR's API exposes to a read-only connection.</li>
+        <li><strong>Service providers</strong> we rely on to run the product (hosting, email delivery, analytics) see only what's necessary to provide their service, and are not permitted to use your data for their own purposes.</li>
+      </ul>
+
+      <h2>Security</h2>
+      <p>We take reasonable, industry-standard measures to protect your data in transit and at rest. No system is perfectly secure, and we'll notify affected users if we ever have reason to believe that promise has been broken.</p>
+
+      <h2>Your choices</h2>
+      <p>You can disconnect your IBKR account at any time from within the app. You can request that we delete your account and associated data entirely by emailing <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a>.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If we materially change how we handle your data, we'll update this page and change the effective date above.</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to home</a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+              <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+              <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+              <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+              <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+              <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+              <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+              <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+              <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+            </svg>
+          </a>
+          <p>The trading journal that shows you where discipline broke down.</p>
+          <a href="mailto:thinker@philoinvestor.com" class="footer-email">thinker@philoinvestor.com</a>
+        </div>
+        <div class="footer-col">
+          <h5>Links</h5>
+          <a href="index.html#plans">How it works</a>
+          <a href="faq.html">FAQ</a>
+          <a href="blog.html">Blog</a>
+          <a href="mentorship.html">Mentorship</a>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <a href="privacy.html" class="current">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+        <div class="footer-col">
+          <h5>Guides</h5>
+          <a href="blog.html">All guides</a>
+          <a href="blog-connecting-ibkr.html">Connecting IBKR</a>
+          <a href="blog-overtrading.html">Why traders overtrade</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 CoTrader 3000. All rights reserved.</span>
+        <span class="footer-bottom-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+  </script>
+</body>
+</html>
