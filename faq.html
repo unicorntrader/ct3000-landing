@@ -94,19 +94,26 @@
     /* ============ FAQ ============ */
     .faq .wrap { max-width: 1080px; }
     .faq-head { text-align: center; margin-bottom: 48px; }
+    .faq-head .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
+    }
     .faq-head h1 {
       font-size: clamp(32px, 4.5vw, 44px);
       font-weight: 800; letter-spacing: -0.03em;
       color: var(--ink); margin-bottom: 12px;
     }
     .faq-head p { font-size: 15px; color: var(--gray-600); line-height: 1.6; max-width: 560px; margin: 0 auto; }
-    .faq-category { font-size: 13px; font-weight: 700; color: var(--blue-600); margin: 32px 0 12px; }
+    .faq-category {
+      font-size: 15px; font-weight: 700; color: var(--blue-600);
+      text-align: center; margin: 40px 0 16px;
+    }
     .faq-category:first-of-type { margin-top: 0; }
     .faq-item {
       background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      margin-bottom: 14px;
       overflow: hidden;
     }
     .faq-question {
@@ -194,6 +201,7 @@
     <section class="faq">
       <div class="wrap">
         <div class="faq-head">
+          <span class="eyebrow">The CoTrader FAQ</span>
           <h1>Questions, answered properly</h1>
           <p>Everything traders ask us, in plain English. Can't find yours? Email <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a> and a real person replies.</p>
         </div>
