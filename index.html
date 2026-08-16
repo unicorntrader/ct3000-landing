@@ -226,48 +226,6 @@
       gap: 12px; flex-wrap: wrap;
     }
 
-    /* ============ HOW IT WORKS ============ */
-    .how-it-works { background: var(--white); }
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 940px;
-      margin: 0 auto;
-    }
-    .how-step {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 16px -4px rgba(17,24,39,0.06);
-      /* Scroll-triggered reveal -- opacity/translate held here, .in-view
-         (added by the IntersectionObserver below) plays the entrance.
-         Each card's transition-delay is set inline per element so they
-         land one after another instead of all at once. */
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .how-step.in-view { opacity: 1; transform: translateY(0); }
-    .how-step .num {
-      font-size: 30px; font-weight: 800;
-      color: var(--blue-600);
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-    }
-    .how-step h4 {
-      font-size: 16px; font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-    .how-step p {
-      font-size: 14px; color: var(--gray-600);
-      line-height: 1.55;
-    }
-    @media (max-width: 720px) {
-      .how-grid { grid-template-columns: 1fr; gap: 16px; }
-    }
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
@@ -1155,18 +1113,28 @@
     .final-cta {
       padding: 120px 0;
       text-align: center;
-      background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+      background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
     }
     .final-cta h2 {
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 800; letter-spacing: -0.03em;
       line-height: 1.05;
       margin-bottom: 18px;
+      color: white;
     }
     .final-cta p {
-      font-size: 17px; color: var(--gray-600);
+      font-size: 17px; color: var(--blue-200);
       max-width: 540px; margin: 0 auto 32px;
       line-height: 1.6;
+    }
+    .final-cta .closing-line { color: var(--blue-200); }
+    .final-cta .cta-primary {
+      background: white; color: var(--blue-600);
+      box-shadow: 0 8px 24px rgba(17,24,39,0.2);
+    }
+    .final-cta .cta-primary:hover {
+      background: var(--blue-50); color: var(--blue-700);
+      box-shadow: 0 12px 32px rgba(17,24,39,0.28);
     }
     .closing-line {
       margin-top: 28px;
@@ -1223,14 +1191,14 @@
       padding-bottom: 44px;
       border-bottom: 1px solid rgba(255,255,255,0.12);
     }
-    .footer-brand .brand { display: inline-flex; align-items: center; margin-bottom: 16px; opacity: 1; }
+    .footer-brand .brand { display: inline-flex; align-items: center; margin-bottom: 22px; opacity: 1; }
     .footer-brand svg { height: 26px; width: auto; display: block; }
     .footer-brand svg path, .footer-brand svg circle, .footer-brand svg polygon { fill: var(--white); }
-    .footer-brand p { font-size: 14px; color: var(--gray-300); line-height: 1.6; margin-bottom: 16px; max-width: 260px; }
+    .footer-brand p { font-size: 14px; color: var(--gray-300); line-height: 1.6; margin-bottom: 20px; max-width: 260px; }
     .footer-email { font-size: 14px; color: var(--blue-200); font-weight: 600; }
     .footer-email:hover { color: var(--white); }
-    .footer-col h5 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 14px; }
-    .footer-col a { display: block; font-size: 14px; color: var(--gray-300); margin-bottom: 10px; }
+    .footer-col h5 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 18px; }
+    .footer-col a { display: block; font-size: 14px; color: var(--gray-300); margin-bottom: 13px; }
     .footer-col a:hover { color: var(--white); }
     .footer-bottom {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
@@ -1896,29 +1864,6 @@
       </div>
     </section>
 
-    <!-- ============ HOW IT WORKS ============ -->
-    <section class="how-it-works">
-      <div class="wrap">
-        <div class="how-grid">
-          <div class="how-step" style="transition-delay: 0s" data-reveal>
-            <div class="num">01</div>
-            <h4>Connect IBKR</h4>
-            <p>One-time sync, a few minutes — fills flow in automatically after that.</p>
-          </div>
-          <div class="how-step" style="transition-delay: 0.12s" data-reveal>
-            <div class="num">02</div>
-            <h4>Plan the trade</h4>
-            <p>Entry, stop, target — written down before you click buy.</p>
-          </div>
-          <div class="how-step" style="transition-delay: 0.24s" data-reveal>
-            <div class="num">03</div>
-            <h4>Review weekly</h4>
-            <p>See what worked, what didn't, and why — every week.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ CLOSING ============ -->
     <section class="final-cta">
       <div class="wrap">
@@ -2006,7 +1951,7 @@
 
     // ─── Scroll-triggered staggered reveal — How it works cards + feature rows
     (function initScrollReveal() {
-      const cards = document.querySelectorAll('.how-step[data-reveal], .feature-row[data-reveal]');
+      const cards = document.querySelectorAll('.feature-row[data-reveal]');
       if (!cards.length) return;
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
