@@ -294,11 +294,11 @@
     .tab-btn.active { border-color: var(--blue-600); }
     .tab-btn.active span { color: var(--blue-600); }
 
-    .tab-panels { max-width: 1040px; margin: 0 auto; min-height: 260px; }
+    .tab-panels { max-width: 1100px; margin: 0 auto; min-height: 260px; }
     .tab-panel { display: none; }
     .tab-panel.active {
-      display: grid; grid-template-columns: 1fr 1.3fr;
-      gap: 64px; align-items: start; text-align: left;
+      display: grid; grid-template-columns: 0.9fr 1.4fr;
+      gap: 80px; align-items: start; text-align: left;
     }
     .tab-panel h3 {
       font-size: clamp(26px, 3.5vw, 34px); font-weight: 800; color: var(--ink);
@@ -306,12 +306,12 @@
     }
     .tab-panel > p {
       font-size: 17px; color: var(--gray-600);
-      line-height: 1.6; margin-bottom: 8px;
+      line-height: 1.6; margin-bottom: 24px;
     }
-    .tab-panel ul { list-style: none; }
+    .tab-panel ul { list-style: none; padding: 0; margin: 0; }
     .tab-panel li {
       font-size: 16px; font-weight: 700; color: var(--ink);
-      padding: 22px 0; border-top: 1px solid var(--gray-200);
+      padding: 26px 0; border-top: 1px solid var(--gray-200);
       display: flex; align-items: center; gap: 14px;
     }
     .tab-panel li::before {
