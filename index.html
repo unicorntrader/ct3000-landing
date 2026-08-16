@@ -1126,6 +1126,14 @@
       max-width: 540px; margin: 0 auto 32px;
       line-height: 1.6;
     }
+    /* On hover the button hollows out to an outline instead of just
+       darkening -- same transition Gather uses on their closing CTA. */
+    .final-cta .cta-primary { border: 2px solid transparent; }
+    .final-cta .cta-primary:hover {
+      background: transparent; color: var(--blue-600);
+      border-color: var(--blue-600);
+      box-shadow: none; transform: none;
+    }
     .closing-line {
       margin-top: 28px;
       font-size: 19px; color: var(--gray-600);
