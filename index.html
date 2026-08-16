@@ -822,6 +822,7 @@
       cursor: pointer;
     }
     .week-nav .nav-btn:hover { background: var(--gray-200); color: var(--ink); }
+    .week-nav .nav-btn:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
     .week-nav .week-info { flex: 1; }
     .week-nav .week-info .label {
       font-size: 14px; font-weight: 700; color: var(--ink);
@@ -2186,9 +2187,14 @@
                     : (h < 30 ? 'bar neg' : 'bar pos');
           return '<div class="' + cls + '" style="height:' + Math.max(6, h) + '%"></div>';
         }).join('');
+        // Clamp at the ends instead of wrapping -- looping back to "This
+        // week" after clicking Previous a few times read as broken rather
+        // than like real week-by-week navigation.
+        $prev.disabled = idx >= weeks.length - 1;
+        $next.disabled = idx <= 0;
       };
-      $prev.addEventListener('click', () => { idx = (idx + 1) % weeks.length; render(); });
-      $next.addEventListener('click', () => { idx = (idx - 1 + weeks.length) % weeks.length; render(); });
+      $prev.addEventListener('click', () => { idx = Math.min(idx + 1, weeks.length - 1); render(); });
+      $next.addEventListener('click', () => { idx = Math.max(idx - 1, 0); render(); });
       render();
     })();
 
