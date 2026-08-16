@@ -56,7 +56,36 @@
     .site-nav a.current { color: var(--blue-600); }
     .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; font-size: 14px; font-weight: 700; }
     .nav-cta:hover { background: var(--blue-700); color: white; }
-    @media (max-width: 720px) { .site-nav a:not(.nav-cta) { display: none; } }
+    /* Mobile menu (hamburger) -- desktop nav is hidden entirely below
+       720px in favour of this, so the header stays down to logo +
+       toggle instead of squeezing nav items. */
+    .menu-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 6px; color: var(--ink);
+    }
+    .menu-toggle svg { width: 24px; height: 24px; display: block; }
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle.open .icon-open { display: none; }
+    .menu-toggle.open .icon-close { display: block; }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--white); border-top: 1px solid var(--gray-200);
+      padding: 8px 28px 20px;
+    }
+    .mobile-menu a {
+      padding: 14px 0; font-size: 16px; font-weight: 700; color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .mobile-menu a.current { color: var(--blue-600); }
+    .mobile-menu a.nav-cta {
+      display: block; border-bottom: none; text-align: center; margin-top: 12px;
+      background: var(--blue-600); color: white; border-radius: 999px; padding: 12px;
+    }
+    .mobile-menu.open { display: flex; }
+    @media (max-width: 720px) {
+      .site-nav { display: none; }
+      .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    }
 
     .doc-head { text-align: center; padding: 72px 0 40px; }
     .doc-head h1 {
@@ -146,7 +175,18 @@
         <a href="mentorship.html">Mentorship</a>
         <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
       </nav>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
     </div>
+    <nav class="mobile-menu">
+        <a href="index.html#plans">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html">Blog</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>
+      </nav>
   </header>
 
   <main>
@@ -308,6 +348,26 @@
   <script>
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
     window.addEventListener('load', () => window.scrollTo(0, 0));
+
+    // ─── Mobile hamburger menu ─────────────────────────────────────────
+    (function initMobileMenu() {
+      const btn = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
   </script>
 </body>
 </html>
