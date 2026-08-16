@@ -243,15 +243,15 @@
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
-    .feature-tabs-head { text-align: center; margin-bottom: 40px; }
+    .feature-tabs-head { text-align: center; margin-bottom: 48px; }
     .feature-tabs-head h2 {
-      font-size: clamp(26px, 3.5vw, 36px);
+      font-size: clamp(30px, 4.5vw, 44px);
       font-weight: 800; letter-spacing: -0.02em;
       color: var(--ink);
     }
     .tab-row {
       display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
     }
     .tab-btn {
       display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -266,23 +266,35 @@
     .tab-btn.active { border-color: var(--blue-600); background: var(--blue-50); }
     .tab-btn.active svg, .tab-btn.active span { color: var(--blue-600); }
 
-    .tab-panels { max-width: 560px; margin: 0 auto; text-align: center; min-height: 220px; }
+    .tab-panels { max-width: 1000px; margin: 0 auto; min-height: 320px; }
     .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    .tab-panel.active {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center; text-align: left;
+    }
+    .tab-panel-visual {
+      background: var(--white); border-radius: 20px;
+      padding: 24px; border: 1px solid var(--gray-200);
+    }
+    .tab-panel-visual img { width: 100%; height: auto; display: block; }
     .tab-panel h3 {
-      font-size: 22px; font-weight: 800; color: var(--blue-600);
-      letter-spacing: -0.02em; margin-bottom: 10px;
+      font-size: clamp(24px, 3vw, 30px); font-weight: 800; color: var(--blue-600);
+      letter-spacing: -0.02em; margin-bottom: 14px; line-height: 1.2;
     }
     .tab-panel > p {
-      font-size: 15px; color: var(--gray-600);
-      line-height: 1.6; margin-bottom: 20px;
+      font-size: 17px; color: var(--gray-600);
+      line-height: 1.6; margin-bottom: 24px;
     }
-    .tab-panel ul { list-style: none; display: inline-block; text-align: left; }
+    .tab-panel ul { list-style: none; }
     .tab-panel li {
-      font-size: 14px; color: var(--gray-700);
-      padding: 6px 0; display: flex; align-items: center; gap: 8px;
+      font-size: 15px; color: var(--gray-700);
+      padding: 7px 0; display: flex; align-items: center; gap: 8px;
     }
     .tab-panel li::before { content: '✓'; color: var(--blue-600); font-weight: 700; }
+    @media (max-width: 800px) {
+      .tab-panel.active { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .tab-panel ul { display: inline-block; text-align: left; }
+    }
 
     /* Staggered reveal -- each row fades/slides in a beat after the last,
        instead of the whole panel appearing at once. Delays are keyed off
@@ -1261,49 +1273,64 @@
 
         <div class="tab-panels">
           <div class="tab-panel active" data-panel="plans">
-            <h3 class="reveal-row">Write the trade before you take it.</h3>
-            <p class="reveal-row">Entry, stop, target, size — one card, one hypothesis. R:R computes as you tap.</p>
-            <ul>
-              <li class="reveal-row">Plan every trade before entry</li>
-              <li class="reveal-row">R:R computes live as you adjust</li>
-              <li class="reveal-row">One card, one hypothesis</li>
-            </ul>
+            <div class="tab-panel-visual"><img src="feature-plans.png" alt="" loading="lazy"></div>
+            <div class="tab-panel-text">
+              <h3 class="reveal-row">Write the trade before you take it.</h3>
+              <p class="reveal-row">Entry, stop, target, size — one card, one hypothesis. R:R computes as you tap.</p>
+              <ul>
+                <li class="reveal-row">Plan every trade before entry</li>
+                <li class="reveal-row">R:R computes live as you adjust</li>
+                <li class="reveal-row">One card, one hypothesis</li>
+              </ul>
+            </div>
           </div>
           <div class="tab-panel" data-panel="auto-sync">
-            <h3 class="reveal-row">Every fill, pulled in.</h3>
-            <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste.</p>
-            <ul>
-              <li class="reveal-row">Connect once, IBKR only</li>
-              <li class="reveal-row">No CSVs, no copy-paste</li>
-              <li class="reveal-row">Fills sync automatically</li>
-            </ul>
+            <div class="tab-panel-visual"><img src="feature-auto-sync.png" alt="" loading="lazy"></div>
+            <div class="tab-panel-text">
+              <h3 class="reveal-row">Every fill, pulled in.</h3>
+              <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste.</p>
+              <ul>
+                <li class="reveal-row">Connect once, IBKR only</li>
+                <li class="reveal-row">No CSVs, no copy-paste</li>
+                <li class="reveal-row">Fills sync automatically</li>
+              </ul>
+            </div>
           </div>
           <div class="tab-panel" data-panel="journal">
-            <h3 class="reveal-row">Taken. Missed. Tagged.</h3>
-            <p class="reveal-row">Every trade and every miss, filed and findable — a searchable index of your decisions.</p>
-            <ul>
-              <li class="reveal-row">Every trade, journaled</li>
-              <li class="reveal-row">Missed trades tracked too</li>
-              <li class="reveal-row">Searchable by tag</li>
-            </ul>
+            <div class="tab-panel-visual"><img src="feature-journal.png" alt="" loading="lazy"></div>
+            <div class="tab-panel-text">
+              <h3 class="reveal-row">Taken. Missed. Tagged.</h3>
+              <p class="reveal-row">Every trade and every miss, filed and findable — a searchable index of your decisions.</p>
+              <ul>
+                <li class="reveal-row">Every trade, journaled</li>
+                <li class="reveal-row">Missed trades tracked too</li>
+                <li class="reveal-row">Searchable by tag</li>
+              </ul>
+            </div>
           </div>
           <div class="tab-panel" data-panel="weekly-review">
-            <h3 class="reveal-row">How did the week go?</h3>
-            <p class="reveal-row">Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual.</p>
-            <ul>
-              <li class="reveal-row">Net P&amp;L and win rate</li>
-              <li class="reveal-row">One screen per week</li>
-              <li class="reveal-row">2-minute retrospective ritual</li>
-            </ul>
+            <div class="tab-panel-visual"><img src="feature-weekly-review.png" alt="" loading="lazy"></div>
+            <div class="tab-panel-text">
+              <h3 class="reveal-row">How did the week go?</h3>
+              <p class="reveal-row">Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual.</p>
+              <ul>
+                <li class="reveal-row">Net P&amp;L and win rate</li>
+                <li class="reveal-row">One screen per week</li>
+                <li class="reveal-row">2-minute retrospective ritual</li>
+              </ul>
+            </div>
           </div>
           <div class="tab-panel" data-panel="insights">
-            <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
-            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour — firing only when the data shows something real.</p>
-            <ul>
-              <li class="reveal-row">12 deterministic rules</li>
-              <li class="reveal-row">Fires only on real patterns</li>
-              <li class="reveal-row">No generic advice</li>
-            </ul>
+            <div class="tab-panel-visual"><img src="feature-insights.png" alt="" loading="lazy"></div>
+            <div class="tab-panel-text">
+              <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
+              <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour — firing only when the data shows something real.</p>
+              <ul>
+                <li class="reveal-row">12 deterministic rules</li>
+                <li class="reveal-row">Fires only on real patterns</li>
+                <li class="reveal-row">No generic advice</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -1864,7 +1891,7 @@
           <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
         </svg>
           </a>
-          <p>The trading journal that shows you where discipline broke down.</p>
+          <p>Know your edge.</p>
           <a href="mailto:thinker@philoinvestor.com" class="footer-email">thinker@philoinvestor.com</a>
         </div>
         <div class="footer-col">
