@@ -1063,6 +1063,58 @@
       color: var(--blue-600);
     }
 
+    /* ============ FAQ ============ */
+    .faq { background: var(--gray-50); }
+    .faq .wrap { max-width: 720px; }
+    .faq-head { text-align: center; margin-bottom: 48px; }
+    .faq-head h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 12px;
+    }
+    .faq-head p {
+      font-size: 15px; color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .faq-head a { color: var(--blue-600); }
+    .faq-category {
+      font-size: 13px; font-weight: 700;
+      color: var(--blue-600);
+      margin: 32px 0 12px;
+    }
+    .faq-category:first-of-type { margin-top: 0; }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 14px; font-weight: 600;
+      color: var(--ink);
+    }
+    .faq-question .plus {
+      color: var(--blue-600);
+      font-size: 18px; font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.expanded .faq-question .plus { transform: rotate(45deg); }
+    .faq-answer {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 14px; color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .faq-item.expanded .faq-answer { display: block; }
+    .faq-foot { text-align: center; margin-top: 40px; }
+    .faq-foot p { font-size: 14px; color: var(--gray-600); margin-bottom: 16px; }
+
     /* ============ FINAL CTA ============ */
     .final-cta {
       padding: 120px 0;
@@ -1157,6 +1209,7 @@
     <a href="#weekly-review" data-section="weekly-review"><span class="dot-label">Weekly review</span><span class="dot"></span></a>
     <a href="#insights" data-section="insights"><span class="dot-label">Insights</span><span class="dot"></span></a>
     <a href="#mentorship" data-section="mentorship"><span class="dot-label">Mentorship</span><span class="dot"></span></a>
+    <a href="#faq" data-section="faq"><span class="dot-label">FAQ</span><span class="dot"></span></a>
   </nav>
 
   <main>
@@ -1688,6 +1741,77 @@
       </div>
     </section>
 
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <div class="faq-head">
+          <h2>Questions, answered properly</h2>
+          <p>Everything traders ask us, in plain English. Can't find yours? Email <a href="mailto:thinker@philoinvestor.com">thinker@philoinvestor.com</a> and a real person replies.</p>
+        </div>
+
+        <div class="faq-category">Pricing and trial</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>How much does CoTrader cost?</span><span class="plus">+</span></div>
+          <div class="faq-answer">$30/month for Solo, after a 7-day free trial. Mentorship is a separate add-on on top of Solo, at $500 or $1,000/month depending on cadence.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is there a free trial?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — 7 days free on Solo. Your card isn't charged until the trial ends.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Can I cancel anytime?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes, cancel anytime from your billing portal. Canceling stops future charges, but we don't offer refunds for the current billing period.</div>
+        </div>
+
+        <div class="faq-category">Getting started</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Do I need Interactive Brokers?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — right now CoTrader only supports Interactive Brokers (IBKR). Other brokers aren't supported yet.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>How long does setup take?</span><span class="plus">+</span></div>
+          <div class="faq-answer">A few minutes. Connect your IBKR account and you're live — fills start syncing automatically.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is my trading data safe?</span><span class="plus">+</span></div>
+          <div class="faq-answer">CoTrader can't execute trades on your behalf. It only reads your account activity through IBKR — it can never place, modify, or cancel an order.</div>
+        </div>
+
+        <div class="faq-category">The product</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What exactly does CoTrader track?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Your trades sync automatically from IBKR — entries, exits, size, timing. You plan trades before you take them, journal your reasoning, and review your week.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What are Callouts?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Twelve deterministic rules that scan your trade history for real patterns — a standout symbol, a weak day of the week, revenge trading, and more. They only fire when your own data shows something real, not generic advice.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Does it work on mobile?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Yes — CoTrader is a responsive web app, so it works in your mobile browser. There's no separate native app right now.</div>
+        </div>
+
+        <div class="faq-category">Mentorship</div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What's the difference between Solo and Mentorship?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Solo ($30/month) is the core app — plan, sync, journal, review. Mentorship ($500 or $1,000/month) is 1:1 coaching layered on top of Solo, not a replacement for it.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>If I cancel Mentorship, do I lose Solo too?</span><span class="plus">+</span></div>
+          <div class="faq-answer">No. They're separate subscriptions — canceling Mentorship only cancels Mentorship. Your Solo access keeps running.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Is mentorship investment advice?</span><span class="plus">+</span></div>
+          <div class="faq-answer">No. Mentorship is educational — coaching on process, discipline, and risk management. It's not investment advice.</div>
+        </div>
+
+        <div class="faq-foot">
+          <p>Still got a question?</p>
+          <a href="mailto:thinker@philoinvestor.com" class="cta-outline">Email us</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CLOSING ============ -->
     <section class="final-cta">
       <div class="wrap">
@@ -1889,6 +2013,15 @@
         const header = card.querySelector('.callout-header');
         if (!header) return;
         header.addEventListener('click', () => card.classList.toggle('expanded'));
+      });
+    })();
+
+    // ─── FAQ · Expandable question rows ────────────────────────────────
+    (function initFaqExpand() {
+      document.querySelectorAll('[data-faq-expand]').forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question) return;
+        question.addEventListener('click', () => item.classList.toggle('expanded'));
       });
     })();
 
