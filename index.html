@@ -1140,7 +1140,11 @@
     }
     @media (max-width: 640px) {
       section { padding: 64px 0; }
-      .hero { padding: 56px 0 48px; }
+      /* On a tall, narrow viewport the full-height centering used on
+         desktop leaves a big empty gap above the headline -- drop the
+         forced min-height/centering here so it just sits at the top
+         with normal padding instead. */
+      .hero { min-height: auto; display: block; padding: 40px 0 48px; }
       .workflow-grid { grid-template-columns: 1fr; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .philosophy { padding: 80px 0; }
