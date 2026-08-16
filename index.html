@@ -18,6 +18,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://cotraderapp.com/CT3000%20Digital-03.png">
 
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+
   <style>
     :root {
       /* Brand */
@@ -70,7 +73,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: var(--ink);
       background: var(--gray-50);
       line-height: 1.55;
@@ -103,14 +106,14 @@
       color: var(--ink);
       opacity: 0.85;
     }
-    .brand svg { height: 19px; width: auto; display: block; }
-    .site-nav { display: flex; align-items: center; gap: 22px; }
-    .site-nav a:not(.nav-cta) { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .brand svg { height: 23px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 26px; }
+    .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .site-nav a:not(.nav-cta):hover { color: var(--ink); }
     .nav-cta {
       background: var(--blue-600); color: white;
-      padding: 9px 18px; border-radius: 999px;
-      font-size: 13px; font-weight: 600;
+      padding: 11px 22px; border-radius: 999px;
+      font-size: 15px; font-weight: 700;
       transition: all 0.15s ease;
     }
     .nav-cta:hover { background: var(--blue-700); color: white; transform: translateY(-1px); }
@@ -118,57 +121,8 @@
       .site-nav a:not(.nav-cta) { display: none; }
     }
 
-    /* ============ SECTION NAV (side dot rail) ============ */
+    /* ============ SECTION ANCHORS ============ */
     section[id] { scroll-margin-top: 90px; }
-
-    .dot-rail {
-      position: fixed;
-      right: 22px; top: 50%;
-      transform: translateY(-50%);
-      z-index: 40;
-      display: flex; flex-direction: column; gap: 18px;
-      align-items: flex-end;
-      /* Own opaque surface, not the page's — the rail is fixed and
-         scrolls over both light AND dark (.philosophy, .mentorship-teaser)
-         sections, so it can't rely on inherited page contrast. */
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: saturate(180%) blur(12px);
-      -webkit-backdrop-filter: saturate(180%) blur(12px);
-      border: 1px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 16px 14px;
-      box-shadow: 0 6px 24px rgba(17,24,39,0.1);
-    }
-    .dot-rail a {
-      display: flex; align-items: center; gap: 12px;
-      padding: 4px 2px;
-    }
-    .dot-rail .dot-label {
-      font-size: 13px; font-weight: 600;
-      color: var(--ink);
-      white-space: nowrap;
-      transition: color 0.2s ease, transform 0.2s ease;
-      transform: translateX(4px);
-    }
-    .dot-rail .dot {
-      flex-shrink: 0;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--gray-300);
-      border: 2px solid transparent;
-      transition: all 0.25s ease;
-    }
-    .dot-rail a:hover .dot-label { color: var(--gray-700); transform: translateX(0); }
-    .dot-rail a:hover .dot { background: var(--gray-500); }
-    .dot-rail a.is-active .dot-label { color: var(--blue-600); transform: translateX(0); }
-    .dot-rail a.is-active .dot {
-      background: var(--blue-600);
-      width: 12px; height: 12px;
-      border-color: var(--blue-200);
-    }
-    @media (max-width: 900px) {
-      .dot-rail { display: none; }
-    }
 
     /* ============ HERO ============ */
     .hero {
@@ -1270,15 +1224,6 @@
     </div>
   </header>
 
-  <nav class="dot-rail" aria-label="Section quick jump">
-    <a href="#plans" data-section="plans"><span class="dot-label">Plans</span><span class="dot"></span></a>
-    <a href="#auto-sync" data-section="auto-sync"><span class="dot-label">Auto-sync</span><span class="dot"></span></a>
-    <a href="#journal" data-section="journal"><span class="dot-label">Journal</span><span class="dot"></span></a>
-    <a href="#weekly-review" data-section="weekly-review"><span class="dot-label">Weekly review</span><span class="dot"></span></a>
-    <a href="#insights" data-section="insights"><span class="dot-label">Insights</span><span class="dot"></span></a>
-    <a href="#mentorship" data-section="mentorship"><span class="dot-label">Mentorship</span><span class="dot"></span></a>
-  </nav>
-
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
@@ -1949,31 +1894,6 @@
         });
       }, { threshold: 0.3 });
       cards.forEach(card => observer.observe(card));
-    })();
-
-    // ─── Section nav — scrollspy for header links + side dot rail ─────
-    (function initSectionNav() {
-      const links = document.querySelectorAll('[data-section]');
-      if (!links.length) return;
-      const setActive = (id) => {
-        links.forEach(a => a.classList.toggle('is-active', a.dataset.section === id));
-      };
-      const sections = Array.from(new Set(Array.from(links).map(a => a.dataset.section)))
-        .map(id => document.getElementById(id))
-        .filter(Boolean);
-      const observer = new IntersectionObserver((entries) => {
-        // Pick whichever observed section is currently closest to the
-        // vertical center of the viewport, not just "first intersecting"
-        // — with a thin rootMargin band, fast scrolls can skip a section
-        // entirely, or momentarily intersect two at once.
-        const visible = entries.filter(e => e.isIntersecting);
-        if (!visible.length) return;
-        const closest = visible.reduce((a, b) =>
-          Math.abs(a.boundingClientRect.top) < Math.abs(b.boundingClientRect.top) ? a : b
-        );
-        setActive(closest.target.id);
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-      sections.forEach(s => observer.observe(s));
     })();
 
     // ─── ROW 1 · Live Plan card (R:R) ─────────────────────────────────
