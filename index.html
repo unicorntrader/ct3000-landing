@@ -286,10 +286,25 @@
     .how-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      max-width: 900px;
+      gap: 20px;
+      max-width: 940px;
       margin: 0 auto;
     }
+    .how-step {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 16px -4px rgba(17,24,39,0.06);
+      /* Scroll-triggered reveal -- opacity/translate held here, .in-view
+         (added by the IntersectionObserver below) plays the entrance.
+         Each card's transition-delay is set inline per element so they
+         land one after another instead of all at once. */
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .how-step.in-view { opacity: 1; transform: translateY(0); }
     .how-step .num {
       font-size: 30px; font-weight: 800;
       color: var(--blue-600);
@@ -306,7 +321,7 @@
       line-height: 1.55;
     }
     @media (max-width: 720px) {
-      .how-grid { grid-template-columns: 1fr; gap: 28px; }
+      .how-grid { grid-template-columns: 1fr; gap: 16px; }
     }
 
     /* ============ FEATURE TABS ============ */
@@ -1300,17 +1315,17 @@
     <section class="how-it-works">
       <div class="wrap">
         <div class="how-grid">
-          <div class="how-step">
+          <div class="how-step" style="transition-delay: 0s" data-reveal>
             <div class="num">01</div>
             <h4>Connect IBKR</h4>
             <p>One-time sync, a few minutes — fills flow in automatically after that.</p>
           </div>
-          <div class="how-step">
+          <div class="how-step" style="transition-delay: 0.12s" data-reveal>
             <div class="num">02</div>
             <h4>Plan the trade</h4>
             <p>Entry, stop, target — written down before you click buy.</p>
           </div>
-          <div class="how-step">
+          <div class="how-step" style="transition-delay: 0.24s" data-reveal>
             <div class="num">03</div>
             <h4>Review weekly</h4>
             <p>See what worked, what didn't, and why — every week.</p>
@@ -1921,6 +1936,20 @@
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load', () => window.scrollTo(0, 0));
+
+    // ─── How it works — scroll-triggered staggered reveal ─────────────
+    (function initHowItWorksReveal() {
+      const cards = document.querySelectorAll('.how-step[data-reveal]');
+      if (!cards.length) return;
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+      cards.forEach(card => observer.observe(card));
+    })();
 
     // ─── Section nav — scrollspy for header links + side dot rail ─────
     (function initSectionNav() {
