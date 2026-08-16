@@ -1141,18 +1141,15 @@
     }
     @media (max-width: 640px) {
       section { padding: 64px 0; }
-      /* Desktop vertically CENTERS content in a full-height hero,
-         which on a tall narrow phone left a big empty gap above the
-         headline. But dropping min-height entirely (previous fix)
-         over-corrected -- the hero shrank to content height instead
-         of still filling the first screen like the rest of the site.
-         Keep the full-viewport height, just top-align instead of
-         center -- content sits near the top, natural whitespace
-         lands below the buttons instead of split above and below. */
+      /* Full-height + center (desktop pattern) left too much gap above
+         the headline; full-height + top-align (previous fix) then sat
+         too high with nothing pulling it down. Middle ground: center
+         within a shorter box (not full 100vh) so it lands roughly
+         mid-screen without the extreme gap either fix produced. */
       .hero {
-        min-height: calc(100vh - 70px);
+        min-height: 82vh;
         display: flex; flex-direction: column;
-        align-items: center; justify-content: flex-start;
+        align-items: center; justify-content: center;
         padding: 56px 0 48px;
       }
       /* Forced 2-word line breaks in the desktop headline plus the
