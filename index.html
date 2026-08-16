@@ -882,6 +882,21 @@
     .feature-row:last-child { margin-bottom: 0; }
     .feature-row.reverse > :first-child { order: 2; }
     .feature-row.reverse > :last-child { order: 1; }
+    /* Scroll-triggered reveal, text then phone -- same in-view pattern
+       as the How It Works cards, added by initScrollReveal() below. */
+    .feature-row[data-reveal] .feature-text,
+    .feature-row[data-reveal] .phone {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .feature-row[data-reveal] .feature-text { transition-delay: 0s; }
+    .feature-row[data-reveal] .phone { transition-delay: 0.15s; }
+    .feature-row[data-reveal].in-view .feature-text,
+    .feature-row[data-reveal].in-view .phone {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .feature-text h3 {
       font-size: clamp(24px, 3vw, 34px);
       font-weight: 800; letter-spacing: -0.025em;
@@ -1316,7 +1331,7 @@
     <!-- ============ ROW 1 · PLANS ============ -->
     <section class="features" id="plans">
       <div class="wrap">
-        <div class="feature-row">
+        <div class="feature-row" data-reveal>
           <div class="feature-text">
             <span class="section-eyebrow">Plans</span>
             <h3>Write the trade before you take it.</h3>
@@ -1381,7 +1396,7 @@
     <!-- ============ ROW 2 · AUTO-SYNC ============ -->
     <section class="features" id="auto-sync">
       <div class="wrap">
-        <div class="feature-row reverse">
+        <div class="feature-row reverse" data-reveal>
           <div class="feature-text">
             <span class="section-eyebrow">Auto-sync</span>
             <h3>Every fill, pulled in.</h3>
@@ -1423,7 +1438,7 @@
     <!-- ============ ROW 3 · JOURNAL ============ -->
     <section class="features" id="journal">
       <div class="wrap">
-        <div class="feature-row">
+        <div class="feature-row" data-reveal>
           <div class="feature-text">
             <span class="section-eyebrow">Journal</span>
             <h3>Taken. Missed. Tagged.</h3>
@@ -1665,7 +1680,7 @@
     <!-- ============ ROW 4 · WEEKLY REVIEW ============ -->
     <section class="features" id="weekly-review">
       <div class="wrap">
-        <div class="feature-row reverse">
+        <div class="feature-row reverse" data-reveal>
           <div class="feature-text">
             <span class="section-eyebrow">Weekly review</span>
             <h3>How did the week go?</h3>
@@ -1709,7 +1724,7 @@
     <!-- ============ ROW 5 · INSIGHTS ============ -->
     <section class="features" id="insights">
       <div class="wrap">
-        <div class="feature-row">
+        <div class="feature-row" data-reveal>
           <div class="feature-text">
             <span class="section-eyebrow">Callouts</span>
             <h3>Tap to see what's working. Tap to see what's not.</h3>
@@ -1885,9 +1900,9 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load', () => window.scrollTo(0, 0));
 
-    // ─── How it works — scroll-triggered staggered reveal ─────────────
-    (function initHowItWorksReveal() {
-      const cards = document.querySelectorAll('.how-step[data-reveal]');
+    // ─── Scroll-triggered staggered reveal — How it works cards + feature rows
+    (function initScrollReveal() {
+      const cards = document.querySelectorAll('.how-step[data-reveal], .feature-row[data-reveal]');
       if (!cards.length) return;
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
