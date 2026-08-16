@@ -1160,6 +1160,13 @@
          forced min-height/centering here so it just sits at the top
          with normal padding instead. */
       .hero { min-height: auto; display: block; padding: 40px 0 48px; }
+      /* Forced 2-word line breaks in the desktop headline plus the
+         42px font floor made this wrap to 3 ragged lines on a narrow
+         phone -- shrink it here so it wraps naturally to 2. */
+      .hero h1 { font-size: 34px; }
+      /* The button glow reads as a heavy blur at phone width -- tone
+         it down instead of dropping it, so it doesn't look muddy. */
+      .cta-primary { box-shadow: 0 4px 14px rgba(37,99,235,0.22); }
       .workflow-grid { grid-template-columns: 1fr; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .philosophy { padding: 80px 0; }
@@ -1234,7 +1241,7 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="wrap">
-        <h1>Never wing a trade<br>again.</h1>
+        <h1>Never wing a trade again.</h1>
         <p class="lead">
           CoTrader syncs every fill, tracks your plan, and shows you exactly where discipline broke down.
         </p>
