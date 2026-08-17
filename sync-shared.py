@@ -40,7 +40,7 @@ def build_header(how_it_works_href, nav_current):
         <a href="faq.html"{faq_c}>FAQ</a>
         <a href="blog.html"{blog_c}>Blog</a>
         <a href="mentorship.html"{ment_c}>Mentorship</a>
-        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Sign Up</a>'''
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>'''
     return f'''<header class="site-header">
     <div class="wrap">
       <a href="index.html" class="brand">
