@@ -85,7 +85,7 @@
       .menu-toggle { display: flex; align-items: center; justify-content: center; }
     }
 
-    .article-head { text-align: center; padding: 72px 0 48px; }
+    .article-head { text-align: center; padding: 72px clamp(20px, 5vw, 48px) 48px; }
     .article-head .eyebrow {
       display: inline-block; font-size: clamp(12px, 1.5vw, 14px); font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
@@ -104,7 +104,7 @@
     }
     .article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .article-body { max-width: 680px; margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--gray-700); line-height: 1.75; }
+    .article-body { max-width: 680px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px) 96px; font-size: 17px; color: var(--gray-700); line-height: 1.75; }
     .article-body p { margin-bottom: 22px; }
     .article-body h2 {
       font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink);
@@ -120,7 +120,7 @@
     .article-body blockquote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--gray-500); }
 
     .article-cta {
-      max-width: 680px; margin: 0 auto; text-align: center;
+      max-width: 680px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; text-align: center;
       background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px;
       padding: 36px 32px;
     }
