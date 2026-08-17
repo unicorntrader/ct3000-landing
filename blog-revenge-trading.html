@@ -97,13 +97,13 @@
     .article-head .meta { font-size: 13px; color: var(--gray-500); }
 
     .article-cover {
-      max-width: 480px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto 48px;
-      border-radius: 16px; overflow: hidden;
-      background: var(--blue-50);
+      max-width: 420px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto 48px;
       display: flex; align-items: center; justify-content: center;
-      padding: 32px;
     }
-    .article-cover img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; }
+    .article-cover img {
+      display: block; width: 100%; height: auto; max-height: 280px; object-fit: contain;
+      border-radius: 12px; border: 1px solid var(--gray-200);
+    }
 
     .article-body { max-width: 880px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px) 96px; font-size: 17px; color: var(--ink); line-height: 1.75; }
     .article-body p { margin-bottom: 22px; }

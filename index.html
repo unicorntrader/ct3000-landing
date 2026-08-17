@@ -167,29 +167,6 @@
       text-align: center;
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
-    /* "wing" flying off -- position is computed in JS against #wing-word's
-       real on-screen rect (the headline is fluid/responsive, so a fixed
-       coordinate would drift at every breakpoint). Desktop only. */
-    #wing-fly {
-      position: absolute;
-      width: 90px; height: auto;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 5;
-    }
-    #wing-fly.playing { animation: wingFlyAway 2s ease-out forwards; }
-    @keyframes wingFlyAway {
-      0%   { opacity: 0;   transform: translate(0, 0) scale(0.25) rotate(-10deg); }
-      10%  { opacity: 1;   transform: translate(0, 0) scale(0.4) rotate(-8deg); }
-      30%  { opacity: 1;   transform: translate(6px, -10px) scale(0.55) rotate(-4deg); }
-      100% { opacity: 0;   transform: translate(100px, -120px) scale(1) rotate(10deg); }
-    }
-    @media (max-width: 899px) {
-      #wing-fly { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #wing-fly { display: none; }
-    }
     .hero + section { padding-top: 48px; }
     /* Staggered load-in: headline, then subhead, then buttons -- one
        after another instead of the whole hero appearing at once. */
@@ -1287,7 +1264,7 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="wrap">
-        <h1>Never <span id="wing-word">wing</span> a trade again.<img src="wing-away.png" alt="" id="wing-fly"></h1>
+        <h1>Never wing a trade again.</h1>
         <p class="lead">
           CoTrader syncs your trades straight from your account, matches them to your plans, and generates insights so you know your edge and grow it.
         </p>
@@ -1888,39 +1865,6 @@
     window.addEventListener('load', () => window.scrollTo(0, 0));
 
     // ─── Mobile hamburger menu ─────────────────────────────────────────
-    // ─── Hero: money bag flies away from "wing" (desktop only) ────────
-    (function initWingFly() {
-      const word = document.getElementById('wing-word');
-      const img = document.getElementById('wing-fly');
-      const hero = document.querySelector('.hero');
-      if (!word || !img || !hero) return;
-
-      let played = false;
-
-      function position() {
-        if (window.innerWidth < 900) return;
-        const wordRect = word.getBoundingClientRect();
-        const heroRect = hero.getBoundingClientRect();
-        const imgW = img.offsetWidth || 90;
-        const imgH = img.offsetHeight || imgW;
-        const wordCenterX = wordRect.left + wordRect.width / 2 - heroRect.left;
-        const wordCenterY = wordRect.top + wordRect.height / 2 - heroRect.top;
-        img.style.left = (wordCenterX - imgW / 2) + 'px';
-        img.style.top = (wordCenterY - imgH / 2) + 'px';
-      }
-
-      function play() {
-        if (played || window.innerWidth < 900) return;
-        position();
-        played = true;
-        requestAnimationFrame(() => img.classList.add('playing'));
-      }
-
-      position();
-      window.addEventListener('resize', () => { if (!played) position(); });
-      setTimeout(play, 1200);
-    })();
-
     (function initMobileMenu() {
       const btn = document.querySelector('.menu-toggle');
       const menu = document.querySelector('.mobile-menu');
