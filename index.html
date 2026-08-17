@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
-  <title>CoTrader 3000 — Trading Made Simpler</title>
+  <title>CoTrader 3000 - Trading Made Simpler</title>
   <meta name="description" content="The complete trading workflow. Plan your setups, sync your fills, log your misses, see your patterns. Discipline over P&L.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com">
@@ -52,8 +52,11 @@
       --amber-800: #92400e;
 
       --cyan-200:    #a5f3fc;
+      --cyan-500:    #06b6d4;
       --violet-200:  #ddd6fe;
+      --violet-500:  #8b5cf6;
       --rose-200:    #fecdd3;
+      --rose-500:    #f43f5e;
       --emerald-200: #a7f3d0;
 
       /* Neutrals */
@@ -246,6 +249,7 @@
       margin-bottom: 88px;
       scroll-margin-top: 80px;
     }
+    .tab-row-hint { display: none; }
     .tab-btn {
       display: flex; flex-direction: column; align-items: center; gap: 0;
       background: var(--white); border: 2px solid var(--gray-200);
@@ -290,14 +294,28 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        margin: 0 -24px 40px;
+        margin: 0 -24px 12px;
         padding: 4px 24px 8px;
+        /* Without this, snap-align:start on the first/last card counts
+           the row's own edge padding as "outside" the snap area, so the
+           browser auto-corrects scrollLeft on load to collapse it --
+           the card sat flush against the screen edge despite the padding.
+           scroll-padding tells the snap engine the padding IS the inset. */
+        scroll-padding-left: 24px;
+        scroll-padding-right: 24px;
       }
       .tab-row::-webkit-scrollbar { display: none; }
       .tab-row { scrollbar-width: none; }
       .tab-btn { flex: 0 0 auto; width: 112px; padding: 12px; scroll-snap-align: start; }
       .tab-btn img { height: 60px; margin-bottom: 8px; }
       .tab-btn span { font-size: 12px; }
+      .tab-row-hint {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        font-size: 12px; font-weight: 600; color: var(--gray-500);
+        margin: 0 0 32px;
+      }
+      .tab-row-hint svg { animation: hintNudge 1.4s ease-in-out infinite; }
+      @keyframes hintNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
     }
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
@@ -344,24 +362,6 @@
     .trade-row:last-child { border-bottom: none; }
     .trade-row .sym { font-weight: 700; color: var(--ink); }
     .trade-row .spacer { flex: 1; }
-
-    /* Idea sticky cards (Ideation) */
-    .idea {
-      padding: 10px 12px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .idea:last-child { margin-bottom: 0; }
-    .idea-amber { background: var(--amber-50); border-left: 3px solid var(--amber-500); }
-    .idea-amber .meta { color: var(--amber-800); }
-    .idea-cyan { background: #ecfeff; border-left: 3px solid #06b6d4; }
-    .idea-cyan .meta { color: #155e75; }
-    .idea-violet { background: #f5f3ff; border-left: 3px solid #8b5cf6; }
-    .idea-violet .meta { color: #5b21b6; }
-    .idea strong { font-weight: 600; color: var(--ink); }
-    .idea .meta { font-size: 11px; }
 
     /* Plan card (Planning) */
     .plan-mini {
@@ -449,10 +449,10 @@
       box-shadow: 0 0 0 2px white, 0 0 0 3px var(--gray-200);
       flex-shrink: 0;
     }
-    .tag-dot.cyan    { background: #06b6d4; }
-    .tag-dot.violet  { background: #8b5cf6; }
+    .tag-dot.cyan    { background: var(--cyan-500); }
+    .tag-dot.violet  { background: var(--violet-500); }
     .tag-dot.emerald { background: var(--green-500); }
-    .tag-dot.rose    { background: #f43f5e; }
+    .tag-dot.rose    { background: var(--rose-500); }
     .tag-dot.amber   { background: var(--amber-500); }
     .tag-info { line-height: 1.35; }
     .tag-name { font-weight: 700; color: var(--ink); }
@@ -1034,7 +1034,7 @@
     .testimonial { background: var(--white); text-align: center; }
     .testimonial-card {
       max-width: 500px; margin: 0 auto;
-      background: linear-gradient(135deg, var(--ink) 0%, #1e3a5f 100%);
+      background: linear-gradient(135deg, var(--ink) 0%, var(--gray-700) 100%);
       border: 2px solid var(--blue-600);
       border-radius: 20px;
       padding: 56px 40px;
@@ -1128,7 +1128,7 @@
 
     /* ============ FOOTER ============ */
     .site-footer {
-      background: linear-gradient(180deg, var(--ink) 0%, #17263d 100%);
+      background: linear-gradient(180deg, var(--ink) 0%, var(--gray-700) 100%);
       padding: 72px 0 32px;
     }
     .site-footer .wrap { max-width: 1080px; }
@@ -1248,6 +1248,10 @@
             <img src="feature-insights.png" alt="">
             <span>Insights</span>
           </button>
+        </div>
+        <div class="tab-row-hint" aria-hidden="true">
+          Swipe to see all
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
         </div>
 
           <div class="tab-panels">
