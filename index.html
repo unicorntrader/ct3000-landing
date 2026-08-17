@@ -381,12 +381,37 @@
       padding: 12px;
     }
     .plan-mini .head {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
       font-size: 13px; font-weight: 700; color: var(--ink);
     }
-    .plan-mini .sub { font-size: 11px; color: var(--gray-500); margin-bottom: 10px; }
+    /* Real, typeable ticker field -- styled to blend into the header
+       row rather than look like a form input, but it's a genuine
+       <input>, not a static label. */
+    .ticker-input {
+      font: inherit; font-weight: 700; color: var(--ink);
+      width: 56px;
+      border: none; border-bottom: 1.5px dashed var(--gray-300);
+      background: transparent;
+      padding: 0 0 1px;
+      text-transform: uppercase;
+    }
+    .ticker-input:focus { outline: none; border-bottom-color: var(--blue-600); }
+    .pill[data-plan-direction] { cursor: pointer; user-select: none; }
+    .setup-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .setup-row .setup-lbl { font-size: 11px; color: var(--gray-500); }
+    .setup-chip {
+      font-size: 11px; font-weight: 600; color: var(--blue-700);
+      background: var(--blue-50);
+      padding: 4px 10px; border-radius: 999px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .setup-chip:hover { background: var(--blue-200); }
+    .setup-chip.is-empty { color: var(--gray-500); background: var(--gray-100); font-style: italic; }
     .plan-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
     }
     .plan-cell {
       background: var(--gray-50);
@@ -1117,11 +1142,6 @@
       background: transparent; color: white; border-color: white;
       box-shadow: none;
     }
-    .closing-line {
-      margin-top: 28px;
-      font-size: 19px; color: var(--blue-50);
-      letter-spacing: 0.03em;
-    }
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 960px) {
@@ -1294,8 +1314,8 @@
           <div class="tab-panel active" data-panel="plans">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Plans</span>
-            <h3 class="reveal-row">Plan the trade, if you want to.</h3>
-            <p class="reveal-row">Entry, stop, target, size — there when you want structure. R:R computes as you tap. Try the numbers.</p>
+            <h3 class="reveal-row">Some trades can be planned.</h3>
+            <p class="reveal-row">Type a ticker, pick a direction, tag a setup if you've got one. Entry, stop, target and size compute your R:R live.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1311,11 +1331,14 @@
             <div class="phone-body">
               <div class="plan-mini live">
                 <div class="head">
-                  <span>MSFT</span>
-                  <span class="pill pill-long">LONG</span>
+                  <input type="text" id="plan-ticker" class="ticker-input" value="AAPL" maxlength="6" spellcheck="false" autocomplete="off" aria-label="Ticker">
+                  <span class="pill pill-long" id="plan-direction" data-plan-direction role="button" tabindex="0">LONG</span>
                   <span class="pill pill-planned">Planned</span>
                 </div>
-                <div class="sub">40 shares · Support bounce</div>
+                <div class="setup-row">
+                  <span class="setup-lbl">Setup</span>
+                  <button class="setup-chip" id="plan-setup" data-plan-setup-cycle type="button">Support bounce</button>
+                </div>
                 <div class="plan-grid">
                   <div class="plan-cell">
                     <div class="lbl">Entry</div>
@@ -1323,6 +1346,14 @@
                     <div class="num-adjust">
                       <button data-plan-adjust="entry" data-delta="-1" aria-label="Decrease entry">−</button>
                       <button data-plan-adjust="entry" data-delta="1" aria-label="Increase entry">+</button>
+                    </div>
+                  </div>
+                  <div class="plan-cell stop">
+                    <div class="lbl">Stop</div>
+                    <div class="val" id="plan-stop-val">$405.00</div>
+                    <div class="num-adjust">
+                      <button data-plan-adjust="stop" data-delta="-1" aria-label="Decrease stop">−</button>
+                      <button data-plan-adjust="stop" data-delta="1" aria-label="Increase stop">+</button>
                     </div>
                   </div>
                   <div class="plan-cell target">
@@ -1333,12 +1364,12 @@
                       <button data-plan-adjust="target" data-delta="1" aria-label="Increase target">+</button>
                     </div>
                   </div>
-                  <div class="plan-cell stop">
-                    <div class="lbl">Stop</div>
-                    <div class="val" id="plan-stop-val">$405.00</div>
+                  <div class="plan-cell">
+                    <div class="lbl">Size</div>
+                    <div class="val" id="plan-size-val">40</div>
                     <div class="num-adjust">
-                      <button data-plan-adjust="stop" data-delta="-1" aria-label="Decrease stop">−</button>
-                      <button data-plan-adjust="stop" data-delta="1" aria-label="Increase stop">+</button>
+                      <button data-plan-adjust="size" data-delta="-5" aria-label="Decrease size">−</button>
+                      <button data-plan-adjust="size" data-delta="5" aria-label="Increase size">+</button>
                     </div>
                   </div>
                 </div>
@@ -1755,7 +1786,7 @@
       <div class="wrap">
         <div class="testimonial-card reveal">
           <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
-          <p class="testimonial-quote">"Since I started using CoTrader 3000 I stopped overtrading and taking trades that had a high chance of losing me money. That changed my P&amp;L curve dramatically!"</p>
+          <p class="testimonial-quote">"Since CoTrader I stopped overtrading or taking trades without an edge. I went from sideways to profitable just like that."</p>
           <p class="testimonial-name">— Niklas</p>
         </div>
       </div>
@@ -1773,8 +1804,7 @@
     <!-- ============ CLOSING ============ -->
     <section class="final-cta">
       <div class="wrap">
-        <h2 class="reveal">Plan your trade.<br>Trade your plan.</h2>
-        <div class="closing-line">trading made simpler</div>
+        <h2 class="reveal">Know your edge.</h2>
         <a href="https://cotrader3000.com/subscribe" class="cta-primary" style="margin-top: 32px;">Sign Up</a>
       </div>
     </section>
@@ -1871,17 +1901,23 @@
 
     // ─── ROW 1 · Live Plan card (R:R) ─────────────────────────────────
     (function initPlanLive() {
-      const state = { entry: 413, target: 440, stop: 405 };
-      const $entry  = document.getElementById('plan-entry-val');
-      const $target = document.getElementById('plan-target-val');
-      const $stop   = document.getElementById('plan-stop-val');
-      const $rr     = document.getElementById('plan-rr');
+      const state = { entry: 413, target: 440, stop: 405, size: 40, direction: 'long' };
+      const setups = ['Support bounce', 'Breakout', 'Earnings play', 'No setup'];
+      let setupIdx = 0;
+      const $entry     = document.getElementById('plan-entry-val');
+      const $target    = document.getElementById('plan-target-val');
+      const $stop      = document.getElementById('plan-stop-val');
+      const $size      = document.getElementById('plan-size-val');
+      const $rr        = document.getElementById('plan-rr');
+      const $direction = document.getElementById('plan-direction');
+      const $setup     = document.getElementById('plan-setup');
       if (!$entry) return;
       const fmt = n => '$' + n.toFixed(2);
       const render = () => {
         $entry.textContent  = fmt(state.entry);
         $target.textContent = fmt(state.target);
         $stop.textContent   = fmt(state.stop);
+        $size.textContent   = state.size;
         const risk   = state.entry - state.stop;
         const reward = state.target - state.entry;
         $rr.textContent = (risk > 0 && reward > 0) ? (reward / risk).toFixed(2) : '—';
@@ -1890,10 +1926,31 @@
         btn.addEventListener('click', () => {
           const field = btn.dataset.planAdjust;
           const delta = parseFloat(btn.dataset.delta);
-          state[field] = Math.max(1, +(state[field] + delta).toFixed(2));
+          const min = field === 'size' ? 5 : 1;
+          state[field] = Math.max(min, +(state[field] + delta).toFixed(2));
           render();
         });
       });
+      // Direction toggle -- click flips LONG/SHORT, demonstrating this is
+      // a real choice, not a fixed label.
+      if ($direction) {
+        $direction.addEventListener('click', () => {
+          state.direction = state.direction === 'long' ? 'short' : 'long';
+          $direction.textContent = state.direction === 'long' ? 'LONG' : 'SHORT';
+          $direction.classList.toggle('pill-long', state.direction === 'long');
+          $direction.classList.toggle('pill-short', state.direction === 'short');
+        });
+      }
+      // Setup tag cycles through a few presets plus an explicit "No setup"
+      // state -- shows planning detail is optional, not all-or-nothing.
+      if ($setup) {
+        $setup.addEventListener('click', () => {
+          setupIdx = (setupIdx + 1) % setups.length;
+          const val = setups[setupIdx];
+          $setup.textContent = val;
+          $setup.classList.toggle('is-empty', val === 'No setup');
+        });
+      }
       render();
     })();
 
