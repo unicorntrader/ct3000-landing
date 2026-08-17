@@ -179,10 +179,10 @@
     }
     #wing-fly.playing { animation: wingFlyAway 2s ease-out forwards; }
     @keyframes wingFlyAway {
-      0%   { opacity: 0; transform: translate(0, 0) scale(0.85) rotate(-6deg); }
-      12%  { opacity: 1; transform: translate(0, 0) scale(1) rotate(-4deg); }
-      25%  { opacity: 1; transform: translate(2px, -2px) scale(1) rotate(-2deg); }
-      100% { opacity: 0; transform: translate(70px, -90px) scale(1.05) rotate(8deg); }
+      0%   { opacity: 0;   transform: translate(0, 0) scale(0.25) rotate(-10deg); }
+      10%  { opacity: 1;   transform: translate(0, 0) scale(0.4) rotate(-8deg); }
+      30%  { opacity: 1;   transform: translate(6px, -10px) scale(0.55) rotate(-4deg); }
+      100% { opacity: 0;   transform: translate(100px, -120px) scale(1) rotate(10deg); }
     }
     @media (max-width: 899px) {
       #wing-fly { display: none; }
@@ -1902,8 +1902,11 @@
         const wordRect = word.getBoundingClientRect();
         const heroRect = hero.getBoundingClientRect();
         const imgW = img.offsetWidth || 90;
-        img.style.left = (wordRect.right - heroRect.left - imgW * 0.35) + 'px';
-        img.style.top = (wordRect.top - heroRect.top - imgW * 0.55) + 'px';
+        const imgH = img.offsetHeight || imgW;
+        const wordCenterX = wordRect.left + wordRect.width / 2 - heroRect.left;
+        const wordCenterY = wordRect.top + wordRect.height / 2 - heroRect.top;
+        img.style.left = (wordCenterX - imgW / 2) + 'px';
+        img.style.top = (wordCenterY - imgH / 2) + 'px';
       }
 
       function play() {
