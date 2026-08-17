@@ -21,6 +21,7 @@ changed in all 13 files by hand (or scripted) to stay in sync.
 | `--blue-600` | `#2563eb` (primary) |
 | `--blue-700` | `#1d4ed8` (hover) |
 | `--blue-800` | `#1e40af` |
+| `--blue-900` | `#1e3a5f` (muted navy, index.html premium panels) |
 
 ### Semantic
 | Token | Hex |
@@ -47,10 +48,11 @@ Extra accents (index.html tag dots, Journal → Tags): `--cyan-200 #a5f3fc` / `-
 
 ### Section backgrounds
 - Body sections alternate `var(--white)` / `var(--gray-50)`
-- "Premium" dark sections all key off `var(--ink)` and `var(--gray-700)` (the two darkest neutrals) rather than one-off hex:
-  - Footer (all 13 pages) and the testimonial card (index.html): `linear-gradient(135deg or 180deg, var(--ink) 0%, var(--gray-700) 100%)`
+- "Premium" dark sections key off `var(--ink)`, `var(--gray-700)`, and `var(--blue-900)` rather than one-off hex:
+  - Footer (all 13 pages): `linear-gradient(180deg, var(--ink) 0%, var(--gray-700) 100%)`
+  - Testimonial card (index.html): `linear-gradient(135deg, var(--ink) 0%, var(--blue-900) 100%)`
   - Philosophy: flat `var(--ink)`
-  - Mentorship-teaser: flat `var(--gray-700)` — deliberately different from Philosophy since the two sections sit back-to-back after the feature-tabs merge; identical `--ink` on both made them read as one block with no seam.
+  - Mentorship-teaser: flat `var(--blue-900)` — deliberately a hue change, not just a lightness step, from Philosophy since the two sections sit back-to-back after the feature-tabs merge; identical (or too-similar) darks on both made them read as one block with no seam.
 
 **Rule:** never introduce a fresh hex value for these dark panels (or anywhere else) — pick the closest real step in the palette above.
 
