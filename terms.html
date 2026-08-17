@@ -87,14 +87,14 @@
       .menu-toggle { display: flex; align-items: center; justify-content: center; }
     }
 
-    .doc-head { text-align: center; padding: 72px 0 40px; }
+    .doc-head { text-align: center; padding: 72px clamp(20px, 5vw, 48px) 40px; }
     .doc-head h1 {
       font-size: clamp(34px, 5vw, 50px); font-weight: 800; letter-spacing: -0.03em;
       color: var(--ink); margin-bottom: 12px;
     }
     .doc-head .meta { font-size: 13px; color: var(--gray-500); }
 
-    .doc-body { max-width: 680px; margin: 0 auto; padding: 0 0 96px; font-size: 16px; color: var(--gray-700); line-height: 1.75; }
+    .doc-body { max-width: 680px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px) 96px; font-size: 16px; color: var(--gray-700); line-height: 1.75; }
     .doc-body p { margin-bottom: 20px; }
     .doc-body h2 {
       font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink);
@@ -119,7 +119,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.12);
     }
     .footer-brand .brand { display: inline-flex; align-items: center; margin-bottom: 22px; opacity: 1; }
-    .footer-brand svg { height: 42px; width: auto; display: block; }
+    .footer-brand svg { height: clamp(28px, 5vw, 34px); width: auto; display: block; }
     .footer-brand svg path, .footer-brand svg circle, .footer-brand svg polygon { fill: var(--white); }
     .footer-brand p { font-size: 14px; color: var(--gray-300); line-height: 1.6; margin-bottom: 20px; max-width: 260px; }
     .footer-email { font-size: 14px; color: var(--blue-200); font-weight: 600; }
