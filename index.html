@@ -90,7 +90,7 @@
     a:hover { color: var(--blue-700); }
     button { cursor: pointer; font: inherit; border: 0; background: transparent; }
 
-    .wrap { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
 
     /* ============ HEADER ============ */
     .site-header {
@@ -103,13 +103,13 @@
     .site-header .wrap {
       display: flex; align-items: center; justify-content: space-between;
       max-width: none;
-      padding: 12px 28px;
+      padding: 14px clamp(22px, 6vw, 42px);
     }
     .brand {
       display: inline-flex; align-items: center;
       color: var(--ink);
     }
-    .brand svg { height: 23px; width: auto; display: block; }
+    .brand svg { height: 30px; width: auto; display: block; }
     .site-nav { display: flex; align-items: center; gap: 26px; }
     .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .site-nav a:not(.nav-cta):hover { color: var(--ink); }
@@ -118,7 +118,7 @@
       padding: 9px 18px; border-radius: 999px;
       border: 2px solid var(--blue-600);
       font-size: 14px; font-weight: 700;
-      transition: all 0.15s ease;
+      transition: all 0.6s ease;
     }
     .nav-cta:hover { background: transparent; color: var(--blue-600); border-color: var(--blue-600); transform: translateY(-1px); }
 
@@ -183,7 +183,7 @@
       position: absolute;
       top: 0; height: 100%; width: auto;
       left: -30%;
-      animation: heroFigureWalk 28s linear infinite;
+      animation: heroFigureWalk 19s linear infinite;
     }
     @keyframes heroFigureWalk {
       from { left: -30%; }
@@ -206,10 +206,10 @@
     .hero p.lead     { animation-delay: 0.25s; }
     .hero .cta-row   { animation-delay: 0.45s; }
     .hero h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.0;
+      font-size: clamp(38px, 9.5vw, 86px);
+      line-height: 0.88;
       font-weight: 800;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.02em;
       color: var(--ink);
       margin-bottom: 18px;
     }
@@ -266,8 +266,9 @@
     .feature-tabs { background: var(--gray-50); }
     .feature-tabs-head { text-align: center; margin-bottom: 88px; }
     .feature-tabs-head h2 {
-      font-size: clamp(30px, 4.5vw, 44px);
-      font-weight: 800; letter-spacing: -0.02em;
+      font-size: clamp(28px, 5.5vw, 52px);
+      line-height: 1.02;
+      font-weight: 800; letter-spacing: -0.03em;
       color: var(--ink);
     }
     .tab-row {
@@ -296,8 +297,8 @@
       gap: 64px; align-items: center; text-align: left;
     }
     .tab-panel-text h3 {
-      font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; color: var(--ink);
-      letter-spacing: -0.02em; line-height: 1.2;
+      font-size: clamp(28px, 4.6vw, 50px); font-weight: 800; color: var(--ink);
+      letter-spacing: -0.02em; line-height: 1.04;
       margin-bottom: 14px;
     }
     .tab-panel-text p {
@@ -346,17 +347,24 @@
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
        copy, and phone mockup fade/slide in a beat after each other. */
-    .reveal-row { opacity: 0; transform: translateY(10px); animation: revealRow 0.35s ease forwards; }
+    .reveal-row { opacity: 0; transform: translateY(9px); animation: revealRow 0.22s ease forwards; }
     .tab-panel.active h3.reveal-row { animation-delay: 0s; }
-    .tab-panel.active p.reveal-row { animation-delay: 0.09s; }
-    .tab-panel.active .phone.reveal-row { animation-delay: 0.18s; }
+    .tab-panel.active p.reveal-row { animation-delay: 0.08s; }
+    .tab-panel.active .phone.reveal-row { animation-delay: 0.16s; }
     @keyframes revealRow { to { opacity: 1; transform: translateY(0); } }
 
     /* ============ SECTION SHARED ============ */
-    section { padding: 96px 0; }
+    section { padding: clamp(56px, 9vw, 110px) 0; }
+    /* Scroll-triggered reveal for section headings/cards -- matches
+       Gather's measured system (IO threshold 0.25, 18px rise, .7s ease). */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
     .section-eyebrow {
       display: inline-block;
-      font-size: 12px; font-weight: 700;
+      font-size: clamp(12px, 1.5vw, 14px); font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--blue-600);
       margin-bottom: 14px;
@@ -1128,7 +1136,6 @@
       .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     }
     @media (max-width: 640px) {
-      section { padding: 64px 0; }
       /* Full-height + center (desktop pattern) left too much gap above
          the headline; full-height + top-align (previous fix) then sat
          too high with nothing pulling it down. Middle ground: center
@@ -1162,13 +1169,13 @@
     .site-footer .wrap { max-width: 1080px; }
     .footer-inner {
       display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 40px;
       padding-bottom: 44px;
       border-bottom: 1px solid rgba(255,255,255,0.12);
     }
     .footer-brand .brand { display: inline-flex; align-items: center; margin-bottom: 22px; opacity: 1; }
-    .footer-brand svg { height: 26px; width: auto; display: block; }
+    .footer-brand svg { height: 42px; width: auto; display: block; }
     .footer-brand svg path, .footer-brand svg circle, .footer-brand svg polygon { fill: var(--white); }
     .footer-brand p { font-size: 14px; color: var(--gray-300); line-height: 1.6; margin-bottom: 20px; max-width: 260px; }
     .footer-email { font-size: 14px; color: var(--blue-200); font-weight: 600; }
@@ -1255,7 +1262,7 @@
     <section class="feature-tabs" id="plans">
       <div class="wrap">
         <div class="feature-tabs-head">
-          <h2>Trading greatness, all in one place</h2>
+          <h2 class="reveal">Trading greatness, all in one place</h2>
         </div>
 
         <div class="tab-row" role="tablist">
@@ -1724,8 +1731,8 @@
     <section class="philosophy" id="philosophy">
       <div class="wrap">
         <span class="eyebrow">Why this exists</span>
-        <h2>What profitable traders do.</h2>
-        <div class="body">
+        <h2 class="reveal">What profitable traders do.</h2>
+        <div class="body reveal">
           <p>Know their edge. <strong>Plan the trade.</strong> Execute the plan. Review the results. Repeat.</p>
         </div>
         <div class="stamp">DO WHAT YOU SAY.</div>
@@ -1739,8 +1746,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg>
           Mentorship
         </span>
-        <h2>Level up with 1:1 mentorship.</h2>
-        <p>Weekly or bi-weekly coaching to build your process, master discipline, and trade like a professional.</p>
+        <h2 class="reveal">Level up with 1:1 mentorship.</h2>
+        <p class="reveal">Weekly or bi-weekly coaching to build your process, master discipline, and trade like a professional.</p>
         <a href="mentorship.html" class="cta-secondary">More on mentorship programs →</a>
       </div>
     </section>
@@ -1748,7 +1755,7 @@
     <!-- ============ TESTIMONIAL ============ -->
     <section class="testimonial">
       <div class="wrap">
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal">
           <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
           <p class="testimonial-quote">"Since I started using CoTrader 3000 I stopped overtrading and taking trades that had a high chance of losing me money. That changed my P&amp;L curve dramatically!"</p>
           <p class="testimonial-name">— Niklas</p>
@@ -1759,8 +1766,8 @@
     <!-- ============ FAQ TEASER ============ -->
     <section class="faq-teaser">
       <div class="wrap">
-        <h2>Still have questions?</h2>
-        <p>Pricing, setup, data, and mentorship — answered in plain English.</p>
+        <h2 class="reveal">Still have questions?</h2>
+        <p class="reveal">Pricing, setup, data, and mentorship — answered in plain English.</p>
         <a href="faq.html" class="cta-outline">Read the FAQ →</a>
       </div>
     </section>
@@ -1768,7 +1775,7 @@
     <!-- ============ CLOSING ============ -->
     <section class="final-cta">
       <div class="wrap">
-        <h2>Plan your trade.<br>Trade your plan.</h2>
+        <h2 class="reveal">Plan your trade.<br>Trade your plan.</h2>
         <div class="closing-line">trading made simpler</div>
         <a href="https://cotrader3000.com/subscribe" class="cta-primary" style="margin-top: 32px;">Sign Up</a>
       </div>
@@ -1848,6 +1855,20 @@
           btn.setAttribute('aria-expanded', 'false');
         });
       });
+    })();
+
+    // ─── Scroll-triggered reveal for section headings/cards ───────────
+    (function initScrollReveal() {
+      const els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+      els.forEach(el => observer.observe(el));
     })();
 
     // ─── ROW 1 · Live Plan card (R:R) ─────────────────────────────────
