@@ -183,11 +183,19 @@
       position: absolute;
       top: 0; height: 100%; width: auto;
       left: -30%;
-      animation: heroFigureWalk 19s linear infinite;
+      /* Two animations on different properties so they run independently:
+         the slow one crosses the hero, the fast one is a step-cadence
+         bob -- without it, a static image just glides in a straight
+         line and doesn't read as walking at all. */
+      animation: heroFigureWalk 19s linear infinite, heroFigureBob 0.6s ease-in-out infinite;
     }
     @keyframes heroFigureWalk {
       from { left: -30%; }
       to   { left: 130%; }
+    }
+    @keyframes heroFigureBob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-figure { animation: none; left: 8%; }
@@ -1094,7 +1102,7 @@
     }
 
     /* ============ FAQ TEASER ============ */
-    .faq-teaser { background: var(--white); text-align: center; }
+    .faq-teaser { background: var(--gray-50); text-align: center; }
     .faq-teaser .wrap { max-width: 480px; }
     .faq-teaser h2 {
       font-size: clamp(24px, 3.2vw, 32px);
@@ -1107,27 +1115,43 @@
     }
 
     /* ============ FINAL CTA ============ */
+    /* The friend-template reference makes its closing section the one
+       loud, bold-brand-color moment on the page (the rest is neutral) --
+       ours was flat gray-50, the quietest possible ending for the most
+       important conversion moment. Solid blue-600 instead, matching that
+       pattern with our own palette. */
     .final-cta {
       padding: 120px 0;
       text-align: center;
-      background: var(--gray-50);
+      background: var(--blue-600);
+      color: white;
     }
     .final-cta h2 {
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 800; letter-spacing: -0.03em;
       line-height: 1.05;
+      color: white;
       margin-bottom: 18px;
     }
     .final-cta p {
-      font-size: 17px; color: var(--gray-600);
+      font-size: 17px; color: var(--blue-50);
       max-width: 540px; margin: 0 auto 32px;
       line-height: 1.6;
     }
-    /* On hover the button hollows out to an outline instead of just
-       darkening -- same transition Gather uses on their closing CTA. */
+    /* White inverts to a hollow outline on hover -- same interaction
+       language as the rest of the site's buttons, just flipped since
+       the section itself is now the brand color. */
+    .final-cta .cta-primary {
+      background: white; color: var(--blue-600); border-color: white;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .final-cta .cta-primary:hover {
+      background: transparent; color: white; border-color: white;
+      box-shadow: none;
+    }
     .closing-line {
       margin-top: 28px;
-      font-size: 19px; color: var(--gray-600);
+      font-size: 19px; color: var(--blue-50);
       letter-spacing: 0.03em;
     }
 
