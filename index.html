@@ -109,7 +109,7 @@
       display: inline-flex; align-items: center;
       color: var(--ink);
     }
-    .brand svg { height: 30px; width: auto; display: block; }
+    .brand svg { height: clamp(24px, 5vw, 30px); width: auto; display: block; }
     .site-nav { display: flex; align-items: center; gap: 26px; }
     .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .site-nav a:not(.nav-cta):hover { color: var(--ink); }
@@ -186,8 +186,15 @@
       /* Two animations on different properties so they run independently:
          the slow one crosses the hero, the fast one is a step-cadence
          bob -- without it, a static image just glides in a straight
-         line and doesn't read as walking at all. */
-      animation: heroFigureWalk 19s linear infinite, heroFigureBob 0.6s ease-in-out infinite;
+         line and doesn't read as walking at all. Negative delay on the
+         travel animation starts it ~30% into the loop -- without it the
+         figure starts fully off-screen and you wait several seconds
+         before anything is visible on page load. */
+      animation-name: heroFigureWalk, heroFigureBob;
+      animation-duration: 19s, 0.46s;
+      animation-timing-function: linear, ease-in-out;
+      animation-delay: -6s, 0s;
+      animation-iteration-count: infinite, infinite;
     }
     @keyframes heroFigureWalk {
       from { left: -30%; }
@@ -195,7 +202,7 @@
     }
     @keyframes heroFigureBob {
       0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-4px); }
+      50%      { transform: translateY(-2.5px); }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-figure { animation: none; left: 8%; }
