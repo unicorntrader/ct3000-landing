@@ -52,8 +52,8 @@
     .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .site-nav a:not(.nav-cta):hover { color: var(--ink); }
     .site-nav a.current { color: var(--blue-600); }
-    .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; font-size: 14px; font-weight: 700; line-height: 1; }
-    .nav-cta:hover { background: var(--blue-700); color: white; }
+    .nav-cta { background: var(--blue-600); color: white; padding: 9px 18px; border-radius: 999px; border: 2px solid var(--blue-600); font-size: 14px; font-weight: 700; line-height: 1; transition: all 0.6s ease; }
+    .nav-cta:hover { background: transparent; color: var(--blue-600); border-color: var(--blue-600); transform: translateY(-1px); }
     /* Mobile menu (hamburger) -- desktop nav is hidden entirely below
        720px in favour of this, so the header stays down to logo +
        toggle instead of squeezing nav items. */
