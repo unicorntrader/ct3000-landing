@@ -29,6 +29,7 @@
       --blue-50:  #eff6ff;
       --blue-200: #bfdbfe;
       --blue-800: #1e40af;
+      --blue-900: #1e3a5f;
 
       --green-50:  #f0fdf4;
       --green-100: #dcfce7;
@@ -311,7 +312,7 @@
       .tab-btn span { font-size: 12px; }
       .tab-row-hint {
         display: flex; align-items: center; justify-content: center; gap: 6px;
-        font-size: 12px; font-weight: 600; color: var(--gray-500);
+        font-size: 12px; font-weight: 600; color: var(--blue-600);
         margin: 0 0 32px;
       }
       .tab-row-hint svg { animation: hintNudge 1.4s ease-in-out infinite; }
@@ -982,11 +983,12 @@
 
     /* ============ MENTORSHIP TEASER ============ */
     .mentorship-teaser {
-      /* Philosophy (above) is also --ink -- now that they're adjacent,
-         an identical flat background made the two read as one giant
-         block with no seam. gray-700 is a real palette step, one shade
-         up from ink, giving a visible boundary. */
-      background: var(--gray-700);
+      /* Philosophy (above) is also --ink -- gray-700 was one step lighter
+         but still read as "black again" next to it. blue-900 is the same
+         muted navy the testimonial card already used, now a real token
+         instead of an orphan hex -- a genuine hue switch, not just a
+         lightness step. */
+      background: var(--blue-900);
       color: white;
       text-align: center;
     }
@@ -1034,7 +1036,7 @@
     .testimonial { background: var(--white); text-align: center; }
     .testimonial-card {
       max-width: 500px; margin: 0 auto;
-      background: linear-gradient(135deg, var(--ink) 0%, var(--gray-700) 100%);
+      background: linear-gradient(135deg, var(--ink) 0%, var(--blue-900) 100%);
       border: 2px solid var(--blue-600);
       border-radius: 20px;
       padding: 56px 40px;
