@@ -158,6 +158,7 @@
 
     /* ============ HERO ============ */
     .hero {
+      position: relative;
       min-height: calc(100vh - 70px);
       display: flex;
       align-items: center;
@@ -167,6 +168,30 @@
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
     .hero + section { padding-top: 48px; }
+    /* Trader figure drifting along the bottom edge -- same decorative
+       beat as Gather's walking-tourist strip. Track clips to a thin
+       band so the loop only ever shows the figure crossing, never the
+       transparent padding around it. */
+    .hero-figure-track {
+      position: absolute;
+      left: 0; right: 0; bottom: 28px;
+      height: 90px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-figure {
+      position: absolute;
+      top: 0; height: 100%; width: auto;
+      left: -30%;
+      animation: heroFigureWalk 28s linear infinite;
+    }
+    @keyframes heroFigureWalk {
+      from { left: -30%; }
+      to   { left: 130%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-figure { animation: none; left: 8%; }
+    }
     /* Staggered load-in: headline, then subhead, then buttons -- one
        after another instead of the whole hero appearing at once. */
     @keyframes heroReveal {
@@ -1126,6 +1151,7 @@
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .philosophy { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
+      .hero-figure-track { bottom: 14px; height: 56px; }
     }
 
     /* ============ FOOTER ============ */
@@ -1220,13 +1246,16 @@
           <a href="#plans" class="cta-outline">See how it works</a>
         </div>
       </div>
+      <div class="hero-figure-track" aria-hidden="true">
+        <img src="trader-illustration.png" alt="" class="hero-figure">
+      </div>
     </section>
 
     <!-- ============ FEATURE TABS ============ -->
     <section class="feature-tabs" id="plans">
       <div class="wrap">
         <div class="feature-tabs-head">
-          <h2>Everything you need, in one place</h2>
+          <h2>Trading greatness, all in one place</h2>
         </div>
 
         <div class="tab-row" role="tablist">
