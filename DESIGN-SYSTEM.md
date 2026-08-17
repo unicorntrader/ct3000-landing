@@ -29,7 +29,7 @@ changed in all 13 files by hand (or scripted) to stay in sync.
 | `--red-50/200/500/600/700` | `#fef2f2` `#fecaca` `#ef4444` `#dc2626` `#b91c1c` |
 | `--amber-50/100/200/500/700/800` | `#fffbeb` `#fef3c7` `#fde68a` `#f59e0b` `#b45309` `#92400e` |
 
-Decorative-only accents (index.html "idea" cards): `--cyan-200 #a5f3fc`, `--violet-200 #ddd6fe`, `--rose-200 #fecdd3`, `--emerald-200 #a7f3d0`.
+Extra accents (index.html tag dots, Journal → Tags): `--cyan-200 #a5f3fc` / `--cyan-500 #06b6d4`, `--violet-200 #ddd6fe` / `--violet-500 #8b5cf6`, `--rose-200 #fecdd3` / `--rose-500 #f43f5e`, `--emerald-200 #a7f3d0` (emerald dots reuse `--green-500`, no separate emerald-500 defined).
 
 ### Neutrals
 | Token | Hex |
@@ -47,7 +47,12 @@ Decorative-only accents (index.html "idea" cards): `--cyan-200 #a5f3fc`, `--viol
 
 ### Section backgrounds
 - Body sections alternate `var(--white)` / `var(--gray-50)`
-- "Premium" dark sections (philosophy, mentorship-teaser, testimonial, footer): `linear-gradient(180deg, var(--ink) 0%, #17263d 100%)`
+- "Premium" dark sections all key off `var(--ink)` and `var(--gray-700)` (the two darkest neutrals) rather than one-off hex:
+  - Footer (all 13 pages) and the testimonial card (index.html): `linear-gradient(135deg or 180deg, var(--ink) 0%, var(--gray-700) 100%)`
+  - Philosophy: flat `var(--ink)`
+  - Mentorship-teaser: flat `var(--gray-700)` — deliberately different from Philosophy since the two sections sit back-to-back after the feature-tabs merge; identical `--ink` on both made them read as one block with no seam.
+
+**Rule:** never introduce a fresh hex value for these dark panels (or anywhere else) — pick the closest real step in the palette above.
 
 ---
 
