@@ -8,7 +8,17 @@ Each of the 13 HTML files is fully self-contained with its own inline
 `<style>` block and duplicated `:root` variables, header, and footer
 markup. This document is the closest thing to a single source of
 truth — if you change a value, it needs to be changed in all 13 files
-by hand (or scripted) to stay in sync. This is also *why* drift bugs
+by hand (or scripted) to stay in sync.
+
+**Header/footer markup specifically is scripted:** `sync-shared.py`
+holds the canonical header/footer HTML as one template and rewrites all
+13 pages from it. Run `python3 sync-shared.py` after changing the
+header/footer template inside that file, or `python3 sync-shared.py
+--check` to verify nothing has drifted before a commit. It's a local
+script only — GitHub Pages still serves the committed HTML directly, no
+build step in the actual deploy pipeline.
+
+This is also *why* drift bugs
 happen (see "Known past bugs" at the end) — there's no shared header
 component, just 13 copies of the same markup.
 
