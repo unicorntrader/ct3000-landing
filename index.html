@@ -244,6 +244,7 @@
     .tab-row {
       display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
       margin-bottom: 88px;
+      scroll-margin-top: 80px;
     }
     .tab-btn {
       display: flex; flex-direction: column; align-items: center; gap: 0;
@@ -258,48 +259,53 @@
     .tab-btn.active { border-color: var(--blue-600); }
     .tab-btn.active span { color: var(--blue-600); }
 
-    .tab-panels { max-width: 1100px; margin: 0 auto; min-height: 260px; }
+    .tab-panels { max-width: 1200px; margin: 0 auto; min-height: 260px; }
     .tab-panel { display: none; }
     .tab-panel.active {
-      display: grid; grid-template-columns: 0.9fr 1.4fr;
-      gap: 96px; align-items: start; text-align: left;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; text-align: left;
     }
-    .tab-panel h3 {
-      font-size: clamp(32px, 4.5vw, 46px); font-weight: 800; color: var(--ink);
+    .tab-panel-text h3 {
+      font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; color: var(--ink);
       letter-spacing: -0.02em; line-height: 1.2;
+      margin-bottom: 14px;
     }
-    .tab-panel > p {
+    .tab-panel-text p {
       font-size: 17px; color: var(--gray-600);
-      line-height: 1.6; margin-bottom: 32px;
-    }
-    .tab-panel ul { list-style: none; padding: 0; margin: 0; }
-    .tab-panel li {
-      font-size: 18px; font-weight: 700; color: var(--ink);
-      padding: 32px 0; border-top: 1px solid var(--gray-200);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .tab-panel li::before {
-      content: '✓'; flex-shrink: 0;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--blue-600); color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700;
+      line-height: 1.6;
     }
     @media (max-width: 800px) {
-      .tab-panel.active { grid-template-columns: 1fr; gap: 20px; }
+      .tab-panel.active { grid-template-columns: 1fr; gap: 36px; }
       .tab-btn { width: 140px; }
       .tab-btn img { height: 80px; }
     }
+    /* Mobile: a wrapping grid of 5 tap targets pushed the result panel
+       several rows down, so tapping a tab didn't visibly change anything
+       on screen. A single horizontally-scrolling row (Gather's pattern)
+       keeps the strip short and the panel right underneath it. */
+    @media (max-width: 640px) {
+      .tab-row {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        margin: 0 -24px 40px;
+        padding: 4px 24px 8px;
+      }
+      .tab-row::-webkit-scrollbar { display: none; }
+      .tab-row { scrollbar-width: none; }
+      .tab-btn { flex: 0 0 auto; width: 112px; padding: 12px; scroll-snap-align: start; }
+      .tab-btn img { height: 60px; margin-bottom: 8px; }
+      .tab-btn span { font-size: 12px; }
+    }
 
-    /* Staggered reveal -- each row fades/slides in a beat after the last,
-       instead of the whole panel appearing at once. Delays are keyed off
-       DOM position within the active panel (h3 -> p -> li -> li -> li). */
+    /* Staggered reveal -- eyebrow appears immediately, then headline,
+       copy, and phone mockup fade/slide in a beat after each other. */
     .reveal-row { opacity: 0; transform: translateY(10px); animation: revealRow 0.35s ease forwards; }
     .tab-panel.active h3.reveal-row { animation-delay: 0s; }
     .tab-panel.active p.reveal-row { animation-delay: 0.09s; }
-    .tab-panel.active li.reveal-row:nth-child(1) { animation-delay: 0.18s; }
-    .tab-panel.active li.reveal-row:nth-child(2) { animation-delay: 0.25s; }
-    .tab-panel.active li.reveal-row:nth-child(3) { animation-delay: 0.32s; }
+    .tab-panel.active .phone.reveal-row { animation-delay: 0.18s; }
     @keyframes revealRow { to { opacity: 1; transform: translateY(0); } }
 
     /* ============ SECTION SHARED ============ */
@@ -875,61 +881,7 @@
       color: var(--gray-700);
     }
 
-    /* ============ FEATURES (Deep dive) ============ */
-    .features {
-      background: var(--gray-50);
-    }
-    .feature-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      margin-bottom: 96px;
-    }
-    .feature-row:last-child { margin-bottom: 0; }
-    .feature-row.reverse > :first-child { order: 2; }
-    .feature-row.reverse > :last-child { order: 1; }
-    /* Scroll-triggered reveal, text then phone -- same in-view pattern
-       as the How It Works cards, added by initScrollReveal() below. */
-    .feature-row[data-reveal] .feature-text,
-    .feature-row[data-reveal] .phone {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .feature-row[data-reveal] .feature-text { transition-delay: 0s; }
-    .feature-row[data-reveal] .phone { transition-delay: 0.15s; }
-    .feature-row[data-reveal].in-view .feature-text,
-    .feature-row[data-reveal].in-view .phone {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .feature-text h3 {
-      font-size: clamp(24px, 3vw, 34px);
-      font-weight: 800; letter-spacing: -0.025em;
-      line-height: 1.15; color: var(--blue-600);
-      margin-bottom: 14px;
-    }
-    .feature-text p {
-      font-size: 16px; color: var(--gray-600);
-      line-height: 1.65;
-      margin-bottom: 14px;
-    }
-    .feature-text ul {
-      list-style: none;
-      margin-top: 16px;
-    }
-    .feature-text li {
-      padding: 8px 0;
-      font-size: 15px; color: var(--gray-700);
-      display: flex; align-items: flex-start; gap: 10px;
-    }
-    .feature-text li::before {
-      content: '✓'; color: var(--green-600);
-      font-weight: 700; flex-shrink: 0;
-    }
-
-    /* Phone visual — used in features */
+    /* Phone visual — used in the feature tabs */
     .phone {
       background: var(--white);
       border: 1px solid var(--gray-200);
@@ -1143,9 +1095,6 @@
     /* ============ RESPONSIVE ============ */
     @media (max-width: 960px) {
       .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .feature-row { grid-template-columns: 1fr; gap: 36px; margin-bottom: 72px; }
-      .feature-row.reverse > :first-child { order: 0; }
-      .feature-row.reverse > :last-child { order: 0; }
     }
     @media (max-width: 640px) {
       section { padding: 64px 0; }
@@ -1268,7 +1217,7 @@
     </section>
 
     <!-- ============ FEATURE TABS ============ -->
-    <section class="feature-tabs">
+    <section class="feature-tabs" id="plans">
       <div class="wrap">
         <div class="feature-tabs-head">
           <h2>Everything you need, in one place</h2>
@@ -1297,76 +1246,14 @@
           </button>
         </div>
 
-        <div class="tab-panels">
+          <div class="tab-panels">
           <div class="tab-panel active" data-panel="plans">
-            <h3 class="reveal-row">Plan the trade, if you want to.</h3>
             <div class="tab-panel-text">
-              <p class="reveal-row">Entry, stop, target, size — there when you want structure. R:R computes as you tap.</p>
-              <ul>
-                <li class="reveal-row">Plan trades when you want to</li>
-                <li class="reveal-row">R:R computes live as you adjust</li>
-                <li class="reveal-row">One card, one hypothesis</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-panel" data-panel="auto-sync">
-            <h3 class="reveal-row">Every fill, pulled in.</h3>
-            <div class="tab-panel-text">
-              <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste.</p>
-              <ul>
-                <li class="reveal-row">Connect once, IBKR only</li>
-                <li class="reveal-row">No CSVs, no copy-paste</li>
-                <li class="reveal-row">Fills sync automatically</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-panel" data-panel="journal">
-            <h3 class="reveal-row">Taken. Missed. Tagged.</h3>
-            <div class="tab-panel-text">
-              <p class="reveal-row">Every trade and every miss, filed and findable — a searchable index of your decisions.</p>
-              <ul>
-                <li class="reveal-row">Every trade, journaled</li>
-                <li class="reveal-row">Missed trades tracked too</li>
-                <li class="reveal-row">Searchable by tag</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-panel" data-panel="weekly-review">
-            <h3 class="reveal-row">How did the week go?</h3>
-            <div class="tab-panel-text">
-              <p class="reveal-row">Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual.</p>
-              <ul>
-                <li class="reveal-row">Net P&amp;L and win rate</li>
-                <li class="reveal-row">One screen per week</li>
-                <li class="reveal-row">2-minute retrospective ritual</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-panel" data-panel="insights">
-            <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
-            <div class="tab-panel-text">
-              <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour — firing only when the data shows something real.</p>
-              <ul>
-                <li class="reveal-row">12 deterministic rules</li>
-                <li class="reveal-row">Fires only on real patterns</li>
-                <li class="reveal-row">No generic advice</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ROW 1 · PLANS ============ -->
-    <section class="features" id="plans">
-      <div class="wrap">
-        <div class="feature-row" data-reveal>
-          <div class="feature-text">
             <span class="section-eyebrow">Plans</span>
-            <h3>Plan the trade, if you want to.</h3>
-            <p>Entry, stop, target, size — there when you want structure. R:R computes as you tap. Try the numbers.</p>
-          </div>
-          <div class="phone">
+            <h3 class="reveal-row">Plan the trade, if you want to.</h3>
+            <p class="reveal-row">Entry, stop, target, size — there when you want structure. R:R computes as you tap. Try the numbers.</p>
+            </div>
+          <div class="phone reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1418,20 +1305,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ROW 2 · AUTO-SYNC ============ -->
-    <section class="features" id="auto-sync">
-      <div class="wrap">
-        <div class="feature-row reverse" data-reveal>
-          <div class="feature-text">
-            <span class="section-eyebrow">Auto-sync</span>
-            <h3>Every fill, pulled in.</h3>
-            <p>Connect once. Every trade flows in — automatic. No CSVs. No copy-paste. Try the demo.</p>
           </div>
-          <div class="phone">
+          <div class="tab-panel" data-panel="auto-sync">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Auto-sync</span>
+            <h3 class="reveal-row">Every fill, pulled in.</h3>
+            <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste. Try the demo.</p>
+            </div>
+          <div class="phone reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1460,20 +1341,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ROW 3 · JOURNAL ============ -->
-    <section class="features" id="journal">
-      <div class="wrap">
-        <div class="feature-row" data-reveal>
-          <div class="feature-text">
-            <span class="section-eyebrow">Journal</span>
-            <h3>Taken. Missed. Tagged.</h3>
-            <p>Every trade and every miss, filed and findable. Your journal becomes a searchable index of your decisions.</p>
           </div>
-          <div class="phone">
+          <div class="tab-panel" data-panel="journal">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Journal</span>
+            <h3 class="reveal-row">Taken. Missed. Tagged.</h3>
+            <p class="reveal-row">Every trade and every miss, filed and findable. Your journal becomes a searchable index of your decisions.</p>
+            </div>
+          <div class="phone reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1690,32 +1565,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PHILOSOPHY (mid-page break) ============ -->
-    <section class="philosophy" id="philosophy">
-      <div class="wrap">
-        <span class="eyebrow">Why this exists</span>
-        <h2>What profitable traders do.</h2>
-        <div class="body">
-          <p>Know their edge. <strong>Plan the trade.</strong> Execute the plan. Review the results. Repeat.</p>
-        </div>
-        <div class="stamp">DO WHAT YOU SAY.</div>
-      </div>
-    </section>
-
-    <!-- ============ ROW 4 · WEEKLY REVIEW ============ -->
-    <section class="features" id="weekly-review">
-      <div class="wrap">
-        <div class="feature-row reverse" data-reveal>
-          <div class="feature-text">
-            <span class="section-eyebrow">Weekly review</span>
-            <h3>How did the week go?</h3>
-            <p>Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual. Cycle through the weeks to spot patterns and drift.</p>
           </div>
-          <div class="phone">
+          <div class="tab-panel" data-panel="weekly-review">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Weekly review</span>
+            <h3 class="reveal-row">How did the week go?</h3>
+            <p class="reveal-row">Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual. Cycle through the weeks to spot patterns and drift.</p>
+            </div>
+          <div class="phone reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1746,20 +1603,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ROW 5 · INSIGHTS ============ -->
-    <section class="features" id="insights">
-      <div class="wrap">
-        <div class="feature-row" data-reveal>
-          <div class="feature-text">
-            <span class="section-eyebrow">Callouts</span>
-            <h3>Tap to see what's working. Tap to see what's not.</h3>
-            <p>Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
           </div>
-          <div class="phone">
+          <div class="tab-panel" data-panel="insights">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Callouts</span>
+            <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
+            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
+            </div>
+          <div class="phone reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1826,7 +1677,19 @@
               </div>
             </div>
           </div>
+          </div>
+          </div>
+      </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+      <div class="wrap">
+        <span class="eyebrow">Why this exists</span>
+        <h2>What profitable traders do.</h2>
+        <div class="body">
+          <p>Know their edge. <strong>Plan the trade.</strong> Execute the plan. Review the results. Repeat.</p>
         </div>
+        <div class="stamp">DO WHAT YOU SAY.</div>
       </div>
     </section>
 
@@ -1946,20 +1809,6 @@
           btn.setAttribute('aria-expanded', 'false');
         });
       });
-    })();
-
-    // ─── Scroll-triggered staggered reveal — How it works cards + feature rows
-    (function initScrollReveal() {
-      const cards = document.querySelectorAll('.feature-row[data-reveal]');
-      if (!cards.length) return;
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('in-view');
-          obs.unobserve(entry.target);
-        });
-      }, { threshold: 0.3 });
-      cards.forEach(card => observer.observe(card));
     })();
 
     // ─── ROW 1 · Live Plan card (R:R) ─────────────────────────────────
@@ -2174,8 +2023,18 @@
         });
       }
 
+      const tabRowEl = document.querySelector('.tab-row');
       tabs.forEach(tab => {
-        tab.addEventListener('click', () => activate(tab.dataset.tab));
+        tab.addEventListener('click', () => {
+          activate(tab.dataset.tab);
+          // A tap could leave the (just-changed) result below the fold on
+          // mobile -- scroll the tab row to just under the sticky header
+          // so the switch is visible, and the tabs stay in view as context
+          // instead of scrolling straight to the panel.
+          if (window.innerWidth <= 640 && tabRowEl) {
+            tabRowEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
       });
     })();
 
