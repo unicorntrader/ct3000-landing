@@ -168,45 +168,6 @@
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
     .hero + section { padding-top: 48px; }
-    /* Trader figure drifting along the bottom edge -- same decorative
-       beat as Gather's walking-tourist strip. Track clips to a thin
-       band so the loop only ever shows the figure crossing, never the
-       transparent padding around it. */
-    .hero-figure-track {
-      position: absolute;
-      left: 0; right: 0; bottom: 28px;
-      height: 90px;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .hero-figure {
-      position: absolute;
-      top: 0; height: 100%; width: auto;
-      left: -30%;
-      /* Two animations on different properties so they run independently:
-         the slow one crosses the hero, the fast one is a step-cadence
-         bob -- without it, a static image just glides in a straight
-         line and doesn't read as walking at all. Negative delay on the
-         travel animation starts it ~30% into the loop -- without it the
-         figure starts fully off-screen and you wait several seconds
-         before anything is visible on page load. */
-      animation-name: heroFigureWalk, heroFigureBob;
-      animation-duration: 19s, 0.46s;
-      animation-timing-function: linear, ease-in-out;
-      animation-delay: -6s, 0s;
-      animation-iteration-count: infinite, infinite;
-    }
-    @keyframes heroFigureWalk {
-      from { left: -30%; }
-      to   { left: 130%; }
-    }
-    @keyframes heroFigureBob {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-2.5px); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-figure { animation: none; left: 8%; }
-    }
     /* Staggered load-in: headline, then subhead, then buttons -- one
        after another instead of the whole hero appearing at once. */
     @keyframes heroReveal {
@@ -1189,7 +1150,6 @@
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .philosophy { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
-      .hero-figure-track { bottom: 14px; height: 56px; }
     }
 
     /* ============ FOOTER ============ */
@@ -1283,9 +1243,6 @@
           <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
           <a href="#plans" class="cta-outline">See how it works</a>
         </div>
-      </div>
-      <div class="hero-figure-track" aria-hidden="true">
-        <img src="trader-illustration.png" alt="" class="hero-figure">
       </div>
     </section>
 
