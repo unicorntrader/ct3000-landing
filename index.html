@@ -982,7 +982,11 @@
 
     /* ============ MENTORSHIP TEASER ============ */
     .mentorship-teaser {
-      background: var(--ink);
+      /* Philosophy (above) is also --ink -- now that they're adjacent,
+         an identical flat background made the two read as one giant
+         block with no seam. Reusing the testimonial card's navy gives
+         a visible boundary without introducing a new color. */
+      background: #1e3a5f;
       color: white;
       text-align: center;
     }
