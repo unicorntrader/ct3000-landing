@@ -668,31 +668,19 @@
       background: var(--green-50); color: var(--green-700);
     }
     #sync-container { padding: 14px; }
-    .sync-cta {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--blue-600); color: white;
-      border-radius: 8px;
-      font-weight: 600; font-size: 14px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all 0.2s;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.15);
+    .sync-loading {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 24px 0;
+      font-size: 13px; font-weight: 600; color: var(--gray-500);
     }
-    .sync-cta:hover { background: var(--blue-700); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transform: translateY(-1px); }
-    .sync-cta:disabled { background: var(--gray-200); color: var(--gray-500); cursor: default; }
-    .sync-cta .spinner {
+    .sync-loading .spinner {
       width: 14px; height: 14px;
-      border: 2px solid rgba(255,255,255,0.35);
-      border-top-color: white;
+      border: 2px solid var(--gray-200);
+      border-top-color: var(--blue-600);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .sync-empty {
-      text-align: center; padding: 16px 0;
-      font-size: 12px; color: var(--gray-400);
-    }
     .sync-reset {
       display: block; margin-top: 10px; text-align: center;
       font-size: 11px; color: var(--blue-600);
@@ -1096,16 +1084,22 @@
     }
 
     /* ============ FAQ TEASER ============ */
-    .faq-teaser { background: var(--gray-50); text-align: center; }
+    .faq-teaser { background: var(--ink); text-align: center; }
     .faq-teaser .wrap { max-width: 480px; }
     .faq-teaser h2 {
       font-size: clamp(24px, 3.2vw, 32px);
       font-weight: 800; letter-spacing: -0.02em;
-      color: var(--ink); margin-bottom: 10px;
+      color: white; margin-bottom: 10px;
     }
     .faq-teaser p {
-      font-size: 15px; color: var(--gray-600);
+      font-size: 15px; color: var(--blue-50);
       line-height: 1.6; margin-bottom: 22px;
+    }
+    .faq-teaser .cta-outline {
+      color: white; border-color: rgba(255,255,255,0.3);
+    }
+    .faq-teaser .cta-outline:hover {
+      background: white; color: var(--ink); border-color: white;
     }
 
     /* ============ FINAL CTA ============ */
@@ -1391,7 +1385,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Auto-sync</span>
             <h3 class="reveal-row">Every fill, pulled in.</h3>
-            <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste. Try the demo.</p>
+            <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1414,10 +1408,9 @@
                   <span id="sync-status" class="sync-status">Not synced</span>
                 </div>
                 <div id="sync-container">
-                  <button class="sync-cta" id="sync-cta"><span id="sync-cta-text">Sync now</span></button>
-                  <div class="sync-empty" id="sync-empty">No fills yet — tap Sync to pull.</div>
+                  <div class="sync-loading" id="sync-loading"><span class="spinner"></span> Connecting to broker…</div>
                   <div id="sync-fills"></div>
-                  <button class="sync-reset" id="sync-reset" style="display:none;">Run again</button>
+                  <button class="sync-reset" id="sync-reset" style="display:none;">Sync again</button>
                 </div>
               </div>
             </div>
@@ -1961,14 +1954,18 @@
     })();
 
     // ─── ROW 2 · Sync demo ────────────────────────────────────────────
+    // Trades are pulled automatically -- there's no button to click in the
+    // real product, so the demo shouldn't have one either. First time the
+    // tab is opened it plays the connect-then-stream-in animation once (to
+    // show *how* the sync works); every time after that it just shows the
+    // already-synced state immediately, same as re-opening a screen that's
+    // already loaded would in the real app.
     (function initSyncDemo() {
-      const $cta    = document.getElementById('sync-cta');
-      const $ctaTxt = document.getElementById('sync-cta-text');
-      const $empty  = document.getElementById('sync-empty');
-      const $fills  = document.getElementById('sync-fills');
-      const $reset  = document.getElementById('sync-reset');
-      const $status = document.getElementById('sync-status');
-      if (!$cta) return;
+      const $loading = document.getElementById('sync-loading');
+      const $fills   = document.getElementById('sync-fills');
+      const $reset   = document.getElementById('sync-reset');
+      const $status  = document.getElementById('sync-status');
+      if (!$loading) return;
       const fills = [
         { sym: 'AAPL', qty: 100, pnl: '+$200' },
         { sym: 'NVDA', qty: 50,  pnl: '+$150' },
@@ -1979,50 +1976,50 @@
         $status.textContent = text;
         $status.className = 'sync-status' + (mode ? ' ' + mode : '');
       };
-      const reset = () => {
+      const renderRow = (f) => {
+        const row = document.createElement('div');
+        row.className = 'pos-row fade-in';
+        row.innerHTML =
+          '<div class="pos-meta">' +
+            '<span class="sym">' + f.sym + '</span>' +
+            '<div class="sub">Long · <span data-mask>' + f.qty + ' shares</span></div>' +
+          '</div>' +
+          '<div class="pnl pnl-pos" data-mask>' + f.pnl + '</div>';
+        $fills.appendChild(row);
+        if (window.__ct3000_applyPrivacy) {
+          const phone = row.closest('.phone');
+          if (phone && phone.classList.contains('privacy-on')) window.__ct3000_applyPrivacy(phone);
+        }
+      };
+      const showSynced = () => {
+        $loading.style.display = 'none';
         $fills.innerHTML = '';
-        $empty.style.display = 'block';
-        $reset.style.display = 'none';
-        $cta.style.display = 'inline-flex';
-        $cta.disabled = false;
-        $ctaTxt.textContent = 'Sync now';
-        setStatus('Not synced', '');
+        fills.forEach(renderRow);
+        setStatus('● Synced', 'synced');
+        $reset.style.display = 'block';
       };
       const run = () => {
         if (running) return;
         running = true;
-        $empty.style.display = 'none';
         $fills.innerHTML = '';
-        $cta.disabled = true;
-        $ctaTxt.innerHTML = '<span class="spinner"></span> Syncing…';
+        $reset.style.display = 'none';
+        $loading.style.display = 'flex';
+        $loading.innerHTML = '<span class="spinner"></span> Connecting to broker…';
         setStatus('Syncing…', 'syncing');
-        fills.forEach((f, i) => {
-          setTimeout(() => {
-            const row = document.createElement('div');
-            row.className = 'pos-row fade-in';
-            row.innerHTML =
-              '<div class="pos-meta">' +
-                '<span class="sym">' + f.sym + '</span>' +
-                '<div class="sub">Long · <span data-mask>' + f.qty + ' shares</span></div>' +
-              '</div>' +
-              '<div class="pnl pnl-pos" data-mask>' + f.pnl + '</div>';
-            $fills.appendChild(row);
-            // If privacy is on right now, mask the new row immediately
-            if (window.__ct3000_applyPrivacy) {
-              const phone = row.closest('.phone');
-              if (phone && phone.classList.contains('privacy-on')) window.__ct3000_applyPrivacy(phone);
-            }
-          }, 450 * (i + 1));
-        });
         setTimeout(() => {
-          setStatus('● Synced just now', 'synced');
-          $cta.style.display = 'none';
-          $reset.style.display = 'block';
-          running = false;
-        }, 450 * fills.length + 400);
+          $loading.style.display = 'none';
+          fills.forEach((f, i) => {
+            setTimeout(() => renderRow(f), 380 * i);
+          });
+          setTimeout(() => {
+            setStatus('● Synced just now', 'synced');
+            $reset.style.display = 'block';
+            running = false;
+          }, 380 * fills.length + 200);
+        }, 600);
       };
-      $cta.addEventListener('click', run);
-      $reset.addEventListener('click', reset);
+      $reset.addEventListener('click', run);
+      window.__ct3000_syncDemo = { run, showSynced, played: false };
     })();
 
     // ─── ROW 3 · Journal tab switcher ─────────────────────────────────
@@ -2140,6 +2137,15 @@
               void row.offsetWidth;
               row.style.animation = '';
             });
+            if (name === 'auto-sync' && window.__ct3000_syncDemo) {
+              const demo = window.__ct3000_syncDemo;
+              if (demo.played) {
+                demo.showSynced();
+              } else {
+                demo.played = true;
+                demo.run();
+              }
+            }
           }
         });
       }
