@@ -1897,13 +1897,24 @@
       // Plans is the tab that's already open on load -- no click required
       // to see it at all -- so a visitor who never touches the page would
       // otherwise never see the R:R number actually recompute. Auto-play
-      // one short adjustment sequence using the existing buttons.
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        setTimeout(() => { if ($setup) $setup.click(); }, 1200);
+      // one short adjustment sequence using the existing buttons -- but
+      // only once the panel actually scrolls into view. It sits below the
+      // hero, so a plain page-load timer would finish playing before
+      // anyone had scrolled far enough to see it happen.
+      const $phone = document.querySelector('.tab-panel[data-panel="plans"] .phone');
+      if ($phone && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const targetUp = document.querySelector('[data-plan-adjust="target"][data-delta="1"]');
         const stopDown = document.querySelector('[data-plan-adjust="stop"][data-delta="-1"]');
-        [2000, 2300, 2600].forEach(t => setTimeout(() => { if (targetUp) targetUp.click(); }, t));
-        [3200, 3500, 3800].forEach(t => setTimeout(() => { if (stopDown) stopDown.click(); }, t));
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            setTimeout(() => { if ($setup) $setup.click(); }, 600);
+            [1400, 1700, 2000].forEach(t => setTimeout(() => { if (targetUp) targetUp.click(); }, t));
+            [2600, 2900, 3200].forEach(t => setTimeout(() => { if (stopDown) stopDown.click(); }, t));
+            obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.5 });
+        observer.observe($phone);
       }
     })();
 
