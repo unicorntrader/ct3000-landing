@@ -963,55 +963,9 @@
     .symbol-table .sym { color: var(--blue-600); font-weight: 700; }
     .symbol-table .pnl-pos { color: var(--green-600); }
 
-    /* ============ PHILOSOPHY ============ */
-    .philosophy {
-      background: var(--ink);
-      color: white;
-      text-align: center;
-      padding: 120px 0;
-    }
-    .philosophy .eyebrow {
-      display: inline-block;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--blue-200);
-      margin-bottom: 18px;
-    }
-    .philosophy h2 {
-      font-size: clamp(30px, 4.5vw, 48px);
-      font-weight: 800; letter-spacing: -0.025em;
-      line-height: 1.1;
-      max-width: 760px;
-      margin: 0 auto 26px;
-    }
-    .philosophy .body {
-      max-width: 620px;
-      margin: 0 auto 26px;
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--gray-300);
-    }
-    .philosophy .body strong {
-      color: white;
-      font-weight: 700;
-    }
-    .philosophy .stamp {
-      margin-top: 48px;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      color: white;
-      text-shadow: 0 0 40px rgba(37,99,235,0.6);
-    }
-
     /* ============ MENTORSHIP TEASER ============ */
     .mentorship-teaser {
-      /* Philosophy (above) is also --ink -- gray-700 was one step lighter
-         but still read as "black again" next to it. blue-900 is the same
-         muted navy the testimonial card already used, now a real token
-         instead of an orphan hex -- a genuine hue switch, not just a
-         lightness step. */
-      background: var(--blue-900);
+      background: var(--ink);
       color: white;
       text-align: center;
     }
@@ -1179,7 +1133,6 @@
       .hero + section { padding-top: 32px; }
       .workflow-grid { grid-template-columns: 1fr; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
-      .philosophy { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
     }
 
@@ -1753,17 +1706,6 @@
           </div>
           </div>
           </div>
-      </div>
-    </section>
-
-    <section class="philosophy" id="philosophy">
-      <div class="wrap">
-        <span class="eyebrow">Why this exists</span>
-        <h2 class="reveal">What profitable traders do.</h2>
-        <div class="body reveal">
-          <p>Know their edge. <strong>Plan the trade.</strong> Execute the plan. Review the results. Repeat.</p>
-        </div>
-        <div class="stamp">DO WHAT YOU SAY.</div>
       </div>
     </section>
 
