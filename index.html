@@ -1893,6 +1893,18 @@
         });
       }
       render();
+
+      // Plans is the tab that's already open on load -- no click required
+      // to see it at all -- so a visitor who never touches the page would
+      // otherwise never see the R:R number actually recompute. Auto-play
+      // one short adjustment sequence using the existing buttons.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setTimeout(() => { if ($setup) $setup.click(); }, 1200);
+        const targetUp = document.querySelector('[data-plan-adjust="target"][data-delta="1"]');
+        const stopDown = document.querySelector('[data-plan-adjust="stop"][data-delta="-1"]');
+        [2000, 2300, 2600].forEach(t => setTimeout(() => { if (targetUp) targetUp.click(); }, t));
+        [3200, 3500, 3800].forEach(t => setTimeout(() => { if (stopDown) stopDown.click(); }, t));
+      }
     })();
 
     // ─── ROW 2 · Sync demo ────────────────────────────────────────────
@@ -2059,6 +2071,9 @@
       const panels = document.querySelectorAll('.tab-panel');
       if (!tabs.length) return;
 
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const played = { journal: false, 'weekly-review': false, insights: false };
+
       function activate(name) {
         tabs.forEach(t => {
           const isTarget = t.dataset.tab === name;
@@ -2087,6 +2102,30 @@
                 demo.played = true;
                 demo.run();
               }
+            }
+            // Same idea as the sync demo: play a short automatic sequence
+            // the first time each tab is opened, so a visitor who just
+            // clicks through the tabs (never touching anything inside a
+            // panel) still sees each feature actually do something instead
+            // of a static screenshot.
+            if (!reduceMotion && name === 'journal' && !played.journal) {
+              played.journal = true;
+              const firstRow = p.querySelector('[data-taken-expand]');
+              if (firstRow) setTimeout(() => firstRow.click(), 700);
+            }
+            if (!reduceMotion && name === 'weekly-review' && !played['weekly-review']) {
+              played['weekly-review'] = true;
+              const prevBtn = p.querySelector('#week-prev');
+              const nextBtn = p.querySelector('#week-next');
+              if (prevBtn && nextBtn) {
+                [700, 1600].forEach(t => setTimeout(() => prevBtn.click(), t));
+                [2900, 3800].forEach(t => setTimeout(() => nextBtn.click(), t));
+              }
+            }
+            if (!reduceMotion && name === 'insights' && !played.insights) {
+              played.insights = true;
+              const firstCallout = p.querySelector('[data-callout-expand] .callout-header');
+              if (firstCallout) setTimeout(() => firstCallout.click(), 700);
             }
           }
         });
