@@ -112,6 +112,7 @@ PAGES = {
     'blog-callouts.html':       ('blog', None),
     'blog-connecting-ibkr.html':('blog', None),
     'blog-first-week.html':     ('blog', None),
+    'blog-icarus.html':         ('blog', None),
     'blog-overtrading.html':    ('blog', None),
     'blog-revenge-trading.html':('blog', None),
     'blog-trade-plan.html':     ('blog', None),
