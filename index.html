@@ -160,6 +160,7 @@
     .hero {
       position: relative;
       min-height: calc(100vh - 70px);
+      min-height: calc(100dvh - 70px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1157,6 +1158,13 @@
          buttons and the next section's headline -- dropped further. */
       .hero {
         min-height: 68vh;
+        /* dvh tracks the *current* visible viewport instead of the
+           largest-possible one -- without it, Safari sizes against the
+           address-bar-hidden height while the bar is still showing, so
+           the hero renders taller than what's actually on screen and
+           the next section's heading sits below the real fold until
+           you scroll and the bar collapses. */
+        min-height: 68dvh;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         padding: 40px 0 28px;
