@@ -910,6 +910,50 @@
       color: var(--gray-700);
     }
 
+    /* By tag (Insights) */
+    .bytag-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    .bytag-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+      font-size: 14px; font-weight: 700; color: var(--ink);
+    }
+    .bytag-viewall { font-size: 12px; font-weight: 700; color: var(--blue-600); }
+    .bytag-row { margin-bottom: 14px; }
+    .bytag-row:last-child { margin-bottom: 0; }
+    .bytag-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .bytag-name { font-size: 13px; font-weight: 600; color: var(--ink); flex: 1; }
+    .bytag-amt { font-size: 13px; font-weight: 700; }
+    .bytag-amt.pos { color: var(--green-600); }
+    .bytag-bottom { display: flex; align-items: center; gap: 8px; }
+    .bytag-bar-track { flex: 1; height: 6px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+    .bytag-bar { height: 100%; background: var(--green-500); border-radius: 999px; }
+    .bytag-count { font-size: 11px; color: var(--gray-500); white-space: nowrap; }
+
+    /* Recent activity (Auto-sync) */
+    .activity-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    .activity-head { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .activity-group-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--gray-400); margin: 14px 0 6px;
+    }
+    .activity-group-label:first-of-type { margin-top: 0; }
+    .activity-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; }
+    .activity-check {
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      background: var(--green-50); color: var(--green-600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+    .activity-text { flex: 1; font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+    .activity-text .pos { color: var(--green-600); font-weight: 700; }
+    .activity-time { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+    .activity-pill {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 999px; margin-left: 4px;
+    }
+    .activity-pill.blue  { background: var(--blue-50);  color: var(--blue-700); }
+    .activity-pill.green { background: var(--green-50); color: var(--green-700); }
+
     /* Phone visual — used in the feature tabs */
     .phone {
       background: var(--white);
@@ -1371,6 +1415,45 @@
                   <button class="sync-reset" id="sync-reset" style="display:none;">Sync again</button>
                 </div>
               </div>
+
+              <div class="activity-section" id="activity-section">
+                <div class="activity-head">Recent activity</div>
+
+                <div class="activity-group-label">Today</div>
+                <div class="activity-item">
+                  <span class="activity-check">✓</span>
+                  <div class="activity-text">
+                    Synced 1 trade — <strong>AAPL</strong>
+                    <div class="activity-time">2h ago</div>
+                  </div>
+                </div>
+
+                <div class="activity-group-label">Yesterday</div>
+                <div class="activity-item">
+                  <span class="activity-check">✓</span>
+                  <div class="activity-text">
+                    Reviewed week of May 4
+                    <div class="activity-time">yesterday</div>
+                  </div>
+                </div>
+
+                <div class="activity-group-label">May 6</div>
+                <div class="activity-item">
+                  <span class="activity-check">✓</span>
+                  <div class="activity-text">
+                    Tagged <strong>TSLA</strong> as <span class="activity-pill blue">Breakout</span><span class="activity-pill green">Good exit</span>
+                    <div class="activity-time">2d ago</div>
+                  </div>
+                </div>
+
+                <div class="activity-item">
+                  <span class="activity-check">✓</span>
+                  <div class="activity-text">
+                    Planned trade closed: <strong>NVDA</strong> <span class="pos" data-mask>+$500</span>
+                    <div class="activity-time">3d ago</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           </div>
@@ -1705,6 +1788,68 @@
                   <div class="callout-detail-body">Revenge trading is entering an off-plan trade right after a loss — often sized larger — to "get it back". It's emotion-driven, not edge-driven.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
                   <div class="callout-detail-body">Set a hard rule: after any losing trade, no new entry for 30 minutes. If the idea still looks good after the cool-off, it was probably real.</div>
+                </div>
+              </div>
+
+              <div class="bytag-section">
+                <div class="bytag-head">
+                  <span>By tag · last 30 days</span>
+                  <a href="#" class="bytag-viewall" onclick="return false;">View all →</a>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top">
+                    <span class="tag-dot rose"></span>
+                    <span class="bytag-name">Good exit</span>
+                    <span class="bytag-amt pos" data-mask>+$1,389</span>
+                  </div>
+                  <div class="bytag-bottom">
+                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:100%"></div></div>
+                    <span class="bytag-count">7 trades</span>
+                  </div>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top">
+                    <span class="tag-dot amber"></span>
+                    <span class="bytag-name">Passive management</span>
+                    <span class="bytag-amt pos" data-mask>+$1,243</span>
+                  </div>
+                  <div class="bytag-bottom">
+                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:89%"></div></div>
+                    <span class="bytag-count">5 trades</span>
+                  </div>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top">
+                    <span class="tag-dot violet"></span>
+                    <span class="bytag-name">Let bias infect thinking</span>
+                    <span class="bytag-amt pos" data-mask>+$832</span>
+                  </div>
+                  <div class="bytag-bottom">
+                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:60%"></div></div>
+                    <span class="bytag-count">5 trades</span>
+                  </div>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top">
+                    <span class="tag-dot emerald"></span>
+                    <span class="bytag-name">Sized right</span>
+                    <span class="bytag-amt pos" data-mask>+$680</span>
+                  </div>
+                  <div class="bytag-bottom">
+                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:49%"></div></div>
+                    <span class="bytag-count">3 trades</span>
+                  </div>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top">
+                    <span class="tag-dot cyan"></span>
+                    <span class="bytag-name">Rushed setup</span>
+                    <span class="bytag-amt pos" data-mask>+$485</span>
+                  </div>
+                  <div class="bytag-bottom">
+                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:35%"></div></div>
+                    <span class="bytag-count">3 trades</span>
+                  </div>
                 </div>
               </div>
             </div>
