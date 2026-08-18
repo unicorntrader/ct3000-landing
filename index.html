@@ -434,18 +434,6 @@
       font-size: 12px; color: var(--gray-500); font-style: italic;
     }
 
-    /* Position rows (Executing) */
-    .pos-row {
-      display: flex; align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .pos-row:last-child { border-bottom: none; }
-    .pos-row .pos-meta { flex: 1; }
-    .pos-row .sym { font-size: 14px; font-weight: 700; color: var(--ink); display: block; }
-    .pos-row .sub { font-size: 12px; color: var(--gray-500); margin-top: 1px; }
-    .pos-row .pnl { font-size: 14px; font-weight: 700; }
-
     /* Missed card */
     .missed {
       background: var(--white);
@@ -645,53 +633,6 @@
     }
     .plan-mini.live .rr-live .lbl { color: var(--gray-600); font-weight: 500; }
     .plan-mini.live .rr-live .val { color: var(--blue-700); font-weight: 700; font-size: 15px; }
-
-    /* Sync demo — Row 2 */
-    .sync-shell {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .sync-head {
-      padding: 12px 14px;
-      background: var(--gray-50);
-      border-bottom: 1px solid var(--gray-200);
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 13px; font-weight: 600; color: var(--ink);
-    }
-    .sync-status {
-      font-size: 11px; font-weight: 600;
-      padding: 3px 9px; border-radius: 999px;
-      background: var(--gray-100); color: var(--gray-600);
-      letter-spacing: 0.02em;
-    }
-    .sync-status.syncing {
-      background: var(--blue-50); color: var(--blue-700);
-    }
-    .sync-status.synced {
-      background: var(--green-50); color: var(--green-700);
-    }
-    #sync-container { padding: 14px; }
-    .sync-loading {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 24px 0;
-      font-size: 13px; font-weight: 600; color: var(--gray-500);
-    }
-    .sync-loading .spinner {
-      width: 14px; height: 14px;
-      border: 2px solid var(--gray-200);
-      border-top-color: var(--blue-600);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .sync-reset {
-      display: block; margin-top: 10px; text-align: center;
-      font-size: 11px; color: var(--blue-600);
-      cursor: pointer; background: transparent;
-    }
-    .sync-reset:hover { text-decoration: underline; }
 
     /* Journal Taken table (Row 3) */
     .taken-head, .taken-summary {
@@ -930,7 +871,7 @@
     .bytag-count { font-size: 11px; color: var(--gray-500); white-space: nowrap; }
 
     /* Recent activity (Auto-sync) */
-    .activity-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    .activity-section {}
     .activity-head { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
     .activity-group-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
@@ -1404,18 +1345,6 @@
               </div>
             </div>
             <div class="phone-body">
-              <div class="sync-shell">
-                <div class="sync-head">
-                  <span>Trades</span>
-                  <span id="sync-status" class="sync-status">Not synced</span>
-                </div>
-                <div id="sync-container">
-                  <div class="sync-loading" id="sync-loading"><span class="spinner"></span> Connecting to broker…</div>
-                  <div id="sync-fills"></div>
-                  <button class="sync-reset" id="sync-reset" style="display:none;">Sync again</button>
-                </div>
-              </div>
-
               <div class="activity-section" id="activity-section">
                 <div class="activity-head">Recent activity</div>
 
@@ -1451,6 +1380,15 @@
                   <div class="activity-text">
                     Planned trade closed: <strong>NVDA</strong> <span class="pos" data-mask>+$500</span>
                     <div class="activity-time">3d ago</div>
+                  </div>
+                </div>
+
+                <div class="activity-group-label">May 4</div>
+                <div class="activity-item">
+                  <span class="activity-check">✓</span>
+                  <div class="activity-text">
+                    Planned trade opened: <strong>NVDA</strong> long @ $120.00
+                    <div class="activity-time">4d ago</div>
                   </div>
                 </div>
               </div>
@@ -2068,74 +2006,6 @@
       }
     })();
 
-    // ─── ROW 2 · Sync demo ────────────────────────────────────────────
-    // Trades are pulled automatically -- there's no button to click in the
-    // real product, so the demo shouldn't have one either. First time the
-    // tab is opened it plays the connect-then-stream-in animation once (to
-    // show *how* the sync works); every time after that it just shows the
-    // already-synced state immediately, same as re-opening a screen that's
-    // already loaded would in the real app.
-    (function initSyncDemo() {
-      const $loading = document.getElementById('sync-loading');
-      const $fills   = document.getElementById('sync-fills');
-      const $reset   = document.getElementById('sync-reset');
-      const $status  = document.getElementById('sync-status');
-      if (!$loading) return;
-      const fills = [
-        { sym: 'AAPL', qty: 100, pnl: '+$200' },
-        { sym: 'NVDA', qty: 50,  pnl: '+$150' },
-        { sym: 'TSLA', qty: 20,  pnl: '+$80'  },
-      ];
-      let running = false;
-      const setStatus = (text, mode) => {
-        $status.textContent = text;
-        $status.className = 'sync-status' + (mode ? ' ' + mode : '');
-      };
-      const renderRow = (f) => {
-        const row = document.createElement('div');
-        row.className = 'pos-row fade-in';
-        row.innerHTML =
-          '<div class="pos-meta">' +
-            '<span class="sym">' + f.sym + '</span>' +
-            '<div class="sub">Long · <span data-mask>' + f.qty + ' shares</span></div>' +
-          '</div>' +
-          '<div class="pnl pnl-pos" data-mask>' + f.pnl + '</div>';
-        $fills.appendChild(row);
-        if (window.__ct3000_applyPrivacy) {
-          const phone = row.closest('.phone');
-          if (phone && phone.classList.contains('privacy-on')) window.__ct3000_applyPrivacy(phone);
-        }
-      };
-      const showSynced = () => {
-        $loading.style.display = 'none';
-        $fills.innerHTML = '';
-        fills.forEach(renderRow);
-        setStatus('● Synced', 'synced');
-        $reset.style.display = 'block';
-      };
-      const run = () => {
-        if (running) return;
-        running = true;
-        $fills.innerHTML = '';
-        $reset.style.display = 'none';
-        $loading.style.display = 'flex';
-        $loading.innerHTML = '<span class="spinner"></span> Connecting to broker…';
-        setStatus('Syncing…', 'syncing');
-        setTimeout(() => {
-          $loading.style.display = 'none';
-          fills.forEach((f, i) => {
-            setTimeout(() => renderRow(f), 380 * i);
-          });
-          setTimeout(() => {
-            setStatus('● Synced just now', 'synced');
-            $reset.style.display = 'block';
-            running = false;
-          }, 380 * fills.length + 200);
-        }, 600);
-      };
-      $reset.addEventListener('click', run);
-      window.__ct3000_syncDemo = { run, showSynced, played: false };
-    })();
 
     // ─── ROW 3 · Journal tab switcher ─────────────────────────────────
     (function initJournalTabs() {
@@ -2255,16 +2125,7 @@
               void row.offsetWidth;
               row.style.animation = '';
             });
-            if (name === 'auto-sync' && window.__ct3000_syncDemo) {
-              const demo = window.__ct3000_syncDemo;
-              if (demo.played) {
-                demo.showSynced();
-              } else {
-                demo.played = true;
-                demo.run();
-              }
-            }
-            // Same idea as the sync demo: play a short automatic sequence
+            // Play a short automatic sequence
             // the first time each tab is opened, so a visitor who just
             // clicks through the tabs (never touching anything inside a
             // panel) still sees each feature actually do something instead
