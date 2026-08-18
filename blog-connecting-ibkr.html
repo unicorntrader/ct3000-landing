@@ -227,16 +227,16 @@
     </div>
 
     <div class="article-body">
-      <p>CoTrader connects to one broker: Interactive Brokers. That's not a limitation we're planning to work around — it's the whole reason the rest of the product works the way it does.</p>
+      <p>CoTrader connects to one broker: Interactive Brokers. We're not planning to add others any time soon, because this choice is the whole reason the rest of the product works the way it does.</p>
 
-      <p>IBKR gives us clean, complete fill data: every entry, every exit, every commission, timestamped accurately. Callouts and your Weekly Review are only as good as the data behind them, and "mostly accurate" trade history produces "mostly useful" insights. Rather than support a dozen brokers at a shallower level, we went deep on the one that lets us get this right.</p>
+      <p>IBKR gives us clean, complete fill data — every entry, every exit, every commission, timestamped accurately. Callouts and your Weekly Review are only as good as the data behind them, and a trade history that's "mostly accurate" produces insights that are only "mostly useful." Going deep on one broker beat supporting a dozen at a shallower level.</p>
 
       <h2>Read-only, on purpose</h2>
       <p>CoTrader can see your trade history. It cannot place, modify, or cancel a single order. There's no execution path in the app at all — nothing to click that touches your account's buying power.</p>
 
-      <p>That's not a missing feature, it's a design decision. A journal that could also trade is a tool with a much bigger blast radius if something goes wrong — a bug, a bad click, a stale session. Keeping CoTrader read-only means the worst case is "the data looks wrong," never "a trade fired that I didn't want." Your actual trading still happens in IBKR, exactly where it does today.</p>
+      <p>Skipping execution wasn't a shortcut, it was a deliberate call. A journal that can also trade carries a much bigger blast radius when something goes wrong — a bug, a bad click, a stale session. Staying read-only means the worst case is "the data looks wrong," and never "a trade fired that I didn't want." Your actual trading keeps happening in IBKR, exactly where it already does.</p>
 
-      <h2>What setup actually involves</h2>
+      <h2>What setup involves</h2>
       <p>Connecting your account takes a few minutes, not an afternoon. In short:</p>
       <ul>
         <li>Sign in and link your IBKR account from the CoTrader dashboard.</li>
@@ -244,7 +244,7 @@
         <li>From that point on, new fills sync automatically — you don't re-import or re-connect for each session.</li>
       </ul>
       <img src="diagram-connecting-ibkr.png" alt="Diagram showing the three-step setup: link, sync, done" class="diagram">
-      <p>There's no CSV to export, no manual entry, no reconciling two systems by hand. You trade in IBKR like you always have; CoTrader just watches and organizes.</p>
+      <p>No CSV to export, no manual entry, no reconciling two systems by hand. You keep trading in IBKR exactly like before; CoTrader just watches and organizes it.</p>
 
       <h2>After you're connected</h2>
       <p>Once your history is in, everything else in CoTrader starts working immediately — Callouts can scan your past trades right away, and your first Weekly Review will already have real numbers behind it instead of a week of waiting. The setup is the only manual step. Everything after it runs in the background.</p>
