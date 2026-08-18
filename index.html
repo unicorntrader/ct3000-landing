@@ -241,6 +241,11 @@
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
+    /* 5 tab-btn squares at 200px + 4 gaps need ~1064px of actual content
+       width -- the base .wrap (1080px minus its own side padding) was too
+       narrow for that once the buttons grew, dropping the 5th to its own
+       row. This section gets a wider wrap so all 5 fit on one line. */
+    .feature-tabs .wrap { max-width: 1200px; }
     .feature-tabs-head { text-align: center; margin-bottom: 88px; }
     .feature-tabs-head h2 {
       font-size: clamp(28px, 5.5vw, 52px);
