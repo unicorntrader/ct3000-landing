@@ -75,7 +75,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: var(--ink);
@@ -1087,22 +1087,22 @@
       .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     }
     @media (max-width: 640px) {
-      /* Full-height + center (desktop pattern) left too much gap above
-         the headline; full-height + top-align (previous fix) then sat
-         too high with nothing pulling it down. Middle ground: center
-         within a shorter box (not full 100vh) so it lands roughly
-         mid-screen without the extreme gap either fix produced.
-         82vh measured out to ~228px of dead space between the CTA
-         buttons and the next section's headline -- dropped further. */
+      /* Went as low as 68% at one point to shrink dead space below the
+         CTA, but that let the *next* section's whole heading show in
+         the initial viewport with zero scrolling -- worse than dead
+         space, since it undercuts the reason to scroll at all. 86% is
+         the tallest value that still keeps that heading essentially
+         fully below the fold (an ~8px hairline at most) without
+         reopening a large empty gap under the CTA. */
       .hero {
-        min-height: 68vh;
+        min-height: 86vh;
         /* dvh tracks the *current* visible viewport instead of the
            largest-possible one -- without it, Safari sizes against the
            address-bar-hidden height while the bar is still showing, so
            the hero renders taller than what's actually on screen and
            the next section's heading sits below the real fold until
            you scroll and the bar collapses. */
-        min-height: 68dvh;
+        min-height: 86dvh;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         padding: 40px 0 28px;
@@ -2157,6 +2157,12 @@
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
           activate(tab.dataset.tab);
+          // On mobile the tab row scrolls horizontally and only shows
+          // part of the set at once -- auto-advance it so the tapped tab
+          // slides toward the start, revealing the next ones instead of
+          // requiring a manual swipe on top of the tap. No-ops on desktop
+          // where the whole row already fits.
+          tab.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
           // A tap could leave the (just-changed) result below the fold on
           // mobile -- scroll the tab row to just under the sticky header
           // so the switch is visible, and the tabs stay in view as context
