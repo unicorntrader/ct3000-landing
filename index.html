@@ -278,6 +278,13 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 64px; align-items: center; text-align: left;
     }
+    /* Insights' phone needs real width for the two-column Callouts/By
+       Tag layout -- its own text blurb is short, so it can give up
+       some of the usual 50/50 split without feeling cramped. */
+    .tab-panel[data-panel="insights"].active { grid-template-columns: 0.8fr 1.3fr; }
+    @media (max-width: 800px) {
+      .tab-panel[data-panel="insights"].active { grid-template-columns: 1fr; }
+    }
     .tab-panel-text h3 {
       font-size: clamp(28px, 4.6vw, 50px); font-weight: 800; color: var(--ink);
       letter-spacing: -0.02em; line-height: 1.04;
@@ -860,7 +867,22 @@
     }
 
     /* By tag (Insights) */
+    /* Insights: Callouts + By Tag side by side instead of stacked, to
+       cut the tab's vertical height. Stacks back to one column under
+       700px, matching .phone-wide's own collapse point -- a real
+       phone screen can't fit both columns without the callout text
+       and tag bars getting unreadably cramped. */
+    .insights-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .insights-callouts-col { min-width: 0; }
+    .insights-bytag-col { min-width: 0; }
+    @media (max-width: 700px) {
+      .insights-columns { grid-template-columns: 1fr; gap: 0; }
+    }
     .bytag-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    .insights-columns .bytag-section { margin-top: 0; padding-top: 0; border-top: none; }
+    @media (max-width: 700px) {
+      .insights-columns .bytag-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    }
     .bytag-head {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 14px;
@@ -914,6 +936,14 @@
       margin: 0 auto;
       width: 100%;
       position: relative;
+    }
+    /* Insights only -- Callouts + By Tag need real side-by-side room,
+       so this one mockup runs wider than the standard 440px phone
+       frame used everywhere else. Collapses back to the normal width
+       at the same breakpoint the two-column grid below it stacks at. */
+    .phone-wide { max-width: 760px; }
+    @media (max-width: 700px) {
+      .phone-wide { max-width: 440px; }
     }
     .phone-bar {
       padding: 14px 18px;
@@ -1671,7 +1701,7 @@
             <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
             <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
             </div>
-          <div class="phone reveal-row">
+          <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
@@ -1686,6 +1716,8 @@
               </div>
             </div>
             <div class="phone-body">
+              <div class="insights-columns">
+              <div class="insights-callouts-col">
               <div class="callouts-head">
                 <span class="caret">▼</span>
                 <span>Callouts</span>
@@ -1736,7 +1768,9 @@
                   <div class="callout-detail-body">Set a hard rule: after any losing trade, no new entry for 30 minutes. If the idea still looks good after the cool-off, it was probably real.</div>
                 </div>
               </div>
+              </div>
 
+              <div class="insights-bytag-col">
               <div class="bytag-section">
                 <div class="bytag-head">
                   <span>By tag · last 30 days</span>
@@ -1797,6 +1831,8 @@
                     <span class="bytag-count">3 trades</span>
                   </div>
                 </div>
+              </div>
+              </div>
               </div>
             </div>
           </div>
