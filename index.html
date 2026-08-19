@@ -303,15 +303,23 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
-        margin: 0 -24px 12px;
-        padding: 4px 24px 8px;
+        /* Margin/padding must exactly match the wrap's own fluid gutter
+           (clamp(20px, 5vw, 48px)) -- a hardcoded -24px/24px pair here
+           doesn't match that gutter's actual computed value at most
+           phone widths (it clamps to 20px, not 24px), so the row's
+           negative margin overshot the viewport's left edge by 4px:
+           real horizontal overflow, invisible in scrollWidth checks
+           since it's leftward past the origin, but very much draggable
+           on a real touchscreen. */
+        margin: 0 calc(-1 * clamp(20px, 5vw, 48px)) 12px;
+        padding: 4px clamp(20px, 5vw, 48px) 8px;
         /* Without this, snap-align:start on the first/last card counts
            the row's own edge padding as "outside" the snap area, so the
            browser auto-corrects scrollLeft on load to collapse it --
            the card sat flush against the screen edge despite the padding.
            scroll-padding tells the snap engine the padding IS the inset. */
-        scroll-padding-left: 24px;
-        scroll-padding-right: 24px;
+        scroll-padding-left: clamp(20px, 5vw, 48px);
+        scroll-padding-right: clamp(20px, 5vw, 48px);
       }
       .tab-row::-webkit-scrollbar { display: none; }
       .tab-row { scrollbar-width: none; }
@@ -2159,10 +2167,19 @@
           activate(tab.dataset.tab);
           // On mobile the tab row scrolls horizontally and only shows
           // part of the set at once -- auto-advance it so the tapped tab
-          // slides toward the start, revealing the next ones instead of
-          // requiring a manual swipe on top of the tap. No-ops on desktop
-          // where the whole row already fits.
-          tab.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+          // moves to the start, revealing the next ones instead of
+          // requiring a manual swipe on top of the tap. Direct scrollLeft
+          // assignment, not behavior:'smooth' or a requestAnimationFrame
+          // tween -- both were tried and neither reliably moved this row
+          // (verified rAF itself never ticks in at least one test
+          // environment; the risk wasn't worth gambling on animation
+          // over a scroll that's actually confirmed to happen). No-ops
+          // on desktop where the whole row already fits (target clamps
+          // to 0).
+          if (tabRowEl) {
+            const target = tab.offsetLeft - tabRowEl.clientLeft - parseFloat(getComputedStyle(tabRowEl).paddingLeft || 0);
+            tabRowEl.scrollLeft = Math.max(0, target);
+          }
           // A tap could leave the (just-changed) result below the fold on
           // mobile -- scroll the tab row to just under the sticky header
           // so the switch is visible, and the tabs stay in view as context
