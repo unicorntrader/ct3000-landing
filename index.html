@@ -166,9 +166,17 @@
          height ran away and pushed every section below it outside the
          captured area. clamp() gives it a hard pixel ceiling so no
          rendering pass can do that, same pattern try-gather.co's own
-         production CSS uses for every vh value. */
-      min-height: clamp(600px, calc(100vh - 70px), 950px);
-      min-height: clamp(600px, calc(100dvh - 70px), 950px);
+         production CSS uses for every vh value.
+         First pass capped at 950px, which fixed the export but was low
+         enough to visibly cap the hero shorter than a tall real
+         window -- the bottom-anchored scenery stopped short of the
+         actual viewport bottom instead of sitting flush with it.
+         Confirmed on a sibling project that 950px fixed the export
+         with room to spare, so raised to 1300px: still comfortably
+         under whatever value the export bug was actually hitting, but
+         high enough that no normal or tall desktop window reaches it. */
+      min-height: clamp(600px, calc(100vh - 70px), 1300px);
+      min-height: clamp(600px, calc(100dvh - 70px), 1300px);
       display: flex;
       align-items: center;
       justify-content: center;
