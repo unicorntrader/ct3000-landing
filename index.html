@@ -159,8 +159,16 @@
     /* ============ HERO ============ */
     .hero {
       position: relative;
-      min-height: calc(100vh - 70px);
-      min-height: calc(100dvh - 70px);
+      /* Unbounded vh/dvh here made Safari's Export-as-PDF balloon the
+         hero to swallow the whole page -- PDF export flattens the
+         page into one image and re-resolves vh/dvh against something
+         other than the live viewport, so with no ceiling the hero's
+         height ran away and pushed every section below it outside the
+         captured area. clamp() gives it a hard pixel ceiling so no
+         rendering pass can do that, same pattern try-gather.co's own
+         production CSS uses for every vh value. */
+      min-height: clamp(600px, calc(100vh - 70px), 950px);
+      min-height: clamp(600px, calc(100dvh - 70px), 950px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1133,14 +1141,21 @@
          fully below the fold (an ~8px hairline at most) without
          reopening a large empty gap under the CTA. */
       .hero {
-        min-height: 86vh;
+        /* clamp() ceiling here for the same reason as the desktop
+           .hero rule -- unbounded vh/dvh let Safari's Export-as-PDF
+           balloon the hero and swallow the rest of the page. 800px
+           cap is well above what 86% resolves to on any real phone
+           (698px on a 812px-tall iPhone), so it doesn't change the
+           tuned 86% value on-screen, only removes the PDF-export
+           runaway case. */
+        min-height: clamp(480px, 86vh, 800px);
         /* dvh tracks the *current* visible viewport instead of the
            largest-possible one -- without it, Safari sizes against the
            address-bar-hidden height while the bar is still showing, so
            the hero renders taller than what's actually on screen and
            the next section's heading sits below the real fold until
            you scroll and the bar collapses. */
-        min-height: 86dvh;
+        min-height: clamp(480px, 86dvh, 800px);
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         padding: 40px 0 28px;
