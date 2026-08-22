@@ -37,13 +37,13 @@ def build_header(how_it_works_href, nav_current):
     blog_c = cls(nav_current == 'blog')
     ment_c = cls(nav_current == 'mentorship')
     links = f'''<a href="{how_it_works_href}">How it works</a>
-        <a href="faq.html"{faq_c}>FAQ</a>
-        <a href="blog.html"{blog_c}>Blog</a>
-        <a href="mentorship.html"{ment_c}>Mentorship</a>
+        <a href="/faq"{faq_c}>FAQ</a>
+        <a href="/blog"{blog_c}>Blog</a>
+        <a href="/mentorship"{ment_c}>Mentorship</a>
         <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>'''
     return f'''<header class="site-header">
     <div class="wrap">
-      <a href="index.html" class="brand">
+      <a href="/" class="brand">
         {LOGO_SVG}
       </a>
       <nav class="site-nav">
@@ -68,7 +68,7 @@ def build_footer(how_it_works_href, legal_current):
     <div class="wrap">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="index.html" class="brand">
+          <a href="/" class="brand">
             {LOGO_SVG}
           </a>
           <p>Know your edge.</p>
@@ -77,27 +77,27 @@ def build_footer(how_it_works_href, legal_current):
         <div class="footer-col">
           <h5>Links</h5>
           <a href="{how_it_works_href}">How it works</a>
-          <a href="faq.html">FAQ</a>
-          <a href="blog.html">Blog</a>
-          <a href="mentorship.html">Mentorship</a>
+          <a href="/faq">FAQ</a>
+          <a href="/blog">Blog</a>
+          <a href="/mentorship">Mentorship</a>
         </div>
         <div class="footer-col">
           <h5>Legal</h5>
-          <a href="privacy.html"{priv_c}>Privacy</a>
-          <a href="terms.html"{terms_c}>Terms</a>
+          <a href="/privacy"{priv_c}>Privacy</a>
+          <a href="/terms"{terms_c}>Terms</a>
         </div>
         <div class="footer-col">
           <h5>Guides</h5>
-          <a href="blog.html">All guides</a>
-          <a href="blog-connecting-ibkr.html">Connecting IBKR</a>
-          <a href="blog-overtrading.html">Why traders overtrade</a>
+          <a href="/blog">All guides</a>
+          <a href="/blog-connecting-ibkr">Connecting IBKR</a>
+          <a href="/blog-overtrading">Why traders overtrade</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 CoTrader 3000. All rights reserved.</span>
         <span class="footer-bottom-links">
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
         </span>
       </div>
     </div>
@@ -131,7 +131,7 @@ def main():
     changed = []
     for fname, (nav_current, legal_current) in PAGES.items():
         is_home = fname == 'index.html'
-        how_it_works_href = '#plans' if is_home else 'index.html#plans'
+        how_it_works_href = '#plans' if is_home else '/#plans'
         header = build_header(how_it_works_href, nav_current)
         footer = build_footer(how_it_works_href, legal_current)
 
