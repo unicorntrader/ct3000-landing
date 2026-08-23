@@ -835,6 +835,24 @@
     .callout.positive { border-left-color: var(--green-500); }
     .callout.warning  { border-left-color: var(--amber-500); }
     .callout.locked   { border-left-color: var(--gray-300); background: var(--gray-50); }
+    .tier-progress { margin-bottom: 14px; }
+    .tier-progress-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .tier-progress-badge { font-size: 12px; font-weight: 700; color: var(--blue-600); }
+    .tier-progress-note { font-size: 11px; color: var(--gray-500); }
+    .tier-progress-track { display: flex; gap: 4px; }
+    .tier-progress-seg {
+      flex: 1; height: 5px; border-radius: 3px;
+      background: var(--gray-200); overflow: hidden;
+    }
+    .tier-progress-seg.filled { background: var(--blue-600); }
+    .tier-progress-seg.current { position: relative; }
+    .tier-progress-seg.current::after {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 65%; background: var(--blue-600); border-radius: 3px 0 0 3px;
+    }
     .callout.locked .callout-header { cursor: default; }
     .callout.locked .callout-header:hover { background: var(--gray-50); border-color: var(--gray-200); }
     .callout.locked .callout-icon { color: var(--gray-400); font-size: 11px; }
@@ -1772,6 +1790,19 @@
                 <span class="caret">▼</span>
                 <span>Callouts</span>
                 <span class="count">3 signals</span>
+              </div>
+
+              <div class="tier-progress">
+                <div class="tier-progress-head">
+                  <span class="tier-progress-badge">🏅 Tier 2 unlocked</span>
+                  <span class="tier-progress-note">7 trades to Tier 3</span>
+                </div>
+                <div class="tier-progress-track">
+                  <div class="tier-progress-seg filled"></div>
+                  <div class="tier-progress-seg filled"></div>
+                  <div class="tier-progress-seg current"></div>
+                  <div class="tier-progress-seg"></div>
+                </div>
               </div>
 
               <div class="callouts-category">SYMBOLS</div>
