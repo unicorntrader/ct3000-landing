@@ -153,16 +153,17 @@
     }
     .lb-direction.long { background: var(--blue-600); }
     .lb-direction.short { background: var(--violet-500); }
-    .lb-roi-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
-      background: var(--amber-700); color: white;
-      padding: 3px 8px; border-radius: 999px;
-    }
     .lb-trade-date { font-size: 12px; color: var(--gray-600); }
     .lb-pnl-block { text-align: right; }
     .lb-pnl-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--gray-600); margin-bottom: 2px;
+    }
+    .lb-pnl-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+    .lb-roi-badge {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+      background: var(--amber-700); color: white;
+      padding: 4px 10px; border-radius: 999px; white-space: nowrap;
     }
     .lb-pnl { font-size: 19px; font-weight: 800; color: var(--amber-800); white-space: nowrap; }
     .lb-plan {
@@ -185,6 +186,7 @@
       .lb-card { flex-wrap: wrap; }
       .lb-shot { width: 64px; height: 64px; order: -1; }
       .lb-pnl-block { text-align: left; }
+      .lb-pnl-row { justify-content: flex-start; }
     }
 
     .lb-skeleton { background: var(--gray-100); border-radius: 8px; animation: lbPulse 1.4s ease-in-out infinite; }
@@ -697,12 +699,6 @@
           dir.textContent = d === 'short' ? 'Short' : 'Long';
           symRow.appendChild(dir);
         }
-        if (entry.roiPercent != null && !isNaN(Number(entry.roiPercent))) {
-          const roi = document.createElement('span');
-          roi.className = 'lb-roi-badge';
-          roi.textContent = Number(entry.roiPercent).toLocaleString('en-US', { maximumFractionDigits: 1 }) + '% ROI';
-          symRow.appendChild(roi);
-        }
         if (entry.tradeDate) {
           const dateEl = document.createElement('span');
           dateEl.className = 'lb-trade-date';
@@ -716,11 +712,20 @@
         const pnlLabel = document.createElement('div');
         pnlLabel.className = 'lb-pnl-label';
         pnlLabel.textContent = 'Left on the table';
-        const pnl = document.createElement('div');
+        const pnlRow = document.createElement('div');
+        pnlRow.className = 'lb-pnl-row';
+        if (entry.roiPercent != null && !isNaN(Number(entry.roiPercent))) {
+          const roi = document.createElement('span');
+          roi.className = 'lb-roi-badge';
+          roi.textContent = Number(entry.roiPercent).toLocaleString('en-US', { maximumFractionDigits: 1 }) + '% ROI';
+          pnlRow.appendChild(roi);
+        }
+        const pnl = document.createElement('span');
         pnl.className = 'lb-pnl';
         pnl.textContent = fmtMoney(entry.claimedPnl, entry.currency);
+        pnlRow.appendChild(pnl);
         pnlBlock.appendChild(pnlLabel);
-        pnlBlock.appendChild(pnl);
+        pnlBlock.appendChild(pnlRow);
         top.appendChild(pnlBlock);
 
         body.appendChild(top);

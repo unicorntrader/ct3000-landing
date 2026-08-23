@@ -1151,13 +1151,14 @@
     }
     .lbt-direction.long { background: var(--blue-600); }
     .lbt-direction.short { background: var(--violet-500); }
-    .lbt-roi-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
-      background: var(--amber-700); color: white;
-      padding: 3px 8px; border-radius: 999px; flex-shrink: 0;
-    }
     .lbt-story { font-size: 13px; color: var(--gray-500); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .lbt-right { text-align: right; flex-shrink: 0; }
+    .lbt-pnl-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+    .lbt-roi-badge {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      background: var(--amber-700); color: white;
+      padding: 4px 9px; border-radius: 999px; flex-shrink: 0; white-space: nowrap;
+    }
     .lbt-pnl { font-size: 15px; font-weight: 800; color: var(--amber-800); }
     .lbt-name { font-size: 11px; color: var(--gray-400); }
     .lbt-submitter-link { color: var(--blue-600); font-weight: 700; }
@@ -2498,12 +2499,6 @@
           dir.textContent = d === 'short' ? 'Short' : 'Long';
           left.appendChild(dir);
         }
-        if (entry.roiPercent != null && !isNaN(Number(entry.roiPercent))) {
-          const roi = document.createElement('span');
-          roi.className = 'lbt-roi-badge';
-          roi.textContent = Number(entry.roiPercent).toLocaleString('en-US', { maximumFractionDigits: 1 }) + '% ROI';
-          left.appendChild(roi);
-        }
         if (entry.storyText) {
           const story = document.createElement('span');
           story.className = 'lbt-story';
@@ -2514,10 +2509,19 @@
 
         const right = document.createElement('div');
         right.className = 'lbt-right';
-        const pnl = document.createElement('div');
+        const pnlRow = document.createElement('div');
+        pnlRow.className = 'lbt-pnl-row';
+        if (entry.roiPercent != null && !isNaN(Number(entry.roiPercent))) {
+          const roi = document.createElement('span');
+          roi.className = 'lbt-roi-badge';
+          roi.textContent = Number(entry.roiPercent).toLocaleString('en-US', { maximumFractionDigits: 1 }) + '% ROI';
+          pnlRow.appendChild(roi);
+        }
+        const pnl = document.createElement('span');
         pnl.className = 'lbt-pnl';
         pnl.textContent = fmtMoney(entry.claimedPnl, entry.currency);
-        right.appendChild(pnl);
+        pnlRow.appendChild(pnl);
+        right.appendChild(pnlRow);
         const name = document.createElement('div');
         name.className = 'lbt-name';
         name.appendChild(submitterNode(entry.submitterName));
