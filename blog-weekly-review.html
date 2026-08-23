@@ -24,6 +24,7 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --green-600: #16a34a;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -122,6 +123,45 @@
       display: block; width: 100%; height: auto;
       margin: 32px 0;
       border-radius: 12px; border: 1px solid var(--gray-200);
+    }
+
+    /* Feature demo -- a real fragment of the app's Weekly Review UI
+       instead of an abstract diagram. */
+    .feature-demo {
+      max-width: 420px; margin: 36px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+    }
+    .feature-demo-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .feature-demo-bar img { height: 18px; width: 18px; display: block; }
+    .feature-demo-bar span { font-size: 12px; font-weight: 700; color: var(--gray-500); }
+    .feature-demo-body { padding: 16px; }
+    .fd-week {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .fd-week-label { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .fd-week-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--blue-600); background: var(--blue-50); padding: 3px 8px; border-radius: 999px;
+    }
+    .fd-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .fd-kpi {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
+      padding: 12px 8px; text-align: center;
+    }
+    .fd-kpi-lbl { font-size: 10.5px; color: var(--gray-500); font-weight: 500; }
+    .fd-kpi-val { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-top: 3px; }
+    .fd-kpi-val.green { color: var(--green-600); }
+    .fd-kpi-val.ink { color: var(--ink); }
+    .fd-kpi-sub { font-size: 10.5px; color: var(--gray-500); margin-top: 2px; }
+    .fd-caption {
+      text-align: center; font-size: 13px; color: var(--gray-500);
+      margin-top: 12px; font-style: italic;
     }
 
     .article-cta {
@@ -240,7 +280,33 @@
 
       <p><strong>Average trade</strong> is expectancy in miniature: what you made or lost per trade on average across everything you did that week. It's the number that tells you whether your process is working, regardless of how any single trade turned out.</p>
 
-      <img src="diagram-weekly-review.png" alt="Diagram showing the three numbers: Net P&amp;L, win rate, average trade" class="diagram">
+      <div class="feature-demo">
+        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly Review</span></div>
+        <div class="feature-demo-body">
+          <div class="fd-week">
+            <span class="fd-week-label">May 4–10</span>
+            <span class="fd-week-badge">This week</span>
+          </div>
+          <div class="fd-kpi-grid">
+            <div class="fd-kpi">
+              <div class="fd-kpi-lbl">Net P&amp;L</div>
+              <div class="fd-kpi-val green">+$2,690</div>
+              <div class="fd-kpi-sub">5 closed</div>
+            </div>
+            <div class="fd-kpi">
+              <div class="fd-kpi-lbl">Win rate</div>
+              <div class="fd-kpi-val ink">100%</div>
+              <div class="fd-kpi-sub">5W · 0L</div>
+            </div>
+            <div class="fd-kpi">
+              <div class="fd-kpi-lbl">Avg / trade</div>
+              <div class="fd-kpi-val green">+$538</div>
+              <div class="fd-kpi-sub">expectancy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="fd-caption">A real Weekly Review screen — the exact three numbers explained above, side by side.</p>
 
       <h2>The ritual matters more than any single week</h2>
       <p>One week of data won't tell you much. Four weeks in a row will. The real value here isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these three numbers drift, hold steady, or improve. That's why CoTrader lets you flip back through prior weeks at all.</p>
