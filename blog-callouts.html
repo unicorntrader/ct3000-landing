@@ -24,6 +24,8 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --green-500: #22c55e; --green-600: #16a34a;
+      --amber-500: #f59e0b;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -122,6 +124,49 @@
       display: block; width: 100%; height: auto;
       margin: 32px 0;
       border-radius: 12px; border: 1px solid var(--gray-200);
+    }
+
+    /* Feature demo -- a real fragment of the app's Callouts UI instead
+       of an abstract diagram, so the post shows the outcome before the
+       reader ever opens the app. */
+    .feature-demo {
+      max-width: 480px; margin: 36px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+    }
+    .feature-demo-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .feature-demo-bar img { height: 18px; width: 18px; display: block; }
+    .feature-demo-bar span { font-size: 12px; font-weight: 700; color: var(--gray-500); }
+    .feature-demo-body { padding: 16px; }
+    .fd-callouts-head {
+      display: flex; align-items: center; gap: 8px; padding: 2px 0 12px;
+      font-size: 14px; font-weight: 700; color: var(--ink);
+    }
+    .fd-callouts-head .count { color: var(--gray-500); font-weight: 500; font-size: 12.5px; }
+    .fd-category {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--gray-500); padding: 10px 2px 6px;
+    }
+    .fd-category:first-of-type { padding-top: 0; }
+    .fd-callout {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: var(--white); border: 1px solid var(--gray-200); border-left: 3px solid var(--gray-300);
+      border-radius: 8px; padding: 11px 12px; margin-bottom: 8px;
+    }
+    .fd-callout:last-child { margin-bottom: 0; }
+    .fd-callout.positive { border-left-color: var(--green-500); }
+    .fd-callout.warning { border-left-color: var(--amber-500); }
+    .fd-callout-icon { flex-shrink: 0; font-size: 13px; font-weight: 700; margin-top: 1px; }
+    .fd-callout.positive .fd-callout-icon { color: var(--green-600); }
+    .fd-callout.warning .fd-callout-icon { color: var(--amber-500); }
+    .fd-callout-text { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .fd-caption {
+      text-align: center; font-size: 13px; color: var(--gray-500);
+      margin-top: 12px; font-style: italic;
     }
 
     .article-cta {
@@ -245,7 +290,28 @@
         <li><strong>Timing</strong> — days of the week, times of day, or streaks that correlate with worse outcomes.</li>
         <li><strong>Behavior</strong> — patterns like revenge trading, oversized positions after a loss, or entries with no plan attached.</li>
       </ul>
-      <img src="diagram-callouts.png" alt="Diagram showing Callouts split into Symbols, Timing, and Behavior" class="diagram">
+      <div class="feature-demo">
+        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Callouts</span></div>
+        <div class="feature-demo-body">
+          <div class="fd-callouts-head">Callouts <span class="count">3 signals</span></div>
+          <div class="fd-category">Symbols</div>
+          <div class="fd-callout positive">
+            <span class="fd-callout-icon">✓</span>
+            <span class="fd-callout-text">AAPL: 75% win rate across 4 trades (+$1,880).</span>
+          </div>
+          <div class="fd-category">Timing</div>
+          <div class="fd-callout warning">
+            <span class="fd-callout-icon">⚠</span>
+            <span class="fd-callout-text">Mondays are a drag — −$340 net across 6 trades.</span>
+          </div>
+          <div class="fd-category">Behavior</div>
+          <div class="fd-callout warning">
+            <span class="fd-callout-icon">⚠</span>
+            <span class="fd-callout-text">3 revenge trades opened within an hour of a loss.</span>
+          </div>
+        </div>
+      </div>
+      <p class="fd-caption">Real Callouts from a real CoTrader account — one from each of the three areas above.</p>
       <p>Each one comes with a "why flagged" explanation and a concrete "what to try" suggestion. Think of it less as a lecture and more as the next experiment worth running on your own process.</p>
 
       <h2>Why this matters more than a P&L chart</h2>
