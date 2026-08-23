@@ -1160,6 +1160,8 @@
     .lbt-right { text-align: right; flex-shrink: 0; }
     .lbt-pnl { font-size: 15px; font-weight: 800; color: var(--amber-800); }
     .lbt-name { font-size: 11px; color: var(--gray-400); }
+    .lbt-submitter-link { color: var(--blue-600); font-weight: 700; }
+    .lbt-submitter-link:hover { color: var(--blue-700); text-decoration: underline; }
     .lbt-empty {
       background: var(--white); border: 1.5px dashed var(--gray-300); border-radius: 14px;
       padding: 28px 20px; text-align: center; color: var(--gray-600); font-size: 14.5px; line-height: 1.6;
@@ -2448,6 +2450,26 @@
         return sym ? sym + formatted : formatted + ' ' + cur;
       }
 
+      const X_HANDLE_RE = /^@([A-Za-z0-9_]{1,15})$/;
+      function submitterNode(name) {
+        const trimmed = (name || 'Anonymous').trim();
+        const match = trimmed.match(X_HANDLE_RE);
+        const wrap = document.createDocumentFragment();
+        wrap.appendChild(document.createTextNode('— '));
+        if (match) {
+          const link = document.createElement('a');
+          link.href = 'https://x.com/' + match[1];
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.className = 'lbt-submitter-link';
+          link.textContent = trimmed;
+          wrap.appendChild(link);
+        } else {
+          wrap.appendChild(document.createTextNode(trimmed));
+        }
+        return wrap;
+      }
+
       function renderEmpty() {
         board.innerHTML = '';
         const empty = document.createElement('div');
@@ -2498,7 +2520,7 @@
         right.appendChild(pnl);
         const name = document.createElement('div');
         name.className = 'lbt-name';
-        name.textContent = '— ' + (entry.submitterName || 'Anonymous');
+        name.appendChild(submitterNode(entry.submitterName));
         right.appendChild(name);
         card.appendChild(right);
 

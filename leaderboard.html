@@ -173,6 +173,8 @@
     .lb-story { font-size: 14.5px; color: var(--ink); line-height: 1.6; margin-bottom: 12px; }
     .lb-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .lb-submitter { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+    .lb-submitter-link { color: var(--blue-600); }
+    .lb-submitter-link:hover { color: var(--blue-700); text-decoration: underline; }
     .lb-time { font-size: 12px; color: var(--gray-400); }
     .lb-shot {
       flex-shrink: 0; width: 88px; height: 88px; border-radius: 10px;
@@ -453,7 +455,8 @@
           <div class="lb-field-row">
             <div class="lb-field">
               <label for="lb-name">Your name</label>
-              <input class="lb-input" type="text" id="lb-name" placeholder="Anonymous is fine" autocomplete="off">
+              <span class="hint">Starts with @? We'll link it to your X profile.</span>
+              <input class="lb-input" type="text" id="lb-name" placeholder="Anonymous, or @yourhandle" autocomplete="off">
             </div>
             <div class="lb-field">
               <label for="lb-contact">Contact</label>
@@ -608,6 +611,26 @@
         return Math.floor(months / 12) + 'y ago';
       }
 
+      const X_HANDLE_RE = /^@([A-Za-z0-9_]{1,15})$/;
+      function submitterNode(name) {
+        const trimmed = (name || 'Anonymous').trim();
+        const match = trimmed.match(X_HANDLE_RE);
+        const wrap = document.createDocumentFragment();
+        wrap.appendChild(document.createTextNode('— '));
+        if (match) {
+          const link = document.createElement('a');
+          link.href = 'https://x.com/' + match[1];
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.className = 'lb-submitter-link';
+          link.textContent = trimmed;
+          wrap.appendChild(link);
+        } else {
+          wrap.appendChild(document.createTextNode(trimmed));
+        }
+        return wrap;
+      }
+
       function fmtDate(dateStr) {
         const d = new Date(dateStr + (String(dateStr).length <= 10 ? 'T00:00:00' : ''));
         if (isNaN(d.getTime())) return '';
@@ -723,7 +746,7 @@
         footer.className = 'lb-card-footer';
         const who = document.createElement('span');
         who.className = 'lb-submitter';
-        who.textContent = '— ' + (entry.submitterName || 'Anonymous');
+        who.appendChild(submitterNode(entry.submitterName));
         footer.appendChild(who);
         if (entry.createdAt) {
           const time = document.createElement('span');
