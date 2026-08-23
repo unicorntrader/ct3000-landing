@@ -120,6 +120,7 @@ PAGES = {
     'mentorship.html':          ('mentorship', None),
     'privacy.html':             (None, 'privacy'),
     'terms.html':                (None, 'terms'),
+    'leaderboard.html':         (None, None),
 }
 
 HEADER_RE = re.compile(r'<header class="site-header">.*?</header>', re.DOTALL)
