@@ -153,6 +153,12 @@
     }
     .lb-direction.long { background: var(--blue-600); }
     .lb-direction.short { background: var(--violet-500); }
+    .lb-roi-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
+      background: var(--amber-50); color: var(--amber-700);
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .lb-trade-date { font-size: 12px; color: var(--gray-400); }
     .lb-pnl-block { text-align: right; }
     .lb-pnl-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
@@ -421,6 +427,17 @@
             </div>
           </div>
 
+          <div class="lb-field-row">
+            <div class="lb-field">
+              <label for="lb-roi">% ROI missed</label>
+              <input class="lb-input" type="number" id="lb-roi" min="0.01" step="0.01" placeholder="18.4" inputmode="decimal">
+            </div>
+            <div class="lb-field">
+              <label for="lb-date">Trade date</label>
+              <input class="lb-input" type="date" id="lb-date">
+            </div>
+          </div>
+
           <div class="lb-field">
             <label for="lb-plan">Your plan</label>
             <span class="hint">What was supposed to happen?</span>
@@ -557,6 +574,9 @@
       const listContainer = document.getElementById('lb-list-container');
       const countNote = document.getElementById('lb-count-note');
 
+      const dateInput = document.getElementById('lb-date');
+      if (dateInput) dateInput.max = new Date().toISOString().slice(0, 10);
+
       function esc(str) {
         const d = document.createElement('div');
         d.textContent = str == null ? '' : String(str);
@@ -586,6 +606,12 @@
         const months = Math.floor(days / 30);
         if (months < 12) return months + 'mo ago';
         return Math.floor(months / 12) + 'y ago';
+      }
+
+      function fmtDate(dateStr) {
+        const d = new Date(dateStr + (String(dateStr).length <= 10 ? 'T00:00:00' : ''));
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       }
 
       function isSafeImageUrl(url) {
@@ -647,6 +673,18 @@
           dir.className = 'lb-direction ' + (d === 'short' ? 'short' : 'long');
           dir.textContent = d === 'short' ? 'Short' : 'Long';
           symRow.appendChild(dir);
+        }
+        if (entry.roiPercent != null && !isNaN(Number(entry.roiPercent))) {
+          const roi = document.createElement('span');
+          roi.className = 'lb-roi-badge';
+          roi.textContent = Number(entry.roiPercent).toLocaleString('en-US', { maximumFractionDigits: 1 }) + '% ROI';
+          symRow.appendChild(roi);
+        }
+        if (entry.tradeDate) {
+          const dateEl = document.createElement('span');
+          dateEl.className = 'lb-trade-date';
+          dateEl.textContent = fmtDate(entry.tradeDate);
+          symRow.appendChild(dateEl);
         }
         top.appendChild(symRow);
 
@@ -802,6 +840,9 @@
         const pnlRaw = document.getElementById('lb-pnl').value;
         const claimedPnl = parseFloat(pnlRaw);
         const currency = document.getElementById('lb-currency').value.trim().toUpperCase();
+        const roiRaw = document.getElementById('lb-roi').value;
+        const roiPercent = roiRaw ? parseFloat(roiRaw) : null;
+        const tradeDate = document.getElementById('lb-date').value;
         const planText = document.getElementById('lb-plan').value.trim();
         const storyText = document.getElementById('lb-story').value.trim();
         const submitterName = document.getElementById('lb-name').value.trim();
@@ -814,6 +855,7 @@
         if (!storyText) { showError('Tell us the story — that field is required.'); return; }
         if (!file) { showError('A screenshot is required.'); return; }
         if (file.size > MAX_FILE_BYTES) { showError('That image is over 5MB — please use a smaller file.'); return; }
+        if (roiRaw && (isNaN(roiPercent) || roiPercent <= 0)) { showError('% ROI missed should be a positive number.'); return; }
 
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting…';
@@ -832,6 +874,8 @@
             screenshotMimeType: file.type || 'image/png'
           };
           if (currency) payload.currency = currency;
+          if (roiPercent != null && !isNaN(roiPercent)) payload.roiPercent = roiPercent;
+          if (tradeDate) payload.tradeDate = tradeDate;
           if (planText) payload.planText = planText;
           if (submitterName) payload.submitterName = submitterName;
           if (submitterContact) payload.submitterContact = submitterContact;
