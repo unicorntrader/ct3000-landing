@@ -401,9 +401,9 @@
               <input class="lb-input" type="text" id="lb-symbol" maxlength="10" placeholder="AAPL" autocomplete="off" spellcheck="false" required>
             </div>
             <div class="lb-field">
-              <label for="lb-direction">Direction</label>
-              <select class="lb-select" id="lb-direction">
-                <option value="">— optional —</option>
+              <label for="lb-direction">Direction *</label>
+              <select class="lb-select" id="lb-direction" required>
+                <option value="" disabled selected>— choose one —</option>
                 <option value="long">Long</option>
                 <option value="short">Short</option>
               </select>
@@ -809,6 +809,7 @@
         const file = fileInput.files && fileInput.files[0];
 
         if (!symbol) { showError('Symbol is required.'); return; }
+        if (!direction) { showError('Was it a missed long or a missed short? Pick one.'); return; }
         if (!pnlRaw || isNaN(claimedPnl) || claimedPnl <= 0) { showError('Enter how much you left on the table.'); return; }
         if (!storyText) { showError('Tell us the story — that field is required.'); return; }
         if (!file) { showError('A screenshot is required.'); return; }
@@ -824,12 +825,12 @@
 
           const payload = {
             symbol: symbol,
+            direction: direction,
             claimedPnl: claimedPnl,
             storyText: storyText,
             screenshotBase64: base64,
             screenshotMimeType: file.type || 'image/png'
           };
-          if (direction) payload.direction = direction;
           if (currency) payload.currency = currency;
           if (planText) payload.planText = planText;
           if (submitterName) payload.submitterName = submitterName;
