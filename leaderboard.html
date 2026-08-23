@@ -222,13 +222,13 @@
       padding: clamp(22px, 4vw, 36px); display: flex; flex-direction: column; gap: 18px;
     }
     .lb-field { display: flex; flex-direction: column; gap: 6px; }
-    .lb-field label { font-size: 13px; font-weight: 700; color: var(--gray-700); }
-    .lb-field .hint { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+    .lb-field label { font-size: 15px; font-weight: 700; color: var(--gray-700); }
+    .lb-field .hint { font-size: 13.5px; color: var(--gray-500); font-weight: 400; }
     .lb-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 480px) { .lb-field-row { grid-template-columns: 1fr; } }
 
     .lb-input, .lb-select, .lb-textarea {
-      font: inherit; font-size: 15px; padding: 11px 14px;
+      font: inherit; font-size: 16px; padding: 12px 14px;
       border: 1.5px solid var(--gray-200); border-radius: 10px;
       background: var(--white); color: var(--ink); width: 100%;
       transition: border-color 0.15s ease;
@@ -252,7 +252,7 @@
 
     .lb-file-drop {
       border: 1.5px dashed var(--gray-300); border-radius: 10px; padding: 20px;
-      text-align: center; cursor: pointer; color: var(--gray-600); font-size: 14px;
+      text-align: center; cursor: pointer; color: var(--gray-600); font-size: 15px;
       transition: border-color 0.15s ease, background 0.15s ease;
     }
     .lb-file-drop:hover { border-color: var(--blue-600); background: var(--blue-50); }
@@ -263,16 +263,16 @@
     .lb-submit-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--blue-600); color: white; border: none; border-radius: 999px;
-      font-size: 15px; font-weight: 700; padding: 14px 28px; cursor: pointer;
+      font-size: 16px; font-weight: 700; padding: 15px 28px; cursor: pointer;
       transition: background 0.2s ease;
     }
     .lb-submit-btn:hover { background: var(--blue-700); }
     .lb-submit-btn:disabled { background: var(--gray-300); cursor: not-allowed; }
 
-    .lb-form-note { font-size: 12px; color: var(--gray-500); line-height: 1.5; text-align: center; }
+    .lb-form-note { font-size: 13.5px; color: var(--gray-500); line-height: 1.5; text-align: center; }
     .lb-form-error {
       color: var(--red-600); background: var(--red-50); border: 1px solid var(--red-200);
-      border-radius: 10px; padding: 10px 14px; font-size: 13px; display: none;
+      border-radius: 10px; padding: 10px 14px; font-size: 14.5px; display: none;
     }
     .lb-form-error.show { display: block; }
 
