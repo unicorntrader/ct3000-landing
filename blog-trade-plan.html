@@ -24,6 +24,7 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --green-50: #f0fdf4; --green-600: #16a34a; --red-600: #dc2626;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -122,6 +123,47 @@
       display: block; width: 100%; height: auto;
       margin: 32px 0;
       border-radius: 12px; border: 1px solid var(--gray-200);
+    }
+
+    /* Feature demo -- the real Trade Plan card instead of an abstract
+       entry/stop/target price-level diagram. */
+    .feature-demo {
+      max-width: 420px; margin: 36px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+    }
+    .feature-demo-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .feature-demo-bar img { height: 18px; width: 18px; display: block; }
+    .feature-demo-bar span { font-size: 12px; font-weight: 700; color: var(--gray-500); }
+    .feature-demo-body { padding: 16px; }
+    .fd-plan-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .fd-plan-sym { font-size: 15px; font-weight: 800; color: var(--ink); }
+    .fd-plan-pill {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em;
+      background: var(--green-50); color: var(--green-600);
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .fd-plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+    .fd-plan-cell {
+      background: var(--gray-50); border-radius: 10px; padding: 10px 8px; text-align: center;
+    }
+    .fd-plan-cell .lbl { font-size: 10.5px; color: var(--gray-500); font-weight: 500; margin-bottom: 2px; }
+    .fd-plan-cell .val { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .fd-plan-cell.stop .val { color: var(--red-600); }
+    .fd-plan-cell.target .val { color: var(--green-600); }
+    .fd-rr {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--blue-50); border-radius: 10px; padding: 10px 12px;
+    }
+    .fd-rr .lbl { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+    .fd-rr .val { font-size: 15px; font-weight: 800; color: var(--blue-700); }
+    .fd-caption {
+      text-align: center; font-size: 13px; color: var(--gray-500);
+      margin-top: 12px; font-style: italic;
     }
 
     .article-cta {
@@ -238,7 +280,34 @@
         <li><strong>Stop</strong> — the price where you've been proven wrong. Not wherever feels uncomfortable, but wherever the reason you entered stops applying.</li>
         <li><strong>Target</strong> — where you take profit, decided before the trade and left alone as it moves in your favor.</li>
       </ul>
-      <img src="diagram-trade-plan.png" alt="Diagram showing entry, stop, and target as three price levels on a trade" class="diagram">
+      <div class="feature-demo">
+        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Plan a trade</span></div>
+        <div class="feature-demo-body">
+          <div class="fd-plan-head">
+            <span class="fd-plan-sym">AAPL</span>
+            <span class="fd-plan-pill">LONG</span>
+          </div>
+          <div class="fd-plan-grid">
+            <div class="fd-plan-cell">
+              <div class="lbl">Entry</div>
+              <div class="val">$413.00</div>
+            </div>
+            <div class="fd-plan-cell stop">
+              <div class="lbl">Stop</div>
+              <div class="val">$405.00</div>
+            </div>
+            <div class="fd-plan-cell target">
+              <div class="lbl">Target</div>
+              <div class="val">$440.00</div>
+            </div>
+          </div>
+          <div class="fd-rr">
+            <span class="lbl">Risk : Reward</span>
+            <span class="val">3.38 : 1</span>
+          </div>
+        </div>
+      </div>
+      <p class="fd-caption">All three numbers, decided before the trade — CoTrader computes the risk:reward live as you set them.</p>
       <p>Miss any one of these before you enter and what you're holding isn't a plan. It's a hope with a ticker symbol attached.</p>
 
       <h2>Why plans fall apart before the trade even starts</h2>
