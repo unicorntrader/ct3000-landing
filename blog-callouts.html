@@ -25,7 +25,7 @@
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
       --green-500: #22c55e; --green-600: #16a34a; --green-700: #15803d;
-      --amber-500: #f59e0b;
+      --amber-500: #f59e0b; --amber-700: #b45309;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -106,16 +106,21 @@
     }
     .article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .article-cover .cover-mockup {
-      height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; padding: 24px;
+      height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 12px; padding: 32px;
     }
     .article-cover .mini-card {
       background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px;
-      box-shadow: 0 16px 36px -14px rgba(17,24,39,0.2); max-width: 100%;
+      box-shadow: 0 16px 36px -14px rgba(17,24,39,0.2);
+      width: 100%; max-width: 480px;
     }
     .article-cover .mini-callout { display: flex; align-items: flex-start; gap: 10px; padding: 16px 20px; border-left: 4px solid var(--green-500); }
+    .article-cover .mini-callout.warning { border-left-color: var(--amber-500); }
     .article-cover .mini-callout-icon { color: var(--green-600); font-weight: 700; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .article-cover .mini-callout.warning .mini-callout-icon { color: var(--amber-500); }
     .article-cover .mini-callout-text { font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.4; }
     .article-cover .mini-callout-text strong { color: var(--green-700); }
+    .article-cover .mini-callout.warning .mini-callout-text strong { color: var(--amber-700); }
 
     .article-body { max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--ink); line-height: 1.75; }
     .article-body p { margin-bottom: 22px; }
@@ -285,6 +290,14 @@
         <div class="mini-card mini-callout">
           <span class="mini-callout-icon">✓</span>
           <span class="mini-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
+        </div>
+        <div class="mini-card mini-callout warning">
+          <span class="mini-callout-icon">⚠</span>
+          <span class="mini-callout-text">Mondays are a drag — <strong>−$340 net</strong> across 6 trades</span>
+        </div>
+        <div class="mini-card mini-callout warning">
+          <span class="mini-callout-icon">⚠</span>
+          <span class="mini-callout-text">3 <strong>revenge trades</strong> opened within an hour of a loss</span>
         </div>
       </div>
     </div>
