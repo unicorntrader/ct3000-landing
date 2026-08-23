@@ -834,6 +834,18 @@
     .callout:last-child { margin-bottom: 0; }
     .callout.positive { border-left-color: var(--green-500); }
     .callout.warning  { border-left-color: var(--amber-500); }
+    .callout.locked   { border-left-color: var(--gray-300); background: var(--gray-50); }
+    .callout.locked .callout-header { cursor: default; }
+    .callout.locked .callout-header:hover { background: var(--gray-50); border-color: var(--gray-200); }
+    .callout.locked .callout-icon { color: var(--gray-400); font-size: 11px; }
+    .callout.locked .callout-title { color: var(--gray-500); }
+    .callout-lock-note {
+      flex-shrink: 0;
+      font-size: 10px; font-weight: 700;
+      color: var(--gray-400);
+      white-space: nowrap;
+      margin-top: 3px;
+    }
 
     .callout-header {
       display: flex; align-items: flex-start; gap: 10px;
@@ -1736,8 +1748,8 @@
           <div class="tab-panel" data-panel="insights">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Callouts</span>
-            <h3 class="reveal-row">Tap to see what's working. Tap to see what's not.</h3>
-            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. They fire only when the data shows something real. Tap any callout to see why it fired and what to try.</p>
+            <h3 class="reveal-row">Insights you have to earn.</h3>
+            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour — each one unlocked only once you've got real trade history behind it. No verdicts off three trades. Tap any callout to see why it fired.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -1804,6 +1816,15 @@
                   <div class="callout-detail-body">Revenge trading is entering an off-plan trade right after a loss — often sized larger — to "get it back". It's emotion-driven, not edge-driven.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
                   <div class="callout-detail-body">Set a hard rule: after any losing trade, no new entry for 30 minutes. If the idea still looks good after the cool-off, it was probably real.</div>
+                </div>
+              </div>
+
+              <div class="callouts-category">PLANNING</div>
+              <div class="callout locked">
+                <div class="callout-header">
+                  <span class="callout-icon">🔒</span>
+                  <span class="callout-title">Does planning your trades actually help you?</span>
+                  <span class="callout-lock-note">15 trades/side</span>
                 </div>
               </div>
               </div>
