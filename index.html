@@ -1126,6 +1126,45 @@
       color: var(--blue-200);
     }
 
+    /* ============ LEADERBOARD TEASER ============ */
+    .lb-teaser { background: var(--gray-50); border-top: 1px solid var(--gray-200); text-align: center; }
+    .lb-teaser .wrap { max-width: 720px; }
+    .lb-teaser-eyebrow {
+      display: inline-block; font-size: clamp(12px, 1.5vw, 14px); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber-700); margin-bottom: 14px;
+    }
+    .lb-teaser h2 { font-size: clamp(28px, 4.2vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; color: var(--ink); }
+    .lb-teaser > .wrap > p { font-size: 16px; color: var(--gray-600); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+    .lb-teaser-board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; text-align: left; }
+    .lbt-skel { height: 56px; border-radius: 12px; background: var(--gray-100); animation: lbtPulse 1.4s ease-in-out infinite; }
+    @keyframes lbtPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @media (prefers-reduced-motion: reduce) { .lbt-skel { animation: none; opacity: 0.7; } }
+    .lbt-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 14px 18px;
+    }
+    .lbt-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .lbt-symbol { font-weight: 800; font-size: 15px; color: var(--ink); flex-shrink: 0; }
+    .lbt-direction {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 999px; color: white; flex-shrink: 0;
+    }
+    .lbt-direction.long { background: var(--blue-600); }
+    .lbt-direction.short { background: var(--violet-500); }
+    .lbt-story { font-size: 13px; color: var(--gray-500); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lbt-right { text-align: right; flex-shrink: 0; }
+    .lbt-pnl { font-size: 15px; font-weight: 800; color: var(--amber-800); }
+    .lbt-name { font-size: 11px; color: var(--gray-400); }
+    .lbt-empty {
+      background: var(--white); border: 1.5px dashed var(--gray-300); border-radius: 14px;
+      padding: 28px 20px; text-align: center; color: var(--gray-600); font-size: 14.5px; line-height: 1.6;
+    }
+    .lbt-empty b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+    @media (max-width: 480px) {
+      .lbt-story { display: none; }
+      .lbt-card { flex-wrap: wrap; }
+    }
+
     /* ============ FAQ TEASER ============ */
     .faq-teaser { background: var(--ink); text-align: center; }
     .faq-teaser .wrap { max-width: 480px; }
@@ -1295,6 +1334,7 @@
         <a href="/faq">FAQ</a>
         <a href="/blog">Blog</a>
         <a href="/mentorship">Mentorship</a>
+        <a href="/leaderboard">Leaderboard</a>
         <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>
       </nav>
       <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
@@ -1307,6 +1347,7 @@
         <a href="/faq">FAQ</a>
         <a href="/blog">Blog</a>
         <a href="/mentorship">Mentorship</a>
+        <a href="/leaderboard">Leaderboard</a>
         <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>
     </nav>
   </header>
@@ -1960,6 +2001,20 @@
       </div>
     </section>
 
+    <!-- ============ LEADERBOARD TEASER ============ -->
+    <section class="lb-teaser">
+      <div class="wrap">
+        <span class="lb-teaser-eyebrow reveal">Missed trades leaderboard</span>
+        <h2 class="reveal">What did you miss?</h2>
+        <p class="reveal">Traders confess their biggest missed trades — screenshot required, ego optional. For laughs, not financial advice.</p>
+        <div class="lb-teaser-board" id="lb-teaser-board">
+          <div class="lbt-skel"></div>
+          <div class="lbt-skel"></div>
+        </div>
+        <a href="/leaderboard" class="cta-outline">See the board →</a>
+      </div>
+    </section>
+
     <!-- ============ FAQ TEASER ============ -->
     <section class="faq-teaser">
       <div class="wrap">
@@ -2003,6 +2058,7 @@
           <a href="/faq">FAQ</a>
           <a href="/blog">Blog</a>
           <a href="/mentorship">Mentorship</a>
+          <a href="/leaderboard">Leaderboard</a>
         </div>
         <div class="footer-col">
           <h5>Legal</h5>
@@ -2369,6 +2425,84 @@
           applyPrivacy(phone);
         });
       });
+    })();
+
+    // ─── Leaderboard teaser — top 2-3 entries, same source as /leaderboard ───
+    (function initLeaderboardTeaser() {
+      const board = document.getElementById('lb-teaser-board');
+      if (!board) return;
+      const LIST_URL = 'https://cotrader3000.com/api/leaderboard-list';
+      const MAX_SHOWN = 3;
+
+      function fmtMoney(amount, currency) {
+        const symbols = { USD: '$', EUR: '€', GBP: '£' };
+        const num = Number(amount);
+        const formatted = isNaN(num) ? String(amount) : num.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        const cur = (currency || 'USD').toString().toUpperCase().slice(0, 3);
+        const sym = symbols[cur];
+        return sym ? sym + formatted : formatted + ' ' + cur;
+      }
+
+      function renderEmpty() {
+        board.innerHTML = '';
+        const empty = document.createElement('div');
+        empty.className = 'lbt-empty';
+        const b = document.createElement('b');
+        b.textContent = "Nobody's confessed yet.";
+        empty.appendChild(b);
+        empty.appendChild(document.createTextNode('Be the first to admit what you missed.'));
+        board.appendChild(empty);
+      }
+
+      function cardNode(entry) {
+        const card = document.createElement('div');
+        card.className = 'lbt-card';
+
+        const left = document.createElement('div');
+        left.className = 'lbt-left';
+        const sym = document.createElement('span');
+        sym.className = 'lbt-symbol';
+        sym.textContent = entry.symbol || '—';
+        left.appendChild(sym);
+        if (entry.direction) {
+          const dir = document.createElement('span');
+          const d = String(entry.direction).toLowerCase();
+          dir.className = 'lbt-direction ' + (d === 'short' ? 'short' : 'long');
+          dir.textContent = d === 'short' ? 'Short' : 'Long';
+          left.appendChild(dir);
+        }
+        if (entry.storyText) {
+          const story = document.createElement('span');
+          story.className = 'lbt-story';
+          story.textContent = entry.storyText;
+          left.appendChild(story);
+        }
+        card.appendChild(left);
+
+        const right = document.createElement('div');
+        right.className = 'lbt-right';
+        const pnl = document.createElement('div');
+        pnl.className = 'lbt-pnl';
+        pnl.textContent = fmtMoney(entry.claimedPnl, entry.currency);
+        right.appendChild(pnl);
+        const name = document.createElement('div');
+        name.className = 'lbt-name';
+        name.textContent = '— ' + (entry.submitterName || 'Anonymous');
+        right.appendChild(name);
+        card.appendChild(right);
+
+        return card;
+      }
+
+      fetch(LIST_URL, { headers: { 'Accept': 'application/json' } })
+        .then(res => res.json().catch(() => null))
+        .then(data => {
+          const entries = data && data.success !== false ? (data.entries || []) : [];
+          if (!entries.length) { renderEmpty(); return; }
+          board.innerHTML = '';
+          entries.slice(0, MAX_SHOWN).forEach(entry => board.appendChild(cardNode(entry)));
+        })
+        .catch(() => renderEmpty());
     })();
   </script>
 </body>
