@@ -24,6 +24,7 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
+      --green-50: #f0fdf4; --green-600: #16a34a;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -122,6 +123,32 @@
       display: block; width: 100%; height: auto;
       margin: 32px 0;
       border-radius: 12px; border: 1px solid var(--gray-200);
+    }
+
+    /* Feature demo -- a real timeline of the week described below,
+       instead of an abstract day-one/day-seven milestone diagram. */
+    .feature-demo {
+      max-width: 480px; margin: 36px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+      padding: 20px;
+    }
+    .fd-day { display: flex; align-items: flex-start; gap: 12px; }
+    .fd-day-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--gray-100); color: var(--gray-600);
+      font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fd-day-num.done { background: var(--green-600); color: white; }
+    .fd-day-body { padding-top: 4px; }
+    .fd-day-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .fd-day-sub { font-size: 12.5px; color: var(--gray-500); margin-top: 2px; }
+    .fd-day-connector { width: 1px; height: 20px; background: var(--gray-200); margin-left: 16px; }
+    .fd-caption {
+      text-align: center; font-size: 13px; color: var(--gray-500);
+      margin-top: 12px; font-style: italic;
     }
 
     .article-cta {
@@ -231,7 +258,32 @@
     <div class="article-body">
       <p>New users almost never ask "how do I use this." They ask what they're supposed to do differently starting today. Honestly, for week one: almost nothing. The first week on CoTrader is about connecting your data and letting it build up, not about changing how you trade.</p>
 
-      <img src="diagram-first-week.png" alt="Timeline diagram showing day one and day seven as the key milestones of the first week" class="diagram">
+      <div class="feature-demo">
+        <div class="fd-day">
+          <div class="fd-day-num done">1</div>
+          <div class="fd-day-body">
+            <div class="fd-day-title">Connect &amp; import</div>
+            <div class="fd-day-sub">IBKR linked · 47 trades pulled in</div>
+          </div>
+        </div>
+        <div class="fd-day-connector"></div>
+        <div class="fd-day">
+          <div class="fd-day-num">2–6</div>
+          <div class="fd-day-body">
+            <div class="fd-day-title">Trade like normal</div>
+            <div class="fd-day-sub">Fills sync in the background</div>
+          </div>
+        </div>
+        <div class="fd-day-connector"></div>
+        <div class="fd-day">
+          <div class="fd-day-num done">7</div>
+          <div class="fd-day-body">
+            <div class="fd-day-title">First Weekly Review</div>
+            <div class="fd-day-sub">Net P&amp;L +$2,690 · 100% win rate</div>
+          </div>
+        </div>
+      </div>
+      <p class="fd-caption">The whole first week, in three steps — this is the map for the sections below.</p>
 
       <h2>Day one: connect and import</h2>
       <p>Link your IBKR account and CoTrader pulls your existing trade history in the background. If you've been trading for months, that history is already there and already organized the moment setup finishes — you're not starting from zero. The whole thing takes a few minutes, and it's the only manual step in the entire week.</p>
