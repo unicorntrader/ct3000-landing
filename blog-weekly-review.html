@@ -24,7 +24,7 @@
   <style>
     :root {
       --blue-600: #2563eb; --blue-700: #1d4ed8; --blue-50: #eff6ff; --blue-200: #bfdbfe;
-      --green-600: #16a34a;
+      --green-600: #16a34a; --green-50: #f0fdf4;
       --ink: #111827; --gray-700: #1f2937; --gray-600: #374151; --gray-500: #6b7280;
       --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb; --white: #ffffff;
     }
@@ -104,6 +104,18 @@
       background: var(--blue-50);
     }
     .article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .article-cover .cover-mockup { height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; padding: 32px; }
+    .article-cover .mini-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: 0 16px 36px -14px rgba(17,24,39,0.2); width: 100%; max-width: 560px; overflow: hidden; }
+    .article-cover .mini-bar { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--gray-100); }
+    .article-cover .mini-bar img { width: 18px; height: 18px; border-radius: 5px; }
+    .article-cover .mini-bar span { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+    .article-cover .mini-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .article-cover .mini-kpi { padding: 20px 16px; text-align: center; border-left: 1px solid var(--gray-100); }
+    .article-cover .mini-kpi:first-child { border-left: none; }
+    .article-cover .mini-kpi-lbl { font-size: 12px; color: var(--gray-500); font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; }
+    .article-cover .mini-kpi-val { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-top: 6px; }
+    .article-cover .mini-kpi-val.green { color: var(--green-600); }
+    .article-cover .mini-kpi-sub { font-size: 11.5px; color: var(--gray-500); margin-top: 3px; }
 
     .article-body { max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--ink); line-height: 1.75; }
     .article-body p { margin-bottom: 22px; }
@@ -265,7 +277,28 @@
     </div>
 
     <div class="article-cover">
-      <img src="cover-weekly-review.png" alt="" loading="lazy">
+      <div class="cover-mockup">
+        <div class="mini-card">
+          <div class="mini-bar"><img src="logo-mark.png" alt=""><span>Weekly Review</span></div>
+          <div class="mini-kpi-grid">
+            <div class="mini-kpi">
+              <div class="mini-kpi-lbl">Net P&amp;L</div>
+              <div class="mini-kpi-val green">+$2,690</div>
+              <div class="mini-kpi-sub">5 closed</div>
+            </div>
+            <div class="mini-kpi">
+              <div class="mini-kpi-lbl">Win rate</div>
+              <div class="mini-kpi-val">100%</div>
+              <div class="mini-kpi-sub">5W · 0L</div>
+            </div>
+            <div class="mini-kpi">
+              <div class="mini-kpi-lbl">Avg / trade</div>
+              <div class="mini-kpi-val green">+$538</div>
+              <div class="mini-kpi-sub">expectancy</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="article-body">
