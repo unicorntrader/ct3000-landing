@@ -1037,6 +1037,49 @@
     .symbol-table .sym { color: var(--blue-600); font-weight: 700; }
     .symbol-table .pnl-pos { color: var(--green-600); }
 
+    /* ============ HOW IT WORKS ============ */
+    .how-it-works { background: var(--white); text-align: center; }
+    .how-it-works .wrap { max-width: 880px; }
+    .how-it-works .section-eyebrow { display: block; }
+    .how-it-works h2 {
+      font-size: clamp(28px, 5.5vw, 46px);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .how-lead {
+      font-size: 17px; color: var(--gray-600);
+      max-width: 520px; margin: 0 auto 64px;
+      line-height: 1.6;
+    }
+    .how-steps {
+      display: flex; align-items: flex-start; justify-content: center;
+      text-align: left;
+    }
+    .how-step { flex: 1; max-width: 240px; }
+    .how-step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--blue-600); color: white;
+      font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .how-step h3 {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .how-step p { font-size: 14.5px; color: var(--gray-600); line-height: 1.55; }
+    .how-step-connector {
+      flex-shrink: 0; width: 64px; height: 1px;
+      background: var(--gray-200); margin-top: 40px;
+    }
+    @media (max-width: 760px) {
+      .how-steps { flex-direction: column; gap: 32px; }
+      .how-step { max-width: none; }
+      .how-step-connector { display: none; }
+      .how-lead { margin-bottom: 44px; }
+    }
+
     /* ============ MENTORSHIP TEASER ============ */
     .mentorship-teaser {
       background: var(--ink);
@@ -1977,6 +2020,34 @@
           </div>
           </div>
           </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how-it-works">
+      <div class="wrap">
+        <span class="section-eyebrow reveal">How it works</span>
+        <h2 class="reveal">From first sync to knowing your edge</h2>
+        <p class="how-lead reveal">No manual entry, no spreadsheets — connect your broker once and the rest builds itself.</p>
+        <div class="how-steps">
+          <div class="how-step reveal">
+            <div class="how-step-num">1</div>
+            <h3>Connect your broker</h3>
+            <p>Sync your IBKR account and your trade history is pulled in and organized automatically.</p>
+          </div>
+          <div class="how-step-connector" aria-hidden="true"></div>
+          <div class="how-step reveal">
+            <div class="how-step-num">2</div>
+            <h3>Trade like normal</h3>
+            <p>Keep trading on your broker. Every fill syncs and matches into a trade in the background.</p>
+          </div>
+          <div class="how-step-connector" aria-hidden="true"></div>
+          <div class="how-step reveal">
+            <div class="how-step-num">3</div>
+            <h3>See your edge</h3>
+            <p>Weekly reviews and Callouts surface what's actually working — and what's quietly costing you.</p>
+          </div>
+        </div>
       </div>
     </section>
 
