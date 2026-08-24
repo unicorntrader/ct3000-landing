@@ -175,17 +175,29 @@
          with room to spare, so raised to 1300px: still comfortably
          under whatever value the export bug was actually hitting, but
          high enough that no normal or tall desktop window reaches it. */
-      /* -84px extra on top of the header allowance carves out room for
-         the trust bar so it lands in the same first screen as the hero
-         instead of requiring a scroll to reach. */
-      min-height: clamp(600px, calc(100vh - 70px - 84px), 1300px);
-      min-height: clamp(600px, calc(100dvh - 70px - 84px), 1300px);
+      min-height: clamp(600px, calc(100vh - 70px), 1300px);
+      min-height: clamp(600px, calc(100dvh - 70px), 1300px);
+      /* Padding lives on .hero-inner now, not here -- otherwise the
+         generic `section { padding: clamp(...) }` base rule (same
+         specificity as a lone type selector loses to nothing once this
+         class has no padding of its own) sneaks back in and adds up to
+         110px of dead space above/below the trust bar. */
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+    }
+    /* Hero's own centered content, plus the trust bar as a second flex
+       child pinned flush to the hero's bottom edge -- instead of the
+       trust bar sitting as a separate section with a gap before it,
+       which read as a stray floating block underneath a too-tall hero. */
+    .hero-inner {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 48px 0;
       text-align: center;
-      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
     .hero + section { padding-top: 48px; }
     /* Staggered load-in: headline, then subhead, then buttons -- one
@@ -278,12 +290,14 @@
     }
 
     /* ============ TRUST BAR ============ */
-    .trust-bar { background: var(--white); padding: 20px 0; }
+    /* Nested as the hero's own last flex child (transparent, so it
+       reads as part of the hero's gradient, not a separate block). */
+    .trust-bar { padding: 20px 0; }
     .trust-row {
       display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
       gap: 24px;
     }
-    .trust-item { display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 180px; }
+    .trust-item { display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 155px; }
     .trust-icon {
       flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px;
       color: var(--blue-600);
@@ -1474,6 +1488,7 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
+      <div class="hero-inner">
       <div class="wrap">
         <div class="hero-text">
           <h1>Never wing a trade again.</h1>
@@ -1520,37 +1535,43 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ============ TRUST BAR ============ -->
-    <section class="trust-bar">
-      <div class="wrap trust-row">
-        <div class="trust-item">
-          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M23 4v6h-6"/><path stroke-linecap="round" stroke-linejoin="round" d="M1 20v-6h6"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
-          <div class="trust-text">
-            <div class="trust-label">Direct broker sync</div>
-            <div class="trust-sub">IBKR, auto-matched</div>
+      </div>
+      <div class="trust-bar">
+        <div class="wrap trust-row">
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M23 4v6h-6"/><path stroke-linecap="round" stroke-linejoin="round" d="M1 20v-6h6"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
+            <div class="trust-text">
+              <div class="trust-label">Direct broker sync</div>
+              <div class="trust-sub">IBKR, auto-matched</div>
+            </div>
           </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg></div>
-          <div class="trust-text">
-            <div class="trust-label">Real insights</div>
-            <div class="trust-sub">From your own data</div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg></div>
+            <div class="trust-text">
+              <div class="trust-label">Real insights</div>
+              <div class="trust-sub">From your own data</div>
+            </div>
           </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg></div>
-          <div class="trust-text">
-            <div class="trust-label">1:1 mentorship</div>
-            <div class="trust-sub">Weekly or bi-weekly coaching calls</div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/></svg></div>
+            <div class="trust-text">
+              <div class="trust-label">Built by traders</div>
+              <div class="trust-sub">We use it ourselves</div>
+            </div>
           </div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="trust-text">
-            <div class="trust-label">Free trial</div>
-            <div class="trust-sub">No card required</div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg></div>
+            <div class="trust-text">
+              <div class="trust-label">1:1 mentorship</div>
+              <div class="trust-sub">Weekly or bi-weekly calls</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="trust-text">
+              <div class="trust-label">Free trial</div>
+              <div class="trust-sub">No card required</div>
+            </div>
           </div>
         </div>
       </div>
