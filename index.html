@@ -157,10 +157,37 @@
       .hero-text .cta-row { justify-content: flex-start; }
       .hero-visual {
         display: block; flex-shrink: 0;
-        width: clamp(320px, 30vw, 420px);
+        width: clamp(380px, 36vw, 520px);
         opacity: 0; animation: heroReveal 0.7s ease forwards; animation-delay: 0.55s;
       }
+      .hero-visual .phone { max-width: 500px; }
     }
+    /* Extra rows inside the hero's phone mockup -- Callouts + a tagged
+       trade underneath the KPIs, so the hero shows the breadth of what
+       the app actually tracks instead of just one weekly stat card. */
+    .hero-callouts { margin-bottom: 10px; }
+    .hero-callout {
+      display: flex; align-items: flex-start; gap: 7px;
+      padding: 8px 10px; border-radius: 8px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-left: 3px solid var(--gray-300);
+      margin-bottom: 6px;
+    }
+    .hero-callout:last-child { margin-bottom: 0; }
+    .hero-callout.positive { border-left-color: var(--green-500); }
+    .hero-callout.warning { border-left-color: var(--amber-500); }
+    .hero-callout-icon { flex-shrink: 0; font-size: 11px; font-weight: 700; margin-top: 1px; }
+    .hero-callout.positive .hero-callout-icon { color: var(--green-600); }
+    .hero-callout.warning .hero-callout-icon { color: var(--amber-500); }
+    .hero-callout-text { font-size: 11.5px; color: var(--ink); line-height: 1.4; }
+    .hero-callout-text strong { font-weight: 700; }
+    .hero-tagrow {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 10px;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px;
+      font-size: 11.5px; color: var(--ink);
+    }
+    .hero-tagrow strong { font-weight: 700; }
 
     /* ============ TRUST BAR ============ */
     /* Its own section below the hero (Gather's pattern) rather than
@@ -1368,6 +1395,21 @@
                 <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" style="color:var(--green-600);">+$2,690</div><div class="sub">5 closed</div></div>
                 <div class="kpi"><div class="lbl">Win rate</div><div class="val">100%</div><div class="sub">5W · 0L</div></div>
                 <div class="kpi"><div class="lbl">Avg / trade</div><div class="val">+$538</div><div class="sub">expectancy</div></div>
+              </div>
+              <div class="hero-callouts">
+                <div class="hero-callout positive">
+                  <span class="hero-callout-icon">✓</span>
+                  <span class="hero-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
+                </div>
+                <div class="hero-callout warning">
+                  <span class="hero-callout-icon">⚠</span>
+                  <span class="hero-callout-text">Mondays are a drag — <strong>−$340</strong> net</span>
+                </div>
+              </div>
+              <div class="hero-tagrow">
+                Tagged <strong>TSLA</strong>
+                <span class="activity-pill blue">Breakout</span>
+                <span class="activity-pill green">Good exit</span>
               </div>
             </div>
           </div>
