@@ -35,6 +35,21 @@
         /* ============ SECTION ANCHORS ============ */
     /* ============ HERO ============ */
     .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 0;
+      text-align: center;
+      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+      flex: 1;
+    }
+    /* True full-viewport box (Gather calls theirs .hero-stage) -- .hero
+       and .trust-bar are both children of this in a flex column, .hero
+       flexing to fill whatever's left after the trust bar's natural
+       height, so the trust bar is always visible in the first screen
+       instead of needing height math that goes stale the moment either
+       section's content changes. */
+    .hero-stage {
       position: relative;
       /* Unbounded vh/dvh here made Safari's Export-as-PDF balloon the
          hero to swallow the whole page -- PDF export flattens the
@@ -55,13 +70,9 @@
       min-height: clamp(600px, calc(100vh - 70px), 1300px);
       min-height: clamp(600px, calc(100dvh - 70px), 1300px);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 0;
-      text-align: center;
-      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+      flex-direction: column;
     }
-    .hero + section { padding-top: 48px; }
+    .hero-stage + section { padding-top: 48px; }
     /* Staggered load-in: headline, then subhead, then buttons -- one
        after another instead of the whole hero appearing at once. */
     @keyframes heroReveal {
@@ -1231,9 +1242,9 @@
          the tallest value that still keeps that heading essentially
          fully below the fold (an ~8px hairline at most) without
          reopening a large empty gap under the CTA. */
-      .hero {
+      .hero-stage {
         /* clamp() ceiling here for the same reason as the desktop
-           .hero rule -- unbounded vh/dvh let Safari's Export-as-PDF
+           .hero-stage rule -- unbounded vh/dvh let Safari's Export-as-PDF
            balloon the hero and swallow the rest of the page. 800px
            cap is well above what 86% resolves to on any real phone
            (698px on a 812px-tall iPhone), so it doesn't change the
@@ -1247,6 +1258,8 @@
            the next section's heading sits below the real fold until
            you scroll and the bar collapses. */
         min-height: clamp(480px, 86dvh, 800px);
+      }
+      .hero {
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         padding: 40px 0 28px;
@@ -1264,7 +1277,7 @@
       .hero p.lead { max-width: 36ch; }
       .hero .cta-row { width: 100%; }
       .hero .cta-row .cta-primary { width: 100%; justify-content: center; }
-      .hero + section { padding-top: 32px; }
+      .hero-stage + section { padding-top: 32px; }
       .workflow-grid { grid-template-columns: 1fr; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
       .final-cta { padding: 80px 0; }
@@ -1312,6 +1325,7 @@
 
   <main>
     <!-- ============ HERO ============ -->
+    <section class="hero-stage">
     <section class="hero">
       <div class="wrap">
         <div class="hero-text">
@@ -1400,6 +1414,7 @@
             </div>
           </div>
         </div>
+    </section>
     </section>
 
     <!-- ============ FEATURE TABS ============ -->
