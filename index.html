@@ -229,7 +229,11 @@
     }
 
     /* ============ FEATURE TABS ============ */
-    .feature-tabs { background: var(--gray-50); }
+    /* White, not gray-50 -- trust-bar, feature-tabs, and how-it-works
+       were three sections in a row all sharing the exact same
+       background with nothing to separate them. This breaks the run
+       into an alternating gray/white/gray rhythm instead. */
+    .feature-tabs { background: var(--white); }
     .feature-tabs-head { text-align: center; margin-bottom: 88px; }
     .feature-tabs-head h2 {
       font-size: clamp(28px, 5.5vw, 52px);
@@ -245,7 +249,7 @@
     .tab-row-hint { display: none; }
     .tab-btn {
       display: flex; flex-direction: column; align-items: center; gap: 0;
-      background: var(--white); border: 2px solid var(--gray-200);
+      background: var(--gray-50); border: 2px solid var(--gray-200);
       border-radius: 16px;
       padding: 20px; width: 200px;
       cursor: pointer; transition: all 0.2s ease;
