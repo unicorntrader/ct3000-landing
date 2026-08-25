@@ -90,7 +90,7 @@
     a:hover { color: var(--blue-700); }
     button { cursor: pointer; font: inherit; border: 0; background: transparent; }
 
-    .wrap { max-width: 1080px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; }
+    .wrap { max-width: 1380px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; }
 
     /* ============ HEADER ============ */
     .site-header {
@@ -109,7 +109,8 @@
       display: inline-flex; align-items: center;
       color: var(--ink);
     }
-    .brand svg { height: clamp(20px, 4vw, 24px); width: auto; display: block; }
+    .brand svg { height: clamp(20px, 4vw, 24px); width: auto; display: block; transition: height 0.28s ease; }
+    .site-header.scrolled .brand svg { height: 17px; }
     .site-nav { display: flex; align-items: center; gap: 26px; }
     .site-nav a:not(.nav-cta) { font-size: 15px; font-weight: 700; color: var(--gray-600); }
     .site-nav a:not(.nav-cta):hover { color: var(--blue-600); }
@@ -318,11 +319,6 @@
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
-    /* 5 tab-btn squares at 200px + 4 gaps need ~1064px of actual content
-       width -- the base .wrap (1080px minus its own side padding) was too
-       narrow for that once the buttons grew, dropping the 5th to its own
-       row. This section gets a wider wrap so all 5 fit on one line. */
-    .feature-tabs .wrap { max-width: 1200px; }
     .feature-tabs-head { text-align: center; margin-bottom: 88px; }
     .feature-tabs-head h2 {
       font-size: clamp(28px, 5.5vw, 52px);
@@ -1104,12 +1100,11 @@
        Gather's "How it works" timeline pattern, rebuilt with our own
        existing activity/callout components instead of new illustration. */
     .how-it-works { background: var(--gray-50); }
-    .how-it-works .wrap { max-width: 1120px; }
     .how-wrap {
       display: grid; grid-template-columns: 340px 1fr; gap: 64px;
       align-items: start;
     }
-    .how-intro { position: sticky; top: 120px; }
+    .how-intro { position: static; }
     .how-intro h2 {
       font-size: clamp(28px, 4vw, 42px);
       font-weight: 700; letter-spacing: -0.03em;
@@ -1150,7 +1145,6 @@
     }
     @media (max-width: 900px) {
       .how-wrap { grid-template-columns: 1fr; gap: 32px; }
-      .how-intro { position: static; }
       .how-card { flex-direction: column; padding: 28px 20px 20px 60px; }
       .how-card-demo { width: 100%; }
     }
@@ -1160,7 +1154,18 @@
       background: var(--ink);
       color: white;
       text-align: center;
+      position: relative;
     }
+    /* Organic wave edges instead of a hard rectangular color boundary --
+       transparent-background svg with the ink fill only in the curved
+       band, pulled up/down via negative margin so it bleeds into the
+       neighboring section (gray-50 above, white below) rather than
+       sitting flush inside the ink box. */
+    .mts-wave { display: block; line-height: 0; }
+    .mts-wave svg { display: block; width: 100%; height: clamp(28px, 4vw, 48px); }
+    .mts-wave path { fill: var(--ink); }
+    .mts-wave-top { margin-top: calc(-1 * clamp(28px, 4vw, 48px)); }
+    .mts-wave-bottom { margin-bottom: calc(-1 * clamp(28px, 4vw, 48px)); }
     .mentorship-teaser .wrap { max-width: 680px; }
     .teaser-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -1402,7 +1407,7 @@
       background: linear-gradient(180deg, var(--ink) 0%, var(--gray-700) 100%);
       padding: 72px 0 32px;
     }
-    .site-footer .wrap { max-width: 1080px; }
+    .site-footer .wrap { max-width: 1380px; }
     .footer-inner {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -2245,6 +2250,9 @@
 
     <!-- ============ MENTORSHIP TEASER ============ -->
     <section class="mentorship-teaser" id="mentorship">
+      <div class="mts-wave mts-wave-top" aria-hidden="true">
+        <svg viewBox="0 0 1440 64" preserveAspectRatio="none"><path d="M0 40 C180 8 320 56 480 36 C640 16 780 4 960 28 C1120 48 1280 20 1440 32 L1440 64 L0 64 Z"/></svg>
+      </div>
       <div class="wrap">
         <span class="teaser-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg>
@@ -2258,6 +2266,9 @@
           <span class="teaser-chip">Trade plan reviews</span>
         </div>
         <a href="/mentorship" class="cta-secondary">More on mentorship programs →</a>
+      </div>
+      <div class="mts-wave mts-wave-bottom" aria-hidden="true">
+        <svg viewBox="0 0 1440 64" preserveAspectRatio="none"><path d="M0 0 L1440 0 L1440 24 C1280 44 1120 16 960 36 C780 58 640 48 480 28 C320 8 180 52 0 24 Z"/></svg>
       </div>
     </section>
 
@@ -2378,6 +2389,15 @@
           btn.setAttribute('aria-expanded', 'false');
         });
       });
+    })();
+
+    // ─── Header logo shrinks once the page has scrolled ────────────────
+    (function initHeaderShrink() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const update = () => header.classList.toggle('scrolled', window.scrollY > 12);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
     })();
 
     // ─── Scroll-triggered reveal for section headings/cards ───────────
