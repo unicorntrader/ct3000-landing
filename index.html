@@ -69,6 +69,11 @@
          high enough that no normal or tall desktop window reaches it. */
       min-height: clamp(600px, calc(100vh - 70px), 1300px);
       min-height: clamp(600px, calc(100dvh - 70px), 1300px);
+      /* Same generic `section { padding: clamp(...) }` trap hit before on
+         .hero -- .hero-stage is a <section> too, so without an explicit
+         override it silently picks up ~110px of padding top and bottom,
+         which showed up as dead space after the trust bar. */
+      padding: 0;
       display: flex;
       flex-direction: column;
     }
