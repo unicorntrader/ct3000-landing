@@ -315,9 +315,6 @@
       .trust-row { justify-content: flex-start; }
       .trust-item { flex: 1 1 45%; min-width: 140px; max-width: none; }
     }
-    @media (max-width: 480px) {
-      .trust-item { flex: 1 1 100%; }
-    }
 
     /* ============ FEATURE TABS ============ */
     .feature-tabs { background: var(--gray-50); }
@@ -378,15 +375,6 @@
       .tab-panel.active { grid-template-columns: 1fr; gap: 36px; }
       .tab-btn { width: 160px; }
       .tab-btn img { height: 95px; }
-      /* Selecting a tab then scrolling down to see the (now single-column,
-         much taller) panel meant scrolling all the way back up just to
-         try another tab. Sticking the row under the site header keeps
-         it reachable from anywhere in the panel. */
-      .tab-row {
-        position: sticky; top: 60px; z-index: 20;
-        background: var(--gray-50);
-        padding-top: 8px;
-      }
     }
     /* Mobile: a wrapping grid of 5 tap targets pushed the result panel
        several rows down, so tapping a tab didn't visibly change anything
