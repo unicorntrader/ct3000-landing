@@ -178,27 +178,12 @@
          high enough that no normal or tall desktop window reaches it. */
       min-height: clamp(600px, calc(100vh - 70px), 1300px);
       min-height: clamp(600px, calc(100dvh - 70px), 1300px);
-      /* Padding lives on .hero-inner now, not here -- otherwise the
-         generic `section { padding: clamp(...) }` base rule (same
-         specificity as a lone type selector loses to nothing once this
-         class has no padding of its own) sneaks back in and adds up to
-         110px of dead space above/below the trust bar. */
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
-    }
-    /* Hero's own centered content, plus the trust bar as a second flex
-       child pinned flush to the hero's bottom edge -- instead of the
-       trust bar sitting as a separate section with a gap before it,
-       which read as a stray floating block underneath a too-tall hero. */
-    .hero-inner {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 48px 0;
       text-align: center;
+      background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
     }
     .hero + section { padding-top: 48px; }
     /* Staggered load-in: headline, then subhead, then buttons -- one
@@ -291,9 +276,15 @@
     }
 
     /* ============ TRUST BAR ============ */
-    /* Nested as the hero's own last flex child (transparent, so it
-       reads as part of the hero's gradient, not a separate block). */
-    .trust-bar { padding: 28px 0; border-top: 1px solid var(--gray-200); }
+    /* Its own section below the hero (Gather's pattern) rather than
+       nested inside it -- means it needs a scroll on shorter viewports
+       to reach, but reads as a distinct, self-contained strip. */
+    .trust-bar {
+      padding: 28px 0;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+    }
     /* No .wrap here on purpose -- this spans the full hero width edge
        to edge (like Gather's own trust bar), not the site's usual
        1080px content column, so it doesn't sit centered with empty
@@ -345,7 +336,8 @@
     .tab-btn.active { border-color: var(--blue-600); }
     .tab-btn.active span { color: var(--blue-600); }
 
-    .tab-panels { max-width: 1200px; margin: 0 auto; min-height: 260px; }
+    .tab-panels { max-width: 1200px; margin: 0 auto; min-height: 260px; transition: opacity 0.22s ease; }
+    .tab-panels.is-fading { opacity: 0; }
     .tab-panel { display: none; }
     .tab-panel.active {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -1466,7 +1458,7 @@
         <a href="/blog">Blog</a>
         <a href="/mentorship">Mentorship</a>
         <a href="/leaderboard">Leaderboard</a>
-        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Start free trial</a>
       </nav>
       <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
         <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -1479,14 +1471,13 @@
         <a href="/blog">Blog</a>
         <a href="/mentorship">Mentorship</a>
         <a href="/leaderboard">Leaderboard</a>
-        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Find my edge</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Start free trial</a>
     </nav>
   </header>
 
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero-inner">
       <div class="wrap">
         <div class="hero-text">
           <h1>Never wing a trade again.</h1>
@@ -1533,9 +1524,11 @@
           </div>
         </div>
       </div>
-      </div>
-      <div class="trust-bar">
-        <div class="trust-row">
+    </section>
+
+    <!-- ============ TRUST BAR ============ -->
+    <section class="trust-bar">
+      <div class="trust-row">
           <div class="trust-item">
             <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M23 4v6h-6"/><path stroke-linecap="round" stroke-linejoin="round" d="M1 20v-6h6"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
             <div class="trust-text">
@@ -1572,7 +1565,6 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
 
     <!-- ============ FEATURE TABS ============ -->
@@ -2310,7 +2302,7 @@
     <section class="final-cta">
       <div class="wrap">
         <h2 class="reveal">Know your edge.</h2>
-        <a href="https://cotrader3000.com/subscribe" class="cta-primary" style="margin-top: 32px;">Find my edge</a>
+        <a href="https://cotrader3000.com/subscribe" class="cta-primary" style="margin-top: 32px;">Start free trial →</a>
       </div>
     </section>
   </main>
@@ -2640,9 +2632,21 @@
       }
 
       const tabRowEl = document.querySelector('.tab-row');
+      const tabPanelsEl = document.querySelector('.tab-panels');
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-          activate(tab.dataset.tab);
+          // Cross-fade the panel out/in around the swap instead of an
+          // instant pop -- matches Gather's tab-switch treatment.
+          if (reduceMotion || !tabPanelsEl) {
+            activate(tab.dataset.tab);
+          } else {
+            tabPanelsEl.classList.add('is-fading');
+            setTimeout(() => {
+              activate(tab.dataset.tab);
+              void tabPanelsEl.offsetWidth;
+              tabPanelsEl.classList.remove('is-fading');
+            }, 220);
+          }
           // On mobile the tab row scrolls horizontally and only shows
           // part of the set at once -- auto-advance it so the tapped tab
           // moves to the start, revealing the next ones instead of
