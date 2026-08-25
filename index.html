@@ -149,7 +149,7 @@
     .hero-visual { display: none; }
     @media (min-width: 960px) {
       .hero .wrap {
-        display: flex; align-items: center; justify-content: space-between;
+        display: flex; align-items: center; justify-content: flex-start;
         gap: 56px; text-align: left;
       }
       .hero-text { flex: 1; max-width: 560px; }
@@ -182,12 +182,13 @@
     .hero-callout-text { font-size: 11.5px; color: var(--ink); line-height: 1.4; }
     .hero-callout-text strong { font-weight: 700; }
     .hero-tagrow {
-      display: flex; align-items: center; gap: 6px;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
       padding: 8px 10px;
       background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px;
       font-size: 11.5px; color: var(--ink);
     }
     .hero-tagrow strong { font-weight: 700; }
+    .hero-tagrow-more { margin-top: 6px; color: var(--gray-500); }
 
     /* ============ TRUST BAR ============ */
     /* Its own section below the hero (Gather's pattern) rather than
@@ -928,11 +929,13 @@
     .activity-text .pos { color: var(--green-600); font-weight: 700; }
     .activity-time { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
     .activity-pill {
-      display: inline-block; font-size: 10px; font-weight: 700;
-      padding: 2px 8px; border-radius: 999px; margin-left: 4px;
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px; margin-left: 4px;
     }
     .activity-pill.blue  { background: var(--blue-50);  color: var(--blue-700); }
     .activity-pill.green { background: var(--green-50); color: var(--green-700); }
+    .activity-pill.gray  { background: var(--gray-100); color: var(--gray-700); }
+    .activity-pill.amber { background: var(--amber-100); color: var(--amber-800); }
 
     /* Phone visual — used in the feature tabs */
     .phone {
@@ -1411,6 +1414,12 @@
                 <span class="activity-pill blue">Breakout</span>
                 <span class="activity-pill green">Good exit</span>
               </div>
+              <div class="hero-tagrow hero-tagrow-more">
+                Auto-tagged
+                <span class="activity-pill gray">Scale in</span>
+                <span class="activity-pill gray">Scale out</span>
+                <span class="activity-pill amber">Overtraded</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1445,7 +1454,7 @@
             <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg></div>
             <div class="trust-text">
               <div class="trust-label">1:1 mentorship</div>
-              <div class="trust-sub">Weekly or bi-weekly calls for Mentorship users</div>
+              <div class="trust-sub">For Mentorship users</div>
             </div>
           </div>
           <div class="trust-item">
