@@ -12,11 +12,11 @@
   <meta property="og:url" content="https://cotraderapp.com/mentorship">
   <meta property="og:title" content="Mentorship Programs — CoTrader 3000">
   <meta property="og:description" content="1:1 mentorship to build discipline, process, and a professional trading practice.">
-  <meta property="og:image" content="https://cotraderapp.com/logo-mark.png">
-  <meta property="og:image:width" content="859">
-  <meta property="og:image:height" content="859">
+  <meta property="og:image" content="https://cotraderapp.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://cotraderapp.com/logo-mark.png">
+  <meta name="twitter:image" content="https://cotraderapp.com/og-image.png">
 
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
@@ -174,11 +174,18 @@
       padding: 5px 0;
     }
     .mentorship-blog-link {
-      display: block; text-align: center;
-      font-size: 14px; font-weight: 700; color: var(--blue-600);
-      margin: 8px 0 40px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: fit-content; margin: 8px auto 40px;
+      background: var(--blue-50); border: 1px solid var(--blue-200);
+      border-radius: 10px; padding: 14px 24px;
+      font-size: 16px; font-weight: 700; color: var(--blue-600);
+      transition: all 0.2s ease;
     }
-    .mentorship-blog-link:hover { color: var(--blue-700); }
+    .mentorship-blog-link:hover {
+      background: var(--blue-200); color: var(--blue-700);
+      border-color: var(--blue-600);
+      transform: translateY(-1px);
+    }
     .mentorship-cta { text-align: center; }
     .mentorship-disclaimer {
       font-size: 13px; color: var(--gray-500);
