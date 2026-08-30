@@ -10,7 +10,7 @@
   <meta name="description" content="The complete trading workflow. Plan your setups, sync your fills, log your misses, see your patterns. Discipline over P&L.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com">
-  <meta property="og:title" content="CoTrader 3000 — trading made simpler">
+  <meta property="og:title" content="CoTrader 3000: trading made simpler">
   <meta property="og:description" content="Plan. Execute. Journal. Review. Repeat.">
   <meta property="og:image" content="https://cotraderapp.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -241,23 +241,32 @@
       font-weight: 700; letter-spacing: -0.03em;
       color: var(--ink);
     }
+    /* Compact text-only tab bar (Gather's pattern) -- the old row of
+       big image-cards ate ~180px of height and needed a horizontal
+       swipe strip on mobile. Labels alone sit on one short rail on
+       desktop and wrap cleanly on phones, with the result panel right
+       underneath. */
     .tab-row {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 88px;
+      display: flex; gap: 2px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 72px;
       scroll-margin-top: 80px;
+    }
+    @media (min-width: 641px) {
+      .tab-row { flex-wrap: nowrap; border-bottom: 1px solid var(--gray-200); }
     }
     .tab-row-hint { display: none; }
     .tab-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 0;
-      background: var(--gray-50); border: 2px solid var(--gray-200);
-      border-radius: 16px;
-      padding: 20px; width: 200px;
-      cursor: pointer; transition: all 0.2s ease;
+      display: inline-flex; align-items: center;
+      background: transparent; border: 0;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      padding: 14px 20px;
+      cursor: pointer;
+      transition: color 0.18s ease, border-color 0.18s ease;
     }
-    .tab-btn img { width: 100%; height: 130px; object-fit: contain; margin-bottom: 12px; }
-    .tab-btn span { font-size: 15px; font-weight: 700; color: var(--gray-600); }
-    .tab-btn:hover { border-color: var(--blue-200); }
-    .tab-btn.active { border-color: var(--blue-600); }
+    .tab-btn span { font-size: 15px; font-weight: 700; color: var(--gray-600); white-space: nowrap; }
+    .tab-btn:hover span { color: var(--ink); }
+    .tab-btn.active { border-bottom-color: var(--blue-600); }
     .tab-btn.active span { color: var(--blue-600); }
 
     .tab-panels { max-width: 1200px; margin: 0 auto; min-height: 260px; transition: opacity 0.22s ease; }
@@ -285,50 +294,11 @@
     }
     @media (max-width: 800px) {
       .tab-panel.active { grid-template-columns: 1fr; gap: 36px; }
-      .tab-btn { width: 160px; }
-      .tab-btn img { height: 95px; }
     }
-    /* Mobile: a wrapping grid of 5 tap targets pushed the result panel
-       several rows down, so tapping a tab didn't visibly change anything
-       on screen. A single horizontally-scrolling row (Gather's pattern)
-       keeps the strip short and the panel right underneath it. */
     @media (max-width: 640px) {
-      .tab-row {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        /* Margin/padding must exactly match the wrap's own fluid gutter
-           (clamp(20px, 5vw, 48px)) -- a hardcoded -24px/24px pair here
-           doesn't match that gutter's actual computed value at most
-           phone widths (it clamps to 20px, not 24px), so the row's
-           negative margin overshot the viewport's left edge by 4px:
-           real horizontal overflow, invisible in scrollWidth checks
-           since it's leftward past the origin, but very much draggable
-           on a real touchscreen. */
-        margin: 0 calc(-1 * clamp(20px, 5vw, 48px)) 12px;
-        padding: 4px clamp(20px, 5vw, 48px) 8px;
-        /* Without this, snap-align:start on the first/last card counts
-           the row's own edge padding as "outside" the snap area, so the
-           browser auto-corrects scrollLeft on load to collapse it --
-           the card sat flush against the screen edge despite the padding.
-           scroll-padding tells the snap engine the padding IS the inset. */
-        scroll-padding-left: clamp(20px, 5vw, 48px);
-        scroll-padding-right: clamp(20px, 5vw, 48px);
-      }
-      .tab-row::-webkit-scrollbar { display: none; }
-      .tab-row { scrollbar-width: none; }
-      .tab-btn { flex: 0 0 auto; width: 112px; padding: 12px; scroll-snap-align: start; }
-      .tab-btn img { height: 60px; margin-bottom: 8px; }
-      .tab-btn span { font-size: 12px; }
-      .tab-row-hint {
-        display: flex; align-items: center; justify-content: center; gap: 6px;
-        font-size: 12px; font-weight: 600; color: var(--blue-600);
-        margin: 0 0 32px;
-      }
-      .tab-row-hint svg { animation: hintNudge 1.4s ease-in-out infinite; }
-      @keyframes hintNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+      .tab-row { gap: 0 6px; margin-bottom: 44px; }
+      .tab-btn { padding: 10px 12px; }
+      .tab-btn span { font-size: 14px; }
     }
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
@@ -1415,7 +1385,7 @@
                 </div>
                 <div class="hero-callout warning">
                   <span class="hero-callout-icon">⚠</span>
-                  <span class="hero-callout-text">Mondays are a drag — <strong>−$340</strong> net</span>
+                  <span class="hero-callout-text">Mondays are a drag: <strong>−$340</strong> net</span>
                 </div>
               </div>
               <div class="hero-tagrow">
@@ -1486,29 +1456,20 @@
 
         <div class="tab-row" role="tablist">
           <button class="tab-btn active" data-tab="plans" role="tab" aria-selected="true">
-            <img src="feature-plans.png" alt="">
             <span>Plans</span>
           </button>
           <button class="tab-btn" data-tab="auto-sync" role="tab" aria-selected="false">
-            <img src="feature-auto-sync.png" alt="">
             <span>Auto-sync</span>
           </button>
           <button class="tab-btn" data-tab="journal" role="tab" aria-selected="false">
-            <img src="feature-journal.png" alt="">
             <span>Journal</span>
           </button>
           <button class="tab-btn" data-tab="weekly-review" role="tab" aria-selected="false">
-            <img src="feature-weekly-review.png" alt="">
             <span>Weekly review</span>
           </button>
           <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false">
-            <img src="feature-insights.png" alt="">
             <span>Insights</span>
           </button>
-        </div>
-        <div class="tab-row-hint" aria-hidden="true">
-          Swipe to see all
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
         </div>
 
           <div class="tab-panels">
@@ -1586,7 +1547,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Auto-sync</span>
             <h3 class="reveal-row">Every fill, pulled in.</h3>
-            <p class="reveal-row">Connect once. Every trade flows in — automatic. No CSVs. No copy-paste.</p>
+            <p class="reveal-row">Connect once. Every trade flows in, automatic. No CSVs. No copy-paste.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1610,7 +1571,7 @@
                 <div class="activity-item">
                   <span class="activity-check">✓</span>
                   <div class="activity-text">
-                    Synced 1 trade — <strong>AAPL</strong>
+                    Synced 1 trade: <strong>AAPL</strong>
                     <div class="activity-time">2h ago</div>
                   </div>
                 </div>
@@ -1881,7 +1842,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Weekly review</span>
             <h3 class="reveal-row">How did the week go?</h3>
-            <p class="reveal-row">Net P&amp;L, win rate, average trade — one screen per week. A 2-minute retrospective ritual. Cycle through the weeks to spot patterns and drift.</p>
+            <p class="reveal-row">Net P&amp;L, win rate, average trade: one screen per week. A 2-minute retrospective ritual. Cycle through the weeks to spot patterns and drift.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1919,7 +1880,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Callouts</span>
             <h3 class="reveal-row">Insights you have to earn.</h3>
-            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour — each one unlocked only once you've got real trade history behind it. No verdicts off three trades. Tap any callout to see why it fired.</p>
+            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. Each one unlocks only once you've got real trade history behind it. No verdicts off three trades. Tap any callout to see why it fired.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -1966,9 +1927,9 @@
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">A symbol where you have a real edge — enough trades to trust the signal, and you're winning 3 of 4. Concentration here is working in your favour.</div>
+                  <div class="callout-detail-body">A symbol where you have a real edge: enough trades to trust the signal, and you're winning 3 of 4. Concentration here is working in your favour.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Study what's different about how you play this one — setup, timing, sizing. That pattern may be repeatable on similar names.</div>
+                  <div class="callout-detail-body">Study what's different about how you play this one: setup, timing, sizing. That pattern may be repeatable on similar names.</div>
                 </div>
               </div>
 
@@ -1976,14 +1937,14 @@
               <div class="callout warning" data-callout-expand>
                 <div class="callout-header">
                   <span class="callout-icon">⚠</span>
-                  <span class="callout-title">Mondays are a drag — <span data-mask>−$340</span> net across 6 trades.</span>
+                  <span class="callout-title">Mondays are a drag: <span data-mask>−$340</span> net across 6 trades.</span>
                   <span class="callout-chevron">˅</span>
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
                   <div class="callout-detail-body">This weekday is a consistent drag on P&amp;L. Common culprits: start-of-week hesitation, low-quality setups, or forcing trades when nothing is moving.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Skip Mondays for 2 weeks and compare. If total P&amp;L goes up, you've found a free return — fewer trades, more profit.</div>
+                  <div class="callout-detail-body">Skip Mondays for 2 weeks and compare. If total P&amp;L goes up, you've found a free return: fewer trades, more profit.</div>
                 </div>
               </div>
 
@@ -1996,7 +1957,7 @@
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">Revenge trading is entering an off-plan trade right after a loss — often sized larger — to "get it back". It's emotion-driven, not edge-driven.</div>
+                  <div class="callout-detail-body">Revenge trading is entering an off-plan trade right after a loss (often sized larger) to "get it back". It's emotion-driven, not edge-driven.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
                   <div class="callout-detail-body">Set a hard rule: after any losing trade, no new entry for 30 minutes. If the idea still looks good after the cool-off, it was probably real.</div>
                 </div>
@@ -2089,7 +2050,7 @@
         <div class="how-intro">
           <span class="section-eyebrow reveal">How it works</span>
           <h2 class="reveal">From first sync to knowing your edge</h2>
-          <p class="how-lead reveal">No manual entry, no spreadsheets — connect your broker once and the rest builds itself.</p>
+          <p class="how-lead reveal">No manual entry, no spreadsheets. Connect your broker once and the rest builds itself.</p>
         </div>
         <div class="how-timeline">
           <div class="how-card reveal">
@@ -2102,7 +2063,7 @@
               <div class="activity-item">
                 <span class="activity-check">✓</span>
                 <div class="activity-text">
-                  Synced 1 trade — <strong>AAPL</strong>
+                  Synced 1 trade: <strong>AAPL</strong>
                   <div class="activity-time">4 seconds after linking</div>
                 </div>
               </div>
@@ -2135,7 +2096,7 @@
             <div class="how-card-num">3</div>
             <div class="how-card-text">
               <h3>See your edge</h3>
-              <p>Weekly reviews and Callouts surface what's actually working — and what's quietly costing you.</p>
+              <p>Weekly reviews and Callouts surface what's actually working, and what's quietly costing you.</p>
             </div>
             <div class="how-card-demo" aria-hidden="true">
               <div class="callout positive">
@@ -2179,7 +2140,7 @@
       <div class="wrap">
         <div class="testimonial-card reveal">
           <div class="testimonial-stars" aria-hidden="true">★★★★★</div>
-          <p class="testimonial-quote">"I used to rush to short every dip. Once I saw the patterns costing me money, I cut them out — P&amp;L's better and there's a lot less stress. Fear and FOMO are basically gone now."</p>
+          <p class="testimonial-quote">"I used to rush to short every dip. Once I saw the patterns costing me money, I cut them out. P&amp;L's better and there's a lot less stress. Fear and FOMO are basically gone now."</p>
           <p class="testimonial-name">— Niklas</p>
         </div>
       </div>
@@ -2190,7 +2151,7 @@
       <div class="wrap">
         <span class="lb-teaser-eyebrow reveal">Missed trades leaderboard</span>
         <h2 class="reveal">What did you miss?</h2>
-        <p class="reveal">Traders confess their biggest missed trades — screenshot required, ego optional. For laughs, not financial advice.</p>
+        <p class="reveal">Traders confess their biggest missed trades: screenshot required, ego optional. For laughs, not financial advice.</p>
         <div class="lb-teaser-board" id="lb-teaser-board">
           <div class="lbt-skel"></div>
           <div class="lbt-skel"></div>
@@ -2203,7 +2164,7 @@
     <section class="faq-teaser">
       <div class="wrap">
         <h2 class="reveal">Still have questions?</h2>
-        <p class="reveal">Pricing, setup, data, and mentorship — answered in plain English.</p>
+        <p class="reveal">Pricing, setup, data, and mentorship: answered in plain English.</p>
         <a href="/faq" class="cta-outline">Read the FAQ →</a>
       </div>
     </section>
@@ -2553,21 +2514,6 @@
               void tabPanelsEl.offsetWidth;
               tabPanelsEl.classList.remove('is-fading');
             }, 220);
-          }
-          // On mobile the tab row scrolls horizontally and only shows
-          // part of the set at once -- auto-advance it so the tapped tab
-          // moves to the start, revealing the next ones instead of
-          // requiring a manual swipe on top of the tap. Direct scrollLeft
-          // assignment, not behavior:'smooth' or a requestAnimationFrame
-          // tween -- both were tried and neither reliably moved this row
-          // (verified rAF itself never ticks in at least one test
-          // environment; the risk wasn't worth gambling on animation
-          // over a scroll that's actually confirmed to happen). No-ops
-          // on desktop where the whole row already fits (target clamps
-          // to 0).
-          if (tabRowEl) {
-            const target = tab.offsetLeft - tabRowEl.clientLeft - parseFloat(getComputedStyle(tabRowEl).paddingLeft || 0);
-            tabRowEl.scrollLeft = Math.max(0, target);
           }
           // A tap could leave the (just-changed) result below the fold on
           // mobile -- scroll the tab row to just under the sticky header
