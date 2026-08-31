@@ -7,10 +7,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>Leaderboard - CT3000</title>
-  <meta name="description" content="Traders confess their biggest missed trades. Screenshot required, ego optional. For entertainment only — nothing here is verified.">
+  <meta name="description" content="Traders confess their biggest missed trades. Screenshot required, ego optional. For entertainment only. Nothing here is verified.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com/leaderboard">
-  <meta property="og:title" content="Missed Trades Leaderboard — CoTrader 3000">
+  <meta property="og:title" content="Missed Trades Leaderboard · CoTrader 3000">
   <meta property="og:description" content="Traders confess their biggest missed trades. Screenshot required, ego optional.">
   <meta property="og:image" content="https://cotraderapp.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -280,7 +280,7 @@
         <span class="eyebrow">For entertainment only</span>
         <h1>What did you miss?</h1>
         <p>Confess your biggest missed trade. Screenshot required, ego optional. Sorted by biggest miss, ranked by how much it stings.</p>
-        <span class="lb-disclaimer">Self-reported and unverified — this is for laughs, not financial advice.</span>
+        <span class="lb-disclaimer">Self-reported and unverified. This is for laughs, not financial advice.</span>
         <div class="lb-ctas">
           <a href="#submit" class="lb-btn lb-btn-primary">Submit your miss →</a>
           <a href="#board" class="lb-btn lb-btn-outline">See the board</a>
@@ -306,7 +306,7 @@
       <div class="wrap lb-wrap">
         <div class="lb-submit-head">
           <h2>Think you can top the board?</h2>
-          <p>Tell us what you saw, what you did instead, and why. A screenshot is required — we're not taking your word for it alone.</p>
+          <p>Tell us what you saw, what you did instead, and why. A screenshot is required. We're not taking your word for it alone.</p>
         </div>
 
         <form class="lb-form" id="lb-form" novalidate>
@@ -385,12 +385,12 @@
           <div class="lb-form-error" id="lb-form-error"></div>
 
           <button type="submit" class="lb-submit-btn" id="lb-submit-btn">Submit your miss</button>
-          <p class="lb-form-note">Submissions are manually reviewed before they appear on the board. Entertainment only — nothing here is verified or audited.</p>
+          <p class="lb-form-note">Submissions are manually reviewed before they appear on the board. Entertainment only. Nothing here is verified or audited.</p>
         </form>
 
         <div class="lb-success" id="lb-success">
           <div class="check">✓</div>
-          <h3>Thanks — under review!</h3>
+          <h3>Thanks, under review!</h3>
           <p>Your miss has been submitted. We manually check every entry before it goes live on the board, so it won't show up immediately.</p>
         </div>
       </div>
@@ -555,7 +555,7 @@
 
       function renderEmpty() {
         listContainer.innerHTML =
-          '<div class="lb-empty"><b>Nobody’s confessed yet.</b>Be the first to admit what you missed — the board is waiting.</div>';
+          '<div class="lb-empty"><b>Nobody’s confessed yet.</b>Be the first to admit what you missed. The board is waiting.</div>';
         countNote.textContent = '';
       }
 
@@ -738,7 +738,7 @@
           return;
         }
         if (file.size > MAX_FILE_BYTES) {
-          showError('That image is over 5MB — please use a smaller file.');
+          showError('That image is over 5MB. Please use a smaller file.');
           fileInput.value = '';
           fileDrop.classList.remove('has-file');
           fileLabel.textContent = 'Click to choose an image';
@@ -785,9 +785,9 @@
         if (!symbol) { showError('Symbol is required.'); return; }
         if (!direction) { showError('Was it a missed long or a missed short? Pick one.'); return; }
         if (!pnlRaw || isNaN(claimedPnl) || claimedPnl <= 0) { showError('Enter how much you left on the table.'); return; }
-        if (!storyText) { showError('Tell us the story — that field is required.'); return; }
+        if (!storyText) { showError('Tell us the story. That field is required.'); return; }
         if (!file) { showError('A screenshot is required.'); return; }
-        if (file.size > MAX_FILE_BYTES) { showError('That image is over 5MB — please use a smaller file.'); return; }
+        if (file.size > MAX_FILE_BYTES) { showError('That image is over 5MB. Please use a smaller file.'); return; }
         if (roiRaw && (isNaN(roiPercent) || roiPercent <= 0)) { showError('% ROI missed should be a positive number.'); return; }
 
         submitBtn.disabled = true;
@@ -825,19 +825,19 @@
                 successBox.classList.add('show');
                 successBox.scrollIntoView({ block: 'center' });
               } else {
-                showError((data && data.error) || 'Something went wrong submitting that — try again in a moment.');
+                showError((data && data.error) || 'Something went wrong submitting that. Try again in a moment.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit your miss';
               }
             })
             .catch(() => {
-              showError('Couldn’t reach the server — check your connection and try again.');
+              showError('Couldn’t reach the server. Check your connection and try again.');
               submitBtn.disabled = false;
               submitBtn.textContent = 'Submit your miss';
             });
         };
         reader.onerror = () => {
-          showError('Couldn’t read that file — try a different image.');
+          showError('Couldn’t read that file. Try a different image.');
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit your miss';
         };
