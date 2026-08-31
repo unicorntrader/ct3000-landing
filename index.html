@@ -247,19 +247,23 @@
       font-weight: 700; letter-spacing: -0.03em;
       color: var(--ink);
     }
-    /* Compact tab bar with line icons (Gather's pattern) -- the old row
-       of big image-cards ate ~180px of height and needed a horizontal
-       swipe strip on mobile. Icon + label sit on one rail on desktop
-       and wrap cleanly on phones, with the result panel right under. */
+    /* Compact tab bar with line icons (Gather's pattern) -- icon + label
+       on one rail. Desktop: the whole set fits, left-aligned. Mobile:
+       a single edge-to-edge scrolling strip with the last tab clipped
+       at the screen edge and a "Swipe to explore" hint underneath,
+       exactly like try-gather.co's mobile treatment. */
     .tab-row {
-      display: flex; gap: 2px; justify-content: flex-start; flex-wrap: wrap;
+      display: flex; gap: 2px; justify-content: flex-start; flex-wrap: nowrap;
       max-width: 1200px; margin: 0 auto 72px;
+      overflow-x: auto; scrollbar-width: none;
       scroll-margin-top: 80px;
     }
-    @media (min-width: 641px) {
-      .tab-row { flex-wrap: nowrap; border-bottom: 1px solid var(--gray-200); }
+    .tab-row::-webkit-scrollbar { display: none; }
+    @media (min-width: 768px) {
+      .tab-row { border-bottom: 1px solid var(--gray-200); }
     }
     .tab-row-hint { display: none; }
+    .tab-row-hint.is-hidden { display: none; }
     .tab-btn {
       display: inline-flex; align-items: center; gap: 8px;
       background: transparent; border: 0;
@@ -301,10 +305,33 @@
     @media (max-width: 800px) {
       .tab-panel.active { grid-template-columns: 1fr; gap: 36px; }
     }
-    @media (max-width: 640px) {
-      .tab-row { gap: 0 6px; margin-bottom: 44px; }
-      .tab-btn { padding: 10px 12px; }
+    @media (max-width: 767px) {
+      /* Edge-to-edge horizontal scroll strip. Negative margins /
+         matching padding bleed it to the viewport edges so the last
+         tab is visibly clipped at the right -- the cue that there's
+         more to swipe to (the hint below spells it out too). Margin
+         and padding must equal the wrap's own fluid gutter
+         (clamp(20px, 5vw, 48px)) exactly, or the strip over/undershoots
+         the screen edge. */
+      .tab-row {
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        border-bottom: 1px solid var(--gray-200);
+        margin: 0 calc(-1 * clamp(20px, 5vw, 48px)) 18px;
+        padding: 0 clamp(20px, 5vw, 48px);
+      }
+      .tab-btn { flex: 0 0 auto; padding: 12px 15px; }
       .tab-btn span { font-size: 14px; }
+      .tab-row-hint {
+        display: flex; align-items: center; justify-content: center; gap: 7px;
+        font-size: 12px; font-weight: 700;
+        letter-spacing: 0.09em; text-transform: uppercase;
+        color: var(--blue-600);
+        margin: 0 0 40px;
+        transition: opacity 0.3s ease;
+      }
+      .tab-row-hint svg { animation: hintNudge 1.4s ease-in-out infinite; }
+      @keyframes hintNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
     }
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
@@ -1482,6 +1509,10 @@
             <span>Insights</span>
           </button>
         </div>
+        <div class="tab-row-hint" aria-hidden="true">
+          Swipe to explore
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
 
           <div class="tab-panels">
           <div class="tab-panel active" data-panel="plans">
@@ -2530,11 +2561,39 @@
           // mobile -- scroll the tab row to just under the sticky header
           // so the switch is visible, and the tabs stay in view as context
           // instead of scrolling straight to the panel.
-          if (window.innerWidth <= 640 && tabRowEl) {
+          if (window.innerWidth <= 767 && tabRowEl) {
             tabRowEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // If the tapped tab is partly clipped at either edge of the
+            // scroll strip, nudge it fully into view (horizontal only).
+            const t = tab.getBoundingClientRect();
+            const r = tabRowEl.getBoundingClientRect();
+            if (t.left < r.left) {
+              tabRowEl.scrollBy({ left: t.left - r.left - 12, behavior: 'smooth' });
+            } else if (t.right > r.right) {
+              tabRowEl.scrollBy({ left: t.right - r.right + 12, behavior: 'smooth' });
+            }
           }
         });
       });
+
+      // "Swipe to explore" hint -- only meaningful while the strip
+      // actually overflows and hasn't been scrolled yet. Hide it when
+      // everything fits, and fade it once the user starts swiping.
+      const hintEl = document.querySelector('.tab-row-hint');
+      if (hintEl && tabRowEl) {
+        const syncHint = () => {
+          const scrollable = tabRowEl.scrollWidth > tabRowEl.clientWidth + 4;
+          const atStart = tabRowEl.scrollLeft < 16;
+          hintEl.classList.toggle('is-hidden', !scrollable);
+          hintEl.style.opacity = scrollable && atStart ? '' : '0';
+        };
+        syncHint();
+        requestAnimationFrame(syncHint);
+        window.addEventListener('load', syncHint);
+        tabRowEl.addEventListener('scroll', syncHint, { passive: true });
+        window.addEventListener('resize', syncHint);
+        if (window.ResizeObserver) new ResizeObserver(syncHint).observe(tabRowEl);
+      }
     })();
 
     // ─── ROW 3 · Expandable Taken trade rows ──────────────────────────
