@@ -1031,14 +1031,16 @@
     .drop-zone {
       display: flex; align-items: center; gap: 10px;
       border: 1.5px dashed var(--gray-300); border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 13px; font-weight: 700; color: var(--gray-600);
+      padding: 12px 16px;
     }
     .drop-zone > svg {
       width: 18px; height: 18px; flex-shrink: 0;
       stroke: var(--blue-600); fill: none;
       stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     }
+    .dz-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .dz-title { font-size: 13px; font-weight: 700; color: var(--gray-600); }
+    .dz-hint { font-size: 11px; font-weight: 600; color: var(--gray-500); }
     .drop-day {
       margin-left: auto; flex-shrink: 0;
       font-size: 11px; font-weight: 700; color: var(--gray-500);
@@ -1739,12 +1741,15 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Charts</span>
             <h3 class="reveal-row">Charts that file themselves.</h3>
-            <p class="reveal-row">Drag every screenshot from the session onto the dashboard and each one finds its trade. It reads the ticker in the filename, not the chart, so MSTR.png is enough. Nothing to label, nothing to match up.</p>
+            <p class="reveal-row">Drag every screenshot from the session onto the dashboard and each one finds its trade. It reads the ticker, not the chart. Nothing to label, nothing to match up.</p>
             </div>
           <div class="drop-demo reveal-row" aria-hidden="true">
             <div class="drop-zone">
               <svg viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
-              Drop the session's charts
+              <div class="dz-text">
+                <span class="dz-title">Drop the session's charts</span>
+                <span class="dz-hint">Filename just needs the ticker, like MSTR.png</span>
+              </div>
               <span class="drop-day">Today ▾</span>
             </div>
             <div class="drop-files">
