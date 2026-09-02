@@ -7,11 +7,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>Connecting IBKR to CoTrader - CT3000</title>
-  <meta name="description" content="Why CoTrader only supports Interactive Brokers, what read-only access actually means, and what to expect from the few-minute setup.">
+  <meta name="description" content="A step-by-step guide to connecting Interactive Brokers to CoTrader with an Activity Flex Query and the Flex Web Service, plus what read-only access means.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cotraderapp.com/blog-connecting-ibkr">
   <meta property="og:title" content="Connecting Interactive Brokers to CoTrader · CoTrader 3000 Blog">
-  <meta property="og:description" content="The 5-minute setup: start to first synced trade.">
+  <meta property="og:description" content="The Flex Query setup, step by step: from IBKR Client Portal to your first synced trade.">
   <meta property="og:image" content="https://cotraderapp.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -107,6 +107,59 @@
       margin-top: 12px; font-style: italic;
     }
 
+    /* Numbered steps inside the how-to sections. */
+    .article-body ol { margin: 0 0 22px 22px; }
+    .article-body ol li { margin-bottom: 10px; padding-left: 4px; }
+
+    /* Annotated IBKR screenshots. */
+    .article-body figure.shot { margin: 28px 0; }
+    .article-body figure.shot img {
+      display: block; width: 100%; height: auto;
+      border-radius: 10px; border: 1px solid var(--gray-200);
+    }
+    .article-body figure.shot figcaption {
+      font-size: 13px; color: var(--gray-500); margin-top: 8px; font-style: italic;
+    }
+
+    /* Inline note / caveat block. */
+    .article-body .note {
+      background: var(--amber-50); border: 1px solid var(--amber-200);
+      border-radius: 10px; padding: 16px 20px; margin: 24px 0;
+      font-size: 15px; line-height: 1.65; color: var(--gray-700);
+    }
+    .article-body .note strong { color: var(--amber-800); }
+
+    /* Mockup of the in-app "Connect IBKR Account" screen. */
+    .connect-mock {
+      max-width: 420px; margin: 32px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+    }
+    .connect-mock-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-bottom: 1px solid var(--gray-200);
+      font-size: 12px; font-weight: 700; color: var(--gray-500);
+    }
+    .connect-mock-body { padding: 18px 16px; }
+    .cm-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 6px; }
+    .cm-field {
+      border: 1px solid var(--gray-300); border-radius: 8px;
+      padding: 10px 12px; margin-bottom: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px; color: var(--gray-400); background: var(--gray-50);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cm-field .cm-show { font-family: 'General Sans', sans-serif; font-weight: 600; color: var(--blue-600); }
+    .cm-hint { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray-500); margin-bottom: 16px; }
+    .cm-actions { display: flex; gap: 8px; }
+    .cm-btn {
+      flex: 1; text-align: center; font-size: 12px; font-weight: 700;
+      padding: 9px 12px; border-radius: 999px;
+    }
+    .cm-btn.secondary { border: 1px solid var(--gray-300); color: var(--gray-600); }
+    .cm-btn.primary { background: var(--blue-600); color: var(--white); }
+
     .article-cta {
       max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; text-align: center;
       background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px;
@@ -168,7 +221,7 @@
     <div class="article-head">
       <span class="eyebrow">Using CoTrader</span>
       <h1>Connecting Interactive Brokers to CoTrader</h1>
-      <div class="meta">3 min read</div>
+      <div class="meta">7 min read</div>
     </div>
 
     <div class="article-cover">
@@ -178,22 +231,22 @@
           <div class="mini-activity">
             <span class="mini-activity-check">✓</span>
             <div>
-              <div class="mini-activity-text">Synced 1 trade: AAPL</div>
-              <div class="mini-activity-time">4 seconds after linking</div>
+              <div class="mini-activity-text">Daily refresh: 3 new fills added</div>
+              <div class="mini-activity-time">This morning</div>
             </div>
           </div>
           <div class="mini-activity">
             <span class="mini-activity-check">✓</span>
             <div>
-              <div class="mini-activity-text">Synced 1 trade: NVDA</div>
-              <div class="mini-activity-time">4 seconds after linking</div>
-            </div>
-          </div>
-          <div class="mini-activity">
-            <span class="mini-activity-check">✓</span>
-            <div>
-              <div class="mini-activity-text">Pulled 47 trades from account history</div>
+              <div class="mini-activity-text">Imported the last 30 days of trades</div>
               <div class="mini-activity-time">On connect</div>
+            </div>
+          </div>
+          <div class="mini-activity">
+            <span class="mini-activity-check">✓</span>
+            <div>
+              <div class="mini-activity-text">IBKR Flex Query connected</div>
+              <div class="mini-activity-time">Setup complete</div>
             </div>
           </div>
         </div>
@@ -201,54 +254,154 @@
     </div>
 
     <div class="article-body">
-      <p>CoTrader connects to one broker: Interactive Brokers. We're not planning to add others any time soon, because this choice is the whole reason the rest of the product works the way it does.</p>
+      <p>CoTrader reads your Interactive Brokers trade history through a <strong>Flex Query</strong>, a read-only report that IBKR generates on a schedule. Setup takes about five minutes, you do it once, and nothing in the process can place a trade. This guide walks through all of it.</p>
 
-      <p>IBKR gives us clean, complete fill data: every entry, every exit, every commission, timestamped accurately. Callouts and your Weekly Review are only as good as the data behind them, and a trade history that's "mostly accurate" produces insights that are only "mostly useful." Going deep on one broker beat supporting a dozen at a shallower level.</p>
+      <p>CoTrader connects to one broker only, and that is on purpose. IBKR gives us clean, complete fill data: every entry, every exit, every commission, timestamped accurately. Callouts and your Weekly Review are only as good as the data behind them, and a trade history that's "mostly accurate" produces insights that are only "mostly useful." Going deep on one broker beat supporting a dozen at a shallower level.</p>
 
       <h2>Read-only, on purpose</h2>
       <p>CoTrader can see your trade history. It cannot place, modify, or cancel a single order. There's no execution path in the app at all: nothing to click that touches your account's buying power.</p>
 
-      <p>Skipping execution wasn't a shortcut, it was a deliberate call. A journal that can also trade carries a much bigger blast radius when something goes wrong: a bug, a bad click, a stale session. Staying read-only means the worst case is "the data looks wrong," and never "a trade fired that I didn't want." Your actual trading keeps happening in IBKR, exactly where it already does.</p>
+      <p>Skipping execution was a deliberate call. A journal that can also trade carries a much bigger blast radius when something goes wrong: a bug, a bad click, a stale session. With read-only access the worst case is a number that looks off and gets corrected. Your actual trading keeps happening in IBKR, exactly where it already does.</p>
 
-      <h2>What setup involves</h2>
-      <p>Connecting your account takes a few minutes, not an afternoon. In short:</p>
+      <p>The Flex Query token you create below can pull one report and nothing else. It carries no trading permission of any kind.</p>
+
+      <h2>What you'll need</h2>
       <ul>
-        <li>Sign in and link your IBKR account from the CoTrader dashboard.</li>
-        <li>CoTrader pulls your existing trade history so you're not starting from a blank slate.</li>
-        <li>From that point on, new fills sync automatically. You don't re-import or re-connect for each session.</li>
+        <li>An Interactive Brokers account with some trade history.</li>
+        <li>Access to <strong>IBKR Client Portal</strong>, the browser login at interactivebrokers.com. These steps are not in TWS.</li>
+        <li>About five minutes.</li>
       </ul>
+      <p>By the end you'll have two values from IBKR, a <strong>Query ID</strong> and a <strong>token</strong>, which you paste into CoTrader once. Steps 1 to 3 happen in IBKR. Step 4 is in CoTrader.</p>
+
+      <h2>Step 1: Create the Flex Query in IBKR</h2>
+      <p>In Client Portal, open <strong>Performance &amp; Reports</strong> in the top menu, then <strong>Flex Queries</strong>.</p>
+      <figure class="shot">
+        <img src="/ibkr-flex-1.png" alt="IBKR Client Portal with Performance and Reports and the Flex Queries tab marked" loading="lazy">
+        <figcaption>Performance &amp; Reports, then the Flex Queries tab.</figcaption>
+      </figure>
+      <p>Next to <strong>Activity Flex Query</strong>, click <strong>+</strong> and give the new query a name you'll recognize later, such as <em>CT3000 Activity</em>.</p>
+      <figure class="shot">
+        <img src="/ibkr-flex-2.png" alt="The plus button on the Activity Flex Query panel and a named query" loading="lazy">
+        <figcaption>Create the query from the Activity Flex Query panel, then name it.</figcaption>
+      </figure>
+      <p>Then set it up like this:</p>
+      <ol>
+        <li>Under <strong>Sections</strong>, tick <strong>Trades</strong>, <strong>Open Positions</strong>, <strong>Account Information</strong> and <strong>Corporate Actions</strong>.</li>
+        <li>Open each of those four sections and choose <strong>Select All</strong>, so no fields are left out.</li>
+        <li>Under <strong>Delivery Configuration</strong>, set <strong>Format</strong> to <strong>XML</strong> and <strong>Period</strong> to <strong>Last 30 Calendar Days</strong>.</li>
+        <li>Under <strong>General Configuration</strong>, leave <strong>Date Format</strong> as <strong>yyyyMMdd</strong>, <strong>Time Format</strong> as <strong>HHmmss</strong> and <strong>Date/Time Separator</strong> as <strong>; (semi-colon)</strong>. These are the defaults, and CoTrader reads them.</li>
+        <li>Save the query.</li>
+      </ol>
+      <figure class="shot">
+        <img src="/ibkr-flex-3.png" alt="Trades, Open Positions, Account Information and Corporate Actions selected in the Sections list" loading="lazy">
+        <figcaption>The four sections to select.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/ibkr-flex-4.png" alt="Select All ticked inside the Trades section" loading="lazy">
+        <figcaption>Inside each section, tick Select All.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/ibkr-flex-5.png" alt="Format, Period and the date and time format fields set on the query" loading="lazy">
+        <figcaption>Format XML, Period Last 30 Calendar Days, and the date and time formats left at their defaults.</figcaption>
+      </figure>
+
+      <h2>Step 2: Turn on the Flex Web Service and copy the token</h2>
+      <p>The Flex Web Service is what lets CoTrader fetch the report by itself, so there is no export step on your side.</p>
+      <p>Back on the <strong>Flex Queries</strong> page, find the <strong>Flex Web Service Configuration</strong> panel and click the gear icon on it.</p>
+      <figure class="shot">
+        <img src="/ibkr-flex-6.png" alt="The gear icon on the Flex Web Service Configuration panel" loading="lazy">
+        <figcaption>The gear on the Flex Web Service Configuration panel.</figcaption>
+      </figure>
+      <ol>
+        <li>Tick <strong>Flex Web Service Status</strong>, then <strong>Save</strong>.</li>
+        <li>Copy the <strong>token</strong> that appears. It is a long string of digits. Keep it handy for Step 4.</li>
+      </ol>
+      <figure class="shot">
+        <img src="/ibkr-flex-7.png" alt="Flex Web Service Configuration page with the status box ticked and the token marked" loading="lazy">
+        <figcaption>Tick the status box, Save, then copy the token.</figcaption>
+      </figure>
+      <div class="note"><strong>Token expiry:</strong> IBKR ties the token to your account and expires it on the schedule you pick when you enable the service. If it lapses, come back to this page and generate a new one.</div>
+
+      <h2>Step 3: Copy the Query ID</h2>
+      <p>Back on the <strong>Flex Queries</strong> page, click the query you just made to open its details. The <strong>Query ID</strong> is the number at the top, next to the query name. That's your second value.</p>
+      <figure class="shot">
+        <img src="/ibkr-flex-8.png" alt="The Query ID field on the Activity Flex Query details page" loading="lazy">
+        <figcaption>The Query ID sits at the top of the query's details.</figcaption>
+      </figure>
+
+      <h2>Step 4: Paste both into CoTrader</h2>
+      <p>In CoTrader, open <strong>Settings</strong> and choose <strong>Manage IBKR connection</strong>.</p>
+      <figure class="shot">
+        <img src="/ibkr-flex-9.png" alt="The CoTrader settings menu with Manage IBKR connection highlighted" loading="lazy">
+        <figcaption>Settings, then Manage IBKR connection.</figcaption>
+      </figure>
+      <p>Enter the two values from IBKR:</p>
+      <div class="connect-mock">
+        <div class="connect-mock-bar"><span>Manage IBKR connection</span><span>✕</span></div>
+        <div class="connect-mock-body">
+          <div class="cm-label">Query ID</div>
+          <div class="cm-field">1234567</div>
+          <div class="cm-label">Token</div>
+          <div class="cm-field"><span>••••••••••••••••••••</span><span class="cm-show">Show</span></div>
+          <div class="cm-actions">
+            <span class="cm-btn secondary">Test Connection</span>
+            <span class="cm-btn primary">Save &amp; Sync</span>
+          </div>
+        </div>
+      </div>
+      <ol>
+        <li>Paste the <strong>Query ID</strong> and the <strong>token</strong> into their fields.</li>
+        <li>Click <strong>Test Connection</strong>. CoTrader asks IBKR for the report and confirms the two values work together.</li>
+        <li>Click <strong>Save &amp; Sync</strong>. The first import runs.</li>
+      </ol>
+      <p>That's the whole setup. You never open this screen again unless the token expires.</p>
+
+      <h2>How the sync works after that</h2>
+      <p>The Flex Query is a <strong>rolling 30-day window</strong>. In practice:</p>
+      <ul>
+        <li><strong>On connect:</strong> CoTrader imports your last 30 days of trades.</li>
+        <li><strong>Every day after:</strong> it re-runs the query, which always returns the most recent 30 days, and adds anything new to your CoTrader history.</li>
+        <li><strong>Over time:</strong> your record in CoTrader keeps growing, because CoTrader holds on to everything it has already pulled even though IBKR only ever serves the last month.</li>
+      </ul>
+      <p>The one gap: trades from more than 30 days before you connected. IBKR will not return them through this query, so they stay in IBKR and don't appear in CoTrader.</p>
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Recent activity</span></div>
         <div class="feature-demo-body">
-          <div class="fd-activity-head">Today</div>
+          <div class="fd-activity-head">This week</div>
           <div class="fd-activity-item">
             <span class="fd-activity-check">✓</span>
             <div>
-              <div class="fd-activity-text">Synced 1 trade: <strong>AAPL</strong></div>
-              <div class="fd-activity-time">4 seconds after linking</div>
+              <div class="fd-activity-text">Daily refresh: added <strong>MSFT</strong>, <strong>TSLA</strong></div>
+              <div class="fd-activity-time">This morning</div>
             </div>
           </div>
           <div class="fd-activity-item">
             <span class="fd-activity-check">✓</span>
             <div>
-              <div class="fd-activity-text">Synced 1 trade: <strong>NVDA</strong></div>
-              <div class="fd-activity-time">4 seconds after linking</div>
-            </div>
-          </div>
-          <div class="fd-activity-item">
-            <span class="fd-activity-check">✓</span>
-            <div>
-              <div class="fd-activity-text">Pulled 47 trades from account history</div>
+              <div class="fd-activity-text">Imported the last <strong>30 days</strong> of trades</div>
               <div class="fd-activity-time">On connect</div>
+            </div>
+          </div>
+          <div class="fd-activity-item">
+            <span class="fd-activity-check">✓</span>
+            <div>
+              <div class="fd-activity-text">IBKR Flex Query connected</div>
+              <div class="fd-activity-time">Setup complete</div>
             </div>
           </div>
         </div>
       </div>
       <p class="fd-caption">This is what "connected" actually looks like: no CSV, no manual entry.</p>
-      <p>No CSV to export, no manual entry, no reconciling two systems by hand. You keep trading in IBKR exactly like before; CoTrader just watches and organizes it.</p>
 
       <h2>After you're connected</h2>
-      <p>Once your history is in, everything else in CoTrader starts working immediately. Callouts can scan your past trades right away, and your first Weekly Review will already have real numbers behind it instead of a week of waiting. The setup is the only manual step. Everything after it runs in the background.</p>
+      <p>Once that first 30 days is in, the rest of CoTrader starts working straight away. Callouts can scan those trades immediately, and your first Weekly Review already has real numbers behind it instead of a week of waiting. Setup is the only manual step. The sync runs on its own from then on, roughly once a day.</p>
+
+      <h2>If a sync doesn't land</h2>
+      <ul>
+        <li><strong>Test Connection fails:</strong> re-check that the token and Query ID pasted cleanly with no trailing spaces, and that the Flex Web Service is still switched on in IBKR.</li>
+        <li><strong>A recent trade is missing:</strong> confirm the <strong>Trades</strong> section is set to <strong>Select All</strong>, then give it a day, since IBKR regenerates the report on its own schedule.</li>
+        <li><strong>Older trades never appeared:</strong> expected. The query only reaches back 30 days, and your history builds forward from the day you connected.</li>
+      </ul>
     </div>
 
     <div class="article-cta">
