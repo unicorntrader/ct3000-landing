@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="cotraderapp.com" src="https://plausible.io/js/script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+  <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
+  <title>Setting Up Your Trading Profile - CT3000</title>
+  <meta name="description" content="The six numbers in your CoTrader Trading Profile, what each one does, and which flags they turn on. About two minutes to fill in.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cotraderapp.com/blog-trading-profile">
+  <meta property="og:title" content="Setting Up Your Trading Profile · CoTrader 3000 Blog">
+  <meta property="og:description" content="Six numbers, what each one does, and the flags they turn on.">
+  <meta property="og:image" content="https://cotraderapp.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cotraderapp.com/og-image.png">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    body {
+      font-family: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .article-head { text-align: left; max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; padding: 24px 0 48px; }
+    .article-head .eyebrow {
+      display: inline-block; font-size: clamp(12px, 1.5vw, 14px); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 14px;
+    }
+    .article-head h1 {
+      font-size: clamp(34px, 5vw, 60px); font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.15; color: var(--ink); max-width: 1140px; margin: 0 0 16px;
+    }
+    .article-head .meta { font-size: 13px; color: var(--gray-500); }
+
+    .article-cover {
+      max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto 48px;
+      border-radius: 16px; overflow: hidden;
+      aspect-ratio: 2 / 1;
+      background: var(--blue-50);
+    }
+    .article-cover .cover-mockup { height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; padding: 32px; }
+    .article-cover .mini-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: 0 16px 36px -14px rgba(17,24,39,0.2); width: 100%; max-width: 420px; overflow: hidden; }
+    .article-cover .mini-bar { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-bottom: 1px solid var(--gray-100); }
+    .article-cover .mini-bar img { width: 18px; height: 18px; border-radius: 5px; }
+    .article-cover .mini-bar span { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+    .article-cover .mini-profile-body { padding: 8px 18px 14px; }
+    .article-cover .mini-profile-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--gray-100); }
+    .article-cover .mini-profile-row:first-child { border-top: none; }
+    .article-cover .mini-profile-row .k { font-size: 13px; color: var(--gray-600); }
+    .article-cover .mini-profile-row .v { font-size: 14px; font-weight: 700; color: var(--ink); }
+
+    .article-body { max-width: 760px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; padding: 0 0 96px; font-size: 17px; color: var(--ink); line-height: 1.75; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body h2 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink);
+      margin: 40px 0 16px;
+    }
+    .article-body ul { margin: 0 0 22px 20px; }
+    .article-body li { margin-bottom: 12px; }
+
+    .article-body .note {
+      background: var(--amber-50); border: 1px solid var(--amber-200);
+      border-radius: 10px; padding: 16px 20px; margin: 24px 0;
+      font-size: 15px; line-height: 1.65; color: var(--gray-700);
+    }
+    .article-body .note strong { color: var(--amber-800); }
+
+    /* The real activity-feed line an auto-flag produces. */
+    .feature-demo {
+      max-width: 460px; margin: 32px auto;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
+      overflow: hidden;
+    }
+    .feature-demo-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-bottom: 1px solid var(--gray-200);
+    }
+    .feature-demo-bar img { height: 18px; width: 18px; display: block; }
+    .feature-demo-bar span { font-size: 12px; font-weight: 700; color: var(--gray-500); }
+    .feature-demo-body { padding: 16px; }
+    .fd-flag { display: flex; align-items: flex-start; gap: 10px; }
+    .fd-flag-tag {
+      flex-shrink: 0; font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em;
+      background: var(--violet-500); color: var(--white);
+      padding: 3px 9px; border-radius: 999px; margin-top: 2px;
+    }
+    .fd-flag-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
+    .fd-caption {
+      text-align: center; font-size: 13px; color: var(--gray-500);
+      margin-top: 12px; font-style: italic;
+    }
+
+    .article-cta {
+      max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; text-align: center;
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .article-cta h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .article-cta p { font-size: 14px; color: var(--gray-600); margin-bottom: 20px; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-600); color: white; padding: 14px 28px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+    }
+    .cta-primary:hover { background: var(--blue-700); color: white; }
+    .back-to-blog { display: block; max-width: 1140px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; padding: 32px 0 0; text-align: left; font-size: 13px; font-weight: 600; color: var(--blue-600); }
+    .back-to-blog:hover { color: var(--blue-700); }
+
+        </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="brand">
+        <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+      </a>
+      <nav class="site-nav">
+        <a href="/#plans">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="/blog" class="current">Blog</a>
+        <a href="/mentorship">Mentorship</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Start free trial</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-menu">
+      <a href="/#plans">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="/blog" class="current">Blog</a>
+        <a href="/mentorship">Mentorship</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="https://cotrader3000.com/subscribe" class="nav-cta">Start free trial</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="/blog" class="back-to-blog">← All guides</a>
+    <div class="article-head">
+      <span class="eyebrow">Using CoTrader</span>
+      <h1>Setting up your Trading Profile</h1>
+      <div class="meta">4 min read</div>
+    </div>
+
+    <div class="article-cover">
+      <div class="cover-mockup">
+        <div class="mini-card">
+          <div class="mini-bar"><img src="logo-mark.png" alt=""><span>Trading Profile</span></div>
+          <div class="mini-profile-body">
+            <div class="mini-profile-row"><span class="k">Account size</span><span class="v">$50,000</span></div>
+            <div class="mini-profile-row"><span class="k">Max risk / trade</span><span class="v">1.5%</span></div>
+            <div class="mini-profile-row"><span class="k">Drawdown appetite</span><span class="v">4%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-body">
+      <p>Your Trading Profile is where you tell CoTrader your own rules: how much you're willing to risk on a trade, how big a losing day is too big, what kind of year you're aiming for. Once it's set, CoTrader flags the trades and days that break those rules so you notice the pattern instead of explaining it away.</p>
+
+      <p>It's optional, it takes about two minutes, and nothing you enter here can stop a trade. CoTrader is read-only. These are flags after the fact, not guardrails in the moment.</p>
+
+      <h2>Where to find it</h2>
+      <p>Open the menu from the top right, then <strong>Trading</strong> → <strong>Trading Profile</strong>. The screen is a single card of six numbers and a Save button. Every field is a plain number. The <strong>$</strong> and <strong>%</strong> next to them are just labels.</p>
+
+      <h2>The six numbers</h2>
+      <ul>
+        <li><strong>Account size.</strong> Total capital in the account. Everything else is a percentage of this one figure, so if you leave it blank, none of the flags below do anything.</li>
+        <li><strong>Max risk / trade.</strong> The share of your account you're willing to lose on a single trade, as a percent. This is the field that does the most work.</li>
+        <li><strong>Ideal risk / trade.</strong> Your target risk per trade. CoTrader only uses this if you leave Max risk empty, as a fallback. Set Max and this one just sits there for your own reference.</li>
+        <li><strong>Ideal daily volatility.</strong> The daily account swing you're comfortable with, as a percent. A day that loses more than this gets a <strong>Bad day</strong> flag.</li>
+        <li><strong>Drawdown appetite.</strong> The most you can stand to lose in a single day. A bigger daily loss gets a <strong>Drawdown breach</strong> flag. Set it above your ideal daily volatility: one means "worse than I'd like," the other means "this really hurt." It's measured on a single day's net loss, not a peak-to-trough equity drop.</li>
+        <li><strong>Return / year target.</strong> Your yearly return goal. This one is a number to write down for yourself. CoTrader doesn't measure anything against it yet.</li>
+      </ul>
+      <p>Fill in what you know, leave the rest blank, and hit <strong>Save profile</strong>. You can come back and change any of it whenever.</p>
+
+      <h2>What it flags</h2>
+      <p>Once a sync has processed your trades, CoTrader marks the ones that crossed your lines.</p>
+      <p>On individual trades, in your Smart Journal:</p>
+      <ul>
+        <li><strong>Overtraded</strong>: a planned trade whose intended risk, from your entry to your planned stop, worked out to more than your Max risk.</li>
+        <li><strong>Big loss</strong>: any losing trade whose actual loss came in above your Max risk.</li>
+      </ul>
+      <p>On days, as pills on the day header in the Daily view:</p>
+      <ul>
+        <li><strong>Bad day</strong>: the day's net loss cleared your ideal daily volatility.</li>
+        <li><strong>Drawdown breach</strong>: the day's net loss cleared your drawdown appetite.</li>
+        <li><strong>Over-risk</strong>: the day held at least one trade that got flagged.</li>
+      </ul>
+      <p>When a Big loss or Overtraded flag lands, it also drops a line in your Home activity feed with the numbers behind it.</p>
+      <div class="feature-demo">
+        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Recent activity</span></div>
+        <div class="feature-demo-body">
+          <div class="fd-flag">
+            <span class="fd-flag-tag">Big loss</span>
+            <div class="fd-flag-text">Lost $1,240 on <strong>NVDA</strong>, 2.5% of your account. Your limit is 1.5%. Thursday is now an Over-risk day.</div>
+          </div>
+        </div>
+      </div>
+      <p class="fd-caption">The flag, with the math it's based on.</p>
+
+      <h2>Good to know</h2>
+      <ul>
+        <li><strong>It only counts from when you set it up.</strong> The first save grades your recent history back to that day and no further. Trades and days from before never get flagged.</li>
+        <li><strong>Raising a limit later doesn't un-flag old trades.</strong> The trade tagger only adds, it never removes, so trades flagged under the old number keep their flag. Day pills for roughly the last month do recalculate on the next sync.</li>
+        <li><strong>You can dismiss any flag.</strong> Delete the tag and it stays gone, even after a re-sync.</li>
+      </ul>
+    </div>
+
+    <div class="article-cta">
+      <h3>Set your limits, then watch for the days you cross them</h3>
+      <p>Your Trading Profile turns your own rules into flags you can't argue with after the fact.</p>
+      <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="brand">
+            <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000">
+          <path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/>
+          <circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/>
+          <path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/>
+          <polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/>
+          <path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/>
+          <path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+          <path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/>
+        </svg>
+          </a>
+          <p>Know your edge.</p>
+          <a href="mailto:thinker@philoinvestor.com" class="footer-email">thinker@philoinvestor.com</a>
+        </div>
+        <div class="footer-col">
+          <h5>Links</h5>
+          <a href="/#plans">How it works</a>
+          <a href="/faq">FAQ</a>
+          <a href="/blog">Blog</a>
+          <a href="/mentorship">Mentorship</a>
+          <a href="/leaderboard">Leaderboard</a>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
+        <div class="footer-col">
+          <h5>Guides</h5>
+          <a href="/blog">All guides</a>
+          <a href="/blog-connecting-ibkr">Connecting IBKR</a>
+          <a href="/blog-overtrading">Why traders overtrade</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 CoTrader 3000. All rights reserved.</span>
+        <span class="footer-bottom-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', () => window.scrollTo(0, 0));
+
+    // ─── Mobile hamburger menu ─────────────────────────────────────────
+    (function initMobileMenu() {
+      const btn = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+  </script>
+</body>
+</html>
