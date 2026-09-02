@@ -49,6 +49,13 @@
     }
     .blog-section-head p { font-size: 14px; color: var(--gray-500); margin-top: 5px; }
 
+    /* Sections with a single guide: center the heading and the card. */
+    .blog-section--solo .blog-section-head { text-align: center; }
+    .blog-section--solo .blog-grid {
+      grid-template-columns: minmax(0, 346px);
+      justify-content: center;
+    }
+
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -186,7 +193,7 @@
 
       <div class="blog-sections">
 
-        <section class="blog-section">
+        <section class="blog-section blog-section--solo">
           <div class="blog-section-head">
             <h2>Setting up</h2>
             <p>Get your account connected and syncing.</p>
@@ -234,6 +241,21 @@
                 <span class="read-link">Read the guide →</span>
               </div>
             </a>
+            <a href="/blog-trade-plan" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-trade-plan">
+                  <div class="mini-card mini-stat">
+                    <div class="mini-stat-lbl">Risk : Reward</div>
+                    <div class="mini-stat-val blue">3.38 : 1</div>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <h3>How to write a trade plan that actually holds up</h3>
+                <p>Entry, stop, target, and why most plans fall apart before the trade even starts.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
             <a href="/blog-weekly-review" class="blog-card">
               <div class="blog-card-cover">
                 <div class="cover-mockup cover-weekly">
@@ -269,25 +291,10 @@
 
         <section class="blog-section">
           <div class="blog-section-head">
-            <h2>Trading discipline</h2>
+            <h2>Trading discipline and philosophy</h2>
             <p>The mistakes that cost the most, and how to spot them in your own data.</p>
           </div>
           <div class="blog-grid">
-            <a href="/blog-trade-plan" class="blog-card">
-              <div class="blog-card-cover">
-                <div class="cover-mockup cover-trade-plan">
-                  <div class="mini-card mini-stat">
-                    <div class="mini-stat-lbl">Risk : Reward</div>
-                    <div class="mini-stat-val blue">3.38 : 1</div>
-                  </div>
-                </div>
-              </div>
-              <div class="blog-card-body">
-                <h3>How to write a trade plan that actually holds up</h3>
-                <p>Entry, stop, target, and why most plans fall apart before the trade even starts.</p>
-                <span class="read-link">Read the guide →</span>
-              </div>
-            </a>
             <a href="/blog-overtrading" class="blog-card">
               <div class="blog-card-cover">
                 <img src="cover-overtrading.png" alt="" loading="lazy">
@@ -321,7 +328,7 @@
           </div>
         </section>
 
-        <section class="blog-section">
+        <section class="blog-section blog-section--solo">
           <div class="blog-section-head">
             <h2>Mentorship</h2>
             <p>One-on-one coaching, if you want a person in the loop.</p>
