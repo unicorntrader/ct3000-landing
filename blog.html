@@ -41,11 +41,18 @@
     }
     .blog-head p { font-size: 17px; color: var(--gray-600); max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
+    .blog-sections { padding-bottom: 96px; }
+    .blog-section-head { margin: 56px 0 22px; }
+    .blog-section:first-child .blog-section-head { margin-top: 8px; }
+    .blog-section-head h2 {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink);
+    }
+    .blog-section-head p { font-size: 14px; color: var(--gray-500); margin-top: 5px; }
+
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      padding-bottom: 96px;
+      gap: 20px;
     }
     .blog-card {
       background: var(--white);
@@ -61,10 +68,13 @@
       transform: translateY(-3px);
     }
     .blog-card-cover {
-      height: 150px; flex-shrink: 0;
+      height: 168px; flex-shrink: 0;
       background: var(--blue-50);
     }
-    .blog-card-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-card-cover:has(> img) {
+      display: flex; align-items: center; justify-content: center; padding: 22px;
+    }
+    .blog-card-cover > img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
     /* Cover mockups -- real fragments of the actual product UI instead
        of generic stock-style icon art. The specific number/card is the
@@ -73,7 +83,7 @@
     .cover-mockup {
       height: 100%; width: 100%;
       display: flex; align-items: center; justify-content: center;
-      padding: 16px;
+      padding: 28px;
     }
     .cover-callouts, .cover-first-week { background: var(--green-50); }
     .cover-weekly, .cover-trade-plan, .cover-mentorship { background: var(--blue-50); }
@@ -82,7 +92,7 @@
     .mini-card {
       background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px;
       box-shadow: 0 10px 24px -10px rgba(17,24,39,0.18);
-      max-width: 100%;
+      max-width: 230px;
     }
     .mini-callout {
       display: flex; align-items: flex-start; gap: 8px;
@@ -97,7 +107,7 @@
       font-size: 10.5px; font-weight: 700; color: var(--gray-500);
       text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
     }
-    .mini-stat-val { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+    .mini-stat-val { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
     .mini-stat-val.green { color: var(--green-600); }
     .mini-stat-val.blue { color: var(--blue-600); }
 
@@ -117,12 +127,7 @@
       display: flex; align-items: center; justify-content: center;
     }
     .mini-day-text { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.35; }
-    .blog-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-    .blog-card .cat {
-      padding: 16px 24px 0;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--blue-600);
-    }
+    .blog-card-body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
     .blog-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); line-height: 1.3; margin-bottom: 10px; }
     .blog-card p { font-size: 14px; color: var(--ink); line-height: 1.55; margin-bottom: 14px; flex: 1; }
     .blog-card .read-link { font-size: 14px; font-weight: 700; color: var(--blue-600); }
@@ -179,139 +184,167 @@
         <p>Honest and practical. No fluff, just what actually helps you trade with more discipline.</p>
       </div>
 
-      <div class="blog-grid">
-        <a href="/blog-connecting-ibkr" class="blog-card">
-          <div class="cat">Using CoTrader</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-ibkr">
-              <div class="mini-card mini-activity">
-                <span class="mini-activity-check">✓</span>
-                <div>
-                  <div class="mini-activity-text">Imported the last <strong>30 days</strong> of trades</div>
-                  <div class="mini-activity-time">On connect</div>
+      <div class="blog-sections">
+
+        <section class="blog-section">
+          <div class="blog-section-head">
+            <h2>Setting up</h2>
+            <p>Get your account connected and syncing.</p>
+          </div>
+          <div class="blog-grid">
+            <a href="/blog-connecting-ibkr" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-ibkr">
+                  <div class="mini-card mini-activity">
+                    <span class="mini-activity-check">✓</span>
+                    <div>
+                      <div class="mini-activity-text">Imported the last <strong>30 days</strong> of trades</div>
+                      <div class="mini-activity-time">On connect</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="blog-card-body">
-            <h3>Connecting Interactive Brokers to CoTrader</h3>
-            <p>The Flex Query setup, step by step: from IBKR Client Portal to your first synced trade.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-callouts" class="blog-card">
-          <div class="cat">Using CoTrader</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-callouts">
-              <div class="mini-card mini-callout">
-                <span class="mini-callout-icon">✓</span>
-                <span class="mini-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
+              <div class="blog-card-body">
+                <h3>Connecting Interactive Brokers to CoTrader</h3>
+                <p>The Flex Query setup, step by step: from IBKR Client Portal to your first synced trade.</p>
+                <span class="read-link">Read the guide →</span>
               </div>
-            </div>
+            </a>
           </div>
-          <div class="blog-card-body">
-            <h3>What are Callouts?</h3>
-            <p>Twelve deterministic rules that scan your trade history for real patterns, not generic advice.</p>
-            <span class="read-link">Read the guide →</span>
+        </section>
+
+        <section class="blog-section">
+          <div class="blog-section-head">
+            <h2>Using CoTrader</h2>
+            <p>What to do once your trades are flowing in.</p>
           </div>
-        </a>
-        <a href="/blog-weekly-review" class="blog-card">
-          <div class="cat">Using CoTrader</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-weekly">
-              <div class="mini-card mini-stat">
-                <div class="mini-stat-lbl">Net P&amp;L this week</div>
-                <div class="mini-stat-val green">+$2,690</div>
+          <div class="blog-grid">
+            <a href="/blog-first-week" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-first-week">
+                  <div class="mini-card mini-day">
+                    <span class="mini-day-num">7</span>
+                    <span class="mini-day-text">Your first Weekly Review is ready</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="blog-card-body">
-            <h3>Reading your Weekly Review</h3>
-            <p>Net P&amp;L, win rate, average trade: what each number is really telling you.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-overtrading" class="blog-card">
-          <div class="cat">Trading discipline</div>
-          <div class="blog-card-cover">
-            <img src="cover-overtrading.png" alt="" loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <h3>Why most traders overtrade</h3>
-            <p>It rarely feels like a mistake in the moment. Here's how to catch it in your own data.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-icarus" class="blog-card">
-          <div class="cat">Trading discipline</div>
-          <div class="blog-card-cover">
-            <img src="cover-icarus.png" alt="" loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <h3>Icarus and the second kind of overtrading</h3>
-            <p>It's not just too many trades. It's flying too close to the sun on size.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-revenge-trading" class="blog-card">
-          <div class="cat">Trading discipline</div>
-          <div class="blog-card-cover">
-            <img src="cover-revenge-trading.png" alt="" loading="lazy">
-          </div>
-          <div class="blog-card-body">
-            <h3>Revenge trading: what it actually costs you</h3>
-            <p>It's gambling wearing a trading costume, and it never works out over the long run.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-first-week" class="blog-card">
-          <div class="cat">Using CoTrader</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-first-week">
-              <div class="mini-card mini-day">
-                <span class="mini-day-num">7</span>
-                <span class="mini-day-text">Your first Weekly Review is ready</span>
+              <div class="blog-card-body">
+                <h3>Your first week on CoTrader</h3>
+                <p>What to expect from setup through your first Weekly Review.</p>
+                <span class="read-link">Read the guide →</span>
               </div>
-            </div>
-          </div>
-          <div class="blog-card-body">
-            <h3>Your first week on CoTrader</h3>
-            <p>What to expect from setup through your first Weekly Review.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-trade-plan" class="blog-card">
-          <div class="cat">Trading discipline</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-trade-plan">
-              <div class="mini-card mini-stat">
-                <div class="mini-stat-lbl">Risk : Reward</div>
-                <div class="mini-stat-val blue">3.38 : 1</div>
+            </a>
+            <a href="/blog-weekly-review" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-weekly">
+                  <div class="mini-card mini-stat">
+                    <div class="mini-stat-lbl">Net P&amp;L this week</div>
+                    <div class="mini-stat-val green">+$2,690</div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="blog-card-body">
-            <h3>How to write a trade plan that actually holds up</h3>
-            <p>Entry, stop, target, and why most plans fall apart before the trade even starts.</p>
-            <span class="read-link">Read the guide →</span>
-          </div>
-        </a>
-        <a href="/blog-mentorship" class="blog-card">
-          <div class="cat">Mentorship</div>
-          <div class="blog-card-cover">
-            <div class="cover-mockup cover-mentorship">
-              <div class="mini-card mini-callout">
-                <span class="mini-callout-icon">→</span>
-                <span class="mini-callout-text"><strong>Bi-weekly 1:1s</strong> across 4 pillars</span>
+              <div class="blog-card-body">
+                <h3>Reading your Weekly Review</h3>
+                <p>Net P&amp;L, win rate, average trade: what each number is really telling you.</p>
+                <span class="read-link">Read the guide →</span>
               </div>
-            </div>
+            </a>
+            <a href="/blog-callouts" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-callouts">
+                  <div class="mini-card mini-callout">
+                    <span class="mini-callout-icon">✓</span>
+                    <span class="mini-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <h3>What are Callouts?</h3>
+                <p>Twelve deterministic rules that scan your trade history for real patterns, not generic advice.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
           </div>
-          <div class="blog-card-body">
-            <h3>What actually happens in a mentorship session</h3>
-            <p>Inside a real coaching call: psychology, risk, strategy, and the accountability that makes it stick.</p>
-            <span class="read-link">Read the guide →</span>
+        </section>
+
+        <section class="blog-section">
+          <div class="blog-section-head">
+            <h2>Trading discipline</h2>
+            <p>The mistakes that cost the most, and how to spot them in your own data.</p>
           </div>
-        </a>
+          <div class="blog-grid">
+            <a href="/blog-trade-plan" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-trade-plan">
+                  <div class="mini-card mini-stat">
+                    <div class="mini-stat-lbl">Risk : Reward</div>
+                    <div class="mini-stat-val blue">3.38 : 1</div>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <h3>How to write a trade plan that actually holds up</h3>
+                <p>Entry, stop, target, and why most plans fall apart before the trade even starts.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
+            <a href="/blog-overtrading" class="blog-card">
+              <div class="blog-card-cover">
+                <img src="cover-overtrading.png" alt="" loading="lazy">
+              </div>
+              <div class="blog-card-body">
+                <h3>Why most traders overtrade</h3>
+                <p>It rarely feels like a mistake in the moment. Here's how to catch it in your own data.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
+            <a href="/blog-icarus" class="blog-card">
+              <div class="blog-card-cover">
+                <img src="cover-icarus.png" alt="" loading="lazy">
+              </div>
+              <div class="blog-card-body">
+                <h3>Icarus and the second kind of overtrading</h3>
+                <p>Position size is the other way to overtrade, and it burns hotter.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
+            <a href="/blog-revenge-trading" class="blog-card">
+              <div class="blog-card-cover">
+                <img src="cover-revenge-trading.png" alt="" loading="lazy">
+              </div>
+              <div class="blog-card-body">
+                <h3>Revenge trading: what it actually costs you</h3>
+                <p>It's gambling wearing a trading costume, and it never works out over the long run.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <div class="blog-section-head">
+            <h2>Mentorship</h2>
+            <p>One-on-one coaching, if you want a person in the loop.</p>
+          </div>
+          <div class="blog-grid">
+            <a href="/blog-mentorship" class="blog-card">
+              <div class="blog-card-cover">
+                <div class="cover-mockup cover-mentorship">
+                  <div class="mini-card mini-callout">
+                    <span class="mini-callout-icon">→</span>
+                    <span class="mini-callout-text"><strong>Bi-weekly 1:1s</strong> across 4 pillars</span>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <h3>What actually happens in a mentorship session</h3>
+                <p>Inside a real coaching call: psychology, risk, strategy, and the accountability that makes it stick.</p>
+                <span class="read-link">Read the guide →</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
       </div>
     </div>
   </main>
