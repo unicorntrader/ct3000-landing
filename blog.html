@@ -49,11 +49,17 @@
     }
     .blog-section-head p { font-size: 14px; color: var(--gray-500); margin-top: 5px; }
 
-    /* Sections with a single guide: center the heading and the card. */
-    .blog-section--solo .blog-section-head { text-align: center; }
-    .blog-section--solo .blog-grid {
-      grid-template-columns: minmax(0, 346px);
-      justify-content: center;
+    /* Sections with a single guide: one wide horizontal card. */
+    .blog-section--solo .blog-grid { grid-template-columns: 1fr; }
+    .blog-section--solo .blog-card { flex-direction: row; align-items: stretch; }
+    .blog-section--solo .blog-card-cover {
+      width: 320px; height: auto; min-height: 180px; flex-shrink: 0;
+    }
+    .blog-section--solo .blog-card-body { justify-content: center; padding: 28px 32px; }
+    @media (max-width: 620px) {
+      .blog-section--solo .blog-card { flex-direction: column; }
+      .blog-section--solo .blog-card-cover { width: 100%; min-height: 0; height: 168px; }
+      .blog-section--solo .blog-card-body { padding: 22px 24px 24px; }
     }
 
     .blog-grid {
