@@ -339,7 +339,8 @@
     .reveal-row { opacity: 0; transform: translateY(9px); animation: revealRow 0.22s ease forwards; }
     .tab-panel.active h3.reveal-row { animation-delay: 0s; }
     .tab-panel.active p.reveal-row { animation-delay: 0.08s; }
-    .tab-panel.active .phone.reveal-row { animation-delay: 0.16s; }
+    .tab-panel.active .phone.reveal-row,
+    .tab-panel.active .drop-demo.reveal-row { animation-delay: 0.16s; }
     @keyframes revealRow { to { opacity: 1; transform: translateY(0); } }
 
     /* ============ SECTION SHARED ============ */
@@ -1015,6 +1016,80 @@
     .symbol-table .sym { color: var(--blue-600); font-weight: 700; }
     .symbol-table .pnl-pos { color: var(--green-600); }
 
+    /* Charts tab -- a plain card, not a .phone frame. The drop happens
+       on the desktop dashboard, so it isn't pitched as a phone feature.
+       Shows one drop row and three files landing on the three real
+       outcomes: attached, held for the next sync, or asking. */
+    .drop-demo {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      box-shadow: 0 24px 60px -10px rgba(17,24,39,0.15);
+      max-width: 420px; width: 100%; margin: 0 auto;
+      padding: 18px;
+    }
+    .drop-zone {
+      display: flex; align-items: center; gap: 10px;
+      border: 1.5px dashed var(--gray-300); border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px; font-weight: 700; color: var(--gray-600);
+    }
+    .drop-zone > svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      stroke: var(--blue-600); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .drop-day {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      background: var(--gray-100); border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .drop-files { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .drop-file {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12.5px;
+      padding: 10px 12px;
+      border: 1px solid var(--gray-200); border-radius: 10px;
+    }
+    .df-name { font-weight: 700; color: var(--ink); flex-shrink: 0; }
+    .df-state {
+      display: flex; align-items: center; gap: 6px;
+      margin-left: auto; text-align: right;
+      color: var(--gray-500);
+    }
+    .df-state svg {
+      width: 13px; height: 13px; flex-shrink: 0;
+      fill: none; stroke-width: 2.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .drop-file .df-state-done { display: none; }
+    .drop-file.done .df-state { color: var(--green-700); }
+    .drop-file.done .df-state svg { stroke: var(--green-600); }
+    .drop-file.wait .df-state svg { stroke: var(--gray-400); stroke-width: 2; }
+    .drop-file.ask { border-color: var(--amber-200); background: var(--amber-50); }
+    .drop-file.ask .df-state { color: var(--amber-800); }
+    .drop-file.ask .df-state svg { stroke: var(--amber-700); }
+    .drop-file.settled { border-color: var(--green-200); }
+    .drop-file.settled .df-state-wait { display: none; }
+    .drop-file.settled .df-state-done { display: flex; color: var(--green-700); }
+    .drop-file.settled .df-state-done svg { stroke: var(--green-600); }
+    .df-choose {
+      font-size: 11px; font-weight: 700; color: var(--blue-600);
+      background: var(--white); border: 1px solid var(--blue-200);
+      border-radius: 999px; padding: 3px 9px;
+    }
+    .drop-foot {
+      margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid var(--gray-200);
+      font-size: 11.5px; color: var(--gray-500);
+    }
+    @media (max-width: 800px) { .drop-demo { max-width: 440px; } }
+    @media (max-width: 430px) {
+      .drop-file { flex-wrap: wrap; gap: 4px 10px; }
+      .df-state { margin-left: 0; }
+    }
+
     /* ============ HOW IT WORKS ============ */
     /* Sticky-left intro + a right-hand stack of numbered cards, each
        paired with a real UI fragment showing that step's outcome --
@@ -1496,6 +1571,10 @@
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10a6.5 6.5 0 0 1 11-4.7l1.8 1.7"/><path d="M16.5 10a6.5 6.5 0 0 1-11 4.7l-1.8-1.7"/><path d="M16.8 3v4h-4"/><path d="M3.2 17v-4h4"/></svg>
             <span>Auto-sync</span>
           </button>
+          <button class="tab-btn" data-tab="charts" role="tab" aria-selected="false">
+            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="1.5"/><circle cx="7.5" cy="8.5" r="1.4"/><path d="M4 14.5l4-3.5 3 2.5 3-3 2 2"/></svg>
+            <span>Charts</span>
+          </button>
           <button class="tab-btn" data-tab="journal" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="3.5" width="10" height="13" rx="1"/><path d="M8 3.5v13"/><path d="M10.5 7.5H13M10.5 10H13"/></svg>
             <span>Journal</span>
@@ -1654,6 +1733,36 @@
                 </div>
               </div>
             </div>
+          </div>
+          </div>
+          <div class="tab-panel" data-panel="charts">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Charts</span>
+            <h3 class="reveal-row">Charts that file themselves.</h3>
+            <p class="reveal-row">Drag every screenshot from the session onto the dashboard and each one finds its trade. It reads the ticker in the filename, not the chart, so MSTR.png is enough. Nothing to label, nothing to match up.</p>
+            </div>
+          <div class="drop-demo reveal-row" aria-hidden="true">
+            <div class="drop-zone">
+              <svg viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
+              Drop the session's charts
+              <span class="drop-day">Today ▾</span>
+            </div>
+            <div class="drop-files">
+              <div class="drop-file done">
+                <span class="df-name">MSTR.png</span>
+                <span class="df-state"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> on your MSTR long</span>
+              </div>
+              <div class="drop-file wait" data-charts-settle>
+                <span class="df-name">AAPL.png</span>
+                <span class="df-state df-state-wait"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> waiting for next sync</span>
+                <span class="df-state df-state-done"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> attached after sync</span>
+              </div>
+              <div class="drop-file ask">
+                <span class="df-name">TSLA.png</span>
+                <span class="df-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7"/><path d="M12 16.5v.01"/></svg> 2 TSLA trades today <span class="df-choose">Choose</span></span>
+              </div>
+            </div>
+            <div class="drop-foot">3 files. 1 attached, 1 waiting, 1 needs you.</div>
           </div>
           </div>
           <div class="tab-panel" data-panel="journal">
@@ -2491,7 +2600,7 @@
       if (!tabs.length) return;
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const played = { journal: false, 'weekly-review': false, insights: false };
+      const played = { journal: false, 'weekly-review': false, insights: false, charts: false };
 
       function activate(name) {
         tabs.forEach(t => {
@@ -2536,6 +2645,15 @@
               played.insights = true;
               const firstCallout = p.querySelector('[data-callout-expand] .callout-header');
               if (firstCallout) setTimeout(() => firstCallout.click(), 700);
+            }
+            if (!reduceMotion && name === 'charts' && !played.charts) {
+              played.charts = true;
+              const waitRow = p.querySelector('[data-charts-settle]');
+              const foot = p.querySelector('.drop-foot');
+              setTimeout(() => {
+                if (waitRow) waitRow.classList.add('settled');
+                if (foot) foot.textContent = '3 files. 2 attached, 1 needs you.';
+              }, 1400);
             }
           }
         });

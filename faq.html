@@ -180,6 +180,18 @@
           <div class="faq-question"><span>Does it work on mobile?</span><span class="plus">+</span></div>
           <div class="faq-answer">Yes. CoTrader is a responsive web app, so it works in your mobile browser. There's no separate native app right now.</div>
         </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>How do I get my chart screenshots onto my trades?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Drop them on the dashboard, the whole session at once. Each file needs the ticker in its name, like MSTR.png, and you pick which day the charts are from (it defaults to today). That's the whole rule. CoTrader matches on ticker plus day, so it's only ever choosing between the few symbols you traded that session. It won't overwrite: one screenshot per trade, and if two trades share a symbol that day it stops and asks which one.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>What if I save my charts before my trades have synced?</span><span class="plus">+</span></div>
+          <div class="faq-answer">They wait, they're not rejected. A file that doesn't match a trade yet is held, and CoTrader attaches it automatically after your next sync. Drop your charts at 11pm and they'll be on the right trades in the morning.</div>
+        </div>
+        <div class="faq-item" data-faq-expand>
+          <div class="faq-question"><span>Does CoTrader read the chart image, or the timestamp on it?</span><span class="plus">+</span></div>
+          <div class="faq-answer">Neither. It only reads the ticker in the filename. It doesn't look at the picture, and it doesn't try to pull dates off your files, because chart tools stamp the moment you export, not the day you traded. Ticker plus the day you choose is all it uses.</div>
+        </div>
 
         <div class="faq-category">Mentorship</div>
         <div class="faq-item" data-faq-expand>
