@@ -1016,7 +1016,7 @@
     .symbol-table .sym { color: var(--blue-600); font-weight: 700; }
     .symbol-table .pnl-pos { color: var(--green-600); }
 
-    /* Charts tab -- a plain card, not a .phone frame. The drop happens
+    /* Screenshots tab -- a plain card, not a .phone frame. The drop happens
        on the desktop dashboard, so it isn't pitched as a phone feature.
        Shows one drop row and three files landing on the three real
        outcomes: attached, held for the next sync, or asking. */
@@ -1573,9 +1573,9 @@
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10a6.5 6.5 0 0 1 11-4.7l1.8 1.7"/><path d="M16.5 10a6.5 6.5 0 0 1-11 4.7l-1.8-1.7"/><path d="M16.8 3v4h-4"/><path d="M3.2 17v-4h4"/></svg>
             <span>Auto-sync</span>
           </button>
-          <button class="tab-btn" data-tab="charts" role="tab" aria-selected="false">
+          <button class="tab-btn" data-tab="screenshots" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="1.5"/><circle cx="7.5" cy="8.5" r="1.4"/><path d="M4 14.5l4-3.5 3 2.5 3-3 2 2"/></svg>
-            <span>Charts</span>
+            <span>Screenshots</span>
           </button>
           <button class="tab-btn" data-tab="journal" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="3.5" width="10" height="13" rx="1"/><path d="M8 3.5v13"/><path d="M10.5 7.5H13M10.5 10H13"/></svg>
@@ -1737,17 +1737,17 @@
             </div>
           </div>
           </div>
-          <div class="tab-panel" data-panel="charts">
+          <div class="tab-panel" data-panel="screenshots">
             <div class="tab-panel-text">
-            <span class="section-eyebrow">Charts</span>
-            <h3 class="reveal-row">Charts that file themselves.</h3>
+            <span class="section-eyebrow">Screenshots</span>
+            <h3 class="reveal-row">Screenshots that file themselves.</h3>
             <p class="reveal-row">Drag every screenshot from the session onto the dashboard and each one finds its trade. It reads the ticker, not the chart. Nothing to label, nothing to match up.</p>
             </div>
           <div class="drop-demo reveal-row" aria-hidden="true">
             <div class="drop-zone">
               <svg viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
               <div class="dz-text">
-                <span class="dz-title">Drop the session's charts</span>
+                <span class="dz-title">Drop the session's screenshots</span>
                 <span class="dz-hint">Filename just needs the ticker, like MSTR.png</span>
               </div>
               <span class="drop-day">Today ▾</span>
@@ -1757,7 +1757,7 @@
                 <span class="df-name">MSTR.png</span>
                 <span class="df-state"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> on your MSTR long</span>
               </div>
-              <div class="drop-file wait" data-charts-settle>
+              <div class="drop-file wait" data-shots-settle>
                 <span class="df-name">AAPL.png</span>
                 <span class="df-state df-state-wait"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> waiting for next sync</span>
                 <span class="df-state df-state-done"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> attached after sync</span>
@@ -2605,7 +2605,7 @@
       if (!tabs.length) return;
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const played = { journal: false, 'weekly-review': false, insights: false, charts: false };
+      const played = { journal: false, 'weekly-review': false, insights: false, screenshots: false };
 
       function activate(name) {
         tabs.forEach(t => {
@@ -2651,9 +2651,9 @@
               const firstCallout = p.querySelector('[data-callout-expand] .callout-header');
               if (firstCallout) setTimeout(() => firstCallout.click(), 700);
             }
-            if (!reduceMotion && name === 'charts' && !played.charts) {
-              played.charts = true;
-              const waitRow = p.querySelector('[data-charts-settle]');
+            if (!reduceMotion && name === 'screenshots' && !played.screenshots) {
+              played.screenshots = true;
+              const waitRow = p.querySelector('[data-shots-settle]');
               const foot = p.querySelector('.drop-foot');
               setTimeout(() => {
                 if (waitRow) waitRow.classList.add('settled');
