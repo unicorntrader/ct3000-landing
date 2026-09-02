@@ -111,15 +111,25 @@
     .article-body ol { margin: 0 0 22px 22px; }
     .article-body ol li { margin-bottom: 10px; padding-left: 4px; }
 
-    /* Annotated IBKR screenshots. */
-    .article-body figure.shot { margin: 28px 0; }
+    /* Annotated IBKR screenshots. Held to a readable size and never
+       upscaled: tall shots are capped by height, wide ones by width. */
+    .article-body figure.shot { margin: 24px auto; text-align: center; max-width: 560px; }
     .article-body figure.shot img {
-      display: block; width: 100%; height: auto;
+      display: inline-block;
+      max-width: 100%; max-height: 420px;
+      width: auto; height: auto;
       border-radius: 10px; border: 1px solid var(--gray-200);
+      background: var(--white);
     }
     .article-body figure.shot figcaption {
       font-size: 13px; color: var(--gray-500); margin-top: 8px; font-style: italic;
     }
+    /* Two small reference shots side by side. */
+    .article-body .shot-row {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+      margin: 24px 0;
+    }
+    .article-body .shot-row figure.shot { margin: 0; flex: 1 1 240px; max-width: 320px; }
 
     /* Inline note / caveat block. */
     .article-body .note {
@@ -221,7 +231,7 @@
     <div class="article-head">
       <span class="eyebrow">Using CoTrader</span>
       <h1>Connecting Interactive Brokers to CoTrader</h1>
-      <div class="meta">7 min read</div>
+      <div class="meta">4 min read</div>
     </div>
 
     <div class="article-cover">
@@ -259,83 +269,77 @@
       <p>CoTrader connects to one broker only, and that is on purpose. IBKR gives us clean, complete fill data: every entry, every exit, every commission, timestamped accurately. Callouts and your Weekly Review are only as good as the data behind them, and a trade history that's "mostly accurate" produces insights that are only "mostly useful." Going deep on one broker beat supporting a dozen at a shallower level.</p>
 
       <h2>Read-only, on purpose</h2>
-      <p>CoTrader can see your trade history. It cannot place, modify, or cancel a single order. There's no execution path in the app at all: nothing to click that touches your account's buying power.</p>
-
-      <p>Skipping execution was a deliberate call. A journal that can also trade carries a much bigger blast radius when something goes wrong: a bug, a bad click, a stale session. With read-only access the worst case is a number that looks off and gets corrected. Your actual trading keeps happening in IBKR, exactly where it already does.</p>
-
-      <p>The Flex Query token you create below can pull one report and nothing else. It carries no trading permission of any kind.</p>
+      <p>CoTrader can see your trade history. It cannot place, modify, or cancel a single order. The Flex Query token you create below pulls one report and nothing else. It carries no trading permission of any kind, so your actual trading keeps happening in IBKR, exactly where it already does.</p>
 
       <h2>What you'll need</h2>
       <ul>
         <li>An Interactive Brokers account with some trade history.</li>
-        <li>Access to <strong>IBKR Client Portal</strong>, the browser login at interactivebrokers.com. These steps are not in TWS.</li>
-        <li>About five minutes.</li>
+        <li><strong>IBKR Client Portal</strong> access, the browser login at interactivebrokers.com. These steps are not in TWS.</li>
+        <li>About five minutes. You do this once.</li>
       </ul>
-      <p>By the end you'll have two values from IBKR, a <strong>Query ID</strong> and a <strong>token</strong>, which you paste into CoTrader once. Steps 1 to 3 happen in IBKR. Step 4 is in CoTrader.</p>
+      <p>By the end you'll have two values from IBKR, a <strong>Query ID</strong> and a <strong>token</strong>, pasted into CoTrader.</p>
 
-      <h2>Step 1: Create the Flex Query in IBKR</h2>
-      <p>In Client Portal, open <strong>Performance &amp; Reports</strong> in the top menu, then <strong>Flex Queries</strong>.</p>
-      <figure class="shot">
-        <img src="/ibkr-flex-1.png" alt="IBKR Client Portal with Performance and Reports and the Flex Queries tab marked" loading="lazy">
-        <figcaption>Performance &amp; Reports, then the Flex Queries tab.</figcaption>
-      </figure>
-      <p>Next to <strong>Activity Flex Query</strong>, click <strong>+</strong> and give the new query a name you'll recognize later, such as <em>CT3000 Activity</em>.</p>
-      <figure class="shot">
-        <img src="/ibkr-flex-2.png" alt="The plus button on the Activity Flex Query panel and a named query" loading="lazy">
-        <figcaption>Create the query from the Activity Flex Query panel, then name it.</figcaption>
-      </figure>
-      <p>Then set it up like this:</p>
+      <h2>In IBKR Client Portal</h2>
       <ol>
+        <li>Log in at interactivebrokers.com.</li>
+        <li>Open <strong>Performance &amp; Reports</strong> in the top menu, then the <strong>Flex Queries</strong> tab.</li>
+      </ol>
+      <figure class="shot">
+        <img src="/ibkr-flex-1.png" alt="Performance and Reports and the Flex Queries tab marked in IBKR Client Portal" loading="lazy">
+        <figcaption>Performance &amp; Reports, then Flex Queries.</figcaption>
+      </figure>
+      <ol start="3">
+        <li>In the <strong>Activity Flex Query</strong> panel, click <strong>+</strong>. Name the query <em>CT3000 Activity</em>.</li>
         <li>Under <strong>Sections</strong>, tick <strong>Trades</strong>, <strong>Open Positions</strong>, <strong>Account Information</strong> and <strong>Corporate Actions</strong>.</li>
-        <li>Open each of those four sections and choose <strong>Select All</strong>, so no fields are left out.</li>
+        <li>Open each of those four and click <strong>Select All</strong>.</li>
+      </ol>
+      <figure class="shot">
+        <img src="/ibkr-flex-3.png" alt="The four sections selected in the Sections list" loading="lazy">
+        <figcaption>The four sections to tick.</figcaption>
+      </figure>
+      <ol start="6">
         <li>Under <strong>Delivery Configuration</strong>, set <strong>Format</strong> to <strong>XML</strong> and <strong>Period</strong> to <strong>Last 30 Calendar Days</strong>.</li>
-        <li>Under <strong>General Configuration</strong>, leave <strong>Date Format</strong> as <strong>yyyyMMdd</strong>, <strong>Time Format</strong> as <strong>HHmmss</strong> and <strong>Date/Time Separator</strong> as <strong>; (semi-colon)</strong>. These are the defaults, and CoTrader reads them.</li>
-        <li>Save the query.</li>
+        <li>Under <strong>General Configuration</strong>, leave the date and time formats at their defaults (<strong>yyyyMMdd</strong>, <strong>HHmmss</strong>, <strong>; semi-colon</strong>). Save the query.</li>
       </ol>
       <figure class="shot">
-        <img src="/ibkr-flex-3.png" alt="Trades, Open Positions, Account Information and Corporate Actions selected in the Sections list" loading="lazy">
-        <figcaption>The four sections to select.</figcaption>
+        <img src="/ibkr-flex-5.png" alt="Format XML and Period Last 30 Calendar Days set on the query" loading="lazy">
+        <figcaption>Format XML, Period Last 30 Calendar Days.</figcaption>
       </figure>
-      <figure class="shot">
-        <img src="/ibkr-flex-4.png" alt="Select All ticked inside the Trades section" loading="lazy">
-        <figcaption>Inside each section, tick Select All.</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="/ibkr-flex-5.png" alt="Format, Period and the date and time format fields set on the query" loading="lazy">
-        <figcaption>Format XML, Period Last 30 Calendar Days, and the date and time formats left at their defaults.</figcaption>
-      </figure>
-
-      <h2>Step 2: Turn on the Flex Web Service and copy the token</h2>
-      <p>The Flex Web Service is what lets CoTrader fetch the report by itself, so there is no export step on your side.</p>
-      <p>Back on the <strong>Flex Queries</strong> page, find the <strong>Flex Web Service Configuration</strong> panel and click the gear icon on it.</p>
-      <figure class="shot">
-        <img src="/ibkr-flex-6.png" alt="The gear icon on the Flex Web Service Configuration panel" loading="lazy">
-        <figcaption>The gear on the Flex Web Service Configuration panel.</figcaption>
-      </figure>
-      <ol>
-        <li>Tick <strong>Flex Web Service Status</strong>, then <strong>Save</strong>.</li>
-        <li>Copy the <strong>token</strong> that appears. It is a long string of digits. Keep it handy for Step 4.</li>
+      <ol start="8">
+        <li>Back on the <strong>Flex Queries</strong> page, click the gear on the <strong>Flex Web Service Configuration</strong> panel.</li>
+        <li>Tick <strong>Flex Web Service Status</strong>, click <strong>Save</strong>, and copy the <strong>token</strong> (a long string of digits).</li>
+      </ol>
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="/ibkr-flex-6.png" alt="The gear icon on the Flex Web Service Configuration panel" loading="lazy">
+          <figcaption>The gear.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/ibkr-flex-7.png" alt="The status box ticked and the token on the Flex Web Service page" loading="lazy">
+          <figcaption>Tick, Save, copy the token.</figcaption>
+        </figure>
+      </div>
+      <div class="note"><strong>Token expiry:</strong> IBKR expires the token on the schedule you pick when you enable the service. If it lapses, come back here and generate a new one.</div>
+      <ol start="10">
+        <li>Click your query to open its details. Copy the <strong>Query ID</strong>, the number next to the name.</li>
       </ol>
       <figure class="shot">
-        <img src="/ibkr-flex-7.png" alt="Flex Web Service Configuration page with the status box ticked and the token marked" loading="lazy">
-        <figcaption>Tick the status box, Save, then copy the token.</figcaption>
-      </figure>
-      <div class="note"><strong>Token expiry:</strong> IBKR ties the token to your account and expires it on the schedule you pick when you enable the service. If it lapses, come back to this page and generate a new one.</div>
-
-      <h2>Step 3: Copy the Query ID</h2>
-      <p>Back on the <strong>Flex Queries</strong> page, click the query you just made to open its details. The <strong>Query ID</strong> is the number at the top, next to the query name. That's your second value.</p>
-      <figure class="shot">
-        <img src="/ibkr-flex-8.png" alt="The Query ID field on the Activity Flex Query details page" loading="lazy">
-        <figcaption>The Query ID sits at the top of the query's details.</figcaption>
+        <img src="/ibkr-flex-8.png" alt="The Query ID on the Activity Flex Query details page" loading="lazy">
+        <figcaption>The Query ID.</figcaption>
       </figure>
 
-      <h2>Step 4: Paste both into CoTrader</h2>
-      <p>In CoTrader, open <strong>Settings</strong> and choose <strong>Manage IBKR connection</strong>.</p>
+      <h2>In CoTrader</h2>
+      <ol start="11">
+        <li>Open <strong>Settings</strong> and choose <strong>Manage IBKR connection</strong>.</li>
+      </ol>
       <figure class="shot">
-        <img src="/ibkr-flex-9.png" alt="The CoTrader settings menu with Manage IBKR connection highlighted" loading="lazy">
+        <img src="/ibkr-flex-9.png" alt="Manage IBKR connection in the CoTrader settings menu" loading="lazy">
         <figcaption>Settings, then Manage IBKR connection.</figcaption>
       </figure>
-      <p>Enter the two values from IBKR:</p>
+      <ol start="12">
+        <li>Paste in the <strong>Query ID</strong> and the <strong>token</strong>.</li>
+        <li>Click <strong>Test Connection</strong>, then <strong>Save &amp; Sync</strong>. Your last 30 days import right away.</li>
+      </ol>
       <div class="connect-mock">
         <div class="connect-mock-bar"><span>Manage IBKR connection</span><span>✕</span></div>
         <div class="connect-mock-body">
@@ -349,12 +353,7 @@
           </div>
         </div>
       </div>
-      <ol>
-        <li>Paste the <strong>Query ID</strong> and the <strong>token</strong> into their fields.</li>
-        <li>Click <strong>Test Connection</strong>. CoTrader asks IBKR for the report and confirms the two values work together.</li>
-        <li>Click <strong>Save &amp; Sync</strong>. The first import runs.</li>
-      </ol>
-      <p>That's the whole setup. You never open this screen again unless the token expires.</p>
+      <p>That's it. You never open this screen again unless the token expires.</p>
 
       <h2>How the sync works after that</h2>
       <p>The Flex Query is a <strong>rolling 30-day window</strong>. In practice:</p>
