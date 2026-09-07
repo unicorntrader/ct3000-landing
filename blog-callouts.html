@@ -7,11 +7,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>What Are Callouts? - CT3000</title>
-  <meta name="description" content="Callouts are twelve deterministic rules that scan your trade history for real patterns. Here's how they work and why they only fire on your own data.">
+  <meta name="description" content="Callouts are eleven deterministic rules that scan your trade history for real patterns. Here's how they work and why they only fire on your own data.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cotraderapp.com/blog-callouts">
   <meta property="og:title" content="What Are Callouts? · CoTrader 3000 Blog">
-  <meta property="og:description" content="Twelve deterministic rules that scan your trade history for real patterns, not generic advice.">
+  <meta property="og:description" content="Eleven deterministic rules that scan your trade history for real patterns, drawn from your own account.">
   <meta property="og:image" content="https://cotraderapp.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -195,15 +195,15 @@
       <div class="cover-mockup">
         <div class="mini-card mini-callout">
           <span class="mini-callout-icon">✓</span>
-          <span class="mini-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
+          <span class="mini-callout-text">NVDA: <strong>83% win rate</strong> across 6 trades</span>
         </div>
         <div class="mini-card mini-callout warning">
           <span class="mini-callout-icon">⚠</span>
-          <span class="mini-callout-text">Mondays are a drag: <strong>−$340 net</strong> across 6 trades</span>
+          <span class="mini-callout-text">Tuesdays are dragging you down: <strong>−$340</strong> across 6 trades</span>
         </div>
         <div class="mini-card mini-callout warning">
           <span class="mini-callout-icon">⚠</span>
-          <span class="mini-callout-text">3 <strong>revenge trades</strong> opened within an hour of a loss</span>
+          <span class="mini-callout-text">3 <strong>off-plan trades</strong> opened within an hour of a loss</span>
         </div>
       </div>
     </div>
@@ -211,48 +211,57 @@
     <div class="article-body">
       <p>Most trading apps show you a chart of your equity curve and call it a day. Knowing whether you're up or down is the easy part. Knowing <em>why</em>, and whether the cause is something you can fix, is a lot harder to get out of a chart.</p>
 
-      <p>Callouts are CoTrader's answer to that. Twelve deterministic rules run against your own trade history, not a market feed, not generic advice, and surface the patterns that are real enough to matter.</p>
+      <p>Callouts are CoTrader's answer to that. Eleven deterministic rules run against your own trade history. They surface the patterns that are real enough to matter, using your account as the only evidence.</p>
 
       <h2>Deterministic means no guessing</h2>
-      <p>"Deterministic" is the important word here. Each rule checks a fixed condition against your data: a symbol with an unusually high win rate across enough trades to trust it, a weekday quietly dragging your average down, a cluster of entries opened within an hour of a loss. If the condition isn't met, the callout stays silent. There's no sentiment guessing and no vague "you might want to consider" here. The pattern either shows up in your numbers or it doesn't.</p>
+      <p>"Deterministic" is the important word here. Each rule checks a fixed condition against your data: a symbol with an unusually high win rate across enough trades to trust it, a weekday quietly dragging your average down, a cluster of entries opened within an hour of a loss. If the condition isn't met, the callout stays silent. There's no sentiment model and no vague "you might want to consider." The pattern either shows up in your numbers or it doesn't.</p>
 
-      <p>Generic trading advice is easy to ignore because it was never about you specifically. A callout that says "AAPL: 75% win rate across 4 trades" is a lot harder to wave off, because it's your own account making the point.</p>
+      <p>Generic trading advice is easy to ignore because it was never about you specifically. A callout that says "NVDA: 83% win rate across 6 trades" is a lot harder to wave off, because it's your own account making the point.</p>
 
-      <h2>What the twelve rules cover</h2>
-      <p>The rules span three areas:</p>
+      <h2>What the eleven rules cover</h2>
+      <p>The rules span four areas:</p>
       <ul>
-        <li><strong>Symbols</strong>: which names you're genuinely good at trading, and which ones you keep returning to without an edge.</li>
-        <li><strong>Timing</strong>: days of the week, times of day, or streaks that correlate with worse outcomes.</li>
-        <li><strong>Behavior</strong>: patterns like revenge trading, oversized positions after a loss, or entries with no plan attached.</li>
+        <li><strong>Symbols</strong>: which name you're genuinely good at trading, and which one is your biggest drag this period.</li>
+        <li><strong>Timing</strong>: the weekday that's your strongest, and the one that's costing you.</li>
+        <li><strong>Discipline</strong>: how much of your trading is off-plan, and whether your planned trades actually earn more than your unplanned ones.</li>
+        <li><strong>Behavior</strong>: revenge trades after a loss, days you traded well above your usual pace, giving back profit after a big win, and daily swings that dwarf your average edge.</li>
       </ul>
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Callouts</span></div>
         <div class="feature-demo-body">
-          <div class="fd-callouts-head">Callouts <span class="count">3 signals</span></div>
+          <div class="fd-callouts-head">Callouts <span class="count">4 callouts</span></div>
           <div class="fd-category">Symbols</div>
           <div class="fd-callout positive">
             <span class="fd-callout-icon">✓</span>
-            <span class="fd-callout-text">AAPL: 75% win rate across 4 trades (+$1,880).</span>
+            <span class="fd-callout-text">NVDA: 83% win rate across 6 trades (+$1,880).</span>
           </div>
           <div class="fd-category">Timing</div>
           <div class="fd-callout warning">
             <span class="fd-callout-icon">⚠</span>
-            <span class="fd-callout-text">Mondays are a drag: −$340 net across 6 trades.</span>
+            <span class="fd-callout-text">Tuesdays are dragging you down. −$340 across 6 trades.</span>
+          </div>
+          <div class="fd-category">Discipline</div>
+          <div class="fd-callout warning">
+            <span class="fd-callout-icon">⚠</span>
+            <span class="fd-callout-text">12 of 30 trades (40%) were off-plan. Consider writing plans before entering.</span>
           </div>
           <div class="fd-category">Behavior</div>
           <div class="fd-callout warning">
             <span class="fd-callout-icon">⚠</span>
-            <span class="fd-callout-text">3 revenge trades opened within an hour of a loss.</span>
+            <span class="fd-callout-text">3 off-plan trades opened within an hour of a loss. Revenge pattern. A 30-minute cool-off helps.</span>
           </div>
         </div>
       </div>
-      <p class="fd-caption">Real Callouts from a real CoTrader account: one from each of the three areas above.</p>
-      <p>Each one comes with a "why flagged" explanation and a concrete "what to try" suggestion. Think of it less as a lecture and more as the next experiment worth running on your own process.</p>
+      <p class="fd-caption">Callouts as they read in the app, one from each area.</p>
+      <p>Each one opens to a <strong>Why flagged</strong> note and a concrete <strong>What to try</strong> suggestion. Think of it less as a lecture and more as the next experiment worth running on your own process.</p>
+
+      <h2>They unlock as your history grows</h2>
+      <p>One callout, your biggest losing symbol this period, shows up from your first handful of trades. The rest switch on as you build enough of a record to trust them: most between 10 and 25 trades, the weekday patterns once you have a few weeks of history, and the revenge and overtrading rules only after 15 losing trades across six weeks. A "revenge trading" verdict drawn from four trades would be noise, so CoTrader doesn't show you one until the sample is real.</p>
 
       <h2>Why this matters more than a P&L chart</h2>
       <p>A P&amp;L chart tells you the score. Callouts tell you the game. Most traders who improve get there by removing two or three specific habits that were quietly costing them money, rarely by finding some new strategy. You can't remove what you never noticed, and most of it stays invisible until someone actually looks at the pattern across dozens of trades instead of judging one at a time.</p>
 
-      <p>Twelve rules run silently on your own history, surfacing the handful of things worth acting on. That's the whole point of CoTrader's Insights row.</p>
+      <p>Eleven rules run silently on your own history, surfacing the handful of things worth acting on. You'll find them on your Home screen and on their own tab in Performance.</p>
     </div>
 
     <div class="article-cta">

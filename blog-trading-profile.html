@@ -215,7 +215,7 @@
     <div class="article-body">
       <p>Your Trading Profile is where you tell CoTrader your own rules: how much you're willing to risk on a trade, how big a losing day is too big, what kind of year you're aiming for. Once it's set, CoTrader flags the trades and days that break those rules so you notice the pattern instead of explaining it away.</p>
 
-      <p>It's optional, it takes about two minutes, and nothing you enter here can stop a trade. CoTrader is read-only. These are flags after the fact, not guardrails in the moment.</p>
+      <p>It's optional and takes about two minutes. Nothing you enter here can stop a trade: CoTrader never places or blocks an order, so most of what the profile does is flag trades and days after a sync has run. The one live piece is the trade planner. When you write a plan, CoTrader compares its risk to your Max risk and warns you on the spot if you're over.</p>
 
       <h2>Where to find it</h2>
       <p>Open the menu from the top right, then <strong>Trading</strong> → <strong>Trading Profile</strong>. The screen is a single card of six numbers and a Save button. Every field is a plain number. The <strong>$</strong> and <strong>%</strong> next to them are just labels.</p>
@@ -226,7 +226,7 @@
         </div>
         <div class="tp-mock-sublabel">Risk &amp; return targets</div>
         <div class="tp-card">
-          <p class="tp-intro">We use these to auto-flag trades and days that break your own rules. Only applies from today onward. Nothing in your past history gets re-graded.</p>
+          <p class="tp-intro">We use these to auto-flag trades and days that break your own rules, e.g. a trade that risks more than your limit gets tagged &ldquo;Overtraded&rdquo; automatically, and shows up in your Home activity feed. Only applies from today onward. Nothing in your past history gets re-graded.</p>
           <div class="tp-row"><div><div class="tp-k">Account size</div><div class="tp-hint">Total capital in the account</div></div><div class="tp-field">$ <span class="tp-input">50,000</span></div></div>
           <div class="tp-row"><div><div class="tp-k">Ideal risk / trade</div><div class="tp-hint">Target risk per trade</div></div><div class="tp-field"><span class="tp-input">1</span> %</div></div>
           <div class="tp-row"><div><div class="tp-k">Max risk / trade</div><div class="tp-hint">Hard cap: flag anything bigger</div></div><div class="tp-field"><span class="tp-input">1.5</span> %</div></div>
@@ -241,11 +241,11 @@
       <h2>The six numbers</h2>
       <ul>
         <li><strong>Account size.</strong> Total capital in the account. Everything else is a percentage of this one figure, so if you leave it blank, none of the flags below do anything.</li>
-        <li><strong>Max risk / trade.</strong> The share of your account you're willing to lose on a single trade, as a percent. This is the field that does the most work.</li>
-        <li><strong>Ideal risk / trade.</strong> Your target risk per trade. CoTrader only uses this if you leave Max risk empty, as a fallback. Set Max and this one just sits there for your own reference.</li>
+        <li><strong>Max risk / trade.</strong> The share of your account you're willing to lose on a single trade, as a percent. It does more than any other field here. It sets the threshold for the two trade flags below, and when you write a trade plan CoTrader checks the plan's risk against it and warns you on the spot if you're over. The in-app hint calls it a hard cap. CoTrader can't cap anything, since it never places or blocks a trade, so read it as a line you get told about when you cross it.</li>
+        <li><strong>Ideal risk / trade.</strong> Your target risk per trade, and a fallback. CoTrader uses it for the flags below only when Max risk is blank. Fill in Max and this one is just a reference for you.</li>
         <li><strong>Ideal daily volatility.</strong> The daily account swing you're comfortable with, as a percent. A day that loses more than this gets a <strong>Bad day</strong> flag.</li>
-        <li><strong>Drawdown appetite.</strong> The most you can stand to lose in a single day. A bigger daily loss gets a <strong>Drawdown breach</strong> flag. Set it above your ideal daily volatility: one means "worse than I'd like," the other means "this really hurt." It's measured on a single day's net loss, not a peak-to-trough equity drop.</li>
-        <li><strong>Return / year target.</strong> Your yearly return goal. This one is a number to write down for yourself. CoTrader doesn't measure anything against it yet.</li>
+        <li><strong>Drawdown appetite.</strong> The most you can stand to lose in a single day. A bigger daily loss gets a <strong>Drawdown breach</strong> flag. Set it above your ideal daily volatility: one means "worse than I'd like," the other means "this really hurt." Both look at a single day's net loss on its own, so a run of small losing days won't trip either one even when they add up to more.</li>
+        <li><strong>Return / year target.</strong> Your yearly return goal, kept as a reference. No flag measures against it today. It's a number to hold yourself to.</li>
       </ul>
       <p>Hit <strong>Save profile</strong> when you're done. You can come back and change any of it whenever.</p>
 
@@ -256,23 +256,23 @@
         <li><strong>Overtraded</strong>: a planned trade whose intended risk, from your entry to your planned stop, worked out to more than your Max risk.</li>
         <li><strong>Big loss</strong>: any losing trade whose actual loss came in above your Max risk.</li>
       </ul>
-      <p>On days, as pills on the day header in the Daily view:</p>
+      <p>On days, as pills on the day header in Daily View:</p>
       <ul>
         <li><strong>Bad day</strong>: the day's net loss cleared your ideal daily volatility.</li>
         <li><strong>Drawdown breach</strong>: the day's net loss cleared your drawdown appetite.</li>
         <li><strong>Over-risk</strong>: the day held at least one trade that got flagged.</li>
       </ul>
-      <p>When a Big loss or Overtraded flag lands, it also drops a line in your Home activity feed with the numbers behind it.</p>
+      <p>When a Big loss or Overtraded flag lands, it also drops a line in your Home activity feed spelling out why.</p>
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Recent activity</span></div>
         <div class="feature-demo-body">
           <div class="fd-flag">
             <span class="fd-flag-tag">Big loss</span>
-            <div class="fd-flag-text">Lost $1,240 on <strong>NVDA</strong>, 2.5% of your account. Your limit is 1.5%. Thursday is now an Over-risk day.</div>
+            <div class="fd-flag-text">Auto-tagged <strong>NVDA</strong>. Lost $1,240, 2.5% of account (limit 1.5%). Thursday is now an Over-risk day.</div>
           </div>
         </div>
       </div>
-      <p class="fd-caption">The flag, with the math it's based on.</p>
+      <p class="fd-caption">The flag, with the math it's based on. An Overtraded line names the limit without the loss figure.</p>
 
       <h2>Good to know</h2>
       <ul>

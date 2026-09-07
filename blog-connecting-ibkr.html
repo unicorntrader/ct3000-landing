@@ -242,22 +242,22 @@
           <div class="mini-activity">
             <span class="mini-activity-check">✓</span>
             <div>
-              <div class="mini-activity-text">Daily refresh: 3 new fills added</div>
+              <div class="mini-activity-text">Synced 3 trades: MSFT, TSLA, NVDA</div>
               <div class="mini-activity-time">This morning</div>
             </div>
           </div>
           <div class="mini-activity">
             <span class="mini-activity-check">✓</span>
             <div>
-              <div class="mini-activity-text">Imported the last 30 days of trades</div>
-              <div class="mini-activity-time">On connect</div>
+              <div class="mini-activity-text">Synced. No new trades.</div>
+              <div class="mini-activity-time">Yesterday</div>
             </div>
           </div>
           <div class="mini-activity">
             <span class="mini-activity-check">✓</span>
             <div>
-              <div class="mini-activity-text">IBKR Flex Query connected</div>
-              <div class="mini-activity-time">Setup complete</div>
+              <div class="mini-activity-text">Synced 41 trades</div>
+              <div class="mini-activity-time">On connect</div>
             </div>
           </div>
         </div>
@@ -278,7 +278,7 @@
         <li><strong>IBKR Client Portal</strong> access, the browser login at interactivebrokers.com. These steps are not in TWS.</li>
         <li>About five minutes. You do this once.</li>
       </ul>
-      <p>By the end you'll have two values from IBKR, a <strong>Query ID</strong> and a <strong>token</strong>, pasted into CoTrader.</p>
+      <p>By the end you'll have two values from IBKR, a <strong>Query ID</strong> and a <strong>Flex Web Service token</strong>, pasted into CoTrader.</p>
 
       <h2>In IBKR Client Portal</h2>
       <ol>
@@ -291,16 +291,16 @@
       </figure>
       <ol start="3">
         <li>In the <strong>Activity Flex Query</strong> panel, click <strong>+</strong>. Name the query <em>CT3000 Activity</em>.</li>
-        <li>Under <strong>Sections</strong>, tick <strong>Trades</strong>, <strong>Open Positions</strong>, <strong>Account Information</strong> and <strong>Corporate Actions</strong>.</li>
-        <li>Open each of those four and click <strong>Select All</strong>.</li>
+        <li>Under <strong>Sections</strong>, tick <strong>Trades</strong> and <strong>Open Positions</strong>. These two carry your fills and your current holdings, and CoTrader needs both. Tick <strong>Account Information</strong> as well so it picks up your account's base currency. Ticking <strong>Corporate Actions</strong> too does no harm.</li>
+        <li>Open each section you ticked and click <strong>Select All</strong> so every field comes through.</li>
       </ol>
       <figure class="shot">
-        <img src="/ibkr-flex-3.png" alt="The four sections selected in the Sections list" loading="lazy">
-        <figcaption>The four sections to tick.</figcaption>
+        <img src="/ibkr-flex-3.png" alt="Trades, Open Positions, Account Information and Corporate Actions selected in the Sections list" loading="lazy">
+        <figcaption>Trades and Open Positions are the ones that matter. Account Information and Corporate Actions are boxed here too.</figcaption>
       </figure>
       <ol start="6">
-        <li>Under <strong>Delivery Configuration</strong>, set <strong>Format</strong> to <strong>XML</strong> and <strong>Period</strong> to <strong>Last 30 Calendar Days</strong>.</li>
-        <li>Under <strong>General Configuration</strong>, leave the date and time formats at their defaults (<strong>yyyyMMdd</strong>, <strong>HHmmss</strong>, <strong>; semi-colon</strong>). Save the query.</li>
+        <li>Under <strong>Delivery Configuration</strong>, set <strong>Format</strong> to <strong>XML</strong> and <strong>Period</strong> to <strong>Last 30 Calendar Days</strong>. A longer period makes the sync fail with a message telling you to change it back.</li>
+        <li>Under <strong>General Configuration</strong>, leave the date and time formats at their defaults: <strong>yyyyMMdd</strong> for the date, <strong>HHmmss</strong> for the time, <strong>; semi-colon</strong> as the separator. CoTrader reads timestamps in exactly that shape, so a changed format means trades import with the wrong time or not at all. Save the query.</li>
       </ol>
       <figure class="shot">
         <img src="/ibkr-flex-5.png" alt="Format XML and Period Last 30 Calendar Days set on the query" loading="lazy">
@@ -331,26 +331,27 @@
 
       <h2>In CoTrader</h2>
       <ol start="11">
-        <li>Open <strong>Settings</strong> and choose <strong>Manage IBKR connection</strong>.</li>
+        <li>Open the menu from the top right, then <strong>Trading</strong> → <strong>Manage IBKR connection</strong>.</li>
       </ol>
       <figure class="shot">
-        <img src="/ibkr-flex-9.png" alt="Manage IBKR connection in the CoTrader settings menu" loading="lazy">
-        <figcaption>Settings, then Manage IBKR connection.</figcaption>
+        <img src="/ibkr-flex-9.png" alt="Manage IBKR connection under Trading in the CoTrader menu" loading="lazy">
+        <figcaption>The menu, then Manage IBKR connection.</figcaption>
       </figure>
       <ol start="12">
-        <li>Paste in the <strong>Query ID</strong> and the <strong>token</strong>.</li>
-        <li>Click <strong>Test Connection</strong>, then <strong>Save &amp; Sync</strong>. Your last 30 days import right away.</li>
+        <li>Paste the <strong>Flex Web Service Token</strong> into the first field and the <strong>Query ID</strong> into the second.</li>
+        <li>Click <strong>Test first</strong> to check them. A working query comes back with <em>Connection works</em> and a count of the trades it found.</li>
+        <li>Click <strong>Connect IBKR</strong> to save, then <strong>Sync now</strong> on the screen that follows. Your last 30 days import there and then.</li>
       </ol>
       <div class="connect-mock">
-        <div class="connect-mock-bar"><span>Manage IBKR connection</span><span>✕</span></div>
+        <div class="connect-mock-bar"><span>IBKR</span><span>Not connected</span></div>
         <div class="connect-mock-body">
+          <div class="cm-label">Flex Web Service Token</div>
+          <div class="cm-field">123456789012345678901234</div>
           <div class="cm-label">Query ID</div>
           <div class="cm-field">1234567</div>
-          <div class="cm-label">Token</div>
-          <div class="cm-field"><span>••••••••••••••••••••</span><span class="cm-show">Show</span></div>
           <div class="cm-actions">
-            <span class="cm-btn secondary">Test Connection</span>
-            <span class="cm-btn primary">Save &amp; Sync</span>
+            <span class="cm-btn secondary">Test first</span>
+            <span class="cm-btn primary">Connect IBKR</span>
           </div>
         </div>
       </div>
@@ -359,8 +360,8 @@
       <h2>How the sync works after that</h2>
       <p>The Flex Query is a <strong>rolling 30-day window</strong>. In practice:</p>
       <ul>
-        <li><strong>On connect:</strong> CoTrader imports your last 30 days of trades.</li>
-        <li><strong>Every day after:</strong> it re-runs the query, which always returns the most recent 30 days, and adds anything new to your CoTrader history.</li>
+        <li><strong>On connect:</strong> your first <strong>Sync now</strong> imports the last 30 days of trades.</li>
+        <li><strong>After that:</strong> CoTrader re-runs the query the first time you open it each day, which always returns the most recent 30 days, and adds anything new to your history. <strong>Sync now</strong> is there any time you want it sooner.</li>
         <li><strong>Over time:</strong> your record in CoTrader keeps growing, because CoTrader holds on to everything it has already pulled even though IBKR only ever serves the last month.</li>
       </ul>
       <p>The one gap: trades from more than 30 days before you connected. IBKR will not return them through this query, so they stay in IBKR and don't appear in CoTrader.</p>
@@ -371,35 +372,36 @@
           <div class="fd-activity-item">
             <span class="fd-activity-check">✓</span>
             <div>
-              <div class="fd-activity-text">Daily refresh: added <strong>MSFT</strong>, <strong>TSLA</strong></div>
+              <div class="fd-activity-text">Synced 2 trades: <strong>MSFT</strong>, <strong>TSLA</strong></div>
               <div class="fd-activity-time">This morning</div>
             </div>
           </div>
           <div class="fd-activity-item">
             <span class="fd-activity-check">✓</span>
             <div>
-              <div class="fd-activity-text">Imported the last <strong>30 days</strong> of trades</div>
-              <div class="fd-activity-time">On connect</div>
+              <div class="fd-activity-text">Synced. No new trades.</div>
+              <div class="fd-activity-time">Yesterday</div>
             </div>
           </div>
           <div class="fd-activity-item">
             <span class="fd-activity-check">✓</span>
             <div>
-              <div class="fd-activity-text">IBKR Flex Query connected</div>
-              <div class="fd-activity-time">Setup complete</div>
+              <div class="fd-activity-text">Synced 41 trades</div>
+              <div class="fd-activity-time">On connect</div>
             </div>
           </div>
         </div>
       </div>
-      <p class="fd-caption">This is what "connected" actually looks like: no CSV, no manual entry.</p>
+      <p class="fd-caption">The sync lands in your activity feed each day. No CSV, no manual entry.</p>
 
       <h2>After you're connected</h2>
-      <p>Once that first 30 days is in, the rest of CoTrader starts working straight away. Callouts can scan those trades immediately, and your first Weekly Review already has real numbers behind it instead of a week of waiting. Setup is the only manual step. The sync runs on its own from then on, roughly once a day.</p>
+      <p>Once that first 30 days is in, the rest of CoTrader starts working straight away. Callouts can scan those trades immediately, and your first Weekly Review already has real numbers behind it instead of a week of waiting. Setup is the only manual step. After that the sync runs by itself, once a day, the first time you open CoTrader.</p>
 
       <h2>If a sync doesn't land</h2>
       <ul>
-        <li><strong>Test Connection fails:</strong> re-check that the token and Query ID pasted cleanly with no trailing spaces, and that the Flex Web Service is still switched on in IBKR.</li>
-        <li><strong>A recent trade is missing:</strong> confirm the <strong>Trades</strong> section is set to <strong>Select All</strong>, then give it a day, since IBKR regenerates the report on its own schedule.</li>
+        <li><strong>Test first fails:</strong> re-check that the token and Query ID pasted cleanly with no trailing spaces, and that the Flex Web Service is still switched on in IBKR. CoTrader shows the exact message IBKR sent back, so a wrong period or a disabled service names itself.</li>
+        <li><strong>The sync mentions Open Positions:</strong> the <strong>Open Positions</strong> section isn't on the query. Add it, run <strong>Select All</strong> on it, and sync again.</li>
+        <li><strong>A recent trade is missing:</strong> IBKR usually publishes a fill 10 to 30 minutes after the trade, and same-day trades often only land after 4pm ET. Wait a bit and hit <strong>Sync now</strong> again. If it's still missing after that, confirm the <strong>Trades</strong> section is set to <strong>Select All</strong>.</li>
         <li><strong>Older trades never appeared:</strong> expected. The query only reaches back 30 days, and your history builds forward from the day you connected.</li>
       </ul>
     </div>

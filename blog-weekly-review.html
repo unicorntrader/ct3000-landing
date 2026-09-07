@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>Reading Your Weekly Review - CT3000</title>
-  <meta name="description" content="Net P&L, win rate, average trade: one screen per week. Here's what each number actually means and why the ritual matters more than any single metric.">
+  <meta name="description" content="The four headline numbers in CoTrader's Weekly Review, the breakdowns beneath them, and the written reflection that closes the week. What each part is really telling you.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cotraderapp.com/blog-weekly-review">
   <meta property="og:title" content="Reading Your Weekly Review · CoTrader 3000 Blog">
@@ -104,7 +104,7 @@
       font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--blue-600); background: var(--blue-50); padding: 3px 8px; border-radius: 999px;
     }
-    .fd-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .fd-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .fd-kpi {
       background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
       padding: 12px 8px; text-align: center;
@@ -191,16 +191,16 @@
             <div class="mini-kpi">
               <div class="mini-kpi-lbl">Net P&amp;L</div>
               <div class="mini-kpi-val green">+$2,690</div>
-              <div class="mini-kpi-sub">5 closed</div>
+              <div class="mini-kpi-sub">vs +$1,240 last wk</div>
             </div>
             <div class="mini-kpi">
               <div class="mini-kpi-lbl">Win rate</div>
-              <div class="mini-kpi-val">100%</div>
-              <div class="mini-kpi-sub">5W · 0L</div>
+              <div class="mini-kpi-val">80%</div>
+              <div class="mini-kpi-sub">4W · 1L</div>
             </div>
             <div class="mini-kpi">
               <div class="mini-kpi-lbl">Avg / trade</div>
-              <div class="mini-kpi-val green">+$538</div>
+              <div class="mini-kpi-val">+$538</div>
               <div class="mini-kpi-sub">expectancy</div>
             </div>
           </div>
@@ -209,49 +209,62 @@
     </div>
 
     <div class="article-body">
-      <p>Every Sunday, or whenever you get to it, CoTrader gives you one screen: Net P&amp;L, win rate, average trade, all for the week that just closed. Reading it takes about two minutes. That's by design.</p>
+      <p>Your Weekly Review is a mode inside the Performance screen. You open it with the <strong>Weekly review</strong> button, and it lays out the week that just closed: four headline numbers, what made and lost money, the trades you took and the ones you passed on, and a short written reflection at the end. Working through it takes a few minutes, and that's by design.</p>
 
-      <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. The Weekly Review runs on the same cadence no matter how the week went, especially the weeks that went fine, since that's exactly when the drift causing next month's bad week tends to happen.</p>
+      <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. The Weekly Review is built for the opposite habit. The same pass every week, especially the weeks that went fine, since that's exactly when the drift causing next month's bad week tends to start.</p>
 
-      <h2>The three numbers, and what they're really telling you</h2>
-      <p><strong>Net P&amp;L</strong> is the outcome. It matters, but it's the least useful number for changing your behavior. A green week can hide a bad process that got lucky, and a red week can hide a good process that just had a rough five days. Don't stop here.</p>
+      <h2>The headline numbers, and what they're really telling you</h2>
+      <p><strong>Net P&amp;L</strong> is the outcome. It matters, but it's the least useful number for changing your behavior. A green week can hide a bad process that got lucky, and a red week can hide a good process that just had a rough five days. CoTrader shows it next to last week and your 8-week average, so a single week never gets read in isolation.</p>
 
-      <p><strong>Win rate</strong> tells you about your hit rate, not your edge. A 40% win rate with a 3:1 reward-to-risk ratio is a great week. A 70% win rate where your losers run three times the size of your winners is a slow leak. Win rate only means something once you put it next to average trade.</p>
+      <p><strong>Win rate</strong> tells you about your hit rate, not your edge. A 40% win rate with a 3:1 reward-to-risk ratio is a great week. A 70% win rate where your losers run three times the size of your winners is a slow leak. It's shown with the raw split underneath, like 3W &middot; 2L.</p>
 
-      <p><strong>Average trade</strong> is expectancy in miniature: what you made or lost per trade on average across everything you did that week. It's the number that tells you whether your process is working, regardless of how any single trade turned out.</p>
+      <p><strong>Avg / trade</strong> is expectancy in miniature: what you made or lost per trade on average across everything you did that week. It's the number that tells you whether your process is working, regardless of how any single trade turned out.</p>
+
+      <p><strong>W / L</strong> is your average winner measured against your average loser. A 45% win rate is fine when this reads 2.0 and a problem when it reads 0.6. This is the tile that tells you whether your win rate is lying to you.</p>
 
       <div class="feature-demo">
-        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly Review</span></div>
+        <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly review</span></div>
         <div class="feature-demo-body">
           <div class="fd-week">
-            <span class="fd-week-label">May 4–10</span>
+            <span class="fd-week-label">May 5 – May 9</span>
             <span class="fd-week-badge">This week</span>
           </div>
           <div class="fd-kpi-grid">
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Net P&amp;L</div>
               <div class="fd-kpi-val green">+$2,690</div>
-              <div class="fd-kpi-sub">5 closed</div>
+              <div class="fd-kpi-sub">vs +$1,240 last wk</div>
             </div>
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Win rate</div>
-              <div class="fd-kpi-val ink">100%</div>
-              <div class="fd-kpi-sub">5W · 0L</div>
+              <div class="fd-kpi-val ink">80%</div>
+              <div class="fd-kpi-sub">4W · 1L</div>
             </div>
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Avg / trade</div>
-              <div class="fd-kpi-val green">+$538</div>
-              <div class="fd-kpi-sub">expectancy</div>
+              <div class="fd-kpi-val ink">+$538</div>
+              <div class="fd-kpi-sub">expectancy · 5 trades</div>
+            </div>
+            <div class="fd-kpi">
+              <div class="fd-kpi-lbl">W / L</div>
+              <div class="fd-kpi-val ink">2.4</div>
+              <div class="fd-kpi-sub">+$750 / −$310</div>
             </div>
           </div>
         </div>
       </div>
-      <p class="fd-caption">A real Weekly Review screen: the exact three numbers explained above, side by side.</p>
+      <p class="fd-caption">The four KPI tiles from the top of the Weekly Review.</p>
+
+      <h2>Below the numbers</h2>
+      <p>The same screen breaks the week down by symbol and by behaviour tag, marks your best and worst single trade, and lists the trades you flagged as missed. It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
+
+      <h2>The written part</h2>
+      <p>The review ends with four questions, one at a time: what worked, what didn't, whether it's a recurring pattern, and one action for next week. Answer them and CoTrader shows you the week's stats alongside your streak of consecutive weeks reviewed. The streak is the point. One honest paragraph a week compounds the same way the trades do.</p>
 
       <h2>The ritual matters more than any single week</h2>
-      <p>One week of data won't tell you much. Four weeks in a row will. The real value here isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these three numbers drift, hold steady, or improve. That's why CoTrader lets you flip back through prior weeks at all.</p>
+      <p>One week of data won't tell you much. Four in a row will. The real value isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these numbers drift, hold steady, or improve. Flip through prior weeks with the arrows, the week picker, or the 8-week trend bars.</p>
 
-      <p>Two minutes, one screen, every week: small enough to keep up with, and usually the whole difference between improving and just trading.</p>
+      <p>A few minutes, once a week: small enough to keep up with, and usually the whole difference between improving and just trading.</p>
     </div>
 
     <div class="article-cta">
