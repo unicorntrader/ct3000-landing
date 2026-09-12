@@ -79,31 +79,6 @@
       border-radius: 12px; border: 1px solid var(--gray-200);
     }
 
-    /* Feature demo -- a real timeline of the week described below,
-       instead of an abstract day-one/day-seven milestone diagram. */
-    .feature-demo {
-      max-width: 480px; margin: 36px auto;
-      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
-      box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
-      overflow: hidden;
-      padding: 20px;
-    }
-    .fd-day { display: flex; align-items: flex-start; gap: 12px; }
-    .fd-day-num {
-      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
-      background: var(--gray-100); color: var(--gray-600);
-      font-size: 12px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .fd-day-num.done { background: var(--green-600); color: white; }
-    .fd-day-body { padding-top: 4px; }
-    .fd-day-title { font-size: 14px; font-weight: 700; color: var(--ink); }
-    .fd-day-sub { font-size: 12.5px; color: var(--gray-500); margin-top: 2px; }
-    .fd-day-connector { width: 1px; height: 20px; background: var(--gray-200); margin-left: 16px; }
-    .fd-caption {
-      text-align: center; font-size: 13px; color: var(--gray-500);
-      margin-top: 12px; font-style: italic;
-    }
 
     .article-cta {
       max-width: 680px; width: calc(100% - 2 * clamp(20px, 5vw, 48px)); margin: 0 auto; text-align: center;
@@ -199,34 +174,7 @@
     </div>
 
     <div class="article-body">
-      <p>New users almost never ask "how do I use this." They ask what they're supposed to do differently starting today. Honestly, for week one: almost nothing. The first week on CoTrader is about connecting your data and letting it build up, not about changing how you trade.</p>
-
-      <div class="feature-demo">
-        <div class="fd-day">
-          <div class="fd-day-num done">1</div>
-          <div class="fd-day-body">
-            <div class="fd-day-title">Connect &amp; import</div>
-            <div class="fd-day-sub">IBKR linked · last 30 days pulled in</div>
-          </div>
-        </div>
-        <div class="fd-day-connector"></div>
-        <div class="fd-day">
-          <div class="fd-day-num">2–6</div>
-          <div class="fd-day-body">
-            <div class="fd-day-title">Trade like normal</div>
-            <div class="fd-day-sub">Fills sync automatically</div>
-          </div>
-        </div>
-        <div class="fd-day-connector"></div>
-        <div class="fd-day">
-          <div class="fd-day-num done">7</div>
-          <div class="fd-day-body">
-            <div class="fd-day-title">First Weekly Review</div>
-            <div class="fd-day-sub">Net P&amp;L +$2,690 · 5 trades</div>
-          </div>
-        </div>
-      </div>
-      <p class="fd-caption">The whole first week, in three steps. This is the map for the sections below.</p>
+      <p>New users almost never ask "how do I use this." They ask what they're supposed to do differently starting today. Honestly, for week one: almost nothing. The first week on CoTrader is about connecting your data and letting it build up, not about changing how you trade. Three steps, covered below: connect and import, trade like you normally do, then your first Weekly Review.</p>
 
       <h2>Day one: connect and import</h2>
       <p>Link your IBKR account and your first sync pulls in the last 30 days of trades, organized and ready. From there it syncs once a day when you open the app, and your history builds up as you keep trading. Setup is a few minutes, done once, and it's the only manual step of the whole week. The <a href="/blog-connecting-ibkr">full walkthrough is here</a>.</p>
