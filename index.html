@@ -286,12 +286,15 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 64px; align-items: center; text-align: left;
     }
-    /* Insights' phone needs real width for the two-column Callouts/By
-       Tag layout -- its own text blurb is short, so it can give up
-       some of the usual 50/50 split without feeling cramped. */
-    .tab-panel[data-panel="insights"].active { grid-template-columns: 0.8fr 1.3fr; }
+    /* Insights' and Weekly review's phones need real width for their own
+       two-column layouts (Callouts/By Tag, and trade data/reflection) --
+       both text blurbs are short, so they can give up some of the usual
+       50/50 split without feeling cramped. */
+    .tab-panel[data-panel="insights"].active,
+    .tab-panel[data-panel="weekly-review"].active { grid-template-columns: 0.8fr 1.3fr; }
     @media (max-width: 800px) {
-      .tab-panel[data-panel="insights"].active { grid-template-columns: 1fr; }
+      .tab-panel[data-panel="insights"].active,
+      .tab-panel[data-panel="weekly-review"].active { grid-template-columns: 1fr; }
     }
     .tab-panel-text h3 {
       font-size: clamp(28px, 4.6vw, 50px); font-weight: 700; color: var(--ink);
@@ -551,6 +554,13 @@
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
       margin-bottom: 10px;
     }
+    /* Four-tile variant (Weekly review): 2x2 on a narrow phone, 4-across
+       once phone-wide gives it room -- same collapse point as .wr-columns
+       and .phone-wide so everything in this mockup breaks together. */
+    .kpi-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 701px) {
+      .kpi-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
     .kpi {
       background: var(--white);
       border: 1px solid var(--gray-200);
@@ -784,21 +794,47 @@
     .trend-chart .bar.current { outline: 2px solid var(--blue-600); outline-offset: 2px; }
     .trend-chart .bar { cursor: pointer; }
 
-    /* Reflection snippet — the autosaving notebook panel that sits next
-       to trade data in the real Weekly Review. */
-    .reflect-card {
-      background: var(--gray-50); border: 1px solid var(--gray-200);
-      border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+    /* Weekly review — trade data / reflection split, matching the real
+       Performance > Weekly Review screen's own left-heavy column ratio.
+       Same "give the phone real width" reasoning as Insights below. */
+    .wr-columns { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: start; margin-top: 14px; }
+    @media (max-width: 700px) {
+      .wr-columns { grid-template-columns: 1fr; gap: 0; }
     }
-    .reflect-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .reflect-head .reflect-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bw-tile { border-radius: 8px; padding: 10px 12px; }
+    .bw-tile.pos { background: var(--green-50); border: 1px solid var(--green-100); }
+    .bw-tile.neg { background: var(--red-50); border: 1px solid var(--red-100); }
+    .bw-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .bw-tile.pos .bw-lbl { color: var(--green-700); }
+    .bw-tile.neg .bw-lbl { color: var(--red-700); }
+    .bw-val { font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+    .bytag-amt.neg { color: var(--red-600); }
+    .bytag-bar.neg { background: var(--red-500); }
+    .wr-missed {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .wr-missed-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .wr-missed-sym { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .wr-missed-dir {
+      font-size: 10px; font-weight: 700; color: var(--green-700);
+      background: var(--green-50); padding: 2px 8px; border-radius: 999px;
+    }
+    .wr-missed-note { font-size: 11.5px; color: var(--gray-500); line-height: 1.5; }
+    .reflect-panel { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+    .reflect-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .reflect-panel-head span:first-child { font-size: 13px; font-weight: 700; color: var(--ink); }
     .reflect-streak { font-size: 10.5px; color: var(--gray-500); }
-    .reflect-saved {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--green-600); background: var(--green-50); padding: 2px 8px; border-radius: 999px;
+    .reflect-item { margin-bottom: 12px; }
+    .reflect-item:last-child { margin-bottom: 0; }
+    .reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
+    .reflect-sub { font-size: 10.5px; color: var(--gray-500); margin-bottom: 5px; }
+    .reflect-box {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 8px 10px; font-size: 12px; color: var(--gray-700); line-height: 1.5;
     }
-    .reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-    .reflect-a { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+    .reflect-saved-line { font-size: 10.5px; color: var(--gray-500); margin-top: 10px; text-align: right; }
 
     /* ─── Callouts (Row 5) — matches app's Performance callouts UI ─── */
     .callouts-head {
@@ -2032,6 +2068,12 @@
               </div>
             </div>
             <div class="phone-body">
+              <div class="kpi-grid kpi-grid-4">
+                <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" id="kpi-pnl" data-mask style="color:var(--green-600);">+$2,690</div><div class="sub" id="kpi-closed">5 closed</div></div>
+                <div class="kpi"><div class="lbl">Win rate</div><div class="val" id="kpi-wr">100%</div><div class="sub" id="kpi-wl">5W · 0L</div></div>
+                <div class="kpi"><div class="lbl">Avg / trade</div><div class="val" id="kpi-avg" data-mask>+$538</div><div class="sub">expectancy</div></div>
+                <div class="kpi"><div class="lbl">Win/loss ratio</div><div class="val" id="kpi-wlr">&mdash;</div><div class="sub" id="kpi-wlr-sub" data-mask>&nbsp;</div></div>
+              </div>
               <div class="week-nav">
                 <button class="nav-btn" id="week-prev" aria-label="Previous week">‹</button>
                 <button class="nav-btn" id="week-next" aria-label="Next week">›</button>
@@ -2040,22 +2082,93 @@
                   <div class="sub" id="week-num">Week 19 · 2026-W19</div>
                 </div>
               </div>
-              <div class="trend-chart" id="trend-chart" aria-hidden="true"></div>
-              <div class="kpi-grid">
-                <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" id="kpi-pnl" data-mask style="color:var(--green-600);">+$2,690</div><div class="sub" id="kpi-closed">5 closed</div></div>
-                <div class="kpi"><div class="lbl">Win rate</div><div class="val" id="kpi-wr">100%</div><div class="sub" id="kpi-wl">5W · 0L</div></div>
-                <div class="kpi"><div class="lbl">Avg / trade</div><div class="val" id="kpi-avg" data-mask>+$538</div><div class="sub">expectancy</div></div>
+
+              <!-- Trade data (left) / reflection (right) -- static
+                   illustration, same convention as the Insights tab's
+                   callouts + by-tag columns below: only the KPIs and
+                   trend above/below react to week-nav, this snapshot
+                   shows what a filled-in week looks like. -->
+              <div class="wr-columns">
+                <div>
+                  <div class="bw-grid">
+                    <div class="bw-tile pos"><div class="bw-lbl">Best trade</div><div class="bw-val">MSTR <span data-mask>+$620</span></div></div>
+                    <div class="bw-tile neg"><div class="bw-lbl">Worst trade</div><div class="bw-val">TSLA <span data-mask>−$180</span></div></div>
+                  </div>
+                  <div class="bytag-section">
+                    <div class="bytag-head"><span>By symbol</span></div>
+                    <div class="bytag-row">
+                      <div class="bytag-top"><span class="bytag-name">MSTR</span><span class="bytag-amt pos" data-mask>+$620</span></div>
+                      <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar" style="width:100%"></div></div><span class="bytag-count">2 trades</span></div>
+                    </div>
+                    <div class="bytag-row">
+                      <div class="bytag-top"><span class="bytag-name">AAPL</span><span class="bytag-amt pos" data-mask>+$310</span></div>
+                      <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar" style="width:50%"></div></div><span class="bytag-count">2 trades</span></div>
+                    </div>
+                    <div class="bytag-row">
+                      <div class="bytag-top"><span class="bytag-name">TSLA</span><span class="bytag-amt neg" data-mask>&minus;$180</span></div>
+                      <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar neg" style="width:29%"></div></div><span class="bytag-count">1 trade</span></div>
+                    </div>
+                  </div>
+                  <div class="bytag-section">
+                    <div class="bytag-head"><span>By tag &middot; behaviours</span></div>
+                    <div class="bytag-row">
+                      <div class="bytag-top"><span class="bytag-name">Good exit</span><span class="bytag-amt pos" data-mask>+$540</span></div>
+                      <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar" style="width:100%"></div></div><span class="bytag-count">3 trades</span></div>
+                    </div>
+                    <div class="bytag-row">
+                      <div class="bytag-top"><span class="bytag-name">FOMO entry</span><span class="bytag-amt neg" data-mask>&minus;$180</span></div>
+                      <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar neg" style="width:33%"></div></div><span class="bytag-count">1 trade</span></div>
+                    </div>
+                  </div>
+                  <div class="bytag-section">
+                    <div class="bytag-head"><span>Missed this week <span style="font-weight:500;color:var(--gray-500);">(1)</span></span></div>
+                    <div class="wr-missed">
+                      <div class="wr-missed-top"><span class="wr-missed-sym">NVDA</span><span class="wr-missed-dir">LONG</span></div>
+                      <div class="wr-missed-note">Faded back to the open range low, exactly the setup I usually take. Watched it run without me.</div>
+                    </div>
+                  </div>
+                  <div class="bytag-section">
+                    <div class="bytag-head"><span>Trades closed <span style="font-weight:500;color:var(--gray-500);">(5)</span></span></div>
+                    <div class="tag-trade"><span class="tt-date">May 8</span><span class="tt-sym">MSTR</span><span class="tt-pnl pos" data-mask>+$370</span><span class="tt-pct">&nbsp;</span></div>
+                    <div class="tag-trade"><span class="tt-date">May 7</span><span class="tt-sym">AAPL</span><span class="tt-pnl pos" data-mask>+$310</span><span class="tt-pct">&nbsp;</span></div>
+                    <div class="tag-trade"><span class="tt-date">May 6</span><span class="tt-sym">MSTR</span><span class="tt-pnl pos" data-mask>+$250</span><span class="tt-pct">&nbsp;</span></div>
+                    <div class="tag-trade"><span class="tt-date">May 5</span><span class="tt-sym">TSLA</span><span class="tt-pnl neg" data-mask>&minus;$180</span><span class="tt-pct">&nbsp;</span></div>
+                    <div class="tag-trade"><span class="tt-date">May 5</span><span class="tt-sym">CRWV</span><span class="tt-pnl pos" data-mask>+$60</span><span class="tt-pct">&nbsp;</span></div>
+                  </div>
+                </div>
+
+                <div class="reflect-panel">
+                  <div class="reflect-panel-head">
+                    <span>Reflection</span>
+                    <span class="reflect-streak">4-week streak</span>
+                  </div>
+                  <div class="reflect-item">
+                    <div class="reflect-q">What worked well this week?</div>
+                    <div class="reflect-sub">Behaviours, habits, setups. Anything that paid off.</div>
+                    <div class="reflect-box">Stuck to entries on planned trades. Cut losers fast on the MSTR breakout fail.</div>
+                  </div>
+                  <div class="reflect-item">
+                    <div class="reflect-q">What didn't work?</div>
+                    <div class="reflect-sub">Mistakes, near-misses, anything that cost you.</div>
+                    <div class="reflect-box">Chased entries on TSLA twice. Didn't take the planned NVDA trade.</div>
+                  </div>
+                  <div class="reflect-item">
+                    <div class="reflect-q">Is this a recurring pattern?</div>
+                    <div class="reflect-sub">Have you seen the same mistakes / wins before?</div>
+                    <div class="reflect-box">Third week in a row skipping the exact setup I'm best at.</div>
+                  </div>
+                  <div class="reflect-item">
+                    <div class="reflect-q">Action for next week</div>
+                    <div class="reflect-sub">One concrete thing you'll change.</div>
+                    <div class="reflect-box">Set an alert at the planned entry instead of watching the chart live.</div>
+                  </div>
+                  <div class="reflect-saved-line">Saved automatically</div>
+                </div>
               </div>
-              <div class="reflect-card">
-                <div class="reflect-head">
-                  <span class="reflect-title">Reflection</span>
-                  <span class="reflect-saved">Saved</span>
-                </div>
-                <div class="reflect-q">What worked well this week?</div>
-                <div class="reflect-a">Stuck to entries on planned trades. Cut losers fast on the NVDA breakout fail.</div>
-                <div class="reflect-head" style="margin-top:10px; margin-bottom:0;">
-                  <span class="reflect-streak">4-week streak</span>
-                </div>
+
+              <div class="bytag-section">
+                <div class="bytag-head"><span>8w trend</span></div>
+                <div class="trend-chart" id="trend-chart" aria-hidden="true"></div>
               </div>
             </div>
           </div>
@@ -2559,14 +2672,14 @@
       // you're actually looking at instead of always the rightmost bar.
       const trend = [22, 26, 32, 40, 32, 26, 74, 96];
       const weeks = [
-        { label: 'May 4–10',     num: 19, badge: 'THIS WEEK',     pnl: '+$2,690', pnlPos: true,  wr: '100%', wl: '5W · 0L', closed: '5 closed', avg: '+$538' },
-        { label: 'Apr 27–May 3', num: 18, badge: 'LAST WEEK',     pnl: '+$1,200', pnlPos: true,  wr: '67%',  wl: '4W · 2L', closed: '6 closed', avg: '+$200' },
-        { label: 'Apr 20–26',    num: 17, badge: '2 WEEKS AGO',   pnl: '−$450',   pnlPos: false, wr: '40%',  wl: '2W · 3L', closed: '5 closed', avg: '−$90'  },
-        { label: 'Apr 13–19',    num: 16, badge: '3 WEEKS AGO',   pnl: '+$890',   pnlPos: true,  wr: '60%',  wl: '3W · 2L', closed: '5 closed', avg: '+$178' },
-        { label: 'Apr 6–12',     num: 15, badge: '4 WEEKS AGO',   pnl: '−$210',   pnlPos: false, wr: '33%',  wl: '1W · 2L', closed: '3 closed', avg: '−$70'  },
-        { label: 'Mar 30–Apr 5', num: 14, badge: '5 WEEKS AGO',   pnl: '+$1,540', pnlPos: true,  wr: '80%',  wl: '4W · 1L', closed: '5 closed', avg: '+$308' },
-        { label: 'Mar 23–29',    num: 13, badge: '6 WEEKS AGO',   pnl: '+$320',   pnlPos: true,  wr: '50%',  wl: '2W · 2L', closed: '4 closed', avg: '+$80'  },
-        { label: 'Mar 16–22',    num: 12, badge: '7 WEEKS AGO',   pnl: '−$680',   pnlPos: false, wr: '25%',  wl: '1W · 3L', closed: '4 closed', avg: '−$170' },
+        { label: 'May 4–10',     num: 19, badge: 'THIS WEEK',     pnl: '+$2,690', pnlPos: true,  wr: '100%', wl: '5W · 0L', closed: '5 closed', avg: '+$538', wlr: '∞',   wlrSub: '+$538 / —'        },
+        { label: 'Apr 27–May 3', num: 18, badge: 'LAST WEEK',     pnl: '+$1,200', pnlPos: true,  wr: '67%',  wl: '4W · 2L', closed: '6 closed', avg: '+$200', wlr: '2.1', wlrSub: '+$350 / −$165'    },
+        { label: 'Apr 20–26',    num: 17, badge: '2 WEEKS AGO',   pnl: '−$450',   pnlPos: false, wr: '40%',  wl: '2W · 3L', closed: '5 closed', avg: '−$90',  wlr: '0.6', wlrSub: '+$210 / −$290'    },
+        { label: 'Apr 13–19',    num: 16, badge: '3 WEEKS AGO',   pnl: '+$890',   pnlPos: true,  wr: '60%',  wl: '3W · 2L', closed: '5 closed', avg: '+$178', wlr: '1.8', wlrSub: '+$320 / −$180'    },
+        { label: 'Apr 6–12',     num: 15, badge: '4 WEEKS AGO',   pnl: '−$210',   pnlPos: false, wr: '33%',  wl: '1W · 2L', closed: '3 closed', avg: '−$70',  wlr: '0.7', wlrSub: '+$180 / −$255'    },
+        { label: 'Mar 30–Apr 5', num: 14, badge: '5 WEEKS AGO',   pnl: '+$1,540', pnlPos: true,  wr: '80%',  wl: '4W · 1L', closed: '5 closed', avg: '+$308', wlr: '3.4', wlrSub: '+$410 / −$120'    },
+        { label: 'Mar 23–29',    num: 13, badge: '6 WEEKS AGO',   pnl: '+$320',   pnlPos: true,  wr: '50%',  wl: '2W · 2L', closed: '4 closed', avg: '+$80',  wlr: '1.3', wlrSub: '+$260 / −$200'    },
+        { label: 'Mar 16–22',    num: 12, badge: '7 WEEKS AGO',   pnl: '−$680',   pnlPos: false, wr: '25%',  wl: '1W · 3L', closed: '4 closed', avg: '−$170', wlr: '0.5', wlrSub: '+$150 / −$310'    },
       ];
       let idx = 0;
       const $prev = document.getElementById('week-prev');
@@ -2580,6 +2693,8 @@
       const $wr     = document.getElementById('kpi-wr');
       const $wl     = document.getElementById('kpi-wl');
       const $avg    = document.getElementById('kpi-avg');
+      const $wlr    = document.getElementById('kpi-wlr');
+      const $wlrSub = document.getElementById('kpi-wlr-sub');
       const $chart  = document.getElementById('trend-chart');
       const render = () => {
         const w = weeks[idx];
@@ -2596,6 +2711,11 @@
         if (window.__ct3000_setMasked) window.__ct3000_setMasked($avg, w.avg);
         else $avg.textContent = w.avg;
         $avg.style.color    = w.avg.startsWith('−') ? 'var(--red-600)' : 'var(--ink)';
+        if ($wlr) $wlr.textContent = w.wlr;
+        if ($wlrSub) {
+          if (window.__ct3000_setMasked) window.__ct3000_setMasked($wlrSub, w.wlrSub);
+          else $wlrSub.textContent = w.wlrSub;
+        }
         // The "current" bar tracks idx (how many weeks back you've
         // navigated), not always the rightmost bar -- otherwise Previous
         // looked like it did nothing, since the highlight never moved.
