@@ -81,9 +81,10 @@
     }
 
     /* Feature demo -- a real fragment of the app's Weekly Review UI
-       instead of an abstract diagram. */
+       instead of an abstract diagram. Wide enough to hold the actual
+       two-column trade-data/reflection layout, not just a KPI strip. */
     .feature-demo {
-      max-width: 420px; margin: 36px auto;
+      max-width: 640px; margin: 36px auto;
       background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
       box-shadow: 0 24px 60px -18px rgba(17,24,39,0.15);
       overflow: hidden;
@@ -94,17 +95,20 @@
     }
     .feature-demo-bar img { height: 18px; width: 18px; display: block; }
     .feature-demo-bar span { font-size: 12px; font-weight: 700; color: var(--gray-500); }
-    .feature-demo-body { padding: 16px; }
+    .feature-demo-body { padding: 18px 20px; }
     .fd-week {
       display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 12px;
+      margin: 14px 0 0;
     }
     .fd-week-label { font-size: 14px; font-weight: 700; color: var(--ink); }
     .fd-week-badge {
       font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--blue-600); background: var(--blue-50); padding: 3px 8px; border-radius: 999px;
     }
-    .fd-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .fd-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    @media (max-width: 480px) {
+      .fd-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     .fd-kpi {
       background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
       padding: 12px 8px; text-align: center;
@@ -114,19 +118,65 @@
     .fd-kpi-val.green { color: var(--green-600); }
     .fd-kpi-val.ink { color: var(--ink); }
     .fd-kpi-sub { font-size: 10.5px; color: var(--gray-500); margin-top: 2px; }
-    .fd-reflect {
-      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
-      padding: 12px 14px; margin-top: 10px;
+
+    /* Trade data (left) / reflection (right) -- mirrors the real
+       screen's own left-heavy ratio, widened for the reflection notes. */
+    .wr-columns { display: grid; grid-template-columns: 1fr 1.3fr; gap: 18px; margin-top: 16px; align-items: start; }
+    @media (max-width: 560px) {
+      .wr-columns { grid-template-columns: 1fr; gap: 0; }
     }
-    .fd-reflect-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .fd-reflect-head span:first-child { font-size: 13px; font-weight: 700; color: var(--ink); }
-    .fd-reflect-saved {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--green-600); background: var(--green-50); padding: 2px 8px; border-radius: 999px;
+    .bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bw-tile { border-radius: 8px; padding: 10px 12px; }
+    .bw-tile.pos { background: var(--green-50); border: 1px solid var(--green-100); }
+    .bw-tile.neg { background: var(--red-50); border: 1px solid var(--red-100); }
+    .bw-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .bw-tile.pos .bw-lbl { color: var(--green-700); }
+    .bw-tile.neg .bw-lbl { color: var(--red-700); }
+    .bw-val { font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+
+    .bytag-section { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-200); }
+    .bytag-head { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .bytag-row { margin-bottom: 10px; }
+    .bytag-row:last-child { margin-bottom: 0; }
+    .bytag-top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+    .bytag-name { font-size: 12.5px; font-weight: 600; color: var(--ink); flex: 1; }
+    .bytag-amt { font-size: 12.5px; font-weight: 700; }
+    .bytag-amt.pos { color: var(--green-600); }
+    .bytag-amt.neg { color: var(--red-600); }
+    .bytag-bottom { display: flex; align-items: center; gap: 8px; }
+    .bytag-bar-track { flex: 1; height: 5px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+    .bytag-bar { height: 100%; background: var(--green-500); border-radius: 999px; }
+    .bytag-bar.neg { background: var(--red-500); }
+    .bytag-count { font-size: 10.5px; color: var(--gray-500); white-space: nowrap; }
+
+    .tag-trade { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; border-top: 1px solid var(--gray-100); }
+    .tag-trade:first-of-type { border-top: none; }
+    .tag-trade .tt-date { color: var(--gray-500); width: 38px; flex-shrink: 0; }
+    .tag-trade .tt-sym { color: var(--ink); font-weight: 700; flex: 1; }
+    .tag-trade .tt-pnl.pos { color: var(--green-600); font-weight: 700; }
+    .tag-trade .tt-pnl.neg { color: var(--red-600); font-weight: 700; }
+    .wr-more { font-size: 11px; color: var(--gray-500); margin-top: 6px; }
+
+    .reflect-panel { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+    .reflect-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .reflect-panel-head span:first-child { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .reflect-streak { font-size: 10.5px; color: var(--gray-500); }
+    .reflect-item { margin-bottom: 10px; }
+    .reflect-item:last-child { margin-bottom: 0; }
+    .reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+    .reflect-box {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 8px 10px; font-size: 12px; color: var(--gray-700); line-height: 1.5;
     }
-    .fd-reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-    .fd-reflect-a { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
-    .fd-reflect-streak { font-size: 10.5px; color: var(--gray-500); margin-top: 8px; }
+    .reflect-saved-line { font-size: 10.5px; color: var(--gray-500); margin-top: 10px; text-align: right; }
+
+    .wr-trend-section { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-200); }
+    .trend-chart { display: flex; align-items: flex-end; gap: 4px; height: 40px; }
+    .trend-chart .bar { flex: 1; border-radius: 3px 3px 0 0; min-height: 3px; }
+    .trend-chart .bar.pos { background: var(--green-500); }
+    .trend-chart .bar.neg { background: var(--red-500); }
+    .trend-chart .bar.current { outline: 2px solid var(--blue-600); outline-offset: 2px; }
+
     .fd-caption {
       text-align: center; font-size: 13px; color: var(--gray-500);
       margin-top: 12px; font-style: italic;
@@ -238,10 +288,6 @@
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly review</span></div>
         <div class="feature-demo-body">
-          <div class="fd-week">
-            <span class="fd-week-label">May 5 – May 9</span>
-            <span class="fd-week-badge">This week</span>
-          </div>
           <div class="fd-kpi-grid">
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Net P&amp;L</div>
@@ -256,7 +302,7 @@
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Avg / trade</div>
               <div class="fd-kpi-val ink">+$538</div>
-              <div class="fd-kpi-sub">expectancy · 5 trades</div>
+              <div class="fd-kpi-sub">expectancy</div>
             </div>
             <div class="fd-kpi">
               <div class="fd-kpi-lbl">Win/loss ratio</div>
@@ -264,21 +310,70 @@
               <div class="fd-kpi-sub">+$750 / −$310</div>
             </div>
           </div>
-          <div class="fd-reflect">
-            <div class="fd-reflect-head">
-              <span>Reflection</span>
-              <span class="fd-reflect-saved">Saved</span>
+          <div class="fd-week">
+            <span class="fd-week-label">May 5 – May 9</span>
+            <span class="fd-week-badge">This week</span>
+          </div>
+          <div class="wr-columns">
+            <div>
+              <div class="bw-grid">
+                <div class="bw-tile pos"><div class="bw-lbl">Best trade</div><div class="bw-val">MSTR +$620</div></div>
+                <div class="bw-tile neg"><div class="bw-lbl">Worst trade</div><div class="bw-val">TSLA &minus;$180</div></div>
+              </div>
+              <div class="bytag-section">
+                <div class="bytag-head">By symbol</div>
+                <div class="bytag-row">
+                  <div class="bytag-top"><span class="bytag-name">MSTR</span><span class="bytag-amt pos">+$620</span></div>
+                  <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar" style="width:100%"></div></div><span class="bytag-count">2 trades</span></div>
+                </div>
+                <div class="bytag-row">
+                  <div class="bytag-top"><span class="bytag-name">TSLA</span><span class="bytag-amt neg">&minus;$180</span></div>
+                  <div class="bytag-bottom"><div class="bytag-bar-track"><div class="bytag-bar neg" style="width:29%"></div></div><span class="bytag-count">1 trade</span></div>
+                </div>
+              </div>
+              <div class="bytag-section">
+                <div class="bytag-head">Trades closed (5)</div>
+                <div class="tag-trade"><span class="tt-date">May 8</span><span class="tt-sym">MSTR</span><span class="tt-pnl pos">+$370</span></div>
+                <div class="tag-trade"><span class="tt-date">May 5</span><span class="tt-sym">TSLA</span><span class="tt-pnl neg">&minus;$180</span></div>
+                <div class="wr-more">+3 more</div>
+              </div>
             </div>
-            <div class="fd-reflect-q">What worked well this week?</div>
-            <div class="fd-reflect-a">Stuck to entries on planned trades. Cut losers fast on the NVDA breakout fail.</div>
-            <div class="fd-reflect-streak">4-week streak</div>
+            <div class="reflect-panel">
+              <div class="reflect-panel-head">
+                <span>Reflection</span>
+                <span class="reflect-streak">4-week streak</span>
+              </div>
+              <div class="reflect-item">
+                <div class="reflect-q">What worked well this week?</div>
+                <div class="reflect-box">Stuck to entries on planned trades. Cut losers fast on the MSTR breakout fail.</div>
+              </div>
+              <div class="reflect-item">
+                <div class="reflect-q">What didn't work?</div>
+                <div class="reflect-box">Chased entries on TSLA twice. Didn't take the planned NVDA trade.</div>
+              </div>
+              <div class="wr-more">+ 2 more prompts</div>
+              <div class="reflect-saved-line">Saved automatically</div>
+            </div>
+          </div>
+          <div class="wr-trend-section">
+            <div class="bytag-head" style="margin-bottom:8px;">8w trend</div>
+            <div class="trend-chart">
+              <div class="bar neg" style="height:12%"></div>
+              <div class="bar neg" style="height:18%"></div>
+              <div class="bar pos" style="height:40%"></div>
+              <div class="bar pos" style="height:55%"></div>
+              <div class="bar pos" style="height:35%"></div>
+              <div class="bar neg" style="height:20%"></div>
+              <div class="bar pos" style="height:65%"></div>
+              <div class="bar pos current" style="height:100%"></div>
+            </div>
           </div>
         </div>
       </div>
-      <p class="fd-caption">The KPI tiles and the reflection panel, the way they sit side by side on desktop.</p>
+      <p class="fd-caption">The whole screen: trade data and reflection side by side, the 8-week trend underneath.</p>
 
       <h2>Below the numbers</h2>
-      <p>The same screen breaks the week down by symbol, by behaviour tag, and by trade grade if you use star ratings, marks your best and worst single trade, and lists the trades you flagged as missed. It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
+      <p>The screen above breaks the week down by symbol and by behaviour tag, marks your best and worst single trade, and lists the trades you closed (and, elsewhere on it, the ones you flagged as missed). It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
 
       <h2>The reflection panel, always open</h2>
       <p>Four prompts sit in view the whole time: what worked, what didn't, whether it's a recurring pattern, and one action for next week. Type into any of them and CoTrader saves a couple of seconds after you stop typing. No button to click, no form to submit, nothing to mark "done." Keep it up and a streak of consecutive weeks shows up right in the panel header while you're on the current week. The streak is the point, not the completion. One honest paragraph a week compounds the same way the trades do.</p>
