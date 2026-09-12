@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>Reading Your Weekly Review - CT3000</title>
-  <meta name="description" content="The four headline numbers in CoTrader's Weekly Review, the breakdowns beneath them, and the written reflection that closes the week. What each part is really telling you.">
+  <meta name="description" content="The four headline numbers in CoTrader's Weekly Review, the breakdowns beside them, and the autosaving reflection panel next to it all. What each part is really telling you.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cotraderapp.com/blog-weekly-review">
   <meta property="og:title" content="Reading Your Weekly Review · CoTrader 3000 Blog">
@@ -114,6 +114,19 @@
     .fd-kpi-val.green { color: var(--green-600); }
     .fd-kpi-val.ink { color: var(--ink); }
     .fd-kpi-sub { font-size: 10.5px; color: var(--gray-500); margin-top: 2px; }
+    .fd-reflect {
+      background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
+      padding: 12px 14px; margin-top: 10px;
+    }
+    .fd-reflect-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .fd-reflect-head span:first-child { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .fd-reflect-saved {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--green-600); background: var(--green-50); padding: 2px 8px; border-radius: 999px;
+    }
+    .fd-reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .fd-reflect-a { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+    .fd-reflect-streak { font-size: 10.5px; color: var(--gray-500); margin-top: 8px; }
     .fd-caption {
       text-align: center; font-size: 13px; color: var(--gray-500);
       margin-top: 12px; font-style: italic;
@@ -209,7 +222,7 @@
     </div>
 
     <div class="article-body">
-      <p>Your Weekly Review is a mode inside the Performance screen. You open it with the <strong>Weekly review</strong> button, and it lays out the week that just closed: four headline numbers, what made and lost money, the trades you took and the ones you passed on, and a short written reflection at the end. Working through it takes a few minutes, and that's by design.</p>
+      <p>Your Weekly Review is a mode inside the Performance screen. Open it with the <strong>Weekly review</strong> button and the week that just closed splits into two: trade data on one side (four headline numbers, what made and lost money, the trades you took and the ones you passed on), a reflection panel on the other. An 8-week trend runs full-width underneath both. On a phone, it stacks: trade data first, reflection second, the trend last.</p>
 
       <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. The Weekly Review is built for the opposite habit. The same pass every week, especially the weeks that went fine, since that's exactly when the drift causing next month's bad week tends to start.</p>
 
@@ -220,7 +233,7 @@
 
       <p><strong>Avg / trade</strong> is expectancy in miniature: what you made or lost per trade on average across everything you did that week. It's the number that tells you whether your process is working, regardless of how any single trade turned out.</p>
 
-      <p><strong>W / L</strong> is your average winner measured against your average loser. A 45% win rate is fine when this reads 2.0 and a problem when it reads 0.6. This is the tile that tells you whether your win rate is lying to you.</p>
+      <p><strong>Win/loss ratio</strong> is your average winner measured against your average loser. A 45% win rate is fine when this reads 2.0 and a problem when it reads 0.6. This is the tile that tells you whether your win rate is lying to you.</p>
 
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly review</span></div>
@@ -246,23 +259,32 @@
               <div class="fd-kpi-sub">expectancy · 5 trades</div>
             </div>
             <div class="fd-kpi">
-              <div class="fd-kpi-lbl">W / L</div>
+              <div class="fd-kpi-lbl">Win/loss ratio</div>
               <div class="fd-kpi-val ink">2.4</div>
               <div class="fd-kpi-sub">+$750 / −$310</div>
             </div>
           </div>
+          <div class="fd-reflect">
+            <div class="fd-reflect-head">
+              <span>Reflection</span>
+              <span class="fd-reflect-saved">Saved</span>
+            </div>
+            <div class="fd-reflect-q">What worked well this week?</div>
+            <div class="fd-reflect-a">Stuck to entries on planned trades. Cut losers fast on the NVDA breakout fail.</div>
+            <div class="fd-reflect-streak">4-week streak</div>
+          </div>
         </div>
       </div>
-      <p class="fd-caption">The four KPI tiles from the top of the Weekly Review.</p>
+      <p class="fd-caption">The KPI tiles and the reflection panel, the way they sit side by side on desktop.</p>
 
       <h2>Below the numbers</h2>
-      <p>The same screen breaks the week down by symbol and by behaviour tag, marks your best and worst single trade, and lists the trades you flagged as missed. It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
+      <p>The same screen breaks the week down by symbol, by behaviour tag, and by trade grade if you use star ratings, marks your best and worst single trade, and lists the trades you flagged as missed. It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
 
-      <h2>The written part</h2>
-      <p>The review ends with four questions, one at a time: what worked, what didn't, whether it's a recurring pattern, and one action for next week. Answer them and CoTrader shows you the week's stats alongside your streak of consecutive weeks reviewed. The streak is the point. One honest paragraph a week compounds the same way the trades do.</p>
+      <h2>The reflection panel, always open</h2>
+      <p>Four prompts sit in view the whole time: what worked, what didn't, whether it's a recurring pattern, and one action for next week. Type into any of them and CoTrader saves a couple of seconds after you stop typing. No button to click, no form to submit, nothing to mark "done." Keep it up and a streak of consecutive weeks shows up right in the panel header while you're on the current week. The streak is the point, not the completion. One honest paragraph a week compounds the same way the trades do.</p>
 
       <h2>The ritual matters more than any single week</h2>
-      <p>One week of data won't tell you much. Four in a row will. The real value isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these numbers drift, hold steady, or improve. Flip through prior weeks with the arrows, the week picker, or the 8-week trend bars.</p>
+      <p>One week of data won't tell you much. Four in a row will. The real value isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these numbers drift, hold steady, or improve. The 8-week trend at the bottom is clickable: tap any week's bar and you're reviewing that week, no arrowing back one at a time.</p>
 
       <p>A few minutes, once a week: small enough to keep up with, and usually the whole difference between improving and just trading.</p>
     </div>

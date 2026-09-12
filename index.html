@@ -782,6 +782,23 @@
     .trend-chart .bar.pos { background: var(--green-500); }
     .trend-chart .bar.neg { background: var(--red-500); }
     .trend-chart .bar.current { outline: 2px solid var(--blue-600); outline-offset: 2px; }
+    .trend-chart .bar { cursor: pointer; }
+
+    /* Reflection snippet — the autosaving notebook panel that sits next
+       to trade data in the real Weekly Review. */
+    .reflect-card {
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+    }
+    .reflect-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .reflect-head .reflect-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .reflect-streak { font-size: 10.5px; color: var(--gray-500); }
+    .reflect-saved {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--green-600); background: var(--green-50); padding: 2px 8px; border-radius: 999px;
+    }
+    .reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .reflect-a { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
 
     /* ─── Callouts (Row 5) — matches app's Performance callouts UI ─── */
     .callouts-head {
@@ -1998,7 +2015,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Weekly review</span>
             <h3 class="reveal-row">How did the week go?</h3>
-            <p class="reveal-row">Net P&amp;L, win rate, average trade: one screen per week. A 2-minute retrospective ritual. Cycle through the weeks to spot patterns and drift.</p>
+            <p class="reveal-row">Trade data on one side, a running notebook on the other. Answer four short prompts (what worked, what didn't, whether it's a pattern, what changes next week) and it saves as you type: no button to click, no form to finish. Tap any bar in the trend below to jump straight into that week.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -2028,6 +2045,17 @@
                 <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" id="kpi-pnl" data-mask style="color:var(--green-600);">+$2,690</div><div class="sub" id="kpi-closed">5 closed</div></div>
                 <div class="kpi"><div class="lbl">Win rate</div><div class="val" id="kpi-wr">100%</div><div class="sub" id="kpi-wl">5W · 0L</div></div>
                 <div class="kpi"><div class="lbl">Avg / trade</div><div class="val" id="kpi-avg" data-mask>+$538</div><div class="sub">expectancy</div></div>
+              </div>
+              <div class="reflect-card">
+                <div class="reflect-head">
+                  <span class="reflect-title">Reflection</span>
+                  <span class="reflect-saved">Saved</span>
+                </div>
+                <div class="reflect-q">What worked well this week?</div>
+                <div class="reflect-a">Stuck to entries on planned trades. Cut losers fast on the NVDA breakout fail.</div>
+                <div class="reflect-head" style="margin-top:10px; margin-bottom:0;">
+                  <span class="reflect-streak">4-week streak</span>
+                </div>
               </div>
             </div>
           </div>
@@ -2586,6 +2614,16 @@
       };
       $prev.addEventListener('click', () => { idx = Math.min(idx + 1, weeks.length - 1); render(); });
       $next.addEventListener('click', () => { idx = Math.max(idx - 1, 0); render(); });
+      // Bars are clickable, same as the real 8-week trend chart: tap any
+      // week to jump straight into reviewing it.
+      $chart.addEventListener('click', (e) => {
+        const bar = e.target.closest('.bar');
+        if (!bar) return;
+        const pos = Array.prototype.indexOf.call($chart.children, bar);
+        if (pos < 0) return;
+        idx = trend.length - 1 - pos;
+        render();
+      });
       render();
     })();
 
