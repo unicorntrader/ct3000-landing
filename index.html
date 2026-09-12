@@ -796,34 +796,39 @@
 
     /* Weekly review — trade data / reflection split, matching the real
        Performance > Weekly Review screen's own left-heavy column ratio.
-       Same "give the phone real width" reasoning as Insights below. */
-    .wr-columns { display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; align-items: start; margin-top: 14px; }
+       Same "give the phone real width" reasoning as Insights below.
+       Ratio eased from 1/1.3 (real screen's exact ratio) to 1/1.15 --
+       at a normal laptop width the phone itself is well under its
+       760px cap, and the tighter ratio was crushing the Best/Worst
+       tiles into wrapping mid-word. minmax() on the tile grid is the
+       hard floor against that regardless of column width. */
+    .wr-columns { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; margin-top: 16px; }
     @media (max-width: 700px) {
       .wr-columns { grid-template-columns: 1fr; gap: 0; }
     }
-    .bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .bw-tile { border-radius: 8px; padding: 10px 12px; }
+    .bw-grid { display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 10px; }
+    .bw-tile { border-radius: 8px; padding: 12px 14px; }
     .bw-tile.pos { background: var(--green-50); border: 1px solid var(--green-100); }
     .bw-tile.neg { background: var(--red-50); border: 1px solid var(--red-100); }
-    .bw-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .bw-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
     .bw-tile.pos .bw-lbl { color: var(--green-700); }
     .bw-tile.neg .bw-lbl { color: var(--red-700); }
-    .bw-val { font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+    .bw-val { font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 4px; white-space: nowrap; }
     .bytag-amt.neg { color: var(--red-600); }
     .bytag-bar.neg { background: var(--red-500); }
     .wr-more { font-size: 11px; color: var(--gray-500); margin-top: 8px; }
-    .reflect-panel { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
-    .reflect-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .reflect-panel { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px; }
+    .reflect-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .reflect-panel-head span:first-child { font-size: 13px; font-weight: 700; color: var(--ink); }
     .reflect-streak { font-size: 10.5px; color: var(--gray-500); }
-    .reflect-item { margin-bottom: 10px; }
+    .reflect-item { margin-bottom: 14px; }
     .reflect-item:last-child { margin-bottom: 0; }
-    .reflect-q { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+    .reflect-q { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
     .reflect-box {
       background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px;
-      padding: 8px 10px; font-size: 12px; color: var(--gray-700); line-height: 1.5;
+      padding: 10px 12px; font-size: 12.5px; color: var(--gray-700); line-height: 1.6;
     }
-    .reflect-saved-line { font-size: 10.5px; color: var(--gray-500); margin-top: 10px; text-align: right; }
+    .reflect-saved-line { font-size: 10.5px; color: var(--gray-500); margin-top: 12px; text-align: right; }
 
     /* ─── Callouts (Row 5) — matches app's Performance callouts UI ─── */
     .callouts-head {
@@ -2042,7 +2047,7 @@
             <h3 class="reveal-row">How did the week go?</h3>
             <p class="reveal-row">Trade data on one side, a running notebook on the other. Answer four short prompts (what worked, what didn't, whether it's a pattern, what changes next week) and it saves as you type: no button to click, no form to finish. Tap any bar in the trend below to jump straight into that week.</p>
             </div>
-          <div class="phone reveal-row">
+          <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
               <div class="app-title">
                 <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
