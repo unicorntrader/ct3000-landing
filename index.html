@@ -43,12 +43,9 @@
       background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
       flex: 1;
     }
-    /* True full-viewport box (Gather calls theirs .hero-stage) -- .hero
-       and .trust-bar are both children of this in a flex column, .hero
-       flexing to fill whatever's left after the trust bar's natural
-       height, so the trust bar is always visible in the first screen
-       instead of needing height math that goes stale the moment either
-       section's content changes. */
+    /* True full-viewport box (Gather calls theirs .hero-stage), .hero
+       flexing to fill it -- see the min-height comment below for why
+       this needs a hard pixel ceiling rather than plain vh/dvh. */
     .hero-stage {
       position: relative;
       /* Unbounded vh/dvh here made Safari's Export-as-PDF balloon the
@@ -195,44 +192,10 @@
     .hero-tagrow strong { font-weight: 700; }
     .hero-tagrow-more { margin-top: 6px; }
 
-    /* ============ TRUST BAR ============ */
-    /* Its own section below the hero (Gather's pattern) rather than
-       nested inside it -- means it needs a scroll on shorter viewports
-       to reach, but reads as a distinct, self-contained strip. */
-    .trust-bar {
-      padding: 28px 0;
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-    }
-    /* No .wrap here on purpose -- this spans the full hero width edge
-       to edge (like Gather's own trust bar), not the site's usual
-       1080px content column, so it doesn't sit centered with empty
-       margins either side on wide screens. */
-    .trust-row {
-      display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
-      gap: 24px;
-      padding: 0 clamp(20px, 5vw, 48px);
-    }
-    .trust-item { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 155px; max-width: 220px; }
-    .trust-icon {
-      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
-      background: var(--blue-50); color: var(--blue-600);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .trust-icon svg { width: 18px; height: 18px; }
-    .trust-label { font-size: 15px; font-weight: 700; color: var(--ink); }
-    .trust-sub { font-size: 12.5px; color: var(--gray-500); margin-top: 2px; }
-    @media (max-width: 800px) {
-      .trust-row { justify-content: flex-start; }
-      .trust-item { flex: 1 1 45%; min-width: 140px; max-width: none; }
-    }
-
     /* ============ FEATURE TABS ============ */
-    /* White, not gray-50 -- trust-bar, feature-tabs, and how-it-works
-       were three sections in a row all sharing the exact same
-       background with nothing to separate them. This breaks the run
-       into an alternating gray/white/gray rhythm instead. */
+    /* White, not gray-50 -- keeps hero, feature-tabs, and how-it-works
+       from sharing the exact same background with nothing to separate
+       them, giving an alternating gray/white/gray rhythm instead. */
     .feature-tabs { background: var(--white); }
     /* Head + tab row are constrained to the same 1200px box as
        .tab-panels and left-aligned, so the eyebrow, headline, tabs and
@@ -1511,47 +1474,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ============ TRUST BAR ============ -->
-    <section class="trust-bar">
-      <div class="trust-row">
-          <div class="trust-item">
-            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M23 4v6h-6"/><path stroke-linecap="round" stroke-linejoin="round" d="M1 20v-6h6"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
-            <div class="trust-text">
-              <div class="trust-label">Direct broker sync</div>
-              <div class="trust-sub">IBKR, auto-matched</div>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg></div>
-            <div class="trust-text">
-              <div class="trust-label">Real insights</div>
-              <div class="trust-sub">From your own data</div>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/></svg></div>
-            <div class="trust-text">
-              <div class="trust-label">Built by traders</div>
-              <div class="trust-sub">We use it ourselves</div>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 8l10 5 10-5-10-5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 10.5V16c0 1 2.5 3 6 3s6-2 6-3v-5.5"/></svg></div>
-            <div class="trust-text">
-              <div class="trust-label">1:1 mentorship</div>
-              <div class="trust-sub">For Mentorship users</div>
-            </div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="trust-text">
-              <div class="trust-label">Free trial</div>
-              <div class="trust-sub">See if you like it</div>
-            </div>
-          </div>
-        </div>
     </section>
     </section>
 
