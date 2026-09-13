@@ -32,16 +32,14 @@ def cls(active):
 
 
 def build_header(how_it_works_href, nav_current):
-    """nav_current: 'faq' | 'blog' | 'mentorship' | 'leaderboard' | None"""
+    """nav_current: 'faq' | 'blog' | 'mentorship' | None"""
     faq_c = cls(nav_current == 'faq')
     blog_c = cls(nav_current == 'blog')
     ment_c = cls(nav_current == 'mentorship')
-    lb_c = cls(nav_current == 'leaderboard')
     links = f'''<a href="{how_it_works_href}">How it works</a>
         <a href="/faq"{faq_c}>FAQ</a>
         <a href="/blog"{blog_c}>Blog</a>
         <a href="/mentorship"{ment_c}>Mentorship</a>
-        <a href="/leaderboard"{lb_c}>Leaderboard</a>
         <a href="https://cotrader3000.com/subscribe" class="nav-cta">Start free trial</a>'''
     return f'''<header class="site-header">
     <div class="wrap">
@@ -82,7 +80,6 @@ def build_footer(how_it_works_href, legal_current):
           <a href="/faq">FAQ</a>
           <a href="/blog">Blog</a>
           <a href="/mentorship">Mentorship</a>
-          <a href="/leaderboard">Leaderboard</a>
         </div>
         <div class="footer-col">
           <h5>Legal</h5>
@@ -123,7 +120,6 @@ PAGES = {
     'mentorship.html':          ('mentorship', None),
     'privacy.html':             (None, 'privacy'),
     'terms.html':                (None, 'terms'),
-    'leaderboard.html':         ('leaderboard', None),
 }
 
 HEADER_RE = re.compile(r'<header class="site-header">.*?</header>', re.DOTALL)
