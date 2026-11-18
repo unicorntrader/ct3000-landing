@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>Reading Your Weekly Review - CT3000</title>
-  <meta name="description" content="The four headline numbers in CoTrader's Weekly Review, the breakdowns beside them, and the autosaving reflection panel next to it all. What each part is really telling you.">
+  <meta name="description" content="The headline numbers in CoTrader's Weekly Review, the breakdowns beside them, and the open notes box that autosaves next to it all. What each part is really showing you.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://cotraderapp.com/blog-weekly-review">
   <meta property="og:title" content="Reading Your Weekly Review · CoTrader 3000 Blog">
@@ -105,7 +105,7 @@
       font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--blue-600); background: var(--blue-50); padding: 3px 8px; border-radius: 999px;
     }
-    .fd-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .fd-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
     @media (max-width: 480px) {
       .fd-kpi-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -270,9 +270,9 @@
     </div>
 
     <div class="article-body">
-      <p>Your Weekly Review is a mode inside the Performance screen. Open it with the <strong>Weekly review</strong> button and the week that just closed splits into two: trade data on one side (four headline numbers, what made and lost money, the trades you took and the ones you passed on), a reflection panel on the other. An 8-week trend runs full-width underneath both. On a phone, it stacks: trade data first, reflection second, the trend last.</p>
+      <p>Weekly Review is one of the three tabs in Performance, next to Overview and Callouts, and it's a full page. Across the top: five KPI tiles and a week picker, then an 8-week trend. Below that, two columns. Trade data sits on the left (best and worst trade, by symbol, by tag, by grade, missed trades, trades closed). On the right is a single open writing box, with that week's daily notes read back above it. On a phone, it stacks: trade data first, notes second.</p>
 
-      <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. The Weekly Review is built for the opposite habit. The same pass every week, especially the weeks that went fine, since that's exactly when the drift causing next month's bad week tends to start.</p>
+      <p>Most traders review their performance the way most people review their diet: sporadically, emotionally, and usually only right after something went badly wrong. Weekly Review is built for the opposite habit. The same pass every week, especially the weeks that went fine, since that's exactly when the drift causing next month's bad week tends to start.</p>
 
       <h2>The headline numbers, and what they're really telling you</h2>
       <p><strong>Net P&amp;L</strong> is the outcome. It matters, but it's the least useful number for changing your behavior. A green week can hide a bad process that got lucky, and a red week can hide a good process that just had a rough five days. CoTrader shows it next to last week and your 8-week average, so a single week never gets read in isolation.</p>
@@ -282,6 +282,8 @@
       <p><strong>Avg / trade</strong> is expectancy in miniature: what you made or lost per trade on average across everything you did that week. It's the number that tells you whether your process is working, regardless of how any single trade turned out.</p>
 
       <p><strong>Win/loss ratio</strong> is your average winner measured against your average loser. A 45% win rate is fine when this reads 2.0 and a problem when it reads 0.6. This is the tile that tells you whether your win rate is lying to you.</p>
+
+      <p><strong>Capture</strong> is the fifth tile: the average share of the move you kept, with the number of trades you've marked up underneath. On each closed trade you type where you think the move really started and ended, by your own eye, and CoTrader measures your fills against it. It isn't read from market data or from your plan. It's deliberately not red or green, because a share of a move isn't money. A week with no marked-up trades won't show the tile at all.</p>
 
       <div class="feature-demo">
         <div class="feature-demo-bar"><img src="/logo-mark.png" alt=""><span>Weekly review</span></div>
@@ -307,10 +309,28 @@
               <div class="fd-kpi-val ink">2.4</div>
               <div class="fd-kpi-sub">+$750 / −$310</div>
             </div>
+            <div class="fd-kpi">
+              <div class="fd-kpi-lbl">Capture</div>
+              <div class="fd-kpi-val ink">41%</div>
+              <div class="fd-kpi-sub">4 marked up</div>
+            </div>
           </div>
           <div class="fd-week">
             <span class="fd-week-label">May 5 – May 9</span>
             <span class="fd-week-badge">This week</span>
+          </div>
+          <div class="wr-trend-section">
+            <div class="bytag-head" style="margin-bottom:8px;">8w trend</div>
+            <div class="trend-chart">
+              <div class="bar neg" style="height:12%"></div>
+              <div class="bar neg" style="height:18%"></div>
+              <div class="bar pos" style="height:40%"></div>
+              <div class="bar pos" style="height:55%"></div>
+              <div class="bar pos" style="height:35%"></div>
+              <div class="bar neg" style="height:20%"></div>
+              <div class="bar pos" style="height:65%"></div>
+              <div class="bar pos current" style="height:100%"></div>
+            </div>
           </div>
           <div class="wr-columns">
             <div>
@@ -338,46 +358,33 @@
             </div>
             <div class="reflect-panel">
               <div class="reflect-panel-head">
-                <span>Reflection</span>
-                <span class="reflect-streak">4-week streak</span>
+                <span>Notes</span>
+                <span class="reflect-streak">Week 19</span>
               </div>
               <div class="reflect-item">
-                <div class="reflect-q">What worked well this week?</div>
-                <div class="reflect-box">Stuck to entries on planned trades. Cut losers fast on the MSTR breakout fail.</div>
+                <div class="reflect-q">Mon</div>
+                <div class="reflect-box">Waited for the open to settle. Skipped the first gap.</div>
               </div>
               <div class="reflect-item">
-                <div class="reflect-q">What didn't work?</div>
-                <div class="reflect-box">Chased entries on TSLA twice. Didn't take the planned NVDA trade.</div>
+                <div class="reflect-q">Wed</div>
+                <div class="reflect-box">TSLA again. Got in after it had already moved.</div>
               </div>
-              <div class="wr-more">+ 2 more prompts</div>
+              <div class="reflect-box" style="min-height:70px;color:var(--gray-400);">Write about the week…</div>
               <div class="reflect-saved-line">Saved automatically</div>
-            </div>
-          </div>
-          <div class="wr-trend-section">
-            <div class="bytag-head" style="margin-bottom:8px;">8w trend</div>
-            <div class="trend-chart">
-              <div class="bar neg" style="height:12%"></div>
-              <div class="bar neg" style="height:18%"></div>
-              <div class="bar pos" style="height:40%"></div>
-              <div class="bar pos" style="height:55%"></div>
-              <div class="bar pos" style="height:35%"></div>
-              <div class="bar neg" style="height:20%"></div>
-              <div class="bar pos" style="height:65%"></div>
-              <div class="bar pos current" style="height:100%"></div>
             </div>
           </div>
         </div>
       </div>
-      <p class="fd-caption">The whole screen: trade data and reflection side by side, the 8-week trend underneath.</p>
+      <p class="fd-caption">The whole screen: KPI tiles, the 8-week trend, then trade data and notes side by side.</p>
 
       <h2>Below the numbers</h2>
-      <p>The screen above breaks the week down by symbol and by behaviour tag, marks your best and worst single trade, and lists the trades you closed (and, elsewhere on it, the ones you flagged as missed). It's the difference between "down $400 this week" and "down $400, all of it on one revenge trade in a name I don't trade well."</p>
+      <p>The screen above breaks the week down by symbol, by tag and by grade, marks your best and worst single trade, and lists the trades you closed and the missed trades you logged, each priced as "Never taken". It's the difference between "down $400 this week" and "down $400, all of it on one trade in a name I trade rarely." The screen shows you where to look. What it means is for you to decide.</p>
 
-      <h2>The reflection panel, always open</h2>
-      <p>Four prompts sit in view the whole time: what worked, what didn't, whether it's a recurring pattern, and one action for next week. Type into any of them and CoTrader saves a couple of seconds after you stop typing. No button to click, no form to submit, nothing to mark "done." Keep it up and a streak of consecutive weeks shows up right in the panel header while you're on the current week. The streak is the point, not the completion. One honest paragraph a week compounds the same way the trades do.</p>
+      <h2>One open box for your notes</h2>
+      <p>On the right sits one open writing box, with that week's daily notes read back above it so you can see what you wrote on Monday while you write on Friday. There are no prompts and no questions to answer. Type, and CoTrader saves a couple of seconds after you stop. No button to click, no form to submit. There's also no "close the week" step: notes in it or not, that's all. One honest paragraph a week compounds the same way the trades do.</p>
 
       <h2>The ritual matters more than any single week</h2>
-      <p>One week of data won't tell you much. Four in a row will. The real value isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these numbers drift, hold steady, or improve. The 8-week trend at the bottom is clickable: tap any week's bar and you're reviewing that week, no arrowing back one at a time.</p>
+      <p>One week of data won't tell you much. Four in a row will. The real value isn't any individual screen, it's the pattern that emerges once you cycle back through the last month and watch these numbers drift, hold steady, or improve. The 8-week trend is clickable: tap any week's bar and you're reviewing that week, no arrowing back one at a time.</p>
 
       <p>A few minutes, once a week: small enough to keep up with, and usually the whole difference between improving and just trading.</p>
     </div>
