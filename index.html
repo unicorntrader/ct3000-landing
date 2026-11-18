@@ -301,28 +301,24 @@
     }
     /* Phones: no tabs and no swiping. Every feature is its own section,
        stacked in one vertical scroll, Capture (the headline) first. */
-    .m-acc { display: none; }
+    .m-acc, .m-short { display: none; }
     @media (max-width: 767px) {
       .tab-row, .tab-row-hint { display: none !important; }
       .feature-tabs-head { margin-bottom: 28px; }
       .tab-panels { display: flex; flex-direction: column; min-height: 0; }
       .tab-panels.is-fading { opacity: 1; }
-      .tab-panel { display: grid; grid-template-columns: 1fr; gap: 0; border-bottom: 1px solid var(--gray-200); }
-      .tab-panel:not(.m-open) > :not(.m-acc) { display: none; }
-      .tab-panel.m-open > :not(.m-acc) { margin-top: 4px; }
-      .tab-panel.m-open { gap: 20px; padding-bottom: 32px; }
-      .m-acc {
-        display: flex; align-items: center; gap: 12px; width: 100%;
-        background: transparent; border: 0; padding: 18px 0; cursor: pointer;
-        font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); text-align: left;
-      }
-      .m-acc .tab-ico { width: 22px; height: 22px; color: var(--blue-600); }
-      .m-acc .m-chev { margin-left: auto; width: 18px; height: 18px; stroke: var(--gray-500); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
-      .tab-panel.m-open .m-chev { transform: rotate(180deg); }
+      /* Phones: no tabs, no accordions, nothing to tap. Four short cards. */
+      .tab-panel { display: block; padding: 28px 0; border-bottom: 1px solid var(--gray-200); }
+      .tab-panel:last-child { border-bottom: 0; }
+      .m-acc { display: none !important; }
+      .tab-panel > :not(.tab-panel-text) { display: none; }
+      .tab-panel-text p:not(.m-short) { display: none; }
+      .tab-panel-text .m-short { display: block; }
+      .tab-panel-text h3 { font-size: 26px; margin-bottom: 8px; }
+      .tab-panel-text .m-short { font-size: 16px; }
+      .how-it-works { display: none; }
       .tab-panel-text h3 { margin-top: 0; }
       .tab-panels { border-top: 1px solid var(--gray-200); }
-      .tab-panel-text h3 { font-size: 30px; }
-      .tab-panel-text p { font-size: 16px; }
     }
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
@@ -1593,6 +1589,7 @@
             <span class="section-eyebrow">Sync and plan</span>
             <h3 class="reveal-row">Every fill in. Plan if you want.</h3>
             <p class="reveal-row">Connect IBKR once and every trade flows in: no CSVs, no copy-paste. If you like to plan, type a ticker, pick a direction, and entry, stop, target and size compute your R:R live.</p>
+            <p class="m-short">Every IBKR trade flows in on its own. Plan a trade if you want, and see your R:R live.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1670,6 +1667,7 @@
             <span class="section-eyebrow">Journal</span>
             <h3 class="reveal-row">A journal you can scan.</h3>
             <p class="reveal-row">Symbol, entry, exit, return, P&amp;L, duration, R, grade and tags in one table, with prices lined up down the day. Expand a row for the write-up, the session chart and, if you want, your own screenshots. Log a trade you never took and CoTrader prices it.</p>
+            <p class="m-short">Every trade in one scannable table, with its chart, notes and tags. Log the trades you never took too.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1897,6 +1895,7 @@
             <span class="section-eyebrow">Performance</span>
             <h3 class="reveal-row">What you made, and what was there.</h3>
             <p class="reveal-row">The Daily P&amp;L chart keeps green and red bars for money realised. Switch on <strong>Uncaptured</strong> for the part of a move you were in for and didn't take, and <strong>Never taken</strong> for trades you logged but never entered. Eleven Callouts point at patterns worth a look, never at why. The Capture tile stays out of red and green, because a share of a move isn't money.</p>
+            <p class="m-short">See what you made and what was there: Uncaptured and Never taken, right on your daily P&amp;L.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -1954,6 +1953,7 @@
             <span class="section-eyebrow">Weekly review</span>
             <h3 class="reveal-row">How did the week go?</h3>
             <p class="reveal-row">A full page for the week. Trade data on the left: best and worst, by symbol, tag and grade, missed trades. On the right, one open writing box with your daily notes read back above it. No prompts, no button to click: it saves as you type. Pick any week, or tap a bar in the 8-week trend.</p>
+            <p class="m-short">The week's trade data beside one open notes box. It saves as you type.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
