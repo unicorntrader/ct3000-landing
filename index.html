@@ -299,6 +299,25 @@
       .tab-row-hint svg { animation: hintNudge 1.4s ease-in-out infinite; }
       @keyframes hintNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
     }
+    /* Phones: no tabs and no swiping. Every feature is its own section,
+       stacked in one vertical scroll, Capture (the headline) first. */
+    @media (max-width: 767px) {
+      .tab-row, .tab-row-hint { display: none !important; }
+      .feature-tabs-head { margin-bottom: 28px; }
+      .tab-panels { display: flex; flex-direction: column; min-height: 0; }
+      .tab-panels.is-fading { opacity: 1; }
+      .tab-panel { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 40px 0; border-top: 1px solid var(--gray-200); }
+      .tab-panel[data-panel="capture"] { order: 0; border-top: 0; padding-top: 0; }
+      .tab-panel[data-panel="plans"] { order: 1; }
+      .tab-panel[data-panel="auto-sync"] { order: 2; }
+      .tab-panel[data-panel="journal"] { order: 3; }
+      .tab-panel[data-panel="performance"] { order: 4; }
+      .tab-panel[data-panel="weekly-review"] { order: 5; }
+      .tab-panel[data-panel="insights"] { order: 6; }
+      .tab-panel[data-panel="screenshots"] { order: 7; }
+      .tab-panel-text h3 { font-size: 30px; }
+      .tab-panel-text p { font-size: 16px; }
+    }
 
     /* Staggered reveal -- eyebrow appears immediately, then headline,
        copy, and phone mockup fade/slide in a beat after each other. */
