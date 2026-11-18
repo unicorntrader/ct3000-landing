@@ -301,13 +301,27 @@
     }
     /* Phones: no tabs and no swiping. Every feature is its own section,
        stacked in one vertical scroll, Capture (the headline) first. */
+    .m-acc { display: none; }
     @media (max-width: 767px) {
       .tab-row, .tab-row-hint { display: none !important; }
       .feature-tabs-head { margin-bottom: 28px; }
       .tab-panels { display: flex; flex-direction: column; min-height: 0; }
       .tab-panels.is-fading { opacity: 1; }
-      .tab-panel { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 40px 0; border-top: 1px solid var(--gray-200); }
-      .tab-panel[data-panel="capture"] { order: 0; border-top: 0; padding-top: 0; }
+      .tab-panel { display: grid; grid-template-columns: 1fr; gap: 0; border-bottom: 1px solid var(--gray-200); }
+      .tab-panel:not(.m-open) > :not(.m-acc) { display: none; }
+      .tab-panel.m-open > :not(.m-acc) { margin-top: 4px; }
+      .tab-panel.m-open { gap: 20px; padding-bottom: 32px; }
+      .m-acc {
+        display: flex; align-items: center; gap: 12px; width: 100%;
+        background: transparent; border: 0; padding: 18px 0; cursor: pointer;
+        font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); text-align: left;
+      }
+      .m-acc .tab-ico { width: 22px; height: 22px; color: var(--blue-600); }
+      .m-acc .m-chev { margin-left: auto; width: 18px; height: 18px; stroke: var(--gray-500); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+      .tab-panel.m-open .m-chev { transform: rotate(180deg); }
+      .tab-panel-text h3 { margin-top: 0; }
+      .tab-panels { border-top: 1px solid var(--gray-200); }
+      .tab-panel[data-panel="capture"] { order: 0; }
       .tab-panel[data-panel="plans"] { order: 1; }
       .tab-panel[data-panel="auto-sync"] { order: 2; }
       .tab-panel[data-panel="journal"] { order: 3; }
@@ -2926,6 +2940,31 @@
           btn.setAttribute('aria-pressed', String(on));
           chart.classList.toggle('hide-' + btn.dataset.layer, !on);
         });
+      });
+    })();
+
+    // ─── Mobile · tap-to-open feature rows (replaces the tab strip) ───
+    (function initMobileAccordion() {
+      const panels = document.querySelectorAll('.tab-panel');
+      panels.forEach(p => {
+        const btn = document.querySelector('.tab-btn[data-tab="' + p.dataset.panel + '"]');
+        if (!btn) return;
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'm-acc';
+        row.setAttribute('aria-expanded', 'false');
+        const ico = btn.querySelector('.tab-ico');
+        if (ico) row.appendChild(ico.cloneNode(true));
+        const label = document.createElement('span');
+        label.textContent = btn.textContent.trim();
+        row.appendChild(label);
+        row.insertAdjacentHTML('beforeend', '<svg class="m-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+        row.addEventListener('click', () => {
+          const open = p.classList.toggle('m-open');
+          row.setAttribute('aria-expanded', String(open));
+        });
+        p.insertBefore(row, p.firstChild);
+        if (p.dataset.panel === 'capture') { p.classList.add('m-open'); row.setAttribute('aria-expanded', 'true'); }
       });
     })();
   </script>
