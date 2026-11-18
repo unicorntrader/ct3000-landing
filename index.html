@@ -148,7 +148,7 @@
        JS driving the real interactive weekly-review card below. Hidden
        under 960px so it never competes with the hero's tuned mobile
        vh budget (see the min-height comment above). */
-    .hero-visual { display: none; }
+    .hero-visual { display: block; max-width: 440px; margin: 40px auto 0; text-align: left; }
     @media (min-width: 960px) {
       .hero .wrap {
         display: flex; align-items: center; justify-content: flex-start;
@@ -158,7 +158,7 @@
       .hero-text p.lead { margin: 0 0 36px; }
       .hero-text .cta-row { justify-content: flex-start; }
       .hero-visual {
-        display: block; flex-shrink: 0;
+        display: block; flex-shrink: 0; margin: 0;
         width: clamp(380px, 36vw, 520px);
         opacity: 0; animation: heroReveal 0.7s ease forwards; animation-delay: 0.55s;
       }
@@ -321,14 +321,6 @@
       .tab-panel.m-open .m-chev { transform: rotate(180deg); }
       .tab-panel-text h3 { margin-top: 0; }
       .tab-panels { border-top: 1px solid var(--gray-200); }
-      .tab-panel[data-panel="capture"] { order: 0; }
-      .tab-panel[data-panel="plans"] { order: 1; }
-      .tab-panel[data-panel="auto-sync"] { order: 2; }
-      .tab-panel[data-panel="journal"] { order: 3; }
-      .tab-panel[data-panel="performance"] { order: 4; }
-      .tab-panel[data-panel="weekly-review"] { order: 5; }
-      .tab-panel[data-panel="insights"] { order: 6; }
-      .tab-panel[data-panel="screenshots"] { order: 7; }
       .tab-panel-text h3 { font-size: 30px; }
       .tab-panel-text p { font-size: 16px; }
     }
@@ -1402,6 +1394,9 @@
     /* ===== Capture / Performance additions ===== */
     @media (min-width: 768px) { .tab-btn { padding: 14px 14px; } .tab-row { gap: 0; } }
     .cap-note { margin-top: 14px; }
+    .sync-line { margin-bottom: 12px; }
+    .perf-callouts-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; padding: 0 2px; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .perf-callouts-head .count { margin-left: auto; font-weight: 500; font-size: 11px; color: var(--gray-500); }
     .cap-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
     .cap-sym { font-weight: 700; color: var(--ink); font-size: 15px; }
     .cap-meta { margin-left: auto; font-size: 11px; color: var(--gray-500); }
@@ -1512,7 +1507,7 @@
         <div class="hero-text">
           <h1>Never wing a trade again.</h1>
           <p class="lead">
-            CoTrader syncs your IBKR trades, shows how much of each move you actually captured, and puts your patterns in front of you so you know your edge and grow it.
+            CoTrader syncs your IBKR trades and shows how much of each move you actually captured. You mark where the move started and ended, by your own eye, and it measures your fills against it.
           </p>
           <div class="cta-row" style="margin-top: 32px;">
             <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
@@ -1520,59 +1515,43 @@
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="phone">
-            <div class="phone-bar">
-              <div class="app-title">
-                <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
-              </div>
-              <div class="menu">
-                <button aria-label="Menu" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-              </div>
-            </div>
-            <div class="phone-body">
-              <div class="week-nav">
-                <div class="week-info">
-                  <div class="label">May 4–10 <span class="week-badge">THIS WEEK</span></div>
-                  <div class="sub">Week 19 · 2026-W19</div>
-                </div>
-              </div>
-              <div class="trend-chart">
-                <div class="bar pos" style="height:35%"></div>
-                <div class="bar pos" style="height:55%"></div>
-                <div class="bar neg" style="height:20%"></div>
-                <div class="bar pos" style="height:70%"></div>
-                <div class="bar pos" style="height:45%"></div>
-                <div class="bar neg" style="height:15%"></div>
-                <div class="bar pos" style="height:60%"></div>
-                <div class="bar pos current" style="height:100%"></div>
-              </div>
-              <div class="kpi-grid">
-                <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" style="color:var(--green-600);">+$2,690</div><div class="sub">5 closed</div></div>
-                <div class="kpi"><div class="lbl">Win rate</div><div class="val">100%</div><div class="sub">5W · 0L</div></div>
-                <div class="kpi"><div class="lbl">Avg / trade</div><div class="val">+$538</div><div class="sub">expectancy</div></div>
-              </div>
-              <div class="hero-callouts">
-                <div class="hero-callout positive">
-                  <span class="hero-callout-icon">✓</span>
-                  <span class="hero-callout-text">AAPL: <strong>75% win rate</strong> across 4 trades</span>
-                </div>
-                <div class="hero-callout warning">
-                  <span class="hero-callout-icon">⚠</span>
-                  <span class="hero-callout-text">Mondays: <strong>−$340</strong> net across 6 trades</span>
-                </div>
-              </div>
-              <div class="hero-tagrow">
-                Tagged <strong>TSLA</strong>
-                <span class="activity-pill blue">Breakout</span>
-                <span class="activity-pill green">Good exit</span>
-              </div>
-              <div class="hero-tagrow hero-tagrow-more">
-                Auto-tagged
-                <span class="activity-pill violet">Scale in</span>
-                <span class="activity-pill violet">Scale out</span>
-                <span class="activity-pill amber">Chased</span>
-              </div>
-            </div>
-          </div>
+  <div class="phone-bar">
+    <div class="app-title"><svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg></div>
+  </div>
+  <div class="phone-body">
+    <div class="cap-head"><span class="cap-sym">NVDA</span><span class="pill pill-long">LONG</span><span class="cap-meta">Closed · 3h</span></div>
+    <div class="cap-box">
+      <div class="cap-box-title">Your read of the move</div>
+      <div class="cap-inputs">
+        <div class="cap-field"><span class="lbl">Started</span><span class="cap-in" data-mask>110.00</span></div>
+        <div class="cap-field"><span class="lbl">Ended</span><span class="cap-in" data-mask>118.00</span></div>
+      </div>
+      <div class="cap-result">
+        <div><span class="cap-pct">37.5%</span><span class="cap-pct-lbl">captured</span></div>
+        <div class="cap-math" data-mask>Move 8.00 · you traded 113 → 116 (3.00)</div>
+      </div>
+      <div class="cap-eel">
+        <div class="cap-eel-row"><span class="lbl">Entry</span><span class="cap-seg"><span>Early</span><span class="on">Late</span></span></div>
+        <div class="cap-eel-row"><span class="lbl">Exit</span><span class="cap-seg"><span class="on">Early</span><span>Late</span></span></div>
+      </div>
+      <div class="cap-tags"><span class="activity-pill amber">Chased</span><span class="activity-pill amber">Cut winner too early</span></div>
+    </div>
+    <div class="cap-chart-wrap">
+      <div class="cap-chart-btn">Hide chart</div>
+      <svg class="cap-chart" viewBox="0 0 320 170" role="img" aria-label="Session candles with entry and exit fills and dashed lines for where the move started and ended">
+  <line class="dash" x1="14" x2="306" y1="40" y2="40"/><text class="clabel" x="306" y="36" text-anchor="end">Move end 118</text>
+  <line class="dash" x1="14" x2="306" y1="128" y2="128"/><text class="clabel" x="306" y="139" text-anchor="end">Move start 110</text>
+  <line class="wick dn" x1="28" x2="28" y1="112.6" y2="125.8"/><rect class="body dn" x="23" y="117" width="10" height="5.5" rx="1"/><line class="wick dn" x1="47" x2="47" y1="118.1" y2="130.2"/><rect class="body dn" x="42" y="122.5" width="10" height="3.3" rx="1"/><line class="wick up" x1="66" x2="66" y1="108.2" y2="128.0"/><rect class="body up" x="61" y="111.5" width="10" height="14.3" rx="1"/><line class="wick up" x1="85" x2="85" y1="96.1" y2="113.7"/><rect class="body up" x="80" y="99.4" width="10" height="12.1" rx="1"/><line class="wick dn" x1="104" x2="104" y1="95.0" y2="108.2"/><rect class="body dn" x="99" y="99.4" width="10" height="5.5" rx="1"/><line class="wick up" x1="123" x2="123" y1="88.4" y2="106.0"/><rect class="body up" x="118" y="90.6" width="10" height="14.3" rx="1"/><line class="wick up" x1="142" x2="142" y1="74.1" y2="92.8"/><rect class="body up" x="137" y="77.4" width="10" height="13.2" rx="1"/><line class="wick up" x1="161" x2="161" y1="59.8" y2="79.6"/><rect class="body up" x="156" y="63.1" width="10" height="14.3" rx="1"/><line class="wick up" x1="180" x2="180" y1="53.2" y2="67.5"/><rect class="body up" x="175" y="62.0" width="10" height="1.5" rx="1"/><line class="wick up" x1="199" x2="199" y1="41.1" y2="63.1"/><rect class="body up" x="194" y="48.8" width="10" height="13.2" rx="1"/><line class="wick up" x1="218" x2="218" y1="37.8" y2="51.0"/><rect class="body up" x="213" y="40.0" width="10" height="8.8" rx="1"/><line class="wick dn" x1="237" x2="237" y1="38.9" y2="55.4"/><rect class="body dn" x="232" y="40.0" width="10" height="11.0" rx="1"/><line class="wick dn" x1="256" x2="256" y1="47.7" y2="62.0"/><rect class="body dn" x="251" y="51.0" width="10" height="8.8" rx="1"/>
+  <line class="fillline" x1="123" y1="95" x2="180" y2="62"/>
+  <circle class="fill" cx="123" cy="95" r="4.5"/><circle class="fill" cx="180" cy="62" r="4.5"/>
+  <text class="flabel" x="114" y="99" text-anchor="end">In 113</text>
+  <text class="flabel" x="189" y="66">Out 116</text>
+</svg>
+      <div class="cap-legend"><span><i class="sw solid"></i>What you did</span><span><i class="sw dashed"></i>What you said was there</span></div>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
     </section>
@@ -1588,23 +1567,11 @@
         <div class="tab-row" role="tablist">
           <button class="tab-btn active" data-tab="plans" role="tab" aria-selected="true">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="4.5" y="4" width="11" height="13" rx="1.5"/><path d="M7.5 4V3a2.5 2.5 0 0 1 5 0v1"/><path d="M7.5 10.5l1.75 1.75L13 8.5"/></svg>
-            <span>Plans</span>
-          </button>
-          <button class="tab-btn" data-tab="auto-sync" role="tab" aria-selected="false">
-            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10a6.5 6.5 0 0 1 11-4.7l1.8 1.7"/><path d="M16.5 10a6.5 6.5 0 0 1-11 4.7l-1.8-1.7"/><path d="M16.8 3v4h-4"/><path d="M3.2 17v-4h4"/></svg>
-            <span>Auto-sync</span>
-          </button>
-          <button class="tab-btn" data-tab="screenshots" role="tab" aria-selected="false">
-            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="1.5"/><circle cx="7.5" cy="8.5" r="1.4"/><path d="M4 14.5l4-3.5 3 2.5 3-3 2 2"/></svg>
-            <span>Screenshots</span>
+            <span>Sync and plan</span>
           </button>
           <button class="tab-btn" data-tab="journal" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="3.5" width="10" height="13" rx="1"/><path d="M8 3.5v13"/><path d="M10.5 7.5H13M10.5 10H13"/></svg>
             <span>Journal</span>
-          </button>
-          <button class="tab-btn" data-tab="capture" role="tab" aria-selected="false">
-            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 4h13M3.5 16h13"/><path d="M7 7.5h6v5H7z"/></svg>
-            <span>Capture</span>
           </button>
           <button class="tab-btn" data-tab="performance" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 16.5h13"/><path d="M6 16V10M10 16V4.5M14 16v-4"/></svg>
@@ -1613,10 +1580,6 @@
           <button class="tab-btn" data-tab="weekly-review" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="4.5" width="13" height="12" rx="1.5"/><path d="M3.5 8h13"/><path d="M7 3v3M13 3v3"/><path d="M8 12l1.75 1.75L13 10.5"/></svg>
             <span>Weekly review</span>
-          </button>
-          <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false">
-            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 17V3.5"/><path d="M5 4h9l-2 3 2 3H5"/></svg>
-            <span>Callouts</span>
           </button>
         </div>
         <div class="tab-row-hint" aria-hidden="true">
@@ -1627,9 +1590,9 @@
           <div class="tab-panels">
           <div class="tab-panel active" data-panel="plans">
             <div class="tab-panel-text">
-            <span class="section-eyebrow">Plans</span>
-            <h3 class="reveal-row">Plan it. Or don't.</h3>
-            <p class="reveal-row">Type a ticker, pick a direction, tag a setup if you've got one. Entry, stop, target and size compute your R:R live.</p>
+            <span class="section-eyebrow">Sync and plan</span>
+            <h3 class="reveal-row">Every fill in. Plan if you want.</h3>
+            <p class="reveal-row">Connect IBKR once and every trade flows in: no CSVs, no copy-paste. If you like to plan, type a ticker, pick a direction, and entry, stop, target and size compute your R:R live.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1643,6 +1606,13 @@
               </div>
             </div>
             <div class="phone-body">
+              <div class="activity-item sync-line">
+                <span class="activity-check">✓</span>
+                <div class="activity-text">
+                  Synced 1 trade: <strong>AAPL</strong>
+                  <div class="activity-time">2h ago</div>
+                </div>
+              </div>
               <div class="plan-mini live">
                 <div class="head">
                   <input type="text" id="plan-ticker" class="ticker-input" value="AAPL" maxlength="6" spellcheck="false" autocomplete="off" aria-label="Ticker">
@@ -1695,115 +1665,11 @@
             </div>
           </div>
           </div>
-          <div class="tab-panel" data-panel="auto-sync">
-            <div class="tab-panel-text">
-            <span class="section-eyebrow">Auto-sync</span>
-            <h3 class="reveal-row">Every fill, pulled in.</h3>
-            <p class="reveal-row">Connect once. Every trade flows in, automatic. No CSVs. No copy-paste.</p>
-            </div>
-          <div class="phone reveal-row">
-            <div class="phone-bar">
-              <div class="app-title">
-                <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
-              </div>
-              <div class="menu">
-                <button data-privacy-toggle aria-label="Toggle privacy mode" title="Hide $ amounts">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/></svg>
-                </button>
-                <button aria-label="Menu" title="Menu">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
-              </div>
-            </div>
-            <div class="phone-body">
-              <div class="activity-section" id="activity-section">
-                <div class="activity-head">Recent activity</div>
-
-                <div class="activity-group-label">Today</div>
-                <div class="activity-item">
-                  <span class="activity-check">✓</span>
-                  <div class="activity-text">
-                    Synced 1 trade: <strong>AAPL</strong>
-                    <div class="activity-time">2h ago</div>
-                  </div>
-                </div>
-
-                <div class="activity-group-label">Yesterday</div>
-                <div class="activity-item">
-                  <span class="activity-check">✓</span>
-                  <div class="activity-text">
-                    Reviewed week of May 4
-                    <div class="activity-time">yesterday</div>
-                  </div>
-                </div>
-
-                <div class="activity-group-label">May 6</div>
-                <div class="activity-item">
-                  <span class="activity-check">✓</span>
-                  <div class="activity-text">
-                    Tagged <strong>TSLA</strong> as <span class="activity-pill blue">Breakout</span><span class="activity-pill green">Good exit</span>
-                    <div class="activity-time">2d ago</div>
-                  </div>
-                </div>
-
-                <div class="activity-item">
-                  <span class="activity-check">✓</span>
-                  <div class="activity-text">
-                    Planned trade closed: <strong>NVDA</strong> <span class="pos" data-mask>+$500</span>
-                    <div class="activity-time">3d ago</div>
-                  </div>
-                </div>
-
-                <div class="activity-group-label">May 4</div>
-                <div class="activity-item">
-                  <span class="activity-check">✓</span>
-                  <div class="activity-text">
-                    Planned trade opened: <strong>NVDA</strong> long @ $120.00
-                    <div class="activity-time">4d ago</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div class="tab-panel" data-panel="screenshots">
-            <div class="tab-panel-text">
-            <span class="section-eyebrow">Screenshots</span>
-            <h3 class="reveal-row">Screenshots are optional.</h3>
-            <p class="reveal-row">You no longer have to screenshot each trade: the session chart is already on every closed trade, with your fills on it. If you still like keeping your own charts, drag them onto the dashboard and each one finds its trade. It reads the ticker, not the chart. Nothing to label, nothing to match up.</p>
-            </div>
-          <div class="drop-demo reveal-row" aria-hidden="true">
-            <div class="drop-zone">
-              <svg viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
-              <div class="dz-text">
-                <span class="dz-title">Add your own charts, if you want</span>
-                <span class="dz-hint">Filename just needs the ticker, like MSTR.png</span>
-              </div>
-              <span class="drop-day">Today ▾</span>
-            </div>
-            <div class="drop-files">
-              <div class="drop-file done">
-                <span class="df-name">MSTR.png</span>
-                <span class="df-state"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> on your MSTR long</span>
-              </div>
-              <div class="drop-file wait" data-shots-settle>
-                <span class="df-name">AAPL.png</span>
-                <span class="df-state df-state-wait"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> waiting for next sync</span>
-                <span class="df-state df-state-done"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> attached after sync</span>
-              </div>
-              <div class="drop-file ask">
-                <span class="df-name">TSLA.png</span>
-                <span class="df-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7"/><path d="M12 16.5v.01"/></svg> 2 TSLA trades today <span class="df-choose">Choose</span></span>
-              </div>
-            </div>
-            <div class="drop-foot">3 files. 1 attached, 1 waiting, 1 needs you.</div>
-          </div>
-          </div>
           <div class="tab-panel" data-panel="journal">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Journal</span>
             <h3 class="reveal-row">A journal you can scan.</h3>
-            <p class="reveal-row">Symbol, entry, exit, return, P&amp;L, duration, R, grade and tags in one table, with prices lined up down the day so the levels you keep trading around read as a column. Expand a row for the write-up, screenshots and chart. Log a trade you never took (symbol, the move, size) and CoTrader prices it.</p>
+            <p class="reveal-row">Symbol, entry, exit, return, P&amp;L, duration, R, grade and tags in one table, with prices lined up down the day. Expand a row for the write-up, the session chart and, if you want, your own screenshots. Log a trade you never took and CoTrader prices it.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -2026,56 +1892,11 @@
             </div>
           </div>
           </div>
-          <div class="tab-panel" data-panel="capture">
-            <div class="tab-panel-text">
-            <span class="section-eyebrow">Capture</span>
-            <h3 class="reveal-row">How much of the move did you keep?</h3>
-            <p class="reveal-row">Every journal tells you what you made. Capture shows how much of what was there you took. On a closed trade, type where you think the move really started and ended, by your own eye. CoTrader measures your fills against it. The P&amp;L says the trade worked. Capture says you were late in and early out on a move twice that size.</p>
-            <p class="reveal-row cap-note">It comes from you, not from market data and not from your plan, so it works on trades you never planned. Open the session chart to check your call: solid is what you did, dashed is what you said was there.</p>
-            </div>
-          <div class="phone reveal-row">
-            <div class="phone-bar">
-              <div class="app-title"><svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg></div>
-            </div>
-            <div class="phone-body">
-              <div class="cap-head"><span class="cap-sym">NVDA</span><span class="pill pill-long">LONG</span><span class="cap-meta">Closed · 3h</span></div>
-              <div class="cap-box">
-                <div class="cap-box-title">Your read of the move</div>
-                <div class="cap-inputs">
-                  <div class="cap-field"><span class="lbl">Started</span><span class="cap-in" data-mask>110.00</span></div>
-                  <div class="cap-field"><span class="lbl">Ended</span><span class="cap-in" data-mask>118.00</span></div>
-                </div>
-                <div class="cap-result">
-                  <div><span class="cap-pct">37.5%</span><span class="cap-pct-lbl">captured</span></div>
-                  <div class="cap-math" data-mask>Move 8.00 · you traded 113 → 116 (3.00)</div>
-                </div>
-                <div class="cap-eel">
-                  <div class="cap-eel-row"><span class="lbl">Entry</span><span class="cap-seg"><span>Early</span><span class="on">Late</span></span></div>
-                  <div class="cap-eel-row"><span class="lbl">Exit</span><span class="cap-seg"><span class="on">Early</span><span>Late</span></span></div>
-                </div>
-                <div class="cap-tags"><span class="activity-pill amber">Chased</span><span class="activity-pill amber">Cut winner too early</span></div>
-              </div>
-              <div class="cap-chart-wrap">
-                <div class="cap-chart-btn">Hide chart</div>
-                <svg class="cap-chart" viewBox="0 0 320 170" role="img" aria-label="Session candles with entry and exit fills and dashed lines for where the move started and ended">
-  <line class="dash" x1="14" x2="306" y1="40" y2="40"/><text class="clabel" x="306" y="36" text-anchor="end">Move end 118</text>
-  <line class="dash" x1="14" x2="306" y1="128" y2="128"/><text class="clabel" x="306" y="139" text-anchor="end">Move start 110</text>
-  <line class="wick dn" x1="28" x2="28" y1="112.6" y2="125.8"/><rect class="body dn" x="23" y="117" width="10" height="5.5" rx="1"/><line class="wick dn" x1="47" x2="47" y1="118.1" y2="130.2"/><rect class="body dn" x="42" y="122.5" width="10" height="3.3" rx="1"/><line class="wick up" x1="66" x2="66" y1="108.2" y2="128.0"/><rect class="body up" x="61" y="111.5" width="10" height="14.3" rx="1"/><line class="wick up" x1="85" x2="85" y1="96.1" y2="113.7"/><rect class="body up" x="80" y="99.4" width="10" height="12.1" rx="1"/><line class="wick dn" x1="104" x2="104" y1="95.0" y2="108.2"/><rect class="body dn" x="99" y="99.4" width="10" height="5.5" rx="1"/><line class="wick up" x1="123" x2="123" y1="88.4" y2="106.0"/><rect class="body up" x="118" y="90.6" width="10" height="14.3" rx="1"/><line class="wick up" x1="142" x2="142" y1="74.1" y2="92.8"/><rect class="body up" x="137" y="77.4" width="10" height="13.2" rx="1"/><line class="wick up" x1="161" x2="161" y1="59.8" y2="79.6"/><rect class="body up" x="156" y="63.1" width="10" height="14.3" rx="1"/><line class="wick up" x1="180" x2="180" y1="53.2" y2="67.5"/><rect class="body up" x="175" y="62.0" width="10" height="1.5" rx="1"/><line class="wick up" x1="199" x2="199" y1="41.1" y2="63.1"/><rect class="body up" x="194" y="48.8" width="10" height="13.2" rx="1"/><line class="wick up" x1="218" x2="218" y1="37.8" y2="51.0"/><rect class="body up" x="213" y="40.0" width="10" height="8.8" rx="1"/><line class="wick dn" x1="237" x2="237" y1="38.9" y2="55.4"/><rect class="body dn" x="232" y="40.0" width="10" height="11.0" rx="1"/><line class="wick dn" x1="256" x2="256" y1="47.7" y2="62.0"/><rect class="body dn" x="251" y="51.0" width="10" height="8.8" rx="1"/>
-  <line class="fillline" x1="123" y1="95" x2="180" y2="62"/>
-  <circle class="fill" cx="123" cy="95" r="4.5"/><circle class="fill" cx="180" cy="62" r="4.5"/>
-  <text class="flabel" x="114" y="99" text-anchor="end">In 113</text>
-  <text class="flabel" x="189" y="66">Out 116</text>
-</svg>
-                <div class="cap-legend"><span><i class="sw solid"></i>What you did</span><span><i class="sw dashed"></i>What you said was there</span></div>
-              </div>
-            </div>
-          </div>
-          </div>
           <div class="tab-panel" data-panel="performance">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Performance</span>
             <h3 class="reveal-row">What you made, and what was there.</h3>
-            <p class="reveal-row">Three tabs: Overview, Callouts and Weekly review. The Daily P&amp;L chart keeps green and red bars for money realised. Switch on <strong>Uncaptured</strong> to see the part of a move you were in for and didn't take, and <strong>Never taken</strong> for the trades you logged as missed but never entered. A Capture tile appears once you've marked up a trade, and it stays out of red and green, because a share of a move isn't money.</p>
+            <p class="reveal-row">The Daily P&amp;L chart keeps green and red bars for money realised. Switch on <strong>Uncaptured</strong> for the part of a move you were in for and didn't take, and <strong>Never taken</strong> for trades you logged but never entered. Eleven Callouts point at patterns worth a look, never at why. The Capture tile stays out of red and green, because a share of a move isn't money.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -2097,6 +1918,33 @@
                 <span class="chip static"><i class="sw sw-pos"></i><i class="sw sw-neg"></i>Realised</span>
                 <button type="button" class="chip on" data-layer="unc" aria-pressed="true"><i class="sw sw-unc"></i>Uncaptured <b data-mask>$3,150</b></button>
                 <button type="button" class="chip on" data-layer="never" aria-pressed="true"><i class="sw sw-never"></i>Never taken <b data-mask>$1,524</b></button>
+              </div>
+              <div class="callouts-head perf-callouts-head"><span>Callouts</span><span class="count">2 signals</span></div>
+              <div class="callout positive" data-callout-expand>
+                <div class="callout-header">
+                  <span class="callout-icon">✓</span>
+                  <span class="callout-title">AAPL: 75% win rate across 4 trades (<span data-mask>+$1,880</span>).</span>
+                  <span class="callout-chevron">˅</span>
+                </div>
+                <div class="callout-detail">
+                  <div class="callout-detail-label">WHY FLAGGED</div>
+                  <div class="callout-detail-body">Enough trades on this symbol to read, and 3 of 4 closed green.</div>
+                  <div class="callout-detail-label">WHAT TO TRY</div>
+                  <div class="callout-detail-body">Open these trades side by side. Is there anything in setup, timing or size that you do here and not elsewhere?</div>
+                </div>
+              </div>
+              <div class="callout warning" data-callout-expand>
+                <div class="callout-header">
+                  <span class="callout-icon">⚠</span>
+                  <span class="callout-title">Mondays: <span data-mask>−$340</span> net across 6 trades.</span>
+                  <span class="callout-chevron">˅</span>
+                </div>
+                <div class="callout-detail">
+                  <div class="callout-detail-label">WHY FLAGGED</div>
+                  <div class="callout-detail-body">Your Monday trades add up to a net loss. This shows the pattern, not the reason for it.</div>
+                  <div class="callout-detail-label">WHAT TO TRY</div>
+                  <div class="callout-detail-body">Look at your Monday trades together. What do they have in common?</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2188,169 +2036,6 @@
               <div class="bytag-section">
                 <div class="bytag-head"><span>8w trend</span></div>
                 <div class="trend-chart" id="trend-chart" aria-hidden="true"></div>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div class="tab-panel" data-panel="insights">
-            <div class="tab-panel-text">
-            <span class="section-eyebrow">Callouts</span>
-            <h3 class="reveal-row">Insights you have to earn.</h3>
-            <p class="reveal-row">Eleven deterministic rules across symbols, timing, and behaviour. Almost all of them unlock only once you've got real trade history behind them. They show you a pattern and ask you to look. They never tell you why it happens. Tap any callout to see what fired it.</p>
-            </div>
-          <div class="phone phone-wide reveal-row">
-            <div class="phone-bar">
-              <div class="app-title">
-                <svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg>
-              </div>
-              <div class="menu">
-                <button data-privacy-toggle aria-label="Toggle privacy mode" title="Hide $ amounts">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/></svg>
-                </button>
-                <button aria-label="Menu" title="Menu">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
-              </div>
-            </div>
-            <div class="phone-body">
-              <div class="insights-columns">
-              <div class="insights-callouts-col">
-              <div class="callouts-head">
-                <span class="caret">▼</span>
-                <span>Callouts</span>
-                <span class="count">3 signals</span>
-              </div>
-
-              <div class="tier-progress">
-                <div class="tier-progress-head">
-                  <span class="tier-progress-badge">🏅 Tier 2 unlocked</span>
-                  <span class="tier-progress-note">7 trades to Tier 3</span>
-                </div>
-                <div class="tier-progress-track">
-                  <div class="tier-progress-seg filled"></div>
-                  <div class="tier-progress-seg filled"></div>
-                  <div class="tier-progress-seg current"></div>
-                  <div class="tier-progress-seg"></div>
-                </div>
-              </div>
-
-              <div class="callouts-category">SYMBOLS</div>
-              <div class="callout positive" data-callout-expand>
-                <div class="callout-header">
-                  <span class="callout-icon">✓</span>
-                  <span class="callout-title">AAPL: 75% win rate across 4 trades (<span data-mask>+$1,880</span>).</span>
-                  <span class="callout-chevron">˅</span>
-                </div>
-                <div class="callout-detail">
-                  <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">Enough trades on this symbol to read, and 3 of 4 closed green.</div>
-                  <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Open these trades side by side. Is there anything in setup, timing or size that you do here and not elsewhere?</div>
-                </div>
-              </div>
-
-              <div class="callouts-category">TIMING</div>
-              <div class="callout warning" data-callout-expand>
-                <div class="callout-header">
-                  <span class="callout-icon">⚠</span>
-                  <span class="callout-title">Mondays: <span data-mask>−$340</span> net across 6 trades.</span>
-                  <span class="callout-chevron">˅</span>
-                </div>
-                <div class="callout-detail">
-                  <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">Your Monday trades add up to a net loss. This shows the pattern, not the reason for it.</div>
-                  <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Look at your Monday trades together. What do they have in common?</div>
-                </div>
-              </div>
-
-              <div class="callouts-category">BEHAVIOR</div>
-              <div class="callout warning" data-callout-expand>
-                <div class="callout-header">
-                  <span class="callout-icon">⚠</span>
-                  <span class="callout-title">3 entries opened within an hour of a loss.</span>
-                  <span class="callout-chevron">˅</span>
-                </div>
-                <div class="callout-detail">
-                  <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">Three trades without a plan were opened soon after a losing close. Timing alone can't say why.</div>
-                  <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Open those trades and read what you wrote that day. See whether anything repeats.</div>
-                </div>
-              </div>
-
-              <div class="callouts-category">PLANNING</div>
-              <div class="callout locked">
-                <div class="callout-header">
-                  <span class="callout-icon">🔒</span>
-                  <span class="callout-title">Does planning your trades actually help you?</span>
-                  <span class="callout-lock-note">15 trades/side</span>
-                </div>
-              </div>
-              </div>
-
-              <div class="insights-bytag-col">
-              <div class="bytag-section">
-                <div class="bytag-head">
-                  <span>By tag · last 30 days</span>
-                </div>
-                <div class="bytag-row">
-                  <div class="bytag-top">
-                    <span class="tag-dot rose"></span>
-                    <span class="bytag-name">Good exit</span>
-                    <span class="bytag-amt pos" data-mask>+$1,389</span>
-                  </div>
-                  <div class="bytag-bottom">
-                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:100%"></div></div>
-                    <span class="bytag-count">7 trades</span>
-                  </div>
-                </div>
-                <div class="bytag-row">
-                  <div class="bytag-top">
-                    <span class="tag-dot amber"></span>
-                    <span class="bytag-name">Passive management</span>
-                    <span class="bytag-amt pos" data-mask>+$1,243</span>
-                  </div>
-                  <div class="bytag-bottom">
-                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:89%"></div></div>
-                    <span class="bytag-count">5 trades</span>
-                  </div>
-                </div>
-                <div class="bytag-row">
-                  <div class="bytag-top">
-                    <span class="tag-dot violet"></span>
-                    <span class="bytag-name">Let bias infect thinking</span>
-                    <span class="bytag-amt pos" data-mask>+$832</span>
-                  </div>
-                  <div class="bytag-bottom">
-                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:60%"></div></div>
-                    <span class="bytag-count">5 trades</span>
-                  </div>
-                </div>
-                <div class="bytag-row">
-                  <div class="bytag-top">
-                    <span class="tag-dot emerald"></span>
-                    <span class="bytag-name">Sized right</span>
-                    <span class="bytag-amt pos" data-mask>+$680</span>
-                  </div>
-                  <div class="bytag-bottom">
-                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:49%"></div></div>
-                    <span class="bytag-count">3 trades</span>
-                  </div>
-                </div>
-                <div class="bytag-row">
-                  <div class="bytag-top">
-                    <span class="tag-dot cyan"></span>
-                    <span class="bytag-name">Rushed setup</span>
-                    <span class="bytag-amt pos" data-mask>+$485</span>
-                  </div>
-                  <div class="bytag-bottom">
-                    <div class="bytag-bar-track"><div class="bytag-bar" style="width:35%"></div></div>
-                    <span class="bytag-count">3 trades</span>
-                  </div>
-                </div>
-              </div>
-              </div>
               </div>
             </div>
           </div>
@@ -2963,7 +2648,7 @@
           row.setAttribute('aria-expanded', String(open));
         });
         p.insertBefore(row, p.firstChild);
-        if (p.dataset.panel === 'capture') { p.classList.add('m-open'); row.setAttribute('aria-expanded', 'true'); }
+        if (p.dataset.panel === 'plans') { p.classList.add('m-open'); row.setAttribute('aria-expanded', 'true'); }
       });
     })();
 
