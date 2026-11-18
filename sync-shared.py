@@ -72,7 +72,6 @@ def build_footer(how_it_works_href, legal_current):
             {LOGO_SVG}
           </a>
           <p>Know your edge.</p>
-          <a href="mailto:thinker@philoinvestor.com" class="footer-email">thinker@philoinvestor.com</a>
         </div>
         <div class="footer-col">
           <h5>Links</h5>

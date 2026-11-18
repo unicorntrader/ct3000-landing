@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="apple-touch-icon" href="/logo-mark.png?v=4">
   <title>CT3000 - Know Your Edge</title>
-  <meta name="description" content="The complete trading workflow. Plan your setups, sync your fills, log your misses, see your patterns. Discipline over P&L.">
+  <meta name="description" content="Sync your IBKR trades, mark where each move started and ended, and see how much of it you actually captured. Journal, review, know your edge.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cotraderapp.com">
   <meta property="og:title" content="CoTrader 3000: trading made simpler">
@@ -1365,6 +1365,74 @@
       .final-cta { padding: 80px 0; }
     }
 
+
+    /* ===== Capture / Performance additions ===== */
+    @media (min-width: 768px) { .tab-btn { padding: 14px 14px; } .tab-row { gap: 0; } }
+    .cap-note { margin-top: 14px; }
+    .cap-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .cap-sym { font-weight: 700; color: var(--ink); font-size: 15px; }
+    .cap-meta { margin-left: auto; font-size: 11px; color: var(--gray-500); }
+    .cap-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+    .cap-box-title { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
+    .cap-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cap-field .lbl { display: block; font-size: 11px; color: var(--gray-500); margin-bottom: 3px; }
+    .cap-in { display: block; border: 1px solid var(--gray-300); border-radius: 6px; padding: 7px 10px; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--gray-50); }
+    .cap-result { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--violet-200); }
+    .cap-pct { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+    .cap-pct-lbl { margin-left: 6px; font-size: 12px; color: var(--gray-700); }
+    .cap-math { font-size: 11px; color: var(--gray-700); margin-top: 2px; }
+    .cap-eel { margin-top: 12px; display: grid; gap: 6px; }
+    .cap-eel-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .cap-eel-row .lbl { color: var(--gray-600); font-weight: 600; }
+    .cap-seg { display: inline-flex; border: 1px solid var(--gray-300); border-radius: 6px; overflow: hidden; }
+    .cap-seg span { padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--gray-600); background: var(--white); }
+    .cap-seg span.on { background: var(--blue-600); color: var(--white); }
+    .cap-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .cap-chart-wrap { margin-top: 12px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 12px 12px; }
+    .cap-chart-btn { font-size: 12px; font-weight: 600; color: var(--blue-600); margin-bottom: 6px; }
+    .cap-chart { width: 100%; height: auto; display: block; }
+    .cap-chart .wick.up, .cap-chart .body.up { stroke: var(--green-500); fill: var(--green-500); }
+    .cap-chart .wick.dn, .cap-chart .body.dn { stroke: var(--red-500); fill: var(--red-500); }
+    .cap-chart .wick { stroke-width: 1.2; }
+    .cap-chart .dash { stroke: var(--violet-500); stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .cap-chart .fillline { stroke: var(--blue-600); stroke-width: 2; }
+    .cap-chart .fill { fill: var(--blue-600); stroke: var(--white); stroke-width: 1.5; }
+    .cap-chart text { font-size: 10px; font-family: inherit; }
+    .cap-chart .clabel { fill: var(--violet-500); font-weight: 600; }
+    .cap-chart .flabel { fill: var(--blue-700); font-weight: 700; }
+    .cap-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 11px; color: var(--gray-600); }
+    .cap-legend .sw { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--blue-600); vertical-align: middle; margin-right: 5px; }
+    .cap-legend .sw.dashed { border-top: 2px dashed var(--violet-500); }
+    .missed-priced { margin-top: 6px; font-size: 12px; color: var(--ink); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .missed-priced .dot-cyan { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan-500); }
+    .missed-priced .mp-sub { color: var(--gray-500); font-size: 11px; }
+    .kpi-grid-5, .kpi-grid-6 { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+    .kpi-grid-6 .kpi .val { font-size: 18px; }
+    .daynote { display: flex; gap: 10px; font-size: 12px; color: var(--gray-700); line-height: 1.5; margin-bottom: 8px; }
+    .daynote .dn-day { flex: 0 0 28px; font-weight: 700; color: var(--gray-500); }
+    .reflect-open { margin-top: 12px; min-height: 84px; color: var(--gray-400); }
+    .perf-tabs { display: flex; gap: 14px; margin-bottom: 12px; border-bottom: 1px solid var(--gray-200); font-size: 12.5px; font-weight: 600; color: var(--gray-500); }
+    .perf-tabs span { padding: 6px 0; margin-bottom: -1px; border-bottom: 2px solid transparent; }
+    .perf-tabs span.on { color: var(--blue-600); border-bottom-color: var(--blue-600); }
+    .dpl-head { font-size: 13px; font-weight: 700; color: var(--ink); margin: 14px 0 4px; }
+    .dpl-chart { width: 100%; height: auto; display: block; }
+    .dpl-chart .zero { stroke: var(--gray-300); stroke-width: 1; }
+    .dpl-chart .rb.pos { fill: var(--green-500); }
+    .dpl-chart .rb.neg { fill: var(--red-500); }
+    .dpl-chart .lyr-unc { fill: var(--violet-500); }
+    .dpl-chart .lyr-never { fill: var(--cyan-500); }
+    .dpl-chart .dl { font-size: 10px; fill: var(--gray-500); font-family: inherit; }
+    .dpl-chart.hide-unc .lyr-unc, .dpl-chart.hide-never .lyr-never { display: none; }
+    .dpl-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .dpl-legend .chip { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 12px; color: var(--gray-700); background: var(--white); border: 1px solid var(--gray-300); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+    .dpl-legend .chip.static { cursor: default; }
+    .dpl-legend .chip:not(.on):not(.static) { opacity: 0.5; }
+    .dpl-legend .chip b { font-weight: 700; color: var(--ink); }
+    .dpl-legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; }
+    .dpl-legend .sw-pos { background: var(--green-500); margin-right: -3px; }
+    .dpl-legend .sw-neg { background: var(--red-500); }
+    .dpl-legend .sw-unc { background: var(--violet-500); }
+    .dpl-legend .sw-never { background: var(--cyan-500); }
         </style>
 </head>
 <body>
@@ -1411,7 +1479,7 @@
         <div class="hero-text">
           <h1>Never wing a trade again.</h1>
           <p class="lead">
-            CoTrader syncs your trades straight from your account, matches them to your plans, and generates insights so you know your edge and grow it.
+            CoTrader syncs your IBKR trades, shows how much of each move you actually captured, and puts your patterns in front of you so you know your edge and grow it.
           </p>
           <div class="cta-row" style="margin-top: 32px;">
             <a href="https://cotrader3000.com/subscribe" class="cta-primary">Start free trial →</a>
@@ -1456,7 +1524,7 @@
                 </div>
                 <div class="hero-callout warning">
                   <span class="hero-callout-icon">⚠</span>
-                  <span class="hero-callout-text">Mondays are a drag: <strong>−$340</strong> net</span>
+                  <span class="hero-callout-text">Mondays: <strong>−$340</strong> net across 6 trades</span>
                 </div>
               </div>
               <div class="hero-tagrow">
@@ -1468,7 +1536,7 @@
                 Auto-tagged
                 <span class="activity-pill violet">Scale in</span>
                 <span class="activity-pill violet">Scale out</span>
-                <span class="activity-pill amber">Overtraded</span>
+                <span class="activity-pill amber">Chased</span>
               </div>
             </div>
           </div>
@@ -1501,13 +1569,21 @@
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="3.5" width="10" height="13" rx="1"/><path d="M8 3.5v13"/><path d="M10.5 7.5H13M10.5 10H13"/></svg>
             <span>Journal</span>
           </button>
+          <button class="tab-btn" data-tab="capture" role="tab" aria-selected="false">
+            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 4h13M3.5 16h13"/><path d="M7 7.5h6v5H7z"/></svg>
+            <span>Capture</span>
+          </button>
+          <button class="tab-btn" data-tab="performance" role="tab" aria-selected="false">
+            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 16.5h13"/><path d="M6 16V10M10 16V4.5M14 16v-4"/></svg>
+            <span>Performance</span>
+          </button>
           <button class="tab-btn" data-tab="weekly-review" role="tab" aria-selected="false">
             <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="4.5" width="13" height="12" rx="1.5"/><path d="M3.5 8h13"/><path d="M7 3v3M13 3v3"/><path d="M8 12l1.75 1.75L13 10.5"/></svg>
             <span>Weekly review</span>
           </button>
           <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false">
-            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 16.5h13"/><path d="M6 16V10M10 16V4.5M14 16v-4"/></svg>
-            <span>Insights</span>
+            <svg class="tab-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 17V3.5"/><path d="M5 4h9l-2 3 2 3H5"/></svg>
+            <span>Callouts</span>
           </button>
         </div>
         <div class="tab-row-hint" aria-hidden="true">
@@ -1693,8 +1769,8 @@
           <div class="tab-panel" data-panel="journal">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Journal</span>
-            <h3 class="reveal-row">The ones you missed count too.</h3>
-            <p class="reveal-row">Log what you took, and what you almost took. Spot the setup you keep hesitating on, and stop missing it.</p>
+            <h3 class="reveal-row">A journal you can scan.</h3>
+            <p class="reveal-row">Symbol, entry, exit, return, P&amp;L, duration, R, grade and tags in one table, with prices lined up down the day so the levels you keep trading around read as a column. Expand a row for the write-up, screenshots and chart. Log a trade you never took (symbol, the move, size) and CoTrader prices it.</p>
             </div>
           <div class="phone reveal-row">
             <div class="phone-bar">
@@ -1769,6 +1845,7 @@
                       <div class="row"><span class="lbl">Entry</span><span class="val" data-mask>$225.00</span></div>
                       <div class="row"><span class="lbl">Exit</span><span class="val" data-mask>$243.00</span></div>
                       <div class="row"><span class="lbl">Duration</span><span class="val">1d</span></div>
+                      <div class="row"><span class="lbl">Capture</span><span class="val">64%</span></div>
                       <div class="row"><span class="lbl">Tag</span><span class="val tag">breakout</span></div>
                     </div>
                   </div>
@@ -1817,6 +1894,7 @@
                     <span class="date">May 8</span>
                   </div>
                   <div class="note">Gap-up fade, rejected at prior resistance. Hesitated, missed it.</div>
+                  <div class="missed-priced"><span class="dot-cyan"></span>Never taken: <strong data-mask>$400</strong> <span class="mp-sub">50 sh · $178 → $170</span></div>
                 </div>
                 <div class="missed">
                   <div class="head">
@@ -1826,6 +1904,7 @@
                     <span class="date">May 6</span>
                   </div>
                   <div class="note">Saw the breakout, froze on entry. Ran to <span data-mask>$520</span>.</div>
+                  <div class="missed-priced"><span class="dot-cyan"></span>Never taken: <strong data-mask>$750</strong> <span class="mp-sub">30 sh · $495 → $520</span></div>
                 </div>
               </div>
               <div class="journal-panel" data-journal-panel="tags">
@@ -1914,11 +1993,86 @@
             </div>
           </div>
           </div>
+          <div class="tab-panel" data-panel="capture">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Capture</span>
+            <h3 class="reveal-row">How much of the move did you keep?</h3>
+            <p class="reveal-row">Every journal tells you what you made. Capture shows how much of what was there you took. On a closed trade, type where you think the move really started and ended, by your own eye. CoTrader measures your fills against it. The P&amp;L says the trade worked. Capture says you were late in and early out on a move twice that size.</p>
+            <p class="reveal-row cap-note">It comes from you, not from market data and not from your plan, so it works on trades you never planned. Open the session chart to check your call: solid is what you did, dashed is what you said was there.</p>
+            </div>
+          <div class="phone reveal-row">
+            <div class="phone-bar">
+              <div class="app-title"><svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg></div>
+            </div>
+            <div class="phone-body">
+              <div class="cap-head"><span class="cap-sym">NVDA</span><span class="pill pill-long">LONG</span><span class="cap-meta">Closed · 3h</span></div>
+              <div class="cap-box">
+                <div class="cap-box-title">Your read of the move</div>
+                <div class="cap-inputs">
+                  <div class="cap-field"><span class="lbl">Started</span><span class="cap-in" data-mask>110.00</span></div>
+                  <div class="cap-field"><span class="lbl">Ended</span><span class="cap-in" data-mask>118.00</span></div>
+                </div>
+                <div class="cap-result">
+                  <div><span class="cap-pct">37.5%</span><span class="cap-pct-lbl">captured</span></div>
+                  <div class="cap-math" data-mask>Move 8.00 · you traded 113 → 116 (3.00)</div>
+                </div>
+                <div class="cap-eel">
+                  <div class="cap-eel-row"><span class="lbl">Entry</span><span class="cap-seg"><span>Early</span><span class="on">Late</span></span></div>
+                  <div class="cap-eel-row"><span class="lbl">Exit</span><span class="cap-seg"><span class="on">Early</span><span>Late</span></span></div>
+                </div>
+                <div class="cap-tags"><span class="activity-pill amber">Chased</span><span class="activity-pill amber">Cut winner too early</span></div>
+              </div>
+              <div class="cap-chart-wrap">
+                <div class="cap-chart-btn">Hide chart</div>
+                <svg class="cap-chart" viewBox="0 0 320 170" role="img" aria-label="Session candles with entry and exit fills and dashed lines for where the move started and ended">
+  <line class="dash" x1="14" x2="306" y1="40" y2="40"/><text class="clabel" x="306" y="36" text-anchor="end">Move end 118</text>
+  <line class="dash" x1="14" x2="306" y1="128" y2="128"/><text class="clabel" x="306" y="139" text-anchor="end">Move start 110</text>
+  <line class="wick dn" x1="28" x2="28" y1="112.6" y2="125.8"/><rect class="body dn" x="23" y="117" width="10" height="5.5" rx="1"/><line class="wick dn" x1="47" x2="47" y1="118.1" y2="130.2"/><rect class="body dn" x="42" y="122.5" width="10" height="3.3" rx="1"/><line class="wick up" x1="66" x2="66" y1="108.2" y2="128.0"/><rect class="body up" x="61" y="111.5" width="10" height="14.3" rx="1"/><line class="wick up" x1="85" x2="85" y1="96.1" y2="113.7"/><rect class="body up" x="80" y="99.4" width="10" height="12.1" rx="1"/><line class="wick dn" x1="104" x2="104" y1="95.0" y2="108.2"/><rect class="body dn" x="99" y="99.4" width="10" height="5.5" rx="1"/><line class="wick up" x1="123" x2="123" y1="88.4" y2="106.0"/><rect class="body up" x="118" y="90.6" width="10" height="14.3" rx="1"/><line class="wick up" x1="142" x2="142" y1="74.1" y2="92.8"/><rect class="body up" x="137" y="77.4" width="10" height="13.2" rx="1"/><line class="wick up" x1="161" x2="161" y1="59.8" y2="79.6"/><rect class="body up" x="156" y="63.1" width="10" height="14.3" rx="1"/><line class="wick up" x1="180" x2="180" y1="53.2" y2="67.5"/><rect class="body up" x="175" y="62.0" width="10" height="1.5" rx="1"/><line class="wick up" x1="199" x2="199" y1="41.1" y2="63.1"/><rect class="body up" x="194" y="48.8" width="10" height="13.2" rx="1"/><line class="wick up" x1="218" x2="218" y1="37.8" y2="51.0"/><rect class="body up" x="213" y="40.0" width="10" height="8.8" rx="1"/><line class="wick dn" x1="237" x2="237" y1="38.9" y2="55.4"/><rect class="body dn" x="232" y="40.0" width="10" height="11.0" rx="1"/><line class="wick dn" x1="256" x2="256" y1="47.7" y2="62.0"/><rect class="body dn" x="251" y="51.0" width="10" height="8.8" rx="1"/>
+  <line class="fillline" x1="123" y1="95" x2="180" y2="62"/>
+  <circle class="fill" cx="123" cy="95" r="4.5"/><circle class="fill" cx="180" cy="62" r="4.5"/>
+  <text class="flabel" x="114" y="99" text-anchor="end">In 113</text>
+  <text class="flabel" x="189" y="66">Out 116</text>
+</svg>
+                <div class="cap-legend"><span><i class="sw solid"></i>What you did</span><span><i class="sw dashed"></i>What you said was there</span></div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="tab-panel" data-panel="performance">
+            <div class="tab-panel-text">
+            <span class="section-eyebrow">Performance</span>
+            <h3 class="reveal-row">What you made, and what was there.</h3>
+            <p class="reveal-row">Three tabs: Overview, Callouts and Weekly review. The Daily P&amp;L chart keeps green and red bars for money realised. Switch on <strong>Uncaptured</strong> to see the part of a move you were in for and didn't take, and <strong>Never taken</strong> for the trades you logged as missed but never entered. A Capture tile appears once you've marked up a trade, and it stays out of red and green, because a share of a move isn't money.</p>
+            </div>
+          <div class="phone phone-wide reveal-row">
+            <div class="phone-bar">
+              <div class="app-title"><svg viewBox="0 0 685.29 120.16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CT3000"><path fill="#231f20" d="M98.96,0H21.2C9.49,0,0,9.49,0,21.2v77.76C0,110.67,9.49,120.16,21.2,120.16h77.76c11.71,0,21.2-9.49,21.2-21.2V21.2c0-11.71-9.49-21.2-21.2-21.2ZM98.96,28.53v70.43h-21.2v-26.94c0-5.4-6.53-8.1-10.34-4.28l-31.23,31.23h-14.99v-14.99l31.23-31.23c3.82-3.82,1.11-10.34-4.28-10.34h-26.94v-21.2h70.43c4.05,0,7.33,3.28,7.33,7.33h0Z"/><circle fill="#231f20" cx="77.76" cy="42.4" r="10.6"/><path fill="#231f20" d="M200.79,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-20.58h-21.65v16.94c0,1.41-1.15,2.56-2.56,2.56h-31.73c-1.41,0-2.56-1.15-2.56-2.56V27.96c0-1.41,1.15-2.56,2.56-2.56h31.73c1.41,0,2.56,1.15,2.56,2.56v16.94h21.65v-20.58c0-11.35-9.23-20.58-20.58-20.58Z"/><polygon fill="#231f20" points="232.61 25.4 259.36 25.4 259.36 116.42 281.01 116.42 281.01 25.4 307.75 25.4 307.75 3.75 232.61 3.75 232.61 25.4"/><path fill="#231f20" d="M378.57,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v20.58h21.65v-16.9c0-1.43,1.17-2.6,2.6-2.6h31.65c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-24.41v21.65h24.41c1.43,0,2.6,1.17,2.6,2.6v18.66c0,1.43-1.17,2.6-2.6,2.6h-31.65c-1.43,0-2.6-1.17-2.6-2.6v-16.9h-21.65v20.58c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58v-19.5c0-8.07-4.74-13.95-12.58-16.26,7.84-2.31,12.58-8.19,12.58-16.26v-19.5c0-11.35-9.23-20.58-20.58-20.58ZM378.57,60.08h0,0Z"/><path fill="#231f20" d="M473.96,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM472.88,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M569.34,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM568.26,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/><path fill="#231f20" d="M664.72,3.75h-39c-11.35,0-20.58,9.23-20.58,20.58v71.52c0,11.35,9.23,20.58,20.58,20.58h39c11.35,0,20.58-9.23,20.58-20.58V24.32c0-11.35-9.23-20.58-20.58-20.58ZM663.64,27.98v64.21c0,1.42-1.16,2.57-2.57,2.57h-31.69c-1.42,0-2.57-1.16-2.57-2.57V27.98c0-1.42,1.16-2.57,2.57-2.57h31.69c1.42,0,2.57,1.16,2.57,2.57Z"/></svg></div>
+            </div>
+            <div class="phone-body">
+              <div class="perf-tabs"><span class="on">Overview</span><span>Callouts</span><span>Weekly review</span></div>
+              <div class="kpi-grid kpi-grid-6">
+                <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" data-mask style="color:var(--green-600);">+$3,950</div><div class="sub">12 closed</div></div>
+                <div class="kpi"><div class="lbl">Win rate</div><div class="val">67%</div><div class="sub">8W · 4L</div></div>
+                <div class="kpi"><div class="lbl">Avg / trade</div><div class="val" data-mask>+$329</div><div class="sub">expectancy</div></div>
+                <div class="kpi"><div class="lbl">Win/loss ratio</div><div class="val">2.1</div><div class="sub">avg win / loss</div></div>
+                <div class="kpi"><div class="lbl">Best day</div><div class="val" data-mask>+$720</div><div class="sub">Tue</div></div>
+                <div class="kpi"><div class="lbl">Capture</div><div class="val">41%</div><div class="sub">4 marked up</div></div>
+              </div>
+              <div class="dpl-head"><span>Daily P&amp;L</span></div>
+              <svg class="dpl-chart" viewBox="0 0 330 150" role="img" aria-label="Daily P&amp;L bars with Uncaptured and Never taken layers"><line class="zero" x1="14" x2="324" y1="96" y2="96"/><rect class="rb pos" x="22" y="47.7" width="20" height="48.3" rx="2"/><rect class="lyr-unc" x="22" y="4.0" width="20" height="43.7" rx="2"/><rect class="rb neg" x="52" y="96" width="20" height="20.7" rx="2"/><rect class="lyr-unc" x="52" y="67.2" width="20" height="28.8" rx="2"/><rect class="lyr-never" x="52" y="18.9" width="20" height="48.3" rx="2"/><rect class="rb pos" x="82" y="25.8" width="20" height="70.2" rx="2"/><rect class="rb pos" x="112" y="66.1" width="20" height="29.9" rx="2"/><rect class="lyr-unc" x="112" y="6.3" width="20" height="59.8" rx="2"/><rect class="rb neg" x="142" y="96" width="20" height="10.3" rx="2"/><rect class="lyr-unc" x="142" y="61.5" width="20" height="34.5" rx="2"/><rect class="lyr-never" x="142" y="-0.6" width="20" height="62.1" rx="2"/><rect class="rb pos" x="172" y="55.8" width="20" height="40.2" rx="2"/><rect class="lyr-unc" x="172" y="8.6" width="20" height="47.1" rx="2"/><rect class="rb pos" x="202" y="13.2" width="20" height="82.8" rx="2"/><rect class="lyr-never" x="202" y="-51.7" width="20" height="64.9" rx="2"/><rect class="rb neg" x="232" y="96" width="20" height="27.6" rx="2"/><rect class="lyr-unc" x="232" y="75.3" width="20" height="20.7" rx="2"/><rect class="rb pos" x="262" y="37.3" width="20" height="58.7" rx="2"/><rect class="lyr-unc" x="262" y="-0.6" width="20" height="38.0" rx="2"/><rect class="rb pos" x="292" y="75.3" width="20" height="20.7" rx="2"/><rect class="lyr-unc" x="292" y="22.4" width="20" height="52.9" rx="2"/><text class="dl" x="32" y="132" text-anchor="middle">M</text><text class="dl" x="62" y="132" text-anchor="middle">T</text><text class="dl" x="92" y="132" text-anchor="middle">W</text><text class="dl" x="122" y="132" text-anchor="middle">T</text><text class="dl" x="152" y="132" text-anchor="middle">F</text><text class="dl" x="182" y="132" text-anchor="middle">M</text><text class="dl" x="212" y="132" text-anchor="middle">T</text><text class="dl" x="242" y="132" text-anchor="middle">W</text><text class="dl" x="272" y="132" text-anchor="middle">T</text><text class="dl" x="302" y="132" text-anchor="middle">F</text></svg>
+              <div class="dpl-legend" data-dpl>
+                <span class="chip static"><i class="sw sw-pos"></i><i class="sw sw-neg"></i>Realised</span>
+                <button type="button" class="chip on" data-layer="unc" aria-pressed="true"><i class="sw sw-unc"></i>Uncaptured <b data-mask>$3,150</b></button>
+                <button type="button" class="chip on" data-layer="never" aria-pressed="true"><i class="sw sw-never"></i>Never taken <b data-mask>$1,524</b></button>
+              </div>
+            </div>
+          </div>
+          </div>
           <div class="tab-panel" data-panel="weekly-review">
             <div class="tab-panel-text">
             <span class="section-eyebrow">Weekly review</span>
             <h3 class="reveal-row">How did the week go?</h3>
-            <p class="reveal-row">Trade data on one side, a running notebook on the other. Answer four short prompts (what worked, what didn't, whether it's a pattern, what changes next week) and it saves as you type: no button to click, no form to finish. Tap any bar in the trend below to jump straight into that week.</p>
+            <p class="reveal-row">A full page for the week. Trade data on the left: best and worst, by symbol, tag and grade, missed trades. On the right, one open writing box with your daily notes read back above it. No prompts, no button to click: it saves as you type. Pick any week, or tap a bar in the 8-week trend.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -1935,11 +2089,12 @@
               </div>
             </div>
             <div class="phone-body">
-              <div class="kpi-grid kpi-grid-4">
+              <div class="kpi-grid kpi-grid-5">
                 <div class="kpi"><div class="lbl">Net P&amp;L</div><div class="val" id="kpi-pnl" data-mask style="color:var(--green-600);">+$2,690</div><div class="sub" id="kpi-closed">5 closed</div></div>
                 <div class="kpi"><div class="lbl">Win rate</div><div class="val" id="kpi-wr">100%</div><div class="sub" id="kpi-wl">5W · 0L</div></div>
                 <div class="kpi"><div class="lbl">Avg / trade</div><div class="val" id="kpi-avg" data-mask>+$538</div><div class="sub">expectancy</div></div>
                 <div class="kpi"><div class="lbl">Win/loss ratio</div><div class="val" id="kpi-wlr">&mdash;</div><div class="sub" id="kpi-wlr-sub" data-mask>&nbsp;</div></div>
+                <div class="kpi"><div class="lbl">Capture</div><div class="val">41%</div><div class="sub">4 marked up</div></div>
               </div>
               <div class="week-nav">
                 <button class="nav-btn" id="week-prev" aria-label="Previous week">‹</button>
@@ -1978,22 +2133,21 @@
                     <div class="tag-trade"><span class="tt-date">May 5</span><span class="tt-sym">TSLA</span><span class="tt-pnl neg" data-mask>&minus;$180</span><span class="tt-pct">&nbsp;</span></div>
                     <div class="wr-more">+3 more</div>
                   </div>
+                  <div class="bytag-section">
+                    <div class="bytag-head"><span>Missed trades <span style="font-weight:500;color:var(--gray-500);">(2)</span></span></div>
+                    <div class="tag-trade"><span class="tt-date">May 8</span><span class="tt-sym">AMD</span><span class="tt-pnl" data-mask>Never taken: $400</span></div>
+                  </div>
                 </div>
 
                 <div class="reflect-panel">
                   <div class="reflect-panel-head">
-                    <span>Reflection</span>
-                    <span class="reflect-streak">4-week streak</span>
+                    <span>Notes</span>
+                    <span class="reflect-streak">Week 19</span>
                   </div>
-                  <div class="reflect-item">
-                    <div class="reflect-q">What worked well this week?</div>
-                    <div class="reflect-box">Stuck to entries on planned trades. Cut losers fast on the MSTR breakout fail.</div>
-                  </div>
-                  <div class="reflect-item">
-                    <div class="reflect-q">What didn't work?</div>
-                    <div class="reflect-box">Chased entries on TSLA twice. Didn't take the planned NVDA trade.</div>
-                  </div>
-                  <div class="wr-more">+ 2 more prompts</div>
+                  <div class="daynote"><span class="dn-day">Mon</span><span class="dn-text">Waited for the open to settle. Skipped the first gap.</span></div>
+                  <div class="daynote"><span class="dn-day">Wed</span><span class="dn-text">TSLA again. Got in after it had already moved.</span></div>
+                  <div class="daynote"><span class="dn-day">Fri</span><span class="dn-text">MSTR sized right, held to target.</span></div>
+                  <div class="reflect-box reflect-open">Write about the week…</div>
                   <div class="reflect-saved-line">Saved automatically</div>
                 </div>
               </div>
@@ -2009,7 +2163,7 @@
             <div class="tab-panel-text">
             <span class="section-eyebrow">Callouts</span>
             <h3 class="reveal-row">Insights you have to earn.</h3>
-            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. Each one unlocks only once you've got real trade history behind it. No verdicts off three trades. Tap any callout to see why it fired.</p>
+            <p class="reveal-row">Twelve deterministic rules across symbols, timing, and behaviour. Each one unlocks only once you've got real trade history behind it. They show you a pattern and ask you to look. They never tell you why it happens. Tap any callout to see what fired it.</p>
             </div>
           <div class="phone phone-wide reveal-row">
             <div class="phone-bar">
@@ -2056,9 +2210,9 @@
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">A symbol where you have a real edge: enough trades to trust the signal, and you're winning 3 of 4. Concentration here is working in your favour.</div>
+                  <div class="callout-detail-body">Enough trades on this symbol to read, and 3 of 4 closed green.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Study what's different about how you play this one: setup, timing, sizing. That pattern may be repeatable on similar names.</div>
+                  <div class="callout-detail-body">Open these trades side by side. Is there anything in setup, timing or size that you do here and not elsewhere?</div>
                 </div>
               </div>
 
@@ -2066,14 +2220,14 @@
               <div class="callout warning" data-callout-expand>
                 <div class="callout-header">
                   <span class="callout-icon">⚠</span>
-                  <span class="callout-title">Mondays are a drag: <span data-mask>−$340</span> net across 6 trades.</span>
+                  <span class="callout-title">Mondays: <span data-mask>−$340</span> net across 6 trades.</span>
                   <span class="callout-chevron">˅</span>
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">This weekday is a consistent drag on P&amp;L. Common culprits: start-of-week hesitation, low-quality setups, or forcing trades when nothing is moving.</div>
+                  <div class="callout-detail-body">Your Monday trades add up to a net loss. This shows the pattern, not the reason for it.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Skip Mondays for 2 weeks and compare. If total P&amp;L goes up, you've found a free return: fewer trades, more profit.</div>
+                  <div class="callout-detail-body">Look at your Monday trades together. What do they have in common?</div>
                 </div>
               </div>
 
@@ -2081,14 +2235,14 @@
               <div class="callout warning" data-callout-expand>
                 <div class="callout-header">
                   <span class="callout-icon">⚠</span>
-                  <span class="callout-title">3 revenge trades opened within an hour of a loss.</span>
+                  <span class="callout-title">3 entries opened within an hour of a loss.</span>
                   <span class="callout-chevron">˅</span>
                 </div>
                 <div class="callout-detail">
                   <div class="callout-detail-label">WHY FLAGGED</div>
-                  <div class="callout-detail-body">Revenge trading is entering an off-plan trade right after a loss (often sized larger) to "get it back". It's emotion-driven, not edge-driven.</div>
+                  <div class="callout-detail-body">Three trades without a plan were opened soon after a losing close. Timing alone can't say why.</div>
                   <div class="callout-detail-label">WHAT TO TRY</div>
-                  <div class="callout-detail-body">Set a hard rule: after any losing trade, no new entry for 30 minutes. If the idea still looks good after the cool-off, it was probably real.</div>
+                  <div class="callout-detail-body">Open those trades and read what you wrote that day. See whether anything repeats.</div>
                 </div>
               </div>
 
@@ -2225,7 +2379,7 @@
             <div class="how-card-num">3</div>
             <div class="how-card-text">
               <h3>See your edge</h3>
-              <p>Weekly reviews and Callouts surface what's actually working, and what's quietly costing you.</p>
+              <p>Mark where each move started and ended and see how much of it you kept. Weekly reviews and Callouts show you what to look at.</p>
             </div>
             <div class="how-card-demo" aria-hidden="true">
               <div class="callout positive">
@@ -2310,7 +2464,6 @@
         </svg>
           </a>
           <p>Know your edge.</p>
-          <a href="mailto:thinker@philoinvestor.com" class="footer-email">thinker@philoinvestor.com</a>
         </div>
         <div class="footer-col">
           <h5>Links</h5>
@@ -2739,6 +2892,20 @@
           btn.classList.toggle('on', on);
           btn.setAttribute('title', on ? 'Show $ amounts' : 'Hide $ amounts');
           applyPrivacy(phone);
+        });
+      });
+    })();
+
+    // ─── Performance · Uncaptured / Never taken layer chips ───────────
+    (function initLayerChips() {
+      const legend = document.querySelector('[data-dpl]');
+      const chart = document.querySelector('.dpl-chart');
+      if (!legend || !chart) return;
+      legend.querySelectorAll('[data-layer]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const on = btn.classList.toggle('on');
+          btn.setAttribute('aria-pressed', String(on));
+          chart.classList.toggle('hide-' + btn.dataset.layer, !on);
         });
       });
     })();
