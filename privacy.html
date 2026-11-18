@@ -134,6 +134,7 @@
         <li>Authenticate you and keep your account secure</li>
         <li>Process payments and manage your subscription</li>
         <li>Diagnose and fix errors (via our error tracker, Sentry)</li>
+        <li>Count how often each page and screen is opened, so we know which parts of the app to improve. These counts are anonymous and not linked to your account.</li>
         <li>Communicate with you about the Service (support, service updates)</li>
         <li>Comply with legal obligations</li>
       </ul>
@@ -152,7 +153,7 @@
       <table>
         <tr><th>Provider</th><th>Purpose</th><th>Location</th></tr>
         <tr><td>Supabase</td><td>Database + authentication</td><td>EU / US</td></tr>
-        <tr><td>Vercel</td><td>Application hosting</td><td>US (with EU edge)</td></tr>
+        <tr><td>Vercel</td><td>Application hosting + page-view counts</td><td>US (with EU edge)</td></tr>
         <tr><td>Stripe</td><td>Payment processing</td><td>US / EU</td></tr>
         <tr><td>Sentry</td><td>Error tracking</td><td>US / EU</td></tr>
         <tr><td>Interactive Brokers</td><td>Trade data source (you initiate)</td><td>Global</td></tr>
@@ -191,8 +192,8 @@
         <li><strong>Error tracking (Sentry):</strong> session identifiers used to correlate crashes. No cross-site tracking.</li>
         <li><strong>UI preferences (localStorage):</strong> tiny settings like "TradeSquares collapsed/expanded." Local to your browser.</li>
       </ul>
-      <p>We do not use analytics, advertising, marketing, or cross-site tracking cookies. Because we only use strictly necessary and operational cookies, we do not currently display a consent banner. Your browser settings allow you to delete cookies at any time.</p>
-      <p>Our public website uses Vercel Web Analytics to count page views and clicks on our buttons. It sets no cookies and does not track you across other sites.</p>
+      <p>We count page views using Vercel Web Analytics, which sets no cookies and stores no identifier in your browser. It records that a page was opened, never who opened it, and the counts cannot be traced back to your account.</p>
+      <p>We do not use advertising, marketing, or cross-site tracking cookies. Because we only use strictly necessary and operational cookies, we do not currently display a consent banner. Your browser settings allow you to delete cookies at any time.</p>
 
       <h2>10. Security</h2>
       <p>We use encryption in transit (HTTPS), at rest (provider-managed encryption), and industry-standard authentication. Access to production data is restricted to authorised personnel. We cannot guarantee absolute security — no online service can — but we take reasonable steps to protect your information.</p>
