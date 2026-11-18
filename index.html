@@ -2293,7 +2293,6 @@
               <div class="bytag-section">
                 <div class="bytag-head">
                   <span>By tag · last 30 days</span>
-                  <a href="#" class="bytag-viewall" onclick="return false;">View all →</a>
                 </div>
                 <div class="bytag-row">
                   <div class="bytag-top">
@@ -2966,6 +2965,22 @@
         p.insertBefore(row, p.firstChild);
         if (p.dataset.panel === 'capture') { p.classList.add('m-open'); row.setAttribute('aria-expanded', 'true'); }
       });
+    })();
+
+    // ─── Nav · highlight "How it works" while its section is in view ───
+    (function initHowItWorksNav() {
+      const section = document.getElementById('plans');
+      const links = document.querySelectorAll('.site-nav a[href="#plans"], .mobile-menu a[href="#plans"]');
+      if (!section || !links.length) return;
+      const update = () => {
+        const probe = 120; // just under the sticky header
+        const end = document.querySelector('.how-it-works') || section;
+        const on = section.getBoundingClientRect().top <= probe && end.getBoundingClientRect().bottom > probe;
+        links.forEach(a => a.classList.toggle('current', on));
+      };
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
     })();
   </script>
 </body>
